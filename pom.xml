@@ -25,6 +25,7 @@
 		<module>spi-ignite</module>
 		<module>spi-cache-ignite</module>
 		<module>spi-grid-ignite</module>
+		<module>spi-storage-jpa</module>
 	</modules>
 
 	<distributionManagement>
