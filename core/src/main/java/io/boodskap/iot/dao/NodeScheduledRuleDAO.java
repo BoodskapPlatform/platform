@@ -1,0 +1,43 @@
+/*******************************************************************************
+ * Copyright (C) 2019 Boodskap Inc
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ ******************************************************************************/
+package io.boodskap.iot.dao;
+
+import io.boodskap.iot.BoodskapSystem;
+import io.boodskap.iot.StorageException;
+import io.boodskap.iot.model.INodeScheduledRule;
+
+public interface NodeScheduledRuleDAO<T extends INodeScheduledRule> extends DAO<T> {
+	
+	public static <T extends INodeScheduledRule> NodeScheduledRuleDAO<T> get() {
+		return BoodskapSystem.storage().getNodeScheduledRuleDAO();
+	}
+
+	public T create(String domainKey, String ruleId, String nodeId) throws StorageException;
+
+	public EntityIterator<String> ruleIdsByNode(String nodeId) throws StorageException;
+	
+	public long countByNodeId(String nodeId) throws StorageException;
+
+	public T get(String domainKey, String ruleId) throws StorageException;
+
+	public T get(String domainKey, String ruleId, String nodeId) throws StorageException;
+
+	public void delete(String domainKey, String ruleId) throws StorageException;
+
+	public void delete(String domainKey, String ruleId, String nodeId) throws StorageException;
+
+}
