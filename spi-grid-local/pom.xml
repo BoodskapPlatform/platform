@@ -6,16 +6,17 @@
 	
 	<parent>
 		<groupId>io.boodskap.iot</groupId>
-		<artifactId>iot-platform</artifactId>
+		<artifactId>boodskap-platform</artifactId>
 		<version>4.0.0-alpha</version>
 	</parent>
 	
-	<artifactId>spi-grid-local</artifactId>
+	<artifactId>boodskap-spi-grid-local</artifactId>
+	<name>spi-grid-local</name>
 	
 	<dependencies>
 		<dependency>
 			<groupId>io.boodskap.iot</groupId>
-			<artifactId>iot-platform-core</artifactId>
+			<artifactId>boodskap-core</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 	</dependencies>

@@ -6,11 +6,12 @@
 	
 	<parent>
 		<groupId>io.boodskap.iot</groupId>
-		<artifactId>iot-platform</artifactId>
+		<artifactId>boodskap-platform</artifactId>
 		<version>4.0.0-alpha</version>
 	</parent>
 	
-	<artifactId>spi-cache-local</artifactId>
+	<artifactId>boodskap-spi-cache-local</artifactId>
+	<name>spi-cache-local</name>
 
 	<dependencies>
 		<dependency>
@@ -20,7 +21,7 @@
 		</dependency>
 		<dependency>
 			<groupId>io.boodskap.iot</groupId>
-			<artifactId>iot-platform-core</artifactId>
+			<artifactId>boodskap-core</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 	</dependencies>
