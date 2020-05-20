@@ -4,26 +4,22 @@
 	
 	<modelVersion>4.0.0</modelVersion>
 	
-	<groupId>io.boodskap.iot</groupId>
-	<artifactId>iot-platform</artifactId>
-	<version>4.0.0-alpha</version>
+	<parent>
+		<groupId>io.boodskap.iot</groupId>
+		<artifactId>iot-platform</artifactId>
+		<version>4.0.0-alpha</version>
+	</parent>
 	
-	<packaging>pom</packaging>
+	<artifactId>spi-grid-local</artifactId>
 	
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<java.version>10</java.version>
-		<maven.compiler.source>${java.version}</maven.compiler.source>
-		<maven.compiler.target>${java.version}</maven.compiler.target>
-		<maven.compiler.debug>true</maven.compiler.debug>
-	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>io.boodskap.iot</groupId>
+			<artifactId>iot-platform-core</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+	</dependencies>
 	
-	<modules>
-		<module>core</module>
-		<module>spi-grid-local</module>
-		<module>spi-cache-local</module>
-	</modules>
-
 	<distributionManagement>
 		<repository>
 			<id>libs-release</id>
