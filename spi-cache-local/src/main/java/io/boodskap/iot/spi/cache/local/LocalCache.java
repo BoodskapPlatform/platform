@@ -1,6 +1,8 @@
 package io.boodskap.iot.spi.cache.local;
 
 import java.io.File;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Map;
 import java.util.concurrent.BlockingQueue;
 
@@ -83,20 +85,53 @@ public class LocalCache implements ICache {
 	}
 	
 	protected void close() {
-		if(null == db | db.isClosed()) return;
+		if(null == db || db.isClosed()) return;
 		db.commit();
 		db.close();
 	}
-
-	@Override
-	public <K, V> Map<K, V> createOrGetCache(String name) throws CacheException {
-		return getCache(name);
+	
+	private GroupSerializer<?> getSerializer(Class<?> keyOrValue) {
+		
+		final boolean array = keyOrValue.isArray();
+		final Class<?> type = array ? keyOrValue.arrayType() : keyOrValue;
+		
+		if(array && type.equals(BigInteger.class)) throw new IllegalArgumentException("BigInteger arrays are not supported");
+		if(array && type.equals(BigDecimal.class)) throw new IllegalArgumentException("BigDecimal arrays are not supported");
+		
+		if(type.equals(Byte.class)) {
+			return  array ? GroupSerializer.BYTE_ARRAY : GroupSerializer.BYTE;
+		}else if(type.equals(Short.class)) {
+			return  array ? GroupSerializer.SHORT_ARRAY : GroupSerializer.SHORT;
+		}else if(type.equals(Integer.class)) {
+			return  array ? GroupSerializer.INT_ARRAY : GroupSerializer.INTEGER;
+		}else if(type.equals(Long.class)) {
+			return  array ? GroupSerializer.LONG_ARRAY : GroupSerializer.LONG;
+		}else if(type.equals(Float.class)) {
+			return  array ? GroupSerializer.FLOAT_ARRAY : GroupSerializer.FLOAT;
+		}else if(type.equals(Double.class)) {
+			return  array ? GroupSerializer.DOUBLE_ARRAY : GroupSerializer.DOUBLE;
+		}else if(type.equals(BigInteger.class)) {
+			return  GroupSerializer.BIG_INTEGER;
+		}else if(type.equals(BigDecimal.class)) {
+			return  GroupSerializer.BIG_DECIMAL;
+		}
+		
+		return GroupSerializer.JAVA;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <K, V> Map<K, V> getCache(String name) throws CacheException {
-		return db.hashMap(String.format("cache_", name), GroupSerializer.STRING, GroupSerializer.JAVA).createOrOpen();
+	public <K, V> Map<K, V> createOrGetCache(Class<K> keyClass, Class<V> valueClass, String name) throws CacheException {
+		
+		final GroupSerializer<?> keySerializer = getSerializer(keyClass);
+		final GroupSerializer<?> valueSerializer = getSerializer(valueClass);
+
+		return (Map<K, V>) db.hashMap(String.format("cache_%s", name), keySerializer, valueSerializer).createOrOpen();
+	}
+
+	@Override
+	public <K, V> Map<K, V> getCache(Class<K> keyClass, Class<V> valueClass, String name) throws CacheException {
+		return createOrGetCache(keyClass, valueClass, name);
 	}
 
 	@Override
@@ -107,7 +142,7 @@ public class LocalCache implements ICache {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <E> BlockingQueue<E> getQueue(String name) throws CacheException {
-		IndexTreeList<E> list = (IndexTreeList<E>) db.indexTreeList(name, GroupSerializer.JAVA).createOrOpen();
+		IndexTreeList<E> list = (IndexTreeList<E>) db.indexTreeList(String.format("queue_", name), GroupSerializer.JAVA).createOrOpen();
 		return new LocalQueue<>(list, config.getQueueMaxSize());
 	}
 
