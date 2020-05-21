@@ -11,6 +11,7 @@ public class LocalCacheConfig implements IConfig {
 	private int queueMaxSize;
 
 	public LocalCacheConfig() {
+		setDefaults();
 	}
 	
 	@Override
