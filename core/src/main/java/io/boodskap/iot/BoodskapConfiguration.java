@@ -25,6 +25,8 @@ public class BoodskapConfiguration implements IConfig{
 	
 	private static final long serialVersionUID = 7078124126063442833L;
 	
+	private static final BoodskapConfiguration instance = new BoodskapConfiguration();
+	
 	private String domainKey;
 	private String apiKey;
 	private String clusterId;
@@ -43,11 +45,12 @@ public class BoodskapConfiguration implements IConfig{
 	private boolean autoCreateDevices;
 	private List<String> serviceFactories = new ArrayList<>();
 
-	public BoodskapConfiguration() {
+	private BoodskapConfiguration() {
+		setDefaults();
 	}
 	
 	public static BoodskapConfiguration get() {
-		return BoodskapSystem.get().getConfig();
+		return instance;
 	}
 	
 	@Override
@@ -59,7 +62,7 @@ public class BoodskapConfiguration implements IConfig{
 	@Override
 	public void setDefaults() {
 		logOfferTimeout = 2;
-		dataPath = "/usr/local/share/boodskap/data";
+		dataPath = "data";
 		idRangeEnabled = false;
 		maxDomainId = 9999;
 		workerMode = false;
