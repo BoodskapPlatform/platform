@@ -23,9 +23,9 @@ import io.boodskap.iot.CacheException;
 
 public interface ICache {
 	
-	public <K,V> Map<K, V> createOrGetCache(String name) throws CacheException;
+	public <K,V> Map<K, V> createOrGetCache(Class<K> keyClass, Class<V> valueClass, String name) throws CacheException;
 	
-	public <K,V> Map<K, V> getCache(String name) throws CacheException;
+	public <K,V> Map<K, V> getCache(Class<K> keyClass, Class<V> valueClass, String name) throws CacheException;
 	
 	public <E> BlockingQueue<E> createOrGetQueue(String name) throws CacheException;
 	

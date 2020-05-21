@@ -77,17 +77,17 @@ public class CacheStore implements Serializable {
 		
 		{
 			LOG.info("Initing auth cache");
-			authCache = cache.getCache("AUTH_CACHE");
+			authCache = cache.getCache(String.class, AuthToken.class, "AUTH_CACHE");
 		}
 
 		{
 			LOG.info("Initing device update cache");
-			deviceUpdateCache = cache.getCache("DEVICE_UPDATE_CACHE");
+			deviceUpdateCache = cache.getCache(String.class, Long.class, "DEVICE_UPDATE_CACHE");
 		}
 
 		{
 			LOG.info("Initing message spec cache");
-			msgSpecCache = cache.getCache("MSG_SPEC_CACHE");
+			msgSpecCache = cache.getCache(String.class, IMessageSpecification.class, "MSG_SPEC_CACHE");
 		}
 
 		{
