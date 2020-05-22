@@ -9,6 +9,8 @@ public class LocalCacheConfig implements IConfig {
 	private static final long serialVersionUID = 6621123405626354284L;
 	
 	private int queueMaxSize;
+	private boolean fileChannelEnable;
+	private boolean fileLockDisable;
 
 	public LocalCacheConfig() {
 		setDefaults();
@@ -22,11 +24,21 @@ public class LocalCacheConfig implements IConfig {
 
 	@Override
 	public void setDefaults() {
-		queueMaxSize = 10000;
+		queueMaxSize = Integer.MAX_VALUE;
+		fileChannelEnable = true;
+		fileLockDisable = true;
 	}
 
 	public int getQueueMaxSize() {
 		return queueMaxSize;
+	}
+
+	public boolean isFileChannelEnable() {
+		return fileChannelEnable;
+	}
+
+	public boolean isFileLockDisable() {
+		return fileLockDisable;
 	}
 
 }

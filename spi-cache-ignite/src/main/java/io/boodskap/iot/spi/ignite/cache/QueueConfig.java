@@ -7,7 +7,7 @@ public class QueueConfig {
 
 	private CacheAtomicityMode queueAtomicity = CacheAtomicityMode.ATOMIC;
 	private CacheMode queueCacheMode = CacheMode.REPLICATED;
-	private int queueMaxSize = 10000;
+	private int queueMaxSize = Integer.MAX_VALUE;
 	private int queueBackups = 0;
 	private boolean queueCollocated = false;
 	

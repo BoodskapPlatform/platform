@@ -4,6 +4,9 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import org.mapdb.IndexTreeList;
 
@@ -11,37 +14,79 @@ public class LocalQueue<E> implements BlockingQueue<E> {
 	
 	private final IndexTreeList<E> list;
 	private final int limit;
-
+	
+	private final Lock lock = new ReentrantLock(); 
+	private final Condition produceCond  = lock.newCondition(); 
+	private final Condition consumeCond = lock.newCondition(); 
+	
 	protected LocalQueue(IndexTreeList<E> list, int limit) {
 		this.list = list;
-		this.limit = limit;
+		this.limit = limit <= 0 ? Integer.MAX_VALUE : limit;
 	}
 
 	@Override
 	public E remove() {
-		return list.remove(0);
+		
+		lock.lock();
+		
+		try {
+			return list.remove(0);
+		}finally {
+			lock.unlock();
+		}
 	}
 
 	@Override
 	public E poll() {
-		if(isEmpty()) return null;
-		return list.remove(0);
+		
+		lock.lock();
+		
+		try {
+						
+			if(isEmpty()) return null;
+			
+			return remove();
+			
+		}finally {
+			lock.unlock();
+		}
 	}
 
 	@Override
 	public E element() {
-		return list.get(0);
+		
+		lock.lock();
+		
+		try {
+			return list.get(0);
+		}finally {
+			lock.unlock();
+		}
 	}
 
 	@Override
 	public E peek() {
-		if(isEmpty()) return null;
-		return list.get(0);
+		
+		lock.lock();
+		
+		try {
+			if(isEmpty()) return null;
+			return list.get(0);
+		}finally {
+			lock.unlock();
+		}
 	}
 
 	@Override
 	public int size() {
-		return list.size();
+		
+		lock.lock();
+		
+		try {
+			return list.size();
+		}finally {
+			lock.unlock();
+		}
 	}
 
 	@Override
@@ -71,32 +116,76 @@ public class LocalQueue<E> implements BlockingQueue<E> {
 
 	@Override
 	public boolean addAll(Collection<? extends E> c) {
-		return list.addAll(c);
+		
+		lock.lock();
+		
+		boolean changed = false;
+		
+		try {
+			return changed = list.addAll(c);
+		}finally {
+			
+			if(changed) {
+				consumeCond.signal();
+			}
+			
+			lock.unlock();
+		}
 	}
 
 	@Override
 	public boolean removeAll(Collection<?> c) {
-		return list.removeAll(c);
+		
+		lock.lock();
+		
+		try {
+			return list.removeAll(c);
+		}finally {
+			lock.unlock();
+		}
 	}
 
 	@Override
 	public boolean retainAll(Collection<?> c) {
-		return list.retainAll(c);
+		
+		lock.lock();
+		
+		try {
+			return list.retainAll(c);
+		}finally {
+			lock.unlock();
+		}
 	}
 
 	@Override
 	public void clear() {
-		list.clear();
+		
+		lock.lock();
+		
+		try {
+			list.clear();
+		}finally {
+			lock.unlock();
+		}
 	}
 
 	@Override
 	public boolean add(E e) {
+		
+		lock.lock();
+		
 		try {
-			return list.add(e);
-		}finally {
-			synchronized(this) {
-				notify();
+			if(size() >= limit) return false;
+			
+			boolean added = false;
+			
+			if(added = list.add(e)) {
+				consumeCond.signal();
 			}
+			
+			return added;
+		}finally {
+			lock.unlock();
 		}
 	}
 
@@ -107,45 +196,86 @@ public class LocalQueue<E> implements BlockingQueue<E> {
 
 	@Override
 	public void put(E e) throws InterruptedException {
-		add(e);
+		
+		lock.lock();
+		
+		try {
+			
+			while(size() >= limit) {
+				synchronized(this) {
+					produceCond.await();
+				}
+			}
+			
+			if(list.add(e)) {
+				consumeCond.signal();
+			}
+
+		}finally {
+			lock.unlock();
+		}
+
 	}
 
 	@Override
 	public boolean offer(E e, long timeout, TimeUnit unit) throws InterruptedException {
+				
+		lock.lock();
 		
-		if(limit <= 0) return add(e);
-		
-		while(size() >= limit) {
-			synchronized(this) {
-				wait(unit.toMillis(timeout));
+		try {
+			
+			boolean canAdd = true;
+			
+			if(size() >= limit) {
+				synchronized(this) {
+					canAdd = produceCond.await(timeout, unit);
+				}
 			}
+			
+			return canAdd ? add(e) : false;
+						
+		}finally {
+			lock.unlock();
 		}
-		
-		if(size() < limit) {
-			return add(e);
-		}
-		
-		return false;
+
 	}
 
 	@Override
 	public E take() throws InterruptedException {
-		while(isEmpty()) {
-			synchronized(this) {
-				wait();
+		
+		lock.lock();
+		
+		try {
+			
+			while(isEmpty()) {
+				consumeCond.await();
 			}
+			
+			return poll();
+			
+		}finally {
+			lock.unlock();
 		}
-		return poll();
+		
 	}
 
 	@Override
 	public E poll(long timeout, TimeUnit unit) throws InterruptedException {
-		while(isEmpty()) {
-			synchronized(this) {
-				wait(unit.toMillis(timeout));
+		
+		lock.lock();
+		
+		try {
+			
+			if(isEmpty()) {
+				consumeCond.await(timeout, unit);
 			}
+			
+			return poll();
+			
+		}finally {
+			lock.unlock();
 		}
-		return poll();
+		
 	}
 
 	@Override
@@ -160,7 +290,17 @@ public class LocalQueue<E> implements BlockingQueue<E> {
 
 	@Override
 	public boolean remove(Object o) {
-		return list.remove(o);
+		
+		lock.lock();
+		
+		try {
+			
+			return list.remove(o);
+			
+		}finally {
+			lock.unlock();
+		}
+		
 	}
 
 	@Override
@@ -170,12 +310,35 @@ public class LocalQueue<E> implements BlockingQueue<E> {
 
 	@Override
 	public int drainTo(Collection<? super E> c) {
-		throw new UnsupportedOperationException();
+		return drainTo(c, Integer.MAX_VALUE);
 	}
 
 	@Override
 	public int drainTo(Collection<? super E> c, int maxElements) {
-		throw new UnsupportedOperationException();
+		
+		lock.lock();
+		
+		try {
+			
+			int drained = 0;
+			
+			for(int i=0;i<list.size();i++) {
+				
+				c.add(list.remove(0));
+				
+				++drained;
+				
+				if(drained >= maxElements) {
+					break;
+				}
+			}
+			
+			return drained;
+			
+		}finally {
+			lock.unlock();
+		}
+		
 	}
 
 }

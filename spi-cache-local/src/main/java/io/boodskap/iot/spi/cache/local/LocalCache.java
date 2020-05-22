@@ -3,12 +3,15 @@ package io.boodskap.iot.spi.cache.local;
 import java.io.File;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.Date;
 import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.BlockingQueue;
 
 import org.mapdb.DB;
 import org.mapdb.DBException.DataCorruption;
 import org.mapdb.DBMaker;
+import org.mapdb.DBMaker.Maker;
 import org.mapdb.IndexTreeList;
 import org.mapdb.serializer.GroupSerializer;
 import org.slf4j.Logger;
@@ -52,11 +55,22 @@ public class LocalCache implements ICache {
 			
 			try {
 				
-				db = DBMaker.fileDB(file)
+				Maker maker = DBMaker.fileDB(file)
 						   .fileMmapEnableIfSupported()
-						   .closeOnJvmShutdown()
+						   .fileMmapPreclearDisable()
+						   .cleanerHackEnable()
 						   .transactionEnable()
-						   .make();
+						   .closeOnJvmShutdown();
+				
+				if(config.isFileChannelEnable()) {
+					maker.fileChannelEnable();
+				}
+				
+				if(config.isFileLockDisable()) {
+					maker.fileLockDisable();
+				}
+				
+				db = maker.make();
 					
 			}catch(DataCorruption dcx) {
 				
@@ -95,8 +109,8 @@ public class LocalCache implements ICache {
 		final boolean array = keyOrValue.isArray();
 		final Class<?> type = array ? keyOrValue.arrayType() : keyOrValue;
 		
-		if(array && type.equals(BigInteger.class)) throw new IllegalArgumentException("BigInteger arrays are not supported");
-		if(array && type.equals(BigDecimal.class)) throw new IllegalArgumentException("BigDecimal arrays are not supported");
+		//if(array && type.equals(BigInteger.class)) throw new IllegalArgumentException("BigInteger arrays are not supported");
+		//if(array && type.equals(BigDecimal.class)) throw new IllegalArgumentException("BigDecimal arrays are not supported");
 		
 		if(type.equals(Byte.class)) {
 			return  array ? GroupSerializer.BYTE_ARRAY : GroupSerializer.BYTE;
@@ -110,9 +124,19 @@ public class LocalCache implements ICache {
 			return  array ? GroupSerializer.FLOAT_ARRAY : GroupSerializer.FLOAT;
 		}else if(type.equals(Double.class)) {
 			return  array ? GroupSerializer.DOUBLE_ARRAY : GroupSerializer.DOUBLE;
-		}else if(type.equals(BigInteger.class)) {
+		}else if(type.equals(Character.class)) {
+			return  array ? GroupSerializer.CHAR_ARRAY : GroupSerializer.CHAR;
+		}else if(!array && type.equals(String.class)) {
+			return  GroupSerializer.STRING;
+		}else if(!array && type.equals(Boolean.class)) {
+			return  GroupSerializer.BOOLEAN;
+		}else if(!array && type.equals(Date.class)) {
+			return  GroupSerializer.DATE;
+		}else if(!array && type.equals(UUID.class)) {
+			return  GroupSerializer.UUID;
+		}else if(!array && type.equals(BigInteger.class)) {
 			return  GroupSerializer.BIG_INTEGER;
-		}else if(type.equals(BigDecimal.class)) {
+		}else if(!array && type.equals(BigDecimal.class)) {
 			return  GroupSerializer.BIG_DECIMAL;
 		}
 		
@@ -135,15 +159,21 @@ public class LocalCache implements ICache {
 	}
 
 	@Override
-	public <E> BlockingQueue<E> createOrGetQueue(String name) throws CacheException {
-		return getQueue(name);
+	public <E> BlockingQueue<E> createOrGetQueue(Class<E> valueClass, String name) throws CacheException {
+		return createOrGetQueue(valueClass, name, config.getQueueMaxSize());
 	}
-
+	
 	@SuppressWarnings("unchecked")
 	@Override
-	public <E> BlockingQueue<E> getQueue(String name) throws CacheException {
-		IndexTreeList<E> list = (IndexTreeList<E>) db.indexTreeList(String.format("queue_", name), GroupSerializer.JAVA).createOrOpen();
-		return new LocalQueue<>(list, config.getQueueMaxSize());
+	public <E> BlockingQueue<E> createOrGetQueue(Class<E> valueClass, String name, int limit) throws CacheException {
+		final GroupSerializer<?> valueSerializer = getSerializer(valueClass);
+		IndexTreeList<E> list = (IndexTreeList<E>) db.indexTreeList(String.format("queue_%s", name), valueSerializer).createOrOpen();
+		return new LocalQueue<>(list, limit);
+	}
+
+	@Override
+	public <E> BlockingQueue<E> getQueue(Class<E> valueClass, String name) throws CacheException {
+		return createOrGetQueue(valueClass, name, config.getQueueMaxSize());
 	}
 
 }
