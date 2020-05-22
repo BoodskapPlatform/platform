@@ -20,6 +20,7 @@ public class IgniteCacheConfiguration implements IConfig{
 	private Map<String, QueueConfig> namedQueues;
 
 	public IgniteCacheConfiguration() {
+		setDefaults();
 	}
 	
 	@Override
