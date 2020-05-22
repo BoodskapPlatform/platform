@@ -27,7 +27,10 @@ public interface ICache {
 	
 	public <K,V> Map<K, V> getCache(Class<K> keyClass, Class<V> valueClass, String name) throws CacheException;
 	
-	public <E> BlockingQueue<E> createOrGetQueue(String name) throws CacheException;
+	public <E> BlockingQueue<E> createOrGetQueue(Class<E> valueClass, String name) throws CacheException;
 	
-	public <E> BlockingQueue<E> getQueue(String name) throws CacheException;
+	public <E> BlockingQueue<E> getQueue(Class<E> valueClass, String name) throws CacheException;
+	
+	public <E> BlockingQueue<E> createOrGetQueue(Class<E> valueClass, String name, int limit) throws CacheException;
+	
 }
