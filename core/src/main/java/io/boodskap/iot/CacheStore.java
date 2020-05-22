@@ -59,8 +59,6 @@ public class CacheStore implements Serializable {
 	private BlockingQueue<ShellScript> shellScripts;
 	private BlockingQueue<SmsVoiceStatusRequest> smsVoiceStatus;
 	private BlockingQueue<MessageInfo> processedMessages;
-	private BlockingQueue<String[]> mlService;
-	private BlockingQueue<String[]> frService;
 	
 	private int logOfferTimeout = BoodskapConfiguration.get().getLogOfferTimeout();
 
@@ -92,67 +90,57 @@ public class CacheStore implements Serializable {
 
 		{
 			LOG.info("Initing outgoing emails Q");
-			outgoingEmails = cache.getQueue("OUTGOING_EMAILS");
+			outgoingEmails = cache.getQueue(String.class, "OUTGOING_EMAILS");
 		}
 
 		{
 			LOG.info("Initing outgoing sms Q");
-			outgoingSms = cache.getQueue("OUTGOING_SMS");
+			outgoingSms = cache.getQueue(String.class, "OUTGOING_SMS");
 		}
 
 		{
 			LOG.info("Initing outgoing voice msgs Q");
-			outgoingVoices = cache.getQueue("OUTGOING_VOICES");
+			outgoingVoices = cache.getQueue(String.class, "OUTGOING_VOICES");
 		}
 
 		{
 			LOG.info("Initing outgoing fcm msgs Q");
-			outgoingFcms = cache.getQueue("OUTGOING_FCMS");
+			outgoingFcms = cache.getQueue(String.class, "OUTGOING_FCMS");
 		}
 
 		{
 			LOG.info("Initing rules messages Q");
-			rulesMessages = cache.getQueue("RULES_MESSAGES");
+			rulesMessages = cache.getQueue(IMessage.class, "RULES_MESSAGES");
 		}
 
 		{
 			LOG.info("Initing shell script messages Q");
-			shellScripts = cache.getQueue("SCRIPT_MESSAGES");
+			shellScripts = cache.getQueue(ShellScript.class, "SCRIPT_MESSAGES");
 		}
 
 		{
 			LOG.info("Initing SMS/Voice Status Q");
-			smsVoiceStatus = cache.getQueue("SMS_VOICE_STATUS");
+			smsVoiceStatus = cache.getQueue(SmsVoiceStatusRequest.class, "SMS_VOICE_STATUS");
 		}
 
 		{
 			LOG.info("Initing Processed Messages Q");
-			processedMessages = cache.getQueue("PROCESSED_MESSAGES");
+			processedMessages = cache.getQueue(MessageInfo.class, "PROCESSED_MESSAGES");
 		}
 
 		{
 			LOG.info("Initing routed commands Q");
-			routedCommands = cache.getQueue("ROUTED_COMMANDS");
+			routedCommands = cache.getQueue(CommandKey.class, "ROUTED_COMMANDS");
 		}
 		
 		{
-			LOG.info("Initing ML Service Q");
-			mlService = cache.getQueue("ML_SERVICE_Q");
-		}
-
-		{
-			LOG.info("Initing FR Service Q");
-			frService = cache.getQueue("FR_SERVICE_Q");
-		}
-
-		{
 			LOG.info("Initing log Q");
-			logs = cache.getQueue("LOGS");
+			logs = cache.getQueue(LogRecord.class, "LOGS");
 		}
 
 		{
 			LOG.info("Initing incoming messages Q"); // Load this at last after all caches
-			incomingMessages = cache.getQueue("INCOMING_MESSAGES");
+			incomingMessages = cache.getQueue(String.class, "INCOMING_MESSAGES");
 		}
 
 		LOG.info("Loaded/Initialized all caches successfully");
@@ -213,7 +201,7 @@ public class CacheStore implements Serializable {
 		
 		final String queueId = String.format("SCHEDULED_RULES_%s", nodeId);
 		LOG.info(String.format("Loading %s Q", queueId));
-		BlockingQueue<ScheduledRuleAction> queue  = BoodskapSystem.cache().getQueue(queueId);
+		BlockingQueue<ScheduledRuleAction> queue  = BoodskapSystem.cache().getQueue(ScheduledRuleAction.class, queueId);
 		
 		return queue;
 	}
@@ -222,7 +210,7 @@ public class CacheStore implements Serializable {
 		
 		final String queueId = String.format("%s.%s.out", instanceId, channel);
 		LOG.info(String.format("Loading %s Q", queueId));
-		BlockingQueue<IOutgoingCommand> queue  = BoodskapSystem.cache().getQueue(queueId);
+		BlockingQueue<IOutgoingCommand> queue  = BoodskapSystem.cache().getQueue(IOutgoingCommand.class, queueId);
 		
 		return queue;
 	}
@@ -313,14 +301,6 @@ public class CacheStore implements Serializable {
 
 	public BlockingQueue<MessageInfo> getProcessedMessages() {
 		return processedMessages;
-	}
-
-	public BlockingQueue<String[]> getMlService() {
-		return mlService;
-	}
-
-	public BlockingQueue<String[]> getFrService() {
-		return frService;
 	}
 
 	public int getLogOfferTimeout() {
