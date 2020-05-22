@@ -17,7 +17,7 @@ import org.mapdb.serializer.GroupSerializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import io.boodskap.iot.BoodskapConfiguration;
+import io.boodskap.iot.BoodskapSystem;
 import io.boodskap.iot.CacheException;
 import io.boodskap.iot.spi.cache.ICache;
 
@@ -47,7 +47,7 @@ public class LocalCache implements ICache {
 			
 			LOG.info("initializing...");
 			
-			File folder = new File(BoodskapConfiguration.get().getDataPath(), "lcache");
+			File folder = new File(BoodskapSystem.get().getDataDir(), "lcache");
 			folder.mkdirs();
 			File file = new File(folder, "mmapfilecache.db");
 			

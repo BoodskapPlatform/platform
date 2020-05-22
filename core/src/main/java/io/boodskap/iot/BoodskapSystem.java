@@ -79,10 +79,11 @@ public class BoodskapSystem {
 	
 	private static INode node;
 	
-	private File configFolder;
-	private File configFile;
-	private File homeDir;
-	private File dataDir;
+	//private File homeDir = new File(null == System.getenv("BOODSKAP_HOME") ? System.getProperty("user.home") : System.getenv("BOODSKAP_HOME"));
+	private File homeDir = new File(".");
+	private File configFolder = new File(homeDir, "config");
+	private File configFile = new File(configFolder, "boodskap.properties");
+	private File dataDir = new File(homeDir, "data");
 	private PublicKey publicKey;
 	private PrivateKey privateKey;
 	private byte[] publicKeyData;
@@ -189,7 +190,7 @@ public class BoodskapSystem {
 		return storageManager;
 	}
 
-	protected void setStorageManager(IStorageFactory storageManager) {
+	public void setStorageManager(IStorageFactory storageManager) {
 		this.storageManager.setImplementation(storageManager);
 	}
 
@@ -197,7 +198,7 @@ public class BoodskapSystem {
 		return rawStorageManager;
 	}
 
-	protected void setRawStorageManager(IRawStorageFactory rawStorageManager) {
+	public void setRawStorageManager(IRawStorageFactory rawStorageManager) {
 		this.rawStorageManager.setImplementation(rawStorageManager);
 	}
 	

@@ -113,7 +113,7 @@ public class AssetDAOImpl implements AssetDAO<Asset> {
 
 	@Override
 	public Collection<Asset> list(String domainKey, int page, int pageSize) throws StorageException {
-		return new CommonDAO<Asset>(Asset.class).list(domainKey, page, pageSize, "name");
+		return new CommonDAO<Asset>(Asset.class).list(domainKey, page, pageSize, "registeredStamp");
 	}
 
 	@Override

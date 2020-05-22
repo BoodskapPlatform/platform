@@ -66,12 +66,7 @@ public class ThreadContext {
 	public static final TypeReference<Map<String, Object>> TR = new TypeReference<Map<String, Object>>() {
 	};
 	
-	public static final ThreadLocal<AuthToken> AUTH = new ThreadLocal<AuthToken>() {
-		@Override
-		protected AuthToken initialValue() {
-			return new AuthToken();
-		}
-	};
+	public static final ThreadLocal<IAuthToken> AUTH = new ThreadLocal<IAuthToken>();
 	
 	public static final ThreadLocal<Calendar> CALENDAR = new ThreadLocal<Calendar>() {
 		@Override

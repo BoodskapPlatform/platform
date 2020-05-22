@@ -35,7 +35,6 @@ public class BoodskapConfiguration implements IConfig{
 	private String storageFactory;
 	private String rawStorageFactory;
 	private String dynamicStorageFactory;
-	private String dataPath = "/usr/local/share/boodskap/data";
 	private int logOfferTimeout;
 	private boolean idRangeEnabled;
 	private int maxDomainId;
@@ -62,7 +61,6 @@ public class BoodskapConfiguration implements IConfig{
 	@Override
 	public void setDefaults() {
 		logOfferTimeout = 2;
-		dataPath = "data";
 		idRangeEnabled = false;
 		maxDomainId = 9999;
 		workerMode = false;
@@ -99,10 +97,6 @@ public class BoodskapConfiguration implements IConfig{
 		return logOfferTimeout;
 	}
 
-	public String getDataPath() {
-		return dataPath;
-	}
-
 	public boolean isIdRangeEnabled() {
 		return idRangeEnabled;
 	}
@@ -129,10 +123,6 @@ public class BoodskapConfiguration implements IConfig{
 
 	public void setLogOfferTimeout(int logOfferTimeout) {
 		this.logOfferTimeout = logOfferTimeout;
-	}
-
-	public void setDataPath(String dataPath) {
-		this.dataPath = dataPath;
 	}
 
 	public void setIdRangeEnabled(boolean idRangeEnabled) {

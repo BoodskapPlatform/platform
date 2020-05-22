@@ -23,18 +23,18 @@ public class ShellScript implements Serializable {
 
 	private static final long serialVersionUID = 5761587664807288075L;
 	
-	private AuthToken token;
+	private IAuthToken token;
 	private UUID sessionId;
 	private String script;
 
-	public ShellScript(AuthToken token, UUID sessionId, String script) {
+	public ShellScript(IAuthToken token, UUID sessionId, String script) {
 		super();
 		this.token = token;
 		this.sessionId = sessionId;
 		this.script = script;
 	}
 
-	public AuthToken getToken() {
+	public IAuthToken getToken() {
 		return token;
 	}
 

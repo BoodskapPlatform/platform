@@ -47,7 +47,7 @@ public class DeviceCounterDAOImpl implements DeviceCounterDAO<DeviceCounter> {
 			
 		}catch(Exception ex) {
 			UOW.rollback();
-			throw new StorageException();
+			throw new StorageException(ex);
 		}
 	}
 

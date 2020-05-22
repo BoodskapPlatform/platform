@@ -22,6 +22,7 @@ import io.boodskap.iot.StorageException;
 import io.boodskap.iot.dao.AssetDAO;
 import io.boodskap.iot.dao.EntityIterator;
 import io.boodskap.iot.model.IAsset;
+import io.boodskap.iot.spi.storage.policy.PolicyManager;
 
 public class AssetDAOImpl implements AssetDAO<IAsset> {
 	
@@ -40,50 +41,86 @@ public class AssetDAOImpl implements AssetDAO<IAsset> {
 	}
 
 	public void createOrUpdate(IAsset e) throws StorageException {
+		
+		PolicyManager.checkWriteAccess(e.getDomainKey());
+		
 		impl.createOrUpdate(e);
 	}
 
 	public EntityIterator<IAsset> load() throws StorageException {
+		
+		PolicyManager.checkAdmin();
+		
 		return impl.load();
 	}
 
 	public EntityIterator<IAsset> load(String domainKey) throws StorageException {
+		
+		PolicyManager.checkDomainAccess(domainKey);
+		
 		return impl.load(domainKey);
 	}
 
 	public IAsset get(String domainKey, String id) throws StorageException {
+		
+		PolicyManager.checkDomainAccess(domainKey);
+		
 		return impl.get(domainKey, id);
 	}
 
 	public long count() throws StorageException {
+		
+		PolicyManager.checkAdmin();
+		
 		return impl.count();
 	}
 
 	public long count(String domainKey) throws StorageException {
+		
+		PolicyManager.checkDomainAccess(domainKey);
+		
 		return impl.count(domainKey);
 	}
 
 	public void delete(String domainKey, String assetId) throws StorageException {
+		
+		PolicyManager.checkDeleteAccess(domainKey);
+		
 		impl.delete(domainKey, assetId);
 	}
 
 	public void delete(String domainKey) throws StorageException {
+		
+		PolicyManager.checkDeleteAccess(domainKey);
+		
 		impl.delete(domainKey);
 	}
 
 	public Collection<IAsset> list(String domainKey, int page, int pageSize) throws StorageException {
+		
+		PolicyManager.checkDomainAccess(domainKey);
+		
 		return impl.list(domainKey, page, pageSize);
 	}
 
 	public Collection<IAsset> listNext(String domainKey, String assetId, int page, int pageSize)throws StorageException {
+		
+		PolicyManager.checkDomainAccess(domainKey);
+		
 		return impl.listNext(domainKey, assetId, page, pageSize);
 	}
 
 	public Collection<IAsset> search(String domainKey, String query, int pageSize) throws StorageException {
+		
+		PolicyManager.checkDomainAccess(domainKey);
+		
 		return impl.search(domainKey, query, pageSize);
 	}
 
 	public void delete() throws StorageException {
+		
+		PolicyManager.checkAdmin();
+		
 		impl.delete();
 	}
 

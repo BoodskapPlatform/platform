@@ -355,7 +355,7 @@ public class CommonDAO<T> {
 			q.setParameter(k, v);
 		});
 		
-		q.setFirstResult(page);
+		q.setFirstResult(page*pageSize);
 		q.setMaxResults(pageSize);
 		
 		return q.getResultList();
@@ -393,7 +393,7 @@ public class CommonDAO<T> {
 				query.setParameter(me.getKey(), me.getValue());
 			}
 			
-			query.setFirstResult(page);
+			query.setFirstResult(page*pageSize);
 			query.setMaxResults(pageSize);
 			Collection<T> list = query.getResultList();
 			
@@ -425,7 +425,7 @@ public class CommonDAO<T> {
 			
 			TypedQuery<T> query = UOW.createQuery(String.format("select v from %s v order by v.%s", clazz.getSimpleName(), orderBy), clazz);
 			
-			query.setFirstResult(page);
+			query.setFirstResult(page*pageSize);
 			query.setMaxResults(pageSize);
 			Collection<T> list = query.getResultList();
 			return list;
@@ -458,7 +458,7 @@ public class CommonDAO<T> {
 			TypedQuery<T> query = UOW.createQuery(String.format("select v from %s v where v.id.domainKey=:dkey order by v.%s", clazz.getSimpleName(), orderBy), clazz);
 			query.setParameter("dkey", domainKey);
 			
-			query.setFirstResult(page);
+			query.setFirstResult(page * pageSize);
 			query.setMaxResults(pageSize);
 			Collection<T> list = query.getResultList();
 			return list;
@@ -477,7 +477,7 @@ public class CommonDAO<T> {
 			query.setParameter("dkey", domainKey);
 			query.setParameter("idf2", idf2Value);
 			
-			query.setFirstResult(page);
+			query.setFirstResult(page * pageSize);
 			query.setMaxResults(pageSize);
 			Collection<T> list = query.getResultList();
 			return list;
@@ -495,7 +495,7 @@ public class CommonDAO<T> {
 			TypedQuery<T> query = UOW.createQuery(String.format("select v from %s v where v.id.%s=:idf order by v.%s", clazz.getSimpleName(), idf, orderBy), clazz);
 			query.setParameter("idf", idfValue);
 			
-			query.setFirstResult(page);
+			query.setFirstResult(page * pageSize);
 			query.setMaxResults(pageSize);
 			Collection<T> list = query.getResultList();
 			return list;
@@ -514,7 +514,7 @@ public class CommonDAO<T> {
 			query.setParameter("idf", idfValue);
 			query.setParameter("idf2", idf2Value);
 			
-			query.setFirstResult(page);
+			query.setFirstResult(page * pageSize);
 			query.setMaxResults(pageSize);
 			Collection<T> list = query.getResultList();
 			return list;
@@ -534,7 +534,7 @@ public class CommonDAO<T> {
 			query.setParameter("idf2", idf2Value);
 			query.setParameter("idf3", idf3Value);
 			
-			query.setFirstResult(page);
+			query.setFirstResult(page * pageSize);
 			query.setMaxResults(pageSize);
 			Collection<T> list = query.getResultList();
 			return list;
@@ -555,7 +555,7 @@ public class CommonDAO<T> {
 			query.setParameter("idf3", idf3Value);
 			query.setParameter("idf4", idf4Value);
 			
-			query.setFirstResult(page);
+			query.setFirstResult(page * pageSize);
 			query.setMaxResults(pageSize);
 			Collection<T> list = query.getResultList();
 			return list;

@@ -22,6 +22,7 @@ public abstract class JPAConfig implements IConfig {
 	private Map<String, String> properties = new HashMap<>();
 
 	public JPAConfig() {
+		setDefaults();
 	}
 
 	@Override

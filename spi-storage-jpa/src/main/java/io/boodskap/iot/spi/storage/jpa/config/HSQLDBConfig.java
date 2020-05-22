@@ -11,6 +11,7 @@ public class HSQLDBConfig extends JPAConfig {
 	private static final long serialVersionUID = 3589800533000641655L;
 
 	public HSQLDBConfig() {
+		setDefaults();
 	}
 
 	@Override
@@ -20,7 +21,7 @@ public class HSQLDBConfig extends JPAConfig {
 
 		setDbType(DBType.HSQLDB);
 		
-		File folder = new File(BoodskapSystem.get().getDataDir().getAbsolutePath(), "hsqldb");
+		File folder = new File(BoodskapSystem.get().getDataDir(), "hsqldb");
 		folder.mkdirs();
 		
 		getProperties().put("hibernate.dialect", DBType.HSQLDB.dialect());

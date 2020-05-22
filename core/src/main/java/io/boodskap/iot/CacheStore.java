@@ -45,8 +45,9 @@ public class CacheStore implements Serializable {
 	
 	private static final CacheStore instance = new CacheStore();
 	
+	private Map<String, DomainSettings> settingsCache;
 	private Map<String, IMessageSpecification> msgSpecCache; // domainKey.msgid
-	private Map<String, AuthToken> authCache; //UUID
+	private Map<String, IAuthToken> authCache; //UUID
 	private Map<String, Long> deviceUpdateCache; //domainKey.deviceId
 	private BlockingQueue<String> incomingMessages;
 	private BlockingQueue<CommandKey> routedCommands;
@@ -74,8 +75,13 @@ public class CacheStore implements Serializable {
 		ICache cache = BoodskapSystem.cache();
 		
 		{
+			LOG.info("Initing settings cache");
+			settingsCache = cache.getCache(String.class, DomainSettings.class, "SETTINGS_CACHE");
+		}
+
+		{
 			LOG.info("Initing auth cache");
-			authCache = cache.getCache(String.class, AuthToken.class, "AUTH_CACHE");
+			authCache = cache.getCache(String.class, IAuthToken.class, "AUTH_CACHE");
 		}
 
 		{
@@ -251,7 +257,7 @@ public class CacheStore implements Serializable {
 		return msgSpecCache;
 	}
 
-	public Map<String, AuthToken> getAuthCache() {
+	public Map<String, IAuthToken> getAuthCache() {
 		return authCache;
 	}
 
@@ -305,6 +311,18 @@ public class CacheStore implements Serializable {
 
 	public int getLogOfferTimeout() {
 		return logOfferTimeout;
+	}
+
+	public DomainSettings getSettings(String domainKey) {
+		DomainSettings s =  settingsCache.get(domainKey);
+		if(null == s) {
+			s = new DomainSettings();
+		}
+		return s;
+	}
+	
+	public void setSettings(DomainSettings settings) {
+		settingsCache.put(settings.getDomainKey(), settings);
 	}
 	
 }
