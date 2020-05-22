@@ -37,7 +37,7 @@ public class IgniteCache implements ICache {
 	}
 
 	@Override
-	public <K, V> Map<K, V> createOrGetCache(String name) throws CacheException {
+	public <K, V> Map<K, V> createOrGetCache(Class<K> keyClass, Class<V> valueClass,String name) throws CacheException {
 		try {
 			
 			CacheConfig cc = config.getNamedCaches().get(name);
@@ -58,7 +58,7 @@ public class IgniteCache implements ICache {
 	}
 
 	@Override
-	public <K, V> Map<K, V> getCache(String name) throws CacheException {
+	public <K, V> Map<K, V> getCache(Class<K> keyClass, Class<V> valueClass,String name) throws CacheException {
 		try {
 			return new IgniteCacheMap<K, V>(ignite.getOrCreateCache(name));
 		} catch (Exception e) {
@@ -67,7 +67,12 @@ public class IgniteCache implements ICache {
 	}
 
 	@Override
-	public <E> BlockingQueue<E> createOrGetQueue(String name) throws CacheException {
+	public <E> BlockingQueue<E> createOrGetQueue(Class<E> valueClass, String name) throws CacheException {
+		return createOrGetQueue(valueClass, name, -1);
+	}
+
+	@Override
+	public <E> BlockingQueue<E> createOrGetQueue(Class<E> valueClass, String name, int capacity) throws CacheException {
 		try {
 			
 			QueueConfig qc = config.getNamedQueues().get(name);
@@ -81,14 +86,18 @@ public class IgniteCache implements ICache {
 			cfg.setBackups(qc.getQueueBackups());
 			cfg.setCacheMode(qc.getQueueCacheMode());
 			cfg.setCollocated(qc.isQueueCollocated());
-			return ignite.queue(name, qc.getQueueMaxSize(), cfg);
+			
+			capacity = (capacity <= 0) ? qc.getQueueMaxSize() : capacity;
+			
+			return ignite.queue(name, capacity, cfg);
+			
 		} catch (Exception e) {
 			throw new CacheException(e);
 		}
 	}
 
 	@Override
-	public <E> BlockingQueue<E> getQueue(String name) throws CacheException {
+	public <E> BlockingQueue<E> getQueue(Class<E> valueClass, String name) throws CacheException {
 		try {
 			return ignite.queue(name, 0, null);
 		} catch (Exception e) {
