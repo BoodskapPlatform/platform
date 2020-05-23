@@ -46,6 +46,7 @@ public class CacheStore implements Serializable {
 	private static final CacheStore instance = new CacheStore();
 	
 	private Map<String, DomainSettings> settingsCache;
+	private Map<String, OrganizationSettings> orgSettingsCache;
 	private Map<String, IMessageSpecification> msgSpecCache; // domainKey.msgid
 	private Map<String, IAuthToken> authCache; //UUID
 	private Map<String, Long> deviceUpdateCache; //domainKey.deviceId
@@ -75,8 +76,13 @@ public class CacheStore implements Serializable {
 		ICache cache = BoodskapSystem.cache();
 		
 		{
-			LOG.info("Initing settings cache");
-			settingsCache = cache.getCache(String.class, DomainSettings.class, "SETTINGS_CACHE");
+			LOG.info("Initing domain settings cache");
+			settingsCache = cache.getCache(String.class, DomainSettings.class, "DOM_SETTINGS_CACHE");
+		}
+
+		{
+			LOG.info("Initing organization settings cache");
+			orgSettingsCache = cache.getCache(String.class, OrganizationSettings.class, "ORG_SETTINGS_CACHE");
 		}
 
 		{
@@ -325,4 +331,16 @@ public class CacheStore implements Serializable {
 		settingsCache.put(settings.getDomainKey(), settings);
 	}
 	
+	
+	public OrganizationSettings getOrgSettings(String domainKey, String organizationId) {
+		OrganizationSettings s =  orgSettingsCache.get(String.format("%s.%s", domainKey, organizationId));
+		if(null == s) {
+			s = new OrganizationSettings();
+		}
+		return s;
+	}
+	
+	public void setOrgSettings(OrganizationSettings settings) {
+		settingsCache.put(String.format("%s.%s", settings.getDomainKey(), settings.getOrganizationId()), settings);
+	}
 }

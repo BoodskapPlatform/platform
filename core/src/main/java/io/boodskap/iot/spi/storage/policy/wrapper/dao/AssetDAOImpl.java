@@ -49,35 +49,35 @@ public class AssetDAOImpl implements AssetDAO<IAsset> {
 
 	public EntityIterator<IAsset> load() throws StorageException {
 		
-		PolicyManager.checkAdmin();
+		PolicyManager.checkReadAccess();
 		
 		return impl.load();
 	}
 
 	public EntityIterator<IAsset> load(String domainKey) throws StorageException {
 		
-		PolicyManager.checkDomainAccess(domainKey);
+		PolicyManager.checkReadAccess(domainKey);
 		
 		return impl.load(domainKey);
 	}
 
 	public IAsset get(String domainKey, String id) throws StorageException {
 		
-		PolicyManager.checkDomainAccess(domainKey);
+		PolicyManager.checkReadAccess(domainKey);
 		
 		return impl.get(domainKey, id);
 	}
 
 	public long count() throws StorageException {
 		
-		PolicyManager.checkAdmin();
+		PolicyManager.checkReadAccess();
 		
 		return impl.count();
 	}
 
 	public long count(String domainKey) throws StorageException {
 		
-		PolicyManager.checkDomainAccess(domainKey);
+		PolicyManager.checkReadAccess(domainKey);
 		
 		return impl.count(domainKey);
 	}
@@ -98,28 +98,28 @@ public class AssetDAOImpl implements AssetDAO<IAsset> {
 
 	public Collection<IAsset> list(String domainKey, int page, int pageSize) throws StorageException {
 		
-		PolicyManager.checkDomainAccess(domainKey);
+		PolicyManager.checkReadAccess(domainKey);
 		
 		return impl.list(domainKey, page, pageSize);
 	}
 
 	public Collection<IAsset> listNext(String domainKey, String assetId, int page, int pageSize)throws StorageException {
 		
-		PolicyManager.checkDomainAccess(domainKey);
+		PolicyManager.checkReadAccess(domainKey);
 		
 		return impl.listNext(domainKey, assetId, page, pageSize);
 	}
 
 	public Collection<IAsset> search(String domainKey, String query, int pageSize) throws StorageException {
 		
-		PolicyManager.checkDomainAccess(domainKey);
+		PolicyManager.checkReadAccess(domainKey);
 		
 		return impl.search(domainKey, query, pageSize);
 	}
 
 	public void delete() throws StorageException {
 		
-		PolicyManager.checkAdmin();
+		PolicyManager.checkDeleteAccess();
 		
 		impl.delete();
 	}

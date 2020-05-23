@@ -1,6 +1,7 @@
 package io.boodskap.iot.spi.storage.policy;
 
 import io.boodskap.iot.CacheStore;
+import io.boodskap.iot.DomainSettings;
 import io.boodskap.iot.IAuthToken;
 import io.boodskap.iot.StorageException;
 
@@ -15,55 +16,148 @@ public class PolicyManager {
 		PolicyManager.enabled = enabled;
 	}
 	
-	public static void checkAdmin() {
-		if(enabled && !IAuthToken.get().isAdmin()) throw new StorageException("Admin access needed");
-	}
-	
-	public static void checkDomainAdmin() {
-		if(enabled && !IAuthToken.get().isDomainAdmin()) throw new StorageException("Domain admin access needed");
-	}
-	
-	public static void checkDomainAccess(String domainKey) {
-		if(enabled && !IAuthToken.get().hasDomainKey(domainKey))throw new StorageException(String.format("Domain:%s not authorized", domainKey));
-	}
-	
-	public static void checkDomainAdminAccess(String domainKey) {
+	private static IAuthToken getAuthToken() {
 		
-		if(!enabled) return;		
+		final IAuthToken t = IAuthToken.get();
 		
-		checkDomainAdmin();
-		checkDomainAccess(domainKey);
+		if(null == t) throw new StorageException("Not authenticated");
+		if(t.isExpired()) throw new StorageException("Session expired");
+		if(!t.isValid()) throw new StorageException("Invalid session");
+		
+		return t;
 	}
 	
-	public static void checkWriteAccess(String domainKey) {
+	private static IAuthToken getAdminAuthToken() {
+		
+		final IAuthToken t = getAuthToken();
+		
+		if(!t.isAdmin()) throw new StorageException("Need admin access");
+		
+		return t;
+	}
+	
+
+	public static void checkReadAccess() {
+		checkReadAccess(getAdminAuthToken().getDomainKey(), null);
+	}
+
+	public static void checkReadAccess(String domainKey) {
+		checkReadAccess(domainKey, null);
+	}
+
+	public static void checkReadAccess(String domainKey, String organizationId) {
 		
 		if(!enabled) return;
 		
-		checkDomainAccess(domainKey);
+		final IAuthToken t = getAuthToken();
 		
-		switch(IAuthToken.get().getROLE()) {
-		case ORGUSER:
-			if(!CacheStore.get().getSettings(domainKey).isCanOrgUserWrite()) {
-				throw new StorageException(String.format("Write access for domain %s denied", domainKey));
-			}
-		default:
+		if(t.getApiKey() != null && t.hasDomainKey(domainKey)) return; //API Access Grants all premissions
 		
+		DomainSettings s = (null == organizationId) ? CacheStore.get().getSettings(domainKey) : CacheStore.get().getOrgSettings(domainKey, organizationId);
+		
+		if(t.isAdmin() && (s.isCanAdminDelete() || s.isCanAdminWrite() || s.isCanAdminRead())) return; // If admin has delete, write access for this domain
+		
+		if(!t.hasDomainKey(domainKey)) throw new StorageException(String.format("Domain:%s not authorized", domainKey));
+		
+		if(null != organizationId && !t.hasOrganizationId(organizationId)) throw new StorageException(String.format("Domain:%s Organization:%s not authorized", domainKey, organizationId));
+		
+		if(t.isUser() && (s.isCanUserDelete() || s.isCanUserWrite() || s.isCanUserRead())) return;
+		
+		if(t.isOrganizationUser() && (s.isCanOrgUserDelete() || s.isCanOrgUserWrite() || s.isCanOrgUserRead())) return;
+		
+		if(t.isOrganizationAdmin() && (s.isCanOrgAdminDelete() || s.isCanOrgAdminWrite() || s.isCanOrgAdminRead())) return;
+		
+		if(t.isDomainAdmin() && (s.isCanDomainAdminDelete() || s.isCanDomainAdminWrite() || s.isCanDomainAdminRead())) return;
+		
+		if(t.isDeveloper() && (s.isCanDeveloperDelete() || s.isCanDeveloperWrite() || s.isCanDeveloperRead())) return;
+		
+		if(null == organizationId) {
+			throw new StorageException(String.format("Domain:%s not authorized", domainKey));
+		}else {
+			throw new StorageException(String.format("Domain:%s Organization:%s not authorized", domainKey, organizationId));
+		}
+
+	}
+
+	public static void checkWriteAccess() throws StorageException {
+		checkWriteAccess(getAdminAuthToken().getDomainKey(), null);
+	}
+	
+	public static void checkWriteAccess(String domainKey) throws StorageException {
+		checkWriteAccess(domainKey, null);
+	}
+	
+	public static void checkWriteAccess(String domainKey, String organizationId) throws StorageException {
+		
+		if(!enabled) return;
+		
+		final IAuthToken t = getAuthToken();
+		
+		if(t.getApiKey() != null && t.hasDomainKey(domainKey)) return; //API Access Grants all premissions
+		
+		DomainSettings s = (null == organizationId) ? CacheStore.get().getSettings(domainKey) : CacheStore.get().getOrgSettings(domainKey, organizationId);
+		
+		if(t.isAdmin() && (s.isCanAdminDelete() || s.isCanAdminWrite())) return; // If admin has delete, write access for this domain
+		
+		if(!t.hasDomainKey(domainKey)) throw new StorageException(String.format("Domain:%s not authorized", domainKey));
+		
+		if(null != organizationId && !t.hasOrganizationId(organizationId)) throw new StorageException(String.format("Domain:%s Organization:%s not authorized", domainKey, organizationId));
+		
+		if(t.isUser() && (s.isCanUserDelete() || s.isCanUserWrite())) return;
+		
+		if(t.isOrganizationUser() && (s.isCanOrgUserDelete() || s.isCanOrgUserWrite())) return;
+		
+		if(t.isOrganizationAdmin() && (s.isCanOrgAdminDelete() || s.isCanOrgAdminWrite())) return;
+		
+		if(t.isDomainAdmin() && (s.isCanDomainAdminDelete() || s.isCanDomainAdminWrite())) return;
+		
+		if(t.isDeveloper() && (s.isCanDeveloperDelete() || s.isCanDeveloperWrite())) return;
+		
+		if(null == organizationId) {
+			throw new StorageException(String.format("Domain:%s not authorized", domainKey));
+		}else {
+			throw new StorageException(String.format("Domain:%s Organization:%s not authorized", domainKey, organizationId));
 		}
 	}
 
+	public static void checkDeleteAccess() {
+		checkDeleteAccess(getAdminAuthToken().getDomainKey(), null);
+	}
+
 	public static void checkDeleteAccess(String domainKey) {
+		checkDeleteAccess(domainKey, null);
+	}
+
+	public static void checkDeleteAccess(String domainKey, String organizationId) {
 		
 		if(!enabled) return;
 		
-		checkDomainAccess(domainKey);
+		final IAuthToken t = getAuthToken();
 		
-		switch(IAuthToken.get().getROLE()) {
-		case ORGUSER:
-			if(!CacheStore.get().getSettings(domainKey).isCanOrgUserDelete()) {
-				throw new StorageException(String.format("Write access for domain %s denied", domainKey));
-			}
-		default:
+		if(t.getApiKey() != null && t.hasDomainKey(domainKey)) return; //API Access Grants all premissions
 		
+		DomainSettings s = (null == organizationId) ? CacheStore.get().getSettings(domainKey) : CacheStore.get().getOrgSettings(domainKey, organizationId);
+		
+		if(t.isAdmin() && (s.isCanAdminDelete())) return; // If admin has delete, write access for this domain
+		
+		if(!t.hasDomainKey(domainKey)) throw new StorageException(String.format("Domain:%s not authorized", domainKey));
+		
+		if(null != organizationId && !t.hasOrganizationId(organizationId)) throw new StorageException(String.format("Domain:%s Organization:%s not authorized", domainKey, organizationId));
+		
+		if(t.isUser() && (s.isCanUserDelete())) return;
+		
+		if(t.isOrganizationUser() && (s.isCanOrgUserDelete())) return;
+		
+		if(t.isOrganizationAdmin() && (s.isCanOrgAdminDelete())) return;
+		
+		if(t.isDomainAdmin() && (s.isCanDomainAdminDelete())) return;
+		
+		if(t.isDeveloper() && (s.isCanDeveloperDelete())) return;
+		
+		if(null == organizationId) {
+			throw new StorageException(String.format("Domain:%s not authorized", domainKey));
+		}else {
+			throw new StorageException(String.format("Domain:%s Organization:%s not authorized", domainKey, organizationId));
 		}
 	}
 

@@ -22,6 +22,9 @@ import java.util.Map;
 
 import org.slf4j.MDC;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+@JsonSerialize(as=IAuthToken.class)
 public interface IAuthToken extends Serializable {
 	
 	public static IAuthToken get() {
@@ -33,6 +36,8 @@ public interface IAuthToken extends Serializable {
 		MDC.clear();
 	}
 	
+	public void touch();
+	
 	public boolean isExpired();
 	
 	public long getAccessedAt();
@@ -41,9 +46,15 @@ public interface IAuthToken extends Serializable {
 
 	public String getUser();
 
+	public String getApiKey();
+	
+	public String getOrganizationId();
+
 	public boolean isValid();
 
 	public boolean isUser();
+
+	public boolean isOrganizationUser();
 
 	public boolean isDeveloper();
 
@@ -53,8 +64,6 @@ public interface IAuthToken extends Serializable {
 
 	public boolean isAdmin();
 	
-	public String getApiKey();
-
 	public String getToken();
 
 	public long getExpireIn();
@@ -67,7 +76,7 @@ public interface IAuthToken extends Serializable {
 	
 	public boolean hasAccess(Access access);
 	
-	public ROLE getROLE();
+	public AuthType getAuthType();
 	
 	public List<String> getRoles();
 	
@@ -76,5 +85,7 @@ public interface IAuthToken extends Serializable {
 	public String getThisOrMyDomainKey(String dkey);
 	
 	public String getThisOrMyOrDefaultDomainKey(String dkey);
+	
+	public boolean hasOrganizationId(String orgId);
 	
 }
