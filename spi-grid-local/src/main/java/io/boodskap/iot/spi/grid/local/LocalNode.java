@@ -23,7 +23,18 @@ public class LocalNode implements INode {
 	protected void start() {
 		
 		if(null == exec || exec.isShutdown() || exec.isTerminated()) {
-			exec = Executors.newFixedThreadPool(config.getThreadPoolSize());
+			
+			switch(config.getThreadPoolType()) {
+			case CACHED:
+				exec = Executors.newCachedThreadPool();
+				break;
+			case FIXED:
+				exec = Executors.newFixedThreadPool(config.getThreadPoolSize());
+				break;
+			case STEAL:
+				exec = Executors.newWorkStealingPool(config.getParallelism());
+				break;
+			}
 		}
 	}
 	
