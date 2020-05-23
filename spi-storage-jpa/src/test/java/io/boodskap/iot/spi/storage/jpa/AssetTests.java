@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Collection;
+
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
@@ -81,18 +83,32 @@ public class AssetTests extends BaseTest {
 	
 	@Test
 	@Order(8)
+	void search() {
+		
+		Collection<IAsset> list = AssetDAO.get().search(DOMAIN_KEY, "lower(v.name) like 'test%'", 10);
+		assertEquals(3, list.size());
+		
+		list = AssetDAO.get().search(DOMAIN_KEY, "lower(v.name) like '%2'", 10);
+		assertEquals(1, list.size());
+		
+		list = AssetDAO.get().search(DOMAIN_KEY, "lower(v.name) like '%asse%'", 10);
+		assertEquals(3, list.size());
+	}
+	
+	@Test
+	@Order(9)
 	void deleteAsset() {
 		AssetDAO.get().delete(DOMAIN_KEY, "Test Asset");
 	}
 	
 	@Test
-	@Order(9)
+	@Order(10)
 	void delete() {
 		AssetDAO.get().delete(DOMAIN_KEY);
 	}
 	
 	@Test
-	@Order(10)
+	@Order(11)
 	void deleteAll() {
 		AssetDAO.get().delete();
 	}
