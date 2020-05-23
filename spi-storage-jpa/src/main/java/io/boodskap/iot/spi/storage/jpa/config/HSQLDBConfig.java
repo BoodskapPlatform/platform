@@ -26,9 +26,14 @@ public class HSQLDBConfig extends JPAConfig {
 		
 		getProperties().put("hibernate.dialect", DBType.HSQLDB.dialect());
 		getProperties().put("hibernate.connection.driver_class", DBType.HSQLDB.driver());
+		
 		getProperties().put("hibernate.connection.username", "sa");
 		getProperties().put("hibernate.connection.password", "");
 		getProperties().put("hibernate.connection.url", String.format("jdbc:hsqldb:file:%s/boodskapdb", folder.getAbsolutePath()));
+		
+		//getProperties().put("hibernate.hikari.dataSource.jdbcUrl", String.format("jdbc:hsqldb:file:%s/boodskapdb", folder.getAbsolutePath()));
+		//getProperties().put("hibernate.hikari.dataSource.user", "sa");
+		//getProperties().put("hibernate.hikari.dataSource.password", "");
 		
 	}
 }

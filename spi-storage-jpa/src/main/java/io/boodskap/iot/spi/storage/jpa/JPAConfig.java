@@ -33,16 +33,28 @@ public abstract class JPAConfig implements IConfig {
 
 	@Override
 	public void setDefaults() {
-
+		
 		getProperties().put("hibernate.archive.autodetection", "class");
 		getProperties().put("hibernate.show_sql", "false");
 		getProperties().put("hibernate.format_sql", "false");
 		getProperties().put("hibernate.hbm2ddl.auto", "update");
+		getProperties().put("hibernate.connection.provider_class", "org.hibernate.hikaricp.internal.HikariCPConnectionProvider");
+		
+		/**
 		getProperties().put("hibernate.connection.initial_pool_size", "3");
 		getProperties().put("hibernate.connection.min_pool_size", "3");
 		getProperties().put("hibernate.connection.pool_size", "50");
 		getProperties().put("hibernate.connection.pool_validation_interval", "30");
+		**/
 		
+		getProperties().put("hibernate.hikari.connectionTimeout", "20000");
+		//getProperties().put("hibernate.hikari.minIdle", "5");
+		//getProperties().put("hibernate.hikari.maxPoolSize", "25");
+		getProperties().put("hibernate.hikari.idleTimeout", "30000");		
+		getProperties().put("hibernate.hikari.dataSource.cachePrepStmts", "true");		
+		getProperties().put("hibernate.hikari.dataSource.prepStmtCacheSize", "250");		
+		getProperties().put("hibernate.hikari.dataSource.prepStmtCacheSqlLimit", "2048");		
+		getProperties().put("hibernate.hikari.dataSource.useServerPrepStmts", "true");
 	}
 
 	public String getPersistenceUnit() {
