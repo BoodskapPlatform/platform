@@ -38,6 +38,7 @@ public class PolicyManager {
 	
 
 	public static void checkReadAccess() {
+		if(!enabled) return;
 		checkReadAccess(getAdminAuthToken().getDomainKey(), null);
 	}
 
@@ -80,6 +81,7 @@ public class PolicyManager {
 	}
 
 	public static void checkWriteAccess() throws StorageException {
+		if(!enabled) return;
 		checkWriteAccess(getAdminAuthToken().getDomainKey(), null);
 	}
 	
@@ -121,6 +123,7 @@ public class PolicyManager {
 	}
 
 	public static void checkDeleteAccess() {
+		if(!enabled) return;
 		checkDeleteAccess(getAdminAuthToken().getDomainKey(), null);
 	}
 
