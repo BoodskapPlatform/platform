@@ -12,11 +12,6 @@ public class OrganizationDevice extends Device implements IOrganizationDevice {
 		super();
 	}
 
-	public OrganizationDevice(String domainKey, String orgId, String deviceId) {
-		super(domainKey, deviceId);
-		setOrgId(orgId);
-	}
-
 	public String getOrgId() {
 		return orgId;
 	}

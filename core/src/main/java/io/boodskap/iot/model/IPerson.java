@@ -23,7 +23,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @JsonSerialize(as=IPerson.class)
-public interface IPerson extends IEntity {
+public interface IPerson extends IContact {
 
 	public String getUserId();
 

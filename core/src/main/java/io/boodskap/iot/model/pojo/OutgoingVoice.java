@@ -10,8 +10,4 @@ public class OutgoingVoice extends AbstractNotification implements IOutgoingVoic
 	public OutgoingVoice() {
 	}
 
-	public OutgoingVoice(String domainKey, String notificationId) {
-		super(domainKey, notificationId);
-	}
-
 }

@@ -13,11 +13,6 @@ public class OTAModelVersionBatch extends OTAModelBatch implements IOTAModelVers
 		super();
 	}
 
-	public OTAModelVersionBatch(String domainKey, String batchId, String fromModel, String fromVersion) {
-		super(domainKey, batchId, fromModel);
-		this.fromVersion = fromVersion;
-	}
-
 	public String getFromVersion() {
 		return fromVersion;
 	}

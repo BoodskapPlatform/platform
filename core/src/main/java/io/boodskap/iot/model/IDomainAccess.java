@@ -16,8 +16,6 @@
  ******************************************************************************/
 package io.boodskap.iot.model;
 
-import java.util.Date;
-
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import io.boodskap.iot.Access;
@@ -50,8 +48,4 @@ public interface IDomainAccess extends IDomainObject{
 
 	public void setAccess(Access access);
 	
-	public Date getGrantedStamp();
-	
-	public void setGrantedStamp(Date grantedStamp);
-
 }

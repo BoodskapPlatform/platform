@@ -14,9 +14,6 @@ public class SentFCM extends AbstractSentNotification implements ISentFCM {
 	public SentFCM() {
 	}
 
-	public SentFCM(String domainKey, String notificationId) {
-		super(domainKey, notificationId);
-	}
 
 	@Override
 	public String getDeviceId() {

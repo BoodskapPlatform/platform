@@ -7,11 +7,10 @@ import java.util.List;
 import io.boodskap.iot.model.IDatabaseMetaData;
 import io.boodskap.iot.model.IDatabaseTable;
 
-public class DatabaseMetaData implements IDatabaseMetaData {
+public class DatabaseMetaData extends AbstractDomainObject implements IDatabaseMetaData {
 	
 	private static final long serialVersionUID = 547209306501041052L;
 	
-	private String domainKey;
 	private String metaDataId;
 	private Integer databaseMajorVersion;
 	private Integer databaseMinorVersion;
@@ -62,14 +61,6 @@ public class DatabaseMetaData implements IDatabaseMetaData {
 	public DatabaseMetaData() {
 	}
 	
-	public String getDomainKey() {
-		return domainKey;
-	}
-
-	public void setDomainKey(String domainKey) {
-		this.domainKey = domainKey;
-	}
-
 	public String getMetaDataId() {
 		return metaDataId;
 	}
@@ -450,14 +441,13 @@ public class DatabaseMetaData implements IDatabaseMetaData {
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		int result = super.hashCode();
 		result = prime * result + ((aliases == null) ? 0 : aliases.hashCode());
 		result = prime * result + ((catalogs == null) ? 0 : catalogs.hashCode());
 		result = prime * result + ((databaseMajorVersion == null) ? 0 : databaseMajorVersion.hashCode());
 		result = prime * result + ((databaseMinorVersion == null) ? 0 : databaseMinorVersion.hashCode());
 		result = prime * result + ((databaseProductName == null) ? 0 : databaseProductName.hashCode());
 		result = prime * result + ((databaseProductVersion == null) ? 0 : databaseProductVersion.hashCode());
-		result = prime * result + ((domainKey == null) ? 0 : domainKey.hashCode());
 		result = prime * result + ((driverMajorVersion == null) ? 0 : driverMajorVersion.hashCode());
 		result = prime * result + ((driverMinorVersion == null) ? 0 : driverMinorVersion.hashCode());
 		result = prime * result + ((driverName == null) ? 0 : driverName.hashCode());
@@ -505,7 +495,7 @@ public class DatabaseMetaData implements IDatabaseMetaData {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
@@ -539,11 +529,6 @@ public class DatabaseMetaData implements IDatabaseMetaData {
 			if (other.databaseProductVersion != null)
 				return false;
 		} else if (!databaseProductVersion.equals(other.databaseProductVersion))
-			return false;
-		if (domainKey == null) {
-			if (other.domainKey != null)
-				return false;
-		} else if (!domainKey.equals(other.domainKey))
 			return false;
 		if (driverMajorVersion == null) {
 			if (other.driverMajorVersion != null)
@@ -747,4 +732,5 @@ public class DatabaseMetaData implements IDatabaseMetaData {
 			return false;
 		return true;
 	}
+
 }

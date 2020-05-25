@@ -16,8 +16,6 @@
  ******************************************************************************/
 package io.boodskap.iot.model;
 
-import java.util.Date;
-
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import io.boodskap.iot.BoodskapSystem;
@@ -42,10 +40,6 @@ public interface IEventRegistration extends IDomainObject {
 	public String getToAddress();
 
 	public void setToAddress(String toAddress);
-
-	public Date getCreatedStamp();
-	
-	public void setCreatedStamp(Date createdStamp);
 
 	public default void save() {
 		EventRegistrationDAO.get().createOrUpdate(this);

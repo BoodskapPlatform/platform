@@ -14,10 +14,6 @@ public class SentEmail extends AbstractSentNotification implements ISentEmail {
 	public SentEmail() {
 	}
 
-	public SentEmail(String domainKey, String notificationId) {
-		super(domainKey, notificationId);
-	}
-
 	@Override
 	public String getSendor() {
 		return sendor;

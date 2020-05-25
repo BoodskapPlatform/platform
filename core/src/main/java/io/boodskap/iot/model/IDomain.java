@@ -22,7 +22,7 @@ import io.boodskap.iot.dao.DomainDAO;
 import io.boodskap.iot.dao.DomainRoleDAO;
 
 @JsonSerialize(as=IDomain.class)
-public interface IDomain extends IEntity {
+public interface IDomain extends IContact {
 
 	public static DomainDAO<IDomain> dao(){
 		return DomainDAO.get();

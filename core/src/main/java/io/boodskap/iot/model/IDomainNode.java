@@ -16,8 +16,6 @@
  ******************************************************************************/
 package io.boodskap.iot.model;
 
-import java.util.Date;
-
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import io.boodskap.iot.dao.DomainNodeDAO;
@@ -49,8 +47,4 @@ public interface IDomainNode extends IDomainObject{
 
 	public void setNodeId(String nodeId);
 	
-	public Date getCreatedStamp();
-	
-	public void setCreatedStamp(Date createdStamp);
-
 }

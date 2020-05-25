@@ -461,6 +461,11 @@ public class Storage implements IStorage {
 	}
 
 	@Override
+	public DomainJsonEntityDAO<IDomainJsonEntity> getDomainJsonEntityDAO() {
+		return new DomainJsonEntityDAOImpl(impl.getDomainJsonEntityDAO());
+	}
+
+	@Override
 	public OrganizationFileDAO<IOrganizationFile> getOrganizationFileDAO() {
 		return new OrganizationFileDAOImpl(impl.getOrganizationFileDAO());
 	}

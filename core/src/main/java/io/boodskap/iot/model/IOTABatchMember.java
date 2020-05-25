@@ -43,10 +43,6 @@ public interface IOTABatchMember extends IDomainObject {
 
 	public void setState(OTAState state);
 
-	public Date getCreatedStamp();
-
-	public void setCreatedStamp(Date createdStamp);
-
 	public Date getBeginStamp();
 
 	public void setBeginStamp(Date beginStamp);

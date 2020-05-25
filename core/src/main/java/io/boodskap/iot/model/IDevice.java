@@ -16,8 +16,6 @@
  ******************************************************************************/
 package io.boodskap.iot.model;
 
-import java.util.Date;
-
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import io.boodskap.iot.DataChannel;
@@ -50,14 +48,6 @@ public interface IDevice extends IDomainObject {
 
 	public void setDeviceId(String deviceId);
 
-	public String getName();
-
-	public void setName(String name);
-
-	public String getDescription();
-
-	public void setDescription(String description);
-
 	public String getModelId();
 
 	public void setModelId(String modelId);
@@ -70,17 +60,9 @@ public interface IDevice extends IDomainObject {
 
 	public void setPassword(String password);
 
-	public Date getRegisteredStamp();
-
-	public void setRegisteredStamp(Date registeredStamp);
-
 	public String getAssetId();
 
 	public void setAssetId(String assetId);
-
-	public Date getReportedStamp();
-
-	public void setReportedStamp(Date reportedStamp);
 
 	public String getReportedIp();
 

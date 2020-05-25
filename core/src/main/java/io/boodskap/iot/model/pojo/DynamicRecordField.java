@@ -6,27 +6,17 @@ public class DynamicRecordField extends DynamicField implements IDynamicRecordFi
 	
 	private static final long serialVersionUID = 8101500765559308203L;
 
-	private String domainKey;
 	private String specId;
 	private String recordId;
-	private String name;
 	
 	public DynamicRecordField() {
 	}
 
 	public DynamicRecordField(String domainKey, String specId, String recordId, String name) {
-		this.domainKey = domainKey;
+		setDomainKey(domainKey);
 		this.specId = specId;
 		this.recordId = recordId;
-		this.name = name;
-	}
-
-	public String getDomainKey() {
-		return domainKey;
-	}
-
-	public void setDomainKey(String domainKey) {
-		this.domainKey = domainKey;
+		setName(name);
 	}
 
 	public String getSpecId() {
@@ -35,14 +25,6 @@ public class DynamicRecordField extends DynamicField implements IDynamicRecordFi
 
 	public void setSpecId(String specId) {
 		this.specId = specId;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public String getRecordId() {
@@ -57,8 +39,6 @@ public class DynamicRecordField extends DynamicField implements IDynamicRecordFi
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((domainKey == null) ? 0 : domainKey.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((recordId == null) ? 0 : recordId.hashCode());
 		result = prime * result + ((specId == null) ? 0 : specId.hashCode());
 		return result;
@@ -73,16 +53,6 @@ public class DynamicRecordField extends DynamicField implements IDynamicRecordFi
 		if (getClass() != obj.getClass())
 			return false;
 		DynamicRecordField other = (DynamicRecordField) obj;
-		if (domainKey == null) {
-			if (other.domainKey != null)
-				return false;
-		} else if (!domainKey.equals(other.domainKey))
-			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
 		if (recordId == null) {
 			if (other.recordId != null)
 				return false;

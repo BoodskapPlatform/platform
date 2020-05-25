@@ -1,17 +1,12 @@
 package io.boodskap.iot.model.pojo;
 
-import java.util.Date;
-
-
 import io.boodskap.iot.model.IEmailGateway;
 
-public class EmailGateway implements IEmailGateway {
+public class EmailGateway extends AbstractDomainObject implements IEmailGateway {
 
 	private static final long serialVersionUID = 8909342397880526010L;
 
-	private String domainKey;
 	private String host = "smtp.googlemail.com";
-	private String name = "";
 	private String user = "";
 	private String password = "";
 	private String primaryEmail = "";
@@ -20,22 +15,8 @@ public class EmailGateway implements IEmailGateway {
 	private boolean ssl = false;
 	private boolean tls = true;
 	private boolean debug = false;
-	private Date createdStamp;
-	private Date updatedStamp;
 	
 	public EmailGateway() {
-	}
-
-	public EmailGateway(String domainKey) {
-		this.domainKey = domainKey;
-	}
-
-	public String getDomainKey() {
-		return domainKey;
-	}
-
-	public void setDomainKey(String domainKey) {
-		this.domainKey = domainKey;
 	}
 
 	public String getHost() {
@@ -110,46 +91,18 @@ public class EmailGateway implements IEmailGateway {
 		this.debug = debug;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public Date getCreatedStamp() {
-		return createdStamp;
-	}
-
-	public void setCreatedStamp(Date createdStamp) {
-		this.createdStamp = createdStamp;
-	}
-
-	public Date getUpdatedStamp() {
-		return updatedStamp;
-	}
-
-	public void setUpdatedStamp(Date updatedStamp) {
-		this.updatedStamp = updatedStamp;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		int result = super.hashCode();
 		result = prime * result + ((bounceEmail == null) ? 0 : bounceEmail.hashCode());
-		result = prime * result + ((createdStamp == null) ? 0 : createdStamp.hashCode());
 		result = prime * result + (debug ? 1231 : 1237);
-		result = prime * result + ((domainKey == null) ? 0 : domainKey.hashCode());
 		result = prime * result + ((host == null) ? 0 : host.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + port;
 		result = prime * result + ((primaryEmail == null) ? 0 : primaryEmail.hashCode());
 		result = prime * result + (ssl ? 1231 : 1237);
 		result = prime * result + (tls ? 1231 : 1237);
-		result = prime * result + ((updatedStamp == null) ? 0 : updatedStamp.hashCode());
 		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
 	}
@@ -158,7 +111,7 @@ public class EmailGateway implements IEmailGateway {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
@@ -168,27 +121,12 @@ public class EmailGateway implements IEmailGateway {
 				return false;
 		} else if (!bounceEmail.equals(other.bounceEmail))
 			return false;
-		if (createdStamp == null) {
-			if (other.createdStamp != null)
-				return false;
-		} else if (!createdStamp.equals(other.createdStamp))
-			return false;
 		if (debug != other.debug)
-			return false;
-		if (domainKey == null) {
-			if (other.domainKey != null)
-				return false;
-		} else if (!domainKey.equals(other.domainKey))
 			return false;
 		if (host == null) {
 			if (other.host != null)
 				return false;
 		} else if (!host.equals(other.host))
-			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
 			return false;
 		if (password == null) {
 			if (other.password != null)
@@ -205,11 +143,6 @@ public class EmailGateway implements IEmailGateway {
 		if (ssl != other.ssl)
 			return false;
 		if (tls != other.tls)
-			return false;
-		if (updatedStamp == null) {
-			if (other.updatedStamp != null)
-				return false;
-		} else if (!updatedStamp.equals(other.updatedStamp))
 			return false;
 		if (user == null) {
 			if (other.user != null)

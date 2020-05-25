@@ -12,11 +12,6 @@ public class UserAssetGroup extends AbstractGroup implements IUserAssetGroup {
 	public UserAssetGroup() {
 	}
 
-	public UserAssetGroup(String domainKey, String ownerUserId, String groupId) {
-		super(domainKey, groupId);
-		this.ownerUserId = ownerUserId;
-	}
-
 	public String getOwnerUserId() {
 		return ownerUserId;
 	}

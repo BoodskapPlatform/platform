@@ -21,7 +21,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.boodskap.iot.BoodskapSystem;
 
 @JsonSerialize(as=IDatabaseTableField.class)
-public interface IDatabaseTableField extends IModel {
+public interface IDatabaseTableField extends IDomainObject {
 
 	public static Class<? extends IDatabaseTableField> clazz() {
 		return BoodskapSystem.storage().getDatabaseTableDAO().fieldClazz();
@@ -31,10 +31,6 @@ public interface IDatabaseTableField extends IModel {
 		throw new UnsupportedOperationException();
 	}
 	
-	public String getDomainKey();
-
-	public void setDomainKey(String domainKey);
-
 	public String getMetaDataId();
 	
 	public void setMetaDataId(String metaDataId);

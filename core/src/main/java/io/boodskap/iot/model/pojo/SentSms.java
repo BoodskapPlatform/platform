@@ -13,10 +13,6 @@ public class SentSms extends AbstractSentNotification implements ISentSms {
 	public SentSms() {
 	}
 
-	public SentSms(String domainKey, String notificationId) {
-		super(domainKey, notificationId);
-	}
-
 	@Override
 	public String getSendor() {
 		return sendor;

@@ -61,10 +61,6 @@ public interface IOutgoingCommand extends IDomainObject {
 
 	public void setCorrId(long corrId);
 
-	public Date getCreatedStamp();
-
-	public void setCreatedStamp(Date createdStamp);
-
 	public Date getQueuedStamp();
 
 	public void setQueuedStamp(Date queuedStamp);
@@ -100,10 +96,6 @@ public interface IOutgoingCommand extends IDomainObject {
 	public String getNodeUid();
 
 	public void setNodeUid(String nodeUid);
-
-	public String getDescription();
-
-	public void setDescription(String description);
 
 	public String getReportedIp();
 

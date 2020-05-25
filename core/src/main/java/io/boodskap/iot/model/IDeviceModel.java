@@ -16,8 +16,6 @@
  ******************************************************************************/
 package io.boodskap.iot.model;
 
-import java.util.Date;
-
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import io.boodskap.iot.dao.DeviceModelDAO;
@@ -52,13 +50,5 @@ public interface IDeviceModel extends IDomainObject {
 	public String getVersion();
 
 	public void setVersion(String version);
-
-	public String getDescription();
-
-	public void setDescription(String description);
-
-	public Date getRegisteredStamp();
-
-	public void setRegisteredStamp(Date registeredStamp);
 
 }

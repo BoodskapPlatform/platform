@@ -1,7 +1,5 @@
 package io.boodskap.iot.model;
 
-import java.util.Date;
-
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import io.boodskap.iot.dao.ClusterDAO;
@@ -67,12 +65,4 @@ public interface ICluster extends IDomainObject {
 	public int getOrganizations();
 
 	public void setOrganizations(int organizations);
-
-	public Date getRegisteredStamp();
-
-	public void setRegisteredStamp(Date registeredStamp);
-
-	public Date getUpdatedStamp();
-
-	public void setUpdatedStamp(Date updatedStamp);
 }

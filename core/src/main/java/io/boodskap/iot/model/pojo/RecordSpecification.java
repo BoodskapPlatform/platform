@@ -2,66 +2,25 @@ package io.boodskap.iot.model.pojo;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 
 import io.boodskap.iot.DataType;
-import io.boodskap.iot.StorageException;
 import io.boodskap.iot.model.IRecordField;
 import io.boodskap.iot.model.IRecordSpecification;
 
-public class RecordSpecification implements IRecordSpecification {
+public class RecordSpecification extends AbstractDomainObject implements IRecordSpecification {
 
 	private static final long serialVersionUID = -9178896999115174213L;
 
-	private String domainKey;
 	private String specId;
-	private String name;
-	private String description;
 	private List<IRecordField> fields = new ArrayList<>();
 	
-	private Date createdStamp;
-	
-	private Date updatedStamp;
-	
 	public RecordSpecification() {
-	}
-
-	public RecordSpecification(String domainKey, String specId) {
-		super();
-		this.domainKey = domainKey;
-		this.specId = specId;
 	}
 
 	@Override
 	public IRecordField createField(String field, DataType dataType) {
 		return new RecordField(field, dataType);
-	}
-
-	@Override
-	public void addField(IRecordField field) throws StorageException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void modifyField(IRecordField field) throws StorageException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void removeField(String name) throws StorageException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public String getDomainKey() {
-		return domainKey;
-	}
-
-	public void setDomainKey(String domainKey) {
-		this.domainKey = domainKey;
 	}
 
 	public String getSpecId() {
@@ -70,22 +29,6 @@ public class RecordSpecification implements IRecordSpecification {
 
 	public void setSpecId(String specId) {
 		this.specId = specId;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
 	}
 
 	public List<IRecordField> getFields() {
@@ -97,33 +40,51 @@ public class RecordSpecification implements IRecordSpecification {
 		this.fields.addAll(fields);
 	}
 
-	public Date getCreatedStamp() {
-		return createdStamp;
+	@Override
+	public void addField(IRecordField field) {
+		fields.add(field);
 	}
 
-	public void setCreatedStamp(Date createdStamp) {
-		this.createdStamp = createdStamp;
+	@Override
+	public void modifyField(IRecordField field) {
+		
+		int ridx = -1;
+		
+		for(int i=0;i<fields.size();i++) {
+			if(fields.get(i).getName().equals(field.getName())) {
+				ridx = i;
+			}
+		}
+		
+		if(ridx != -1) {
+			fields.remove(ridx);
+		}
+		
+		fields.add(field);
 	}
 
-	public Date getUpdatedStamp() {
-		return updatedStamp;
-	}
-
-	public void setUpdatedStamp(Date updatedStamp) {
-		this.updatedStamp = updatedStamp;
+	@Override
+	public void removeField(String name) {
+		
+		int ridx = -1;
+		
+		for(int i=0;i<fields.size();i++) {
+			if(fields.get(i).getName().equals(name)) {
+				ridx = i;
+			}
+		}
+		
+		if(ridx != -1) {
+			fields.remove(ridx);
+		}
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((createdStamp == null) ? 0 : createdStamp.hashCode());
-		result = prime * result + ((description == null) ? 0 : description.hashCode());
-		result = prime * result + ((domainKey == null) ? 0 : domainKey.hashCode());
+		int result = super.hashCode();
 		result = prime * result + ((fields == null) ? 0 : fields.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((specId == null) ? 0 : specId.hashCode());
-		result = prime * result + ((updatedStamp == null) ? 0 : updatedStamp.hashCode());
 		return result;
 	}
 
@@ -131,45 +92,20 @@ public class RecordSpecification implements IRecordSpecification {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
 		RecordSpecification other = (RecordSpecification) obj;
-		if (createdStamp == null) {
-			if (other.createdStamp != null)
-				return false;
-		} else if (!createdStamp.equals(other.createdStamp))
-			return false;
-		if (description == null) {
-			if (other.description != null)
-				return false;
-		} else if (!description.equals(other.description))
-			return false;
-		if (domainKey == null) {
-			if (other.domainKey != null)
-				return false;
-		} else if (!domainKey.equals(other.domainKey))
-			return false;
 		if (fields == null) {
 			if (other.fields != null)
 				return false;
 		} else if (!fields.equals(other.fields))
 			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
 		if (specId == null) {
 			if (other.specId != null)
 				return false;
 		} else if (!specId.equals(other.specId))
-			return false;
-		if (updatedStamp == null) {
-			if (other.updatedStamp != null)
-				return false;
-		} else if (!updatedStamp.equals(other.updatedStamp))
 			return false;
 		return true;
 	}

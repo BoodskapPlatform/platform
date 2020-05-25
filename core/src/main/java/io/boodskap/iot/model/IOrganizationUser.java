@@ -16,15 +16,13 @@
  ******************************************************************************/
 package io.boodskap.iot.model;
 
-import java.util.Date;
-
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import io.boodskap.iot.dao.OrganizationUserDAO;
 import io.boodskap.iot.dao.OrganizationUserRoleDAO;
 
 @JsonSerialize(as=IOrganizationUser.class)
-public interface IOrganizationUser extends IDomainObject {
+public interface IOrganizationUser extends IUser {
 	
 	public static IOrganizationUser create(String domainKey, String orgId, String userId) {
 		return OrganizationUserDAO.get().create(domainKey, orgId, userId);
@@ -39,7 +37,8 @@ public interface IOrganizationUser extends IDomainObject {
 	}
 
 	public default void addRole(String name, String description) {
-		IOrganizationUserRole e = createRole(name, description);
+		IOrganizationUserRole e = IOrganizationUserRole.create(getDomainKey(), getOrgId(), getUserId(), name);
+		e.setDescription(description);
 		OrganizationUserRoleDAO.get().createOrUpdate(e);
 	}
 	
@@ -55,18 +54,4 @@ public interface IOrganizationUser extends IDomainObject {
 	
 	public void setOrgId(String orgId);
 	
-	public String getUserId();
-	
-	public void setUserId(String userId);
-
-	public Date getCreatedStamp();
-
-	public void setCreatedStamp(Date createdStamp);
-
-	public Date getUpdatedStamp();
-
-	public void setUpdatedStamp(Date updatedStamp);
-	
-	public IOrganizationUserRole createRole(String name, String description);
-
 }

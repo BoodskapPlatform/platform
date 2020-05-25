@@ -16,15 +16,13 @@
  ******************************************************************************/
 package io.boodskap.iot.model;
 
-import java.util.Date;
-
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import io.boodskap.iot.BoodskapSystem;
 import io.boodskap.iot.dao.FirmwareDAO;
 
 @JsonSerialize(as=IFirmware.class)
-public interface IFirmware extends IDomainObject{
+public interface IFirmware extends IFileContent, IDomainObject{
 
 	public static IFirmware  create(String domainKey, String deviceModel, String version) {
 		return BoodskapSystem.storage().getFirmwareDAO().create(domainKey, deviceModel, version);
@@ -41,26 +39,6 @@ public interface IFirmware extends IDomainObject{
 	public String getFileName();
 
 	public void setFileName(String fileName);
-
-	public String getContentType();
-
-	public void setContentType(String contentType);
-
-	public byte[] getContent();
-
-	public void setContent(byte[] content);
-
-	public Date getCreatedStamp();
-	
-	public void setCreatedStamp(Date createdStamp);
-	
-	public Date getUpdatedStamp();
-	
-	public void setUpdatedStamp(Date updatedStamp);
-	
-	public String getDescription();
-
-	public void setDescription(String description);
 
 	public default void save() {
 		FirmwareDAO.get().createOrUpdate(this);

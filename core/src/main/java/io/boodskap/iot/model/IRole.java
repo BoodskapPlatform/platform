@@ -21,14 +21,6 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 @JsonSerialize(as=IRole.class)
 public interface IRole extends IModel {
 	
-	public String getName();
-
-	public void setName(String name);
-
-	public String getDescription();
-
-	public void setDescription(String description);
-
 	public default void save() {
 		throw new UnsupportedOperationException();
 	}

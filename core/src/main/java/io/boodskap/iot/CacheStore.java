@@ -161,7 +161,7 @@ public class CacheStore implements Serializable {
 	
 	public void processRawData(IRawData body, long started) throws InterruptedException {
 		
-		body.setReceivedStamp(new Date(started));
+		body.setRegisteredStamp(new Date(started));
 		body.save();
 		
 		switch(body.getRawDataType()) {
@@ -175,7 +175,7 @@ public class CacheStore implements Serializable {
 			if(args.length >= 10) {
 				stream.setMime(args[9]);
 			}
-			stream.setStamp(body.getReceivedStamp());
+			stream.setRegisteredStamp(body.getRegisteredStamp());
 			stream.setData(body.getData());
 			stream.save();
 			break;
@@ -189,7 +189,7 @@ public class CacheStore implements Serializable {
 			if(args.length >= 8) {
 				snap.setMime(args[7]);
 			}
-			snap.setStamp(body.getReceivedStamp());
+			snap.setRegisteredStamp(body.getRegisteredStamp());
 			snap.setData(body.getData());
 			snap.save();
 			

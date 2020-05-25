@@ -4,7 +4,7 @@ import java.util.Date;
 
 import io.boodskap.iot.model.IProgress;
 
-public class Progress implements IProgress {
+public class Progress extends AbstractModel implements IProgress {
 	
 	private static final long serialVersionUID = 2747446673053336905L;
 

@@ -17,6 +17,7 @@
 package io.boodskap.iot.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import org.json.JSONObject;
 
@@ -26,6 +27,30 @@ import io.boodskap.iot.ThreadContext;
 
 @JsonSerialize(as = IModel.class)
 public interface IModel extends Serializable {
+
+	public String getName();
+
+	public void setName(String name);
+
+	public String getDescription();
+
+	public void setDescription(String description);
+
+	public String getCreatedBy();
+	
+	public void setCreatedBy(String createdBy);
+	
+	public String getUpdatedBy();
+	
+	public void setUpdatedBy(String updatedBy);
+	
+	public Date getRegisteredStamp();
+
+	public void setRegisteredStamp(Date registeredStamp);
+
+	public Date getUpdatedStamp();
+
+	public void setUpdatedStamp(Date updatedStamp);
 
 	public void save();
 

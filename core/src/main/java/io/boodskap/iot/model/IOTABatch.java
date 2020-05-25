@@ -39,18 +39,6 @@ public interface IOTABatch extends IDomainObject {
 
 	public void setState(OTABatchState state);
 
-	public String getName();
-
-	public void setName(String name);
-
-	public Date getCreatedAt();
-
-	public void setCreatedAt(Date createdAt);
-
-	public Date getUpdatedAt();
-
-	public void setUpdatedAt(Date updatedAt);
-
 	public Date getExpireAt();
 
 	public void setExpireAt(Date expireAt);
@@ -58,10 +46,6 @@ public interface IOTABatch extends IDomainObject {
 	public Date getFinishedAt();
 
 	public void setFinishedAt(Date finishedAt);
-
-	public String getDescription();
-
-	public void setDescription(String description);
 
 	public String getFirmwareModel();
 	

@@ -2,22 +2,18 @@ package io.boodskap.iot.model.pojo;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
-
 
 import io.boodskap.iot.DataChannel;
 import io.boodskap.iot.model.IDynamicMessageField;
 import io.boodskap.iot.model.IMessage;
 
-public class Message implements IMessage {
+public class Message extends AbstractDomainObject implements IMessage {
 	
 	private static final long serialVersionUID = -1928207596119374413L;
 
-	private String domainKey;
 	private String specId;
 	private String messageId;
-	private Date createdStamp = new Date();
 	private DataChannel dataChannel;
 	private Integer port;
 	private String ipAddress;
@@ -26,7 +22,6 @@ public class Message implements IMessage {
 	private String deviceId;
 	private String deviceModel;
 	private String firmwareVersion;
-	private Date receivedStamp;
 	private State state;
 	private String trace;
 	private List<IDynamicMessageField> fields = new ArrayList<>();
@@ -34,24 +29,9 @@ public class Message implements IMessage {
 	public Message() {
 	}
 
-	public Message(String domainKey, String specId, String messageId) {
-		super();
-		this.domainKey = domainKey;
-		this.specId = specId;
-		this.messageId = messageId;
-	}
-
 	@Override
 	public IDynamicMessageField createField(String name) {
-		return new DynamicMessageField(domainKey, specId, messageId, name);
-	}
-
-	public String getDomainKey() {
-		return domainKey;
-	}
-
-	public void setDomainKey(String domainKey) {
-		this.domainKey = domainKey;
+		return new DynamicMessageField(getDomainKey(), specId, messageId, name);
 	}
 
 	public String getMessageId() {
@@ -71,16 +51,6 @@ public class Message implements IMessage {
 	}
 
 	@Override
-	public Date getCreatedStamp() {
-		return createdStamp;
-	}
-
-	@Override
-	public void setCreatedStamp(Date createdStamp) {
-		this.createdStamp = createdStamp;
-	}
-
-	@Override
 	public List<IDynamicMessageField> getFields() {
 		return fields;
 	}
@@ -89,16 +59,6 @@ public class Message implements IMessage {
 	public void setFields(Collection<? extends IDynamicMessageField> fields) {
 		this.fields.clear();
 		this.fields.addAll(fields);
-	}
-
-	@Override
-	public Date getReceivedStamp() {
-		return receivedStamp;
-	}
-
-	@Override
-	public void setReceivedStamp(Date receivedStamp) {
-		this.receivedStamp = receivedStamp;
 	}
 
 	@Override
@@ -200,12 +160,10 @@ public class Message implements IMessage {
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((createdStamp == null) ? 0 : createdStamp.hashCode());
+		int result = super.hashCode();
 		result = prime * result + ((dataChannel == null) ? 0 : dataChannel.hashCode());
 		result = prime * result + ((deviceId == null) ? 0 : deviceId.hashCode());
 		result = prime * result + ((deviceModel == null) ? 0 : deviceModel.hashCode());
-		result = prime * result + ((domainKey == null) ? 0 : domainKey.hashCode());
 		result = prime * result + ((fields == null) ? 0 : fields.hashCode());
 		result = prime * result + ((firmwareVersion == null) ? 0 : firmwareVersion.hashCode());
 		result = prime * result + ((ipAddress == null) ? 0 : ipAddress.hashCode());
@@ -213,7 +171,6 @@ public class Message implements IMessage {
 		result = prime * result + ((nodeId == null) ? 0 : nodeId.hashCode());
 		result = prime * result + ((nodeUid == null) ? 0 : nodeUid.hashCode());
 		result = prime * result + ((port == null) ? 0 : port.hashCode());
-		result = prime * result + ((receivedStamp == null) ? 0 : receivedStamp.hashCode());
 		result = prime * result + ((specId == null) ? 0 : specId.hashCode());
 		result = prime * result + ((state == null) ? 0 : state.hashCode());
 		result = prime * result + ((trace == null) ? 0 : trace.hashCode());
@@ -224,16 +181,11 @@ public class Message implements IMessage {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
 		Message other = (Message) obj;
-		if (createdStamp == null) {
-			if (other.createdStamp != null)
-				return false;
-		} else if (!createdStamp.equals(other.createdStamp))
-			return false;
 		if (dataChannel != other.dataChannel)
 			return false;
 		if (deviceId == null) {
@@ -245,11 +197,6 @@ public class Message implements IMessage {
 			if (other.deviceModel != null)
 				return false;
 		} else if (!deviceModel.equals(other.deviceModel))
-			return false;
-		if (domainKey == null) {
-			if (other.domainKey != null)
-				return false;
-		} else if (!domainKey.equals(other.domainKey))
 			return false;
 		if (fields == null) {
 			if (other.fields != null)
@@ -285,11 +232,6 @@ public class Message implements IMessage {
 			if (other.port != null)
 				return false;
 		} else if (!port.equals(other.port))
-			return false;
-		if (receivedStamp == null) {
-			if (other.receivedStamp != null)
-				return false;
-		} else if (!receivedStamp.equals(other.receivedStamp))
 			return false;
 		if (specId == null) {
 			if (other.specId != null)

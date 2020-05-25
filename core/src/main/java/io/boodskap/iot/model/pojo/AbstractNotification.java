@@ -9,11 +9,10 @@ import io.boodskap.iot.NotificationStatus;
 import io.boodskap.iot.model.INotification;
 import io.boodskap.iot.model.IResponse;
 
-public abstract class AbstractNotification implements INotification{
+public abstract class AbstractNotification extends AbstractDomainObject implements INotification{
 
 	private static final long serialVersionUID = -78399951798565586L;
 
-	private String domainKey;
 	private String notificationId;
 	private String sendor;
 	private String content;
@@ -24,21 +23,6 @@ public abstract class AbstractNotification implements INotification{
 	private List<IResponse> response = new ArrayList<>();
 	
 	public AbstractNotification() {
-	}
-
-	public AbstractNotification(String domainKey, String notificationId) {
-		this.domainKey = domainKey;
-		this.notificationId = notificationId;
-	}
-
-	@Override
-	public String getDomainKey() {
-		return domainKey;
-	}
-
-	@Override
-	public void setDomainKey(String domainKey) {
-		this.domainKey = domainKey;
 	}
 
 	@Override
@@ -126,8 +110,9 @@ public abstract class AbstractNotification implements INotification{
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		int result = super.hashCode();
 		result = prime * result + ((content == null) ? 0 : content.hashCode());
+		result = prime * result + ((notificationId == null) ? 0 : notificationId.hashCode());
 		result = prime * result + ((queuedAt == null) ? 0 : queuedAt.hashCode());
 		result = prime * result + ((receipents == null) ? 0 : receipents.hashCode());
 		result = prime * result + ((response == null) ? 0 : response.hashCode());
@@ -141,7 +126,7 @@ public abstract class AbstractNotification implements INotification{
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
@@ -150,6 +135,11 @@ public abstract class AbstractNotification implements INotification{
 			if (other.content != null)
 				return false;
 		} else if (!content.equals(other.content))
+			return false;
+		if (notificationId == null) {
+			if (other.notificationId != null)
+				return false;
+		} else if (!notificationId.equals(other.notificationId))
 			return false;
 		if (queuedAt == null) {
 			if (other.queuedAt != null)

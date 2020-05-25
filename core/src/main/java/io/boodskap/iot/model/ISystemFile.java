@@ -1,7 +1,5 @@
 package io.boodskap.iot.model;
 
-import java.util.Date;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -28,20 +26,8 @@ public interface ISystemFile extends IModel{
 	
 	public void setFileId(String fileId);
 
-	public String getDescription();
-
-	public void setDescription(String description);
-
 	@JsonIgnore
 	public byte[] getData();
 
 	public void setData(byte[] data);
-	
-	public Date getCreatedStamp();
-	
-	public void setCreatedStamp(Date createdStamp);
-
-	public Date getUpdatedStamp();
-	
-	public void setUpdatedStamp(Date updatedStamp);
 }

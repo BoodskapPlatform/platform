@@ -29,7 +29,7 @@ public class RawData implements IRawData {
 	private String binaryType;
 	private Integer port;
 	private int size;
-    private Date receivedStamp;
+    private Date registeredStamp;
     private Date updatedStamp;
     private DataChannel channel;
 	private RawDataType rawDataType;
@@ -51,12 +51,14 @@ public class RawData implements IRawData {
 		this.id = id;
 	}
 
-	public Date getReceivedStamp() {
-		return receivedStamp;
+	@Override
+	public Date getRegisteredStamp() {
+		return registeredStamp;
 	}
 
-	public void setReceivedStamp(Date receivedStamp) {
-		this.receivedStamp = receivedStamp;
+	@Override
+	public void setRegisteredStamp(Date registeredStamp) {
+		this.registeredStamp = registeredStamp;
 	}
 
 	public String getNodeId() {
@@ -242,13 +244,14 @@ public class RawData implements IRawData {
 		result = prime * result + ((firmwareVersion == null) ? 0 : firmwareVersion.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((ipAddress == null) ? 0 : ipAddress.hashCode());
+		result = prime * result + ((mqttServerId == null) ? 0 : mqttServerId.hashCode());
 		result = prime * result + ((mqttTopic == null) ? 0 : mqttTopic.hashCode());
 		result = prime * result + ((nodeId == null) ? 0 : nodeId.hashCode());
 		result = prime * result + ((nodeUid == null) ? 0 : nodeUid.hashCode());
 		result = prime * result + ((port == null) ? 0 : port.hashCode());
 		result = prime * result + ((properties == null) ? 0 : properties.hashCode());
 		result = prime * result + ((rawDataType == null) ? 0 : rawDataType.hashCode());
-		result = prime * result + ((receivedStamp == null) ? 0 : receivedStamp.hashCode());
+		result = prime * result + ((registeredStamp == null) ? 0 : registeredStamp.hashCode());
 		result = prime * result + size;
 		result = prime * result + ((state == null) ? 0 : state.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
@@ -314,6 +317,11 @@ public class RawData implements IRawData {
 				return false;
 		} else if (!ipAddress.equals(other.ipAddress))
 			return false;
+		if (mqttServerId == null) {
+			if (other.mqttServerId != null)
+				return false;
+		} else if (!mqttServerId.equals(other.mqttServerId))
+			return false;
 		if (mqttTopic == null) {
 			if (other.mqttTopic != null)
 				return false;
@@ -341,10 +349,10 @@ public class RawData implements IRawData {
 			return false;
 		if (rawDataType != other.rawDataType)
 			return false;
-		if (receivedStamp == null) {
-			if (other.receivedStamp != null)
+		if (registeredStamp == null) {
+			if (other.registeredStamp != null)
 				return false;
-		} else if (!receivedStamp.equals(other.receivedStamp))
+		} else if (!registeredStamp.equals(other.registeredStamp))
 			return false;
 		if (size != other.size)
 			return false;

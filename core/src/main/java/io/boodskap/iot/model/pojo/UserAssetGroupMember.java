@@ -11,11 +11,6 @@ public class UserAssetGroupMember extends AbstractGroupMember implements IUserAs
 	public UserAssetGroupMember() {
 	}
 
-	public UserAssetGroupMember(String domainKey, String ownerUserId, String groupId, String memberId) {
-		super(domainKey, groupId, memberId);
-		this.ownerUserId = ownerUserId;
-	}
-
 	public String getOwnerUserId() {
 		return ownerUserId;
 	}

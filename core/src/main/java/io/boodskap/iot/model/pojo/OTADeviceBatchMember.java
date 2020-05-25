@@ -11,8 +11,4 @@ public class OTADeviceBatchMember extends OTABatchMember implements IOTADeviceBa
 		super();
 	}
 
-	public OTADeviceBatchMember(String domainKey, String batchId, String deviceId) {
-		super(domainKey, batchId, deviceId);
-	}
-	
 }

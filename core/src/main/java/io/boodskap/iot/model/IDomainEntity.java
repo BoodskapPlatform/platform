@@ -16,12 +16,14 @@
  ******************************************************************************/
 package io.boodskap.iot.model;
 
+import java.util.Map;
+
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import io.boodskap.iot.dao.DomainEntityDAO;
 
 @JsonSerialize(as=IDomainEntity.class)
-public interface IDomainEntity extends IEntity {
+public interface IDomainEntity extends IDomainObject {
 
 	public static DomainEntityDAO<IDomainEntity> dao(){
 		return DomainEntityDAO.get();
@@ -31,19 +33,27 @@ public interface IDomainEntity extends IEntity {
 		return dao().clazz();
 	}
 	
-	public static IDomainEntity create(String domainKey, String entityId) {
-		return dao().create(domainKey, entityId);
+	public static IDomainEntity create(String domainKey, String entityType, String entityId) {
+		return dao().create(domainKey, entityType, entityId);
 	}
 
-	public static IDomainEntity find(String domainKey, String entityId) {
-		return dao().get(domainKey, entityId);
+	public static IDomainEntity find(String domainKey, String entityType, String entityId) {
+		return dao().get(domainKey, entityType, entityId);
 	}
 
 	public default void save() {
 		IDomainEntity.dao().createOrUpdate(this);
 	}
 
+	public String getEntityType();
+	
+	public void setEntityType(String entityType);
+	
 	public String getEntityId();
 	
 	public void setEntityId(String entityId);
+	
+	public Map<String, String> getAttributes();
+	
+	public void setAttributes(Map<String, String> attributes);
 }

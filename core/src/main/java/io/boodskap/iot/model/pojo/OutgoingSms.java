@@ -10,8 +10,4 @@ public class OutgoingSms extends AbstractNotification implements IOutgoingSms {
 	public OutgoingSms() {
 	}
 
-	public OutgoingSms(String domainKey, String notificationId) {
-		super(domainKey, notificationId);
-	}
-
 }

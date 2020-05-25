@@ -16,8 +16,6 @@
  ******************************************************************************/
 package io.boodskap.iot.model;
 
-import java.util.Date;
-
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @JsonSerialize(as=IGroup.class)
@@ -26,14 +24,6 @@ public interface IGroup extends IDomainObject {
 	public String getGroupId();
 
 	public void setGroupId(String groupId);
-
-	public String getName();
-
-	public void setName(String name);
-
-	public String getDescription();
-
-	public void setDescription(String description);
 
 	public void setIndividualBroadcast(boolean individualBroadcast);
 	
@@ -46,12 +36,4 @@ public interface IGroup extends IDomainObject {
 	public String getGroupPhone();
 	
 	public void setGroupPhone(String groupPhone);
-	
-	public Date getCreatedStamp();
-	
-	public void setCreatedStamp(Date createdStamp);
-
-	public Date getUpdatedStamp();
-	
-	public void setUpdatedStamp(Date updatedStamp);
 }

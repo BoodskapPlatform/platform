@@ -1,37 +1,17 @@
 package io.boodskap.iot.model.pojo;
 
-import java.util.Date;
-
-
 import io.boodskap.iot.NotificationChannel;
 import io.boodskap.iot.model.IEventRegistration;
 
-public class EventRegistration implements IEventRegistration {
+public class EventRegistration extends AbstractDomainObject  implements IEventRegistration {
 
 	private static final long serialVersionUID = -5660582348900463445L;
 	
-	private String domainKey;
 	private NotificationChannel channel;
 	private String eventId;
 	private String toAddress;
-	private Date createdStamp;
 	
 	public EventRegistration() {
-	}
-
-	public EventRegistration(String domainKey, NotificationChannel channel, String eventId, String toAddress) {
-		this.domainKey = domainKey;
-		this.channel = channel;
-		this.eventId = eventId;
-		this.toAddress = toAddress;
-	}
-
-	public String getDomainKey() {
-		return domainKey;
-	}
-
-	public void setDomainKey(String domainKey) {
-		this.domainKey = domainKey;
 	}
 
 	public NotificationChannel getChannel() {
@@ -58,12 +38,38 @@ public class EventRegistration implements IEventRegistration {
 		this.toAddress = toAddress;
 	}
 
-	public Date getCreatedStamp() {
-		return createdStamp;
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((channel == null) ? 0 : channel.hashCode());
+		result = prime * result + ((eventId == null) ? 0 : eventId.hashCode());
+		result = prime * result + ((toAddress == null) ? 0 : toAddress.hashCode());
+		return result;
 	}
 
-	public void setCreatedStamp(Date createdStamp) {
-		this.createdStamp = createdStamp;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		EventRegistration other = (EventRegistration) obj;
+		if (channel != other.channel)
+			return false;
+		if (eventId == null) {
+			if (other.eventId != null)
+				return false;
+		} else if (!eventId.equals(other.eventId))
+			return false;
+		if (toAddress == null) {
+			if (other.toAddress != null)
+				return false;
+		} else if (!toAddress.equals(other.toAddress))
+			return false;
+		return true;
 	}
 
 }

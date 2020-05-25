@@ -7,25 +7,10 @@ public class ScheduledRule extends AbstractRule implements IScheduledRule {
 	
 	private static final long serialVersionUID = -7983737035807344846L;
 
-	private String domainKey;
 	private String ruleId;
 	private String pattern;
 	
 	public ScheduledRule() {
-	}
-
-	public ScheduledRule(String domainKey, String ruleId) {
-		super();
-		this.domainKey = domainKey;
-		this.ruleId = ruleId;
-	}
-
-	public String getDomainKey() {
-		return domainKey;
-	}
-
-	public void setDomainKey(String domainKey) {
-		this.domainKey = domainKey;
 	}
 
 	public String getRuleId() {
@@ -50,7 +35,6 @@ public class ScheduledRule extends AbstractRule implements IScheduledRule {
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((domainKey == null) ? 0 : domainKey.hashCode());
 		result = prime * result + ((pattern == null) ? 0 : pattern.hashCode());
 		result = prime * result + ((ruleId == null) ? 0 : ruleId.hashCode());
 		return result;
@@ -65,11 +49,6 @@ public class ScheduledRule extends AbstractRule implements IScheduledRule {
 		if (getClass() != obj.getClass())
 			return false;
 		ScheduledRule other = (ScheduledRule) obj;
-		if (domainKey == null) {
-			if (other.domainKey != null)
-				return false;
-		} else if (!domainKey.equals(other.domainKey))
-			return false;
 		if (pattern == null) {
 			if (other.pattern != null)
 				return false;

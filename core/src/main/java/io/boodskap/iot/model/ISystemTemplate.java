@@ -16,8 +16,6 @@
  ******************************************************************************/
 package io.boodskap.iot.model;
 
-import java.util.Date;
-
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import io.boodskap.iot.TemplateScriptLanguage;
@@ -30,10 +28,6 @@ public interface ISystemTemplate extends IModel {
 		return SystemTemplateDAO.get().create(name);
 	}
 
-	public String getName();
-
-	public void setName(String name);
-
 	public TemplateScriptLanguage getLanguage();
 
 	public void setLanguage(TemplateScriptLanguage language);
@@ -41,14 +35,6 @@ public interface ISystemTemplate extends IModel {
 	public String getCode();
 
 	public void setCode(String code);
-
-	public Date getCreatedStamp();
-	
-	public void setCreatedStamp(Date createdStamp);
-	
-	public Date getUpdatedStamp();
-	
-	public void setUpdatedStamp(Date updatedStamp);
 
 	public default void save() {
 		SystemTemplateDAO.get().createOrUpdate(this);

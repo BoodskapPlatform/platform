@@ -10,8 +10,4 @@ public class OTADeviceBatch extends OTABatch implements IOTADeviceBatch{
 	public OTADeviceBatch() {		
 	}
 
-	public OTADeviceBatch(String domainKey, String batchId) {
-		super(domainKey, batchId);
-	}
-
 }

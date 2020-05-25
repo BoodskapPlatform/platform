@@ -23,10 +23,14 @@ import io.boodskap.iot.dao.EntityFileDAO;
 @JsonSerialize(as=IEntityFile.class)
 public interface IEntityFile extends IDomainFile {
 	
-	public static IEntityFile  create(String domainKey, String entityId, String fileId) {
-		return EntityFileDAO.get().create(domainKey, entityId, fileId);
+	public static IEntityFile  create(String domainKey, String entityType, String entityId, String fileId) {
+		return EntityFileDAO.get().create(domainKey, entityType, entityId, fileId);
 	}	
 	
+	public String getEntityType();
+	
+	public void setEntityType(String entityType);
+
 	public String getEntityId();
 	
 	public void setEntityId(String entityId);

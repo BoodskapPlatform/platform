@@ -4,7 +4,7 @@ import io.boodskap.iot.DataFormat;
 import io.boodskap.iot.DataType;
 import io.boodskap.iot.model.IStorable;
 
-public abstract class AbstractStorable implements IStorable {
+public abstract class AbstractStorable extends AbstractDomainObject implements IStorable {
 
 	private static final long serialVersionUID = -100247674973438772L;
 

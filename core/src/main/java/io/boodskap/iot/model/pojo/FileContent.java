@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 import io.boodskap.iot.model.IFileContent;
 
-public class FileContent implements IFileContent {
+public class FileContent extends AbstractModel implements IFileContent {
 	
 	private static final long serialVersionUID = 2834539513803785961L;
 

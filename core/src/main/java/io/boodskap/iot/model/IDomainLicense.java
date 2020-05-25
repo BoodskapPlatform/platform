@@ -16,8 +16,6 @@
  ******************************************************************************/
 package io.boodskap.iot.model;
 
-import java.util.Date;
-
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import io.boodskap.iot.dao.DomainLicenseDAO;
@@ -45,12 +43,4 @@ public interface IDomainLicense extends IDomainObject {
 
 	public void setLicense(byte[] license);
 	
-	public Date getCreatedStamp();
-	
-	public void setCreatedStamp(Date createdStamp);
-
-	public Date getUpdatedStamp();
-	
-	public void setUpdatedStamp(Date updatedStamp);
-
 }

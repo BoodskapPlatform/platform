@@ -16,8 +16,6 @@
  ******************************************************************************/
 package io.boodskap.iot.model;
 
-import java.util.Date;
-
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import io.boodskap.iot.dao.CameraDeviceDAO;
@@ -53,12 +51,4 @@ public interface ICameraDevice extends IDomainObject{
 	
 	public void setCamera(String camera);
 
-	public Date getCreatedStamp();
-	
-	public void setCreatedStamp(Date createdStamp);
-	
-	public Date getUpdatedStamp();
-	
-	public void setUpdatedStamp(Date updatedStamp);
-	
 }

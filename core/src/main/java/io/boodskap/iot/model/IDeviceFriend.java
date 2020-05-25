@@ -16,8 +16,6 @@
  ******************************************************************************/
 package io.boodskap.iot.model;
 
-import java.util.Date;
-
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import io.boodskap.iot.dao.DeviceFriendDAO;
@@ -53,8 +51,4 @@ public interface IDeviceFriend extends IDomainObject {
 
 	public void setFriendId(String friendId);
 	
-	public Date getCreatedStamp();
-	
-	public void setCreatedStamp(Date createdStamp);
-
 }

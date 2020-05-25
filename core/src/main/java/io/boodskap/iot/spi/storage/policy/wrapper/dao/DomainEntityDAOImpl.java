@@ -55,33 +55,40 @@ public class DomainEntityDAOImpl implements DomainEntityDAO<IDomainEntity> {
 		return impl.count(domainKey);
 	}
 
-	public IDomainEntity create(String domainKey, String entityId) throws StorageException {
-		return impl.create(domainKey, entityId);
+	public IDomainEntity create(String domainKey, String entityType, String entityId) throws StorageException {
+		return impl.create(domainKey, entityType, entityId);
 	}
 
 	public void delete(String domainKey) throws StorageException {
 		impl.delete(domainKey);
 	}
 
-	public IDomainEntity get(String domainKey, String entityId) throws StorageException {
-		return impl.get(domainKey, entityId);
+	public IDomainEntity get(String domainKey, String entityType, String entityId) throws StorageException {
+		return impl.get(domainKey, entityType, entityId);
 	}
 
-	public void delete(String domainKey, String entityId) throws StorageException {
-		impl.delete(domainKey, entityId);
+	public void delete(String domainKey, String entityType, String entityId) throws StorageException {
+		impl.delete(domainKey, entityType, entityId);
 	}
 
 	public Collection<IDomainEntity> list(String domainKey, int page, int pageSize) throws StorageException {
 		return impl.list(domainKey, page, pageSize);
 	}
 
-	public Collection<IDomainEntity> listNext(String domainKey, String entityId, int page, int pageSize)
-			throws StorageException {
-		return impl.listNext(domainKey, entityId, page, pageSize);
+	public Collection<IDomainEntity> list(String domainKey, String entityType, int page, int pageSize) throws StorageException {
+		return impl.list(domainKey, entityType, page, pageSize);
+	}
+
+	public Collection<IDomainEntity> listNext(String domainKey, String entityType, String entityId, int page, int pageSize) throws StorageException {
+		return impl.listNext(domainKey, entityType, entityId, page, pageSize);
 	}
 
 	public Collection<IDomainEntity> search(String domainKey, String query, int pageSize) throws StorageException {
 		return impl.search(domainKey, query, pageSize);
+	}
+
+	public Collection<IDomainEntity> search(String domainKey, String entityType, String query, int pageSize) throws StorageException {
+		return impl.search(domainKey, entityType, query, pageSize);
 	}
 
 	public void delete() throws StorageException {

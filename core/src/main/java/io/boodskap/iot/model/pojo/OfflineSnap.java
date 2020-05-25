@@ -1,36 +1,19 @@
 package io.boodskap.iot.model.pojo;
 
-import java.util.Date;
+import java.util.Arrays;
 
 import io.boodskap.iot.model.IOfflineSnap;
 
-public class OfflineSnap implements IOfflineSnap {
+public class OfflineSnap extends AbstractDomainObject implements IOfflineSnap {
 
 	private static final long serialVersionUID = 1074590347354679901L;
 	
-	private String domainKey;
 	private String deviceId;
 	private String camera;
-	private Date stamp;
 	private String mime;
 	private byte[] data;
 	
 	public OfflineSnap() {
-	}
-
-	public OfflineSnap(String domainKey, String deviceId, String camera, Date stamp) {
-		this.domainKey = domainKey;
-		this.deviceId = deviceId;
-		this.camera = camera;
-		this.stamp = stamp;
-	}
-
-	public String getDomainKey() {
-		return domainKey;
-	}
-
-	public void setDomainKey(String domainKey) {
-		this.domainKey = domainKey;
 	}
 
 	public String getDeviceId() {
@@ -49,14 +32,6 @@ public class OfflineSnap implements IOfflineSnap {
 		this.camera = camera;
 	}
 
-	public Date getStamp() {
-		return stamp;
-	}
-
-	public void setStamp(Date stamp) {
-		this.stamp = stamp;
-	}
-
 	public String getMime() {
 		return mime;
 	}
@@ -71,6 +46,46 @@ public class OfflineSnap implements IOfflineSnap {
 
 	public void setData(byte[] data) {
 		this.data = data;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((camera == null) ? 0 : camera.hashCode());
+		result = prime * result + Arrays.hashCode(data);
+		result = prime * result + ((deviceId == null) ? 0 : deviceId.hashCode());
+		result = prime * result + ((mime == null) ? 0 : mime.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		OfflineSnap other = (OfflineSnap) obj;
+		if (camera == null) {
+			if (other.camera != null)
+				return false;
+		} else if (!camera.equals(other.camera))
+			return false;
+		if (!Arrays.equals(data, other.data))
+			return false;
+		if (deviceId == null) {
+			if (other.deviceId != null)
+				return false;
+		} else if (!deviceId.equals(other.deviceId))
+			return false;
+		if (mime == null) {
+			if (other.mime != null)
+				return false;
+		} else if (!mime.equals(other.mime))
+			return false;
+		return true;
 	}
 
 }

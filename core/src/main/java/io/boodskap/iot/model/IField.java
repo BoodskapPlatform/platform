@@ -23,10 +23,6 @@ import io.boodskap.iot.DataType;
 @JsonSerialize(as=IField.class)
 public interface IField extends IModel {
 	
-	public String getName();
-	
-	public void setName(String name);
-	
 	public DataType getDataType();
 	
 	public void setDataType(DataType type);

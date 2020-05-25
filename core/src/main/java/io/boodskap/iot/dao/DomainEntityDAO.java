@@ -28,15 +28,19 @@ public interface DomainEntityDAO<T extends IDomainEntity> extends DAO<T> {
 		return BoodskapSystem.storage().getDomainEntityDAO();
 	}
 	
-	public T create(String domainKey, String entityId) throws StorageException;
+	public T create(String domainKey, String entityType, String entityId) throws StorageException;
 	
-	public T get(String domainKey, String entityId) throws StorageException;
+	public T get(String domainKey, String entityType, String entityId) throws StorageException;
 	
-	public void delete(String domainKey, String entityId) throws StorageException;
+	public void delete(String domainKey, String enityType, String entityId) throws StorageException;
 	
 	public Collection<T> list(String domainKey, int page, int pageSize) throws StorageException;
 	
-	public Collection<T> listNext(String domainKey, String entityId, int page, int pageSize) throws StorageException;
+	public Collection<T> list(String domainKey, String entityType, int page, int pageSize) throws StorageException;
+	
+	public Collection<T> listNext(String domainKey, String entityType, String entityId, int page, int pageSize) throws StorageException;
 	
 	public Collection<T> search(String domainKey, String query, int pageSize) throws StorageException;
+	
+	public Collection<T> search(String domainKey, String entityType, String query, int pageSize) throws StorageException;
 }

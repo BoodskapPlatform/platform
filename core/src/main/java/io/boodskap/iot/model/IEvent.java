@@ -16,8 +16,6 @@
  ******************************************************************************/
 package io.boodskap.iot.model;
 
-import java.util.Date;
-
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import io.boodskap.iot.BoodskapSystem;
@@ -34,10 +32,6 @@ public interface IEvent extends IDomainObject {
 
 	public void setEventId(String eventId);
 
-	public String getName();
-
-	public void setName(String name);
-
 	public String getContent();
 
 	public void setContent(String content);
@@ -53,14 +47,6 @@ public interface IEvent extends IDomainObject {
 	public String getSubjectTemplate();
 
 	public void setSubjectTemplate(String subjectTemplate);
-
-	public Date getCreatedStamp();
-	
-	public void setCreatedStamp(Date createdStamp);
-	
-	public Date getUpdatedStamp();
-	
-	public void setUpdatedStamp(Date updatedStamp);
 
 	public default void save() {
 		EventDAO.get().createOrUpdate(this);

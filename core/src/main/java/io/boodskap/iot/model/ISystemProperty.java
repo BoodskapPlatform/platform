@@ -16,14 +16,12 @@
  ******************************************************************************/
 package io.boodskap.iot.model;
 
-import java.util.Date;
-
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import io.boodskap.iot.dao.SystemPropertyDAO;
 
 @JsonSerialize(as=ISystemProperty.class)
-public interface ISystemProperty extends IStorable {
+public interface ISystemProperty extends IStorable, IModel {
 	
 	public static Class<? extends ISystemProperty> clazz(){
 		return SystemPropertyDAO.get().clazz();
@@ -41,20 +39,8 @@ public interface ISystemProperty extends IStorable {
 		SystemPropertyDAO.get().createOrUpdate(this);
 	}
 
-	public String getName();
-
-	public void setName(String name);
-
 	public String getValue();
 
 	public void setValue(String value);
 
-	public Date getCreatedStamp();
-	
-	public void setCreatedStamp(Date createdStamp);
-	
-	public Date getUpdatedStamp();
-	
-	public void setUpdatedStamp(Date updatedStamp);
-	
 }

@@ -16,15 +16,13 @@
  ******************************************************************************/
 package io.boodskap.iot.model;
 
-import java.util.Date;
-
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import io.boodskap.iot.DataChannel;
 import io.boodskap.iot.dao.RawMessageDAO;
 
 @JsonSerialize(as=IRawMessage.class)
-public interface IRawMessage extends IDomainObject{
+public interface IRawMessage extends IDomainData{
 	
 	public static IRawMessage create(String domainKey, String rawId) {
 		return RawMessageDAO.get().create(domainKey, rawId);
@@ -33,10 +31,6 @@ public interface IRawMessage extends IDomainObject{
 	public String getRawId();
 
 	public void setRawId(String rawId);
-
-	public Date getReceivedStamp();
-
-	public void setReceivedStamp(Date receivedStamp);
 
 	public DataChannel getChannel();
 

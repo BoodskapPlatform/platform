@@ -16,7 +16,6 @@
  ******************************************************************************/
 package io.boodskap.iot.model;
 
-import java.util.Date;
 import java.util.UUID;
 
 import org.apache.commons.codec.binary.Base64;
@@ -58,14 +57,6 @@ public interface ILookup extends IDomainObject{
 
 	public void setType(DataType type);
 	
-	public Date getCreatedStamp();
-	
-	public void setCreatedStamp(Date createdStamp);
-	
-	public Date getUpdatedStamp();
-	
-	public void setUpdatedStamp(Date updatedStamp);
-
 	public default void save() {
 		LookupDAO.get().createOrUpdate(this);
 	}

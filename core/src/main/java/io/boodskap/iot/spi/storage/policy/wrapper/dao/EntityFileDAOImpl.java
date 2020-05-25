@@ -32,8 +32,8 @@ public class EntityFileDAOImpl implements EntityFileDAO<IEntityFile> {
 		this.impl = impl;
 	}
 
-	public IEntityFile create(String domainKey, String entityId, String fileId) throws StorageException {
-		return impl.create(domainKey, entityId, fileId);
+	public IEntityFile create(String domainKey, String entityType, String entityId, String fileId) throws StorageException {
+		return impl.create(domainKey, entityType, entityId, fileId);
 	}
 
 	public Class<? extends IEntityFile> clazz() {
@@ -60,44 +60,60 @@ public class EntityFileDAOImpl implements EntityFileDAO<IEntityFile> {
 		return impl.count(domainKey);
 	}
 
-	public IEntityFile get(String domainKey, String entityId, String id) throws StorageException {
-		return impl.get(domainKey, entityId, id);
+	public IEntityFile get(String domainKey, String entityType, String entityId, String id) throws StorageException {
+		return impl.get(domainKey, entityType, entityId, id);
 	}
 
 	public void delete(String domainKey) throws StorageException {
 		impl.delete(domainKey);
 	}
 
-	public IFileContent getContent(String domainKey, String entityId, String fileId) throws StorageException {
-		return impl.getContent(domainKey, entityId, fileId);
+	public IFileContent getContent(String domainKey, String entityType, String entityId, String fileId) throws StorageException {
+		return impl.getContent(domainKey, entityType, entityId, fileId);
 	}
 
-	public boolean has(String domainKey, String entityId, String id) throws StorageException {
-		return impl.has(domainKey, entityId, id);
+	public boolean has(String domainKey, String entityType, String entityId, String id) throws StorageException {
+		return impl.has(domainKey, entityType, entityId, id);
 	}
 
-	public void delete(String domainKey, String entityId, String id) throws StorageException {
-		impl.delete(domainKey, entityId, id);
+	public void delete(String domainKey, String entityType, String entityId, String id) throws StorageException {
+		impl.delete(domainKey, entityType, entityId, id);
 	}
 
-	public void update(String domainKey, String entityId, String id, String tags, String description) throws StorageException {
-		impl.update(domainKey, entityId, id, tags, description);
+	public void update(String domainKey, String entityType, String entityId, String id, String tags, String description) throws StorageException {
+		impl.update(domainKey, entityType, entityId, id, tags, description);
 	}
 
-	public void update(String domainKey, String entityId, String id, byte[] data, String mediaType) throws StorageException {
-		impl.update(domainKey, entityId, id, data, mediaType);
+	public void update(String domainKey, String entityType, String entityId, String id, byte[] data, String mediaType) throws StorageException {
+		impl.update(domainKey, entityType, entityId, id, data, mediaType);
 	}
 
-	public Collection<IEntityFile> list(boolean load, String domainKey, String entityId, int page, int pageSize) throws StorageException {
-		return impl.list(load, domainKey, entityId, page, pageSize);
+	public Collection<IEntityFile> list(boolean load, String domainKey, int page, int pageSize) throws StorageException {
+		return impl.list(load, domainKey, page, pageSize);
 	}
 
-	public Collection<IEntityFile> listNext(boolean load, String domainKey, String entityId, String id, int page, int pageSize) throws StorageException {
-		return impl.listNext(load, domainKey, entityId, id, page, pageSize);
+	public Collection<IEntityFile> list(boolean load, String domainKey, String entityType, int page, int pageSize) throws StorageException {
+		return impl.list(load, domainKey, entityType, page, pageSize);
 	}
 
-	public Collection<IEntityFile> search(boolean load, String domainKey, String entityId, String query, int pageSize) throws StorageException {
-		return impl.search(load, domainKey, entityId, query, pageSize);
+	public Collection<IEntityFile> list(boolean load, String domainKey, String entityType, String entityId, int page, int pageSize) throws StorageException {
+		return impl.list(load, domainKey, entityType, entityId, page, pageSize);
+	}
+
+	public Collection<IEntityFile> listNext(boolean load, String domainKey, String entityType, String entityId, String id, int page, int pageSize) throws StorageException {
+		return impl.listNext(load, domainKey, entityType, entityId, id, page, pageSize);
+	}
+
+	public Collection<IEntityFile> search(boolean load, String domainKey, String query, int pageSize) throws StorageException {
+		return impl.search(load, domainKey, query, pageSize);
+	}
+
+	public Collection<IEntityFile> search(boolean load, String domainKey, String entityType, String query, int pageSize) throws StorageException {
+		return impl.search(load, domainKey, entityType, query, pageSize);
+	}
+
+	public Collection<IEntityFile> search(boolean load, String domainKey, String entityType, String entityId, String query, int pageSize) throws StorageException {
+		return impl.search(load, domainKey, entityType, query, pageSize);
 	}
 
 	public void delete() throws StorageException {

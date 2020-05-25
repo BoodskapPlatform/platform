@@ -16,8 +16,6 @@
  ******************************************************************************/
 package io.boodskap.iot.model;
 
-import java.util.Date;
-
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import io.boodskap.iot.dao.OfflineStreamDAO;
@@ -45,10 +43,6 @@ public interface IOfflineStream extends IDomainObject{
 
 	public void setFrame(int frame);
 	
-	public Date getStamp();
-	
-	public void setStamp(Date stamp);
-
 	public String getMime();
 
 	public void setMime(String mime);

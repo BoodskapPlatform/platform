@@ -16,8 +16,6 @@
  ******************************************************************************/
 package io.boodskap.iot.model;
 
-import java.util.Date;
-
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import io.boodskap.iot.dao.AlexaDAO;
@@ -65,15 +63,4 @@ public interface IAlexa extends IDomainObject {
 	
 	public void setErrorResponse(String errorResponse);
 
-	public String getCreatedBy();
-	
-	public void setCreatedBy(String createdBy);
-	
-	public Date getRegisteredStamp();
-
-	public void setRegisteredStamp(Date registeredStamp);
-
-	public Date getUpdatedStamp();
-
-	public void setUpdatedStamp(Date updatedStamp);
 }

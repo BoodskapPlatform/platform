@@ -6,18 +6,9 @@ public class BinaryRule extends AbstractRule implements IBinaryRule{
 	
 	private static final long serialVersionUID = -5294325836044591996L;
 	
-	private String domainKey;
 	private String type;
 	
 	public BinaryRule() {
-	}
-
-	public String getDomainKey() {
-		return domainKey;
-	}
-
-	public void setDomainKey(String domainKey) {
-		this.domainKey = domainKey;
 	}
 
 	public String getType() {
@@ -32,7 +23,6 @@ public class BinaryRule extends AbstractRule implements IBinaryRule{
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((domainKey == null) ? 0 : domainKey.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}
@@ -46,11 +36,6 @@ public class BinaryRule extends AbstractRule implements IBinaryRule{
 		if (getClass() != obj.getClass())
 			return false;
 		BinaryRule other = (BinaryRule) obj;
-		if (domainKey == null) {
-			if (other.domainKey != null)
-				return false;
-		} else if (!domainKey.equals(other.domainKey))
-			return false;
 		if (type == null) {
 			if (other.type != null)
 				return false;

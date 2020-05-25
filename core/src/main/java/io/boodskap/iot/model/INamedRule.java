@@ -43,10 +43,6 @@ public interface INamedRule extends IRule  {
 		INamedRule.dao().createOrUpdate(this);
 	}
 	
-	public String getName();
-
-	public void setName(String name);
-
 }
 
 

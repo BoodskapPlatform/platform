@@ -21,7 +21,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.boodskap.iot.dao.OrganizationDAO;
 
 @JsonSerialize(as=IOrganization.class)
-public interface IOrganization extends IEntity {
+public interface IOrganization extends IContact {
 
 	public static IOrganization create(String domainKey, String orgId) {
 		return OrganizationDAO.get().create(domainKey, orgId);

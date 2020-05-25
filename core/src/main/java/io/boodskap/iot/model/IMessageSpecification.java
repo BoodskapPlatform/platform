@@ -17,7 +17,6 @@
 package io.boodskap.iot.model;
 
 import java.util.Collection;
-import java.util.Date;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -65,24 +64,7 @@ public interface IMessageSpecification extends IDomainObject {
 
 	public void setSpecId(String specId);
 
-	public String getName();
-
-	public void setName(String name);
-
-	public String getDescription();
-
-	public void setDescription(String description);
-
 	public <T extends IMessageField> Collection<T> getFields();
 	
 	public void setFields(Collection<? extends IMessageField> fields);
-	
-	public Date getCreatedStamp();
-	
-	public void setCreatedStamp(Date createdStamp);
-	
-	public Date getUpdatedStamp();
-	
-	public void setUpdatedStamp(Date updatedStamp);
-	
 }

@@ -16,8 +16,6 @@
  ******************************************************************************/
 package io.boodskap.iot.model;
 
-import java.util.Date;
-
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import io.boodskap.iot.BoodskapSystem;
@@ -54,10 +52,6 @@ public interface IReportedDevice extends IDomainObject {
 	public String getNodeUid();
 	
 	public void setNodeUid(String nodeUid);
-	
-	public Date getLastReported();
-
-	public void setLastReported(Date lastReported);
 	
 	public String getMqttServerId();
 	

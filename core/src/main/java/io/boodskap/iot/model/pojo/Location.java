@@ -1,37 +1,18 @@
 package io.boodskap.iot.model.pojo;
 
-import java.util.Date;
-
 import io.boodskap.iot.EntityType;
 import io.boodskap.iot.model.ILocation;
 
-public class Location implements ILocation {
+public class Location extends AbstractDomainObject implements ILocation {
 
 	private static final long serialVersionUID = -5212075937091896086L;
 
-	private String domainKey;
 	private String entityId;
 	private EntityType entityType;
 	private double latitude;
 	private double longitude;
-	private Date createdStamp;
-	private Date updatedStamp;
 	
 	public Location() {
-	}
-
-	public Location(String domainKey, String entityId, EntityType entityType) {
-		this.domainKey = domainKey;
-		this.entityId = entityId;
-		this.entityType = entityType;
-	}
-
-	public String getDomainKey() {
-		return domainKey;
-	}
-
-	public void setDomainKey(String domainKey) {
-		this.domainKey = domainKey;
 	}
 
 	public String getEntityId() {
@@ -66,28 +47,10 @@ public class Location implements ILocation {
 		this.longitude = longitude;
 	}
 
-	public Date getCreatedStamp() {
-		return createdStamp;
-	}
-
-	public void setCreatedStamp(Date createdStamp) {
-		this.createdStamp = createdStamp;
-	}
-
-	public Date getUpdatedStamp() {
-		return updatedStamp;
-	}
-
-	public void setUpdatedStamp(Date updatedStamp) {
-		this.updatedStamp = updatedStamp;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((createdStamp == null) ? 0 : createdStamp.hashCode());
-		result = prime * result + ((domainKey == null) ? 0 : domainKey.hashCode());
+		int result = super.hashCode();
 		result = prime * result + ((entityId == null) ? 0 : entityId.hashCode());
 		result = prime * result + ((entityType == null) ? 0 : entityType.hashCode());
 		long temp;
@@ -95,7 +58,6 @@ public class Location implements ILocation {
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		temp = Double.doubleToLongBits(longitude);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + ((updatedStamp == null) ? 0 : updatedStamp.hashCode());
 		return result;
 	}
 
@@ -103,21 +65,11 @@ public class Location implements ILocation {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
 		Location other = (Location) obj;
-		if (createdStamp == null) {
-			if (other.createdStamp != null)
-				return false;
-		} else if (!createdStamp.equals(other.createdStamp))
-			return false;
-		if (domainKey == null) {
-			if (other.domainKey != null)
-				return false;
-		} else if (!domainKey.equals(other.domainKey))
-			return false;
 		if (entityId == null) {
 			if (other.entityId != null)
 				return false;
@@ -128,11 +80,6 @@ public class Location implements ILocation {
 		if (Double.doubleToLongBits(latitude) != Double.doubleToLongBits(other.latitude))
 			return false;
 		if (Double.doubleToLongBits(longitude) != Double.doubleToLongBits(other.longitude))
-			return false;
-		if (updatedStamp == null) {
-			if (other.updatedStamp != null)
-				return false;
-		} else if (!updatedStamp.equals(other.updatedStamp))
 			return false;
 		return true;
 	}

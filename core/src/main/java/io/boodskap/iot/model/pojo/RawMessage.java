@@ -11,7 +11,6 @@ public class RawMessage implements IRawMessage{
 	
 	private String domainKey;
 	private String rawId;
-	private Date receivedStamp;
 	private DataChannel channel;
 	private String specId;
 	private String deviceId;
@@ -23,6 +22,8 @@ public class RawMessage implements IRawMessage{
 	private String ipAddress;
 	private String header;
 	private String data;
+	private Date registeredStamp;
+	private Date updatedStamp;
 
 	public RawMessage() {
 	}
@@ -47,14 +48,6 @@ public class RawMessage implements IRawMessage{
 
 	public void setRawId(String rawId) {
 		this.rawId = rawId;
-	}
-
-	public Date getReceivedStamp() {
-		return receivedStamp;
-	}
-
-	public void setReceivedStamp(Date receivedStamp) {
-		this.receivedStamp = receivedStamp;
 	}
 
 	public DataChannel getChannel() {
@@ -145,6 +138,22 @@ public class RawMessage implements IRawMessage{
 		this.data = data;
 	}
 
+	public Date getRegisteredStamp() {
+		return registeredStamp;
+	}
+
+	public void setRegisteredStamp(Date registeredStamp) {
+		this.registeredStamp = registeredStamp;
+	}
+
+	public Date getUpdatedStamp() {
+		return updatedStamp;
+	}
+
+	public void setUpdatedStamp(Date updatedStamp) {
+		this.updatedStamp = updatedStamp;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -161,8 +170,9 @@ public class RawMessage implements IRawMessage{
 		result = prime * result + ((nodeUid == null) ? 0 : nodeUid.hashCode());
 		result = prime * result + port;
 		result = prime * result + ((rawId == null) ? 0 : rawId.hashCode());
-		result = prime * result + ((receivedStamp == null) ? 0 : receivedStamp.hashCode());
+		result = prime * result + ((registeredStamp == null) ? 0 : registeredStamp.hashCode());
 		result = prime * result + ((specId == null) ? 0 : specId.hashCode());
+		result = prime * result + ((updatedStamp == null) ? 0 : updatedStamp.hashCode());
 		return result;
 	}
 
@@ -229,15 +239,20 @@ public class RawMessage implements IRawMessage{
 				return false;
 		} else if (!rawId.equals(other.rawId))
 			return false;
-		if (receivedStamp == null) {
-			if (other.receivedStamp != null)
+		if (registeredStamp == null) {
+			if (other.registeredStamp != null)
 				return false;
-		} else if (!receivedStamp.equals(other.receivedStamp))
+		} else if (!registeredStamp.equals(other.registeredStamp))
 			return false;
 		if (specId == null) {
 			if (other.specId != null)
 				return false;
 		} else if (!specId.equals(other.specId))
+			return false;
+		if (updatedStamp == null) {
+			if (other.updatedStamp != null)
+				return false;
+		} else if (!updatedStamp.equals(other.updatedStamp))
 			return false;
 		return true;
 	}

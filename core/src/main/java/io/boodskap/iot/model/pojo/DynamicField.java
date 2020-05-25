@@ -12,7 +12,7 @@ import io.boodskap.iot.StorageException;
 import io.boodskap.iot.ThreadContext;
 import io.boodskap.iot.model.IDynamicField;
 
-public abstract class DynamicField implements IDynamicField {
+public abstract class DynamicField extends AbstractDomainObject implements IDynamicField {
 	
 	private static final long serialVersionUID = 8521375450218976930L;
 

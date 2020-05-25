@@ -16,8 +16,6 @@
  ******************************************************************************/
 package io.boodskap.iot.model;
 
-import java.util.Date;
-
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import io.boodskap.iot.BoodskapSystem;
@@ -37,14 +35,6 @@ public interface IFCMDevice extends IDomainObject{
 	public String getFcmToken();
 
 	public void setFcmToken(String fcmToken);
-
-	public Date getCreatedStamp();
-	
-	public void setCreatedStamp(Date createdStamp);
-	
-	public Date getUpdatedStamp();
-	
-	public void setUpdatedStamp(Date updatedStamp);
 
 	public default void save() {
 		FCMDeviceDAO.get().createOrUpdate(this);

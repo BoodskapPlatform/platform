@@ -3,30 +3,13 @@ package io.boodskap.iot.model.pojo;
 
 import io.boodskap.iot.model.IOrganizationRole;
 
-public class OrganizationRole implements IOrganizationRole {
+public class OrganizationRole extends DomainRole implements IOrganizationRole {
 	
 	private static final long serialVersionUID = -1713165327685347649L;
 	
-	private String domainKey;
 	private String orgId;
-	private String name;
-	private String description = null;
 	
 	public OrganizationRole() {
-	}
-
-	public OrganizationRole(String domainKey, String orgId, String name) {
-		this.domainKey = domainKey;
-		this.orgId = orgId;
-		this.name = name;
-	}
-
-	public String getDomainKey() {
-		return domainKey;
-	}
-
-	public void setDomainKey(String domainKey) {
-		this.domainKey = domainKey;
 	}
 
 	public String getOrgId() {
@@ -37,20 +20,29 @@ public class OrganizationRole implements IOrganizationRole {
 		this.orgId = orgId;
 	}
 
-	public String getName() {
-		return name;
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((orgId == null) ? 0 : orgId.hashCode());
+		return result;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		OrganizationRole other = (OrganizationRole) obj;
+		if (orgId == null) {
+			if (other.orgId != null)
+				return false;
+		} else if (!orgId.equals(other.orgId))
+			return false;
+		return true;
 	}
 
 }

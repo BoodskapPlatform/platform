@@ -29,25 +29,31 @@ public interface EntityFileDAO<T extends IEntityFile> extends DAO<T> {
 		return BoodskapSystem.storage().getEntityFileDAO();
 	}
 
-	public T create(String domainKey, String entityId, String fileId) throws StorageException;
+	public T create(String domainKey, String entityType, String entityId, String fileId) throws StorageException;
 
-	public T get(String domainKey, String entityId, String fileId) throws StorageException;
+	public T get(String domainKey, String entityType, String entityId, String fileId) throws StorageException;
 
-	public IFileContent getContent(String domainKey, String entityId, String fileId) throws StorageException;
+	public IFileContent getContent(String domainKey, String entityType, String entityId, String fileId) throws StorageException;
 
-	public boolean has(String domainKey, String entityId, String fileId) throws StorageException;
+	public boolean has(String domainKey, String entityType, String entityId, String fileId) throws StorageException;
 
-	public void delete(String domainKey, String entityId, String fileId) throws StorageException;
+	public void delete(String domainKey, String entityType, String entityId, String fileId) throws StorageException;
 
-	public void update(String domainKey, String entityId, String fileId, String tags, String description) throws StorageException;
+	public void update(String domainKey, String entityType, String entityId, String fileId, String tags, String description) throws StorageException;
 
-	public void update(String domainKey, String entityId, String fileId, byte[] data, String mediaType) throws StorageException;
+	public void update(String domainKey, String entityType, String entityId, String fileId, byte[] data, String mediaType) throws StorageException;
 
-	public Collection<T> list(boolean load, String domainKey, String entityId, int page, int pageSize) throws StorageException;
+	public Collection<T> list(boolean load, String domainKey, int page, int pageSize) throws StorageException;
 
-	public Collection<T> listNext(boolean load, String domainKey, String entityId, String fileId, int page, int pageSize) throws StorageException;
+	public Collection<T> list(boolean load, String domainKey, String entityType, int page, int pageSize) throws StorageException;
 
-	public Collection<T> search(boolean load, String domainKey, String entityId, String query, int pageSize) throws StorageException;
+	public Collection<T> list(boolean load, String domainKey, String entityType, String entityId, int page, int pageSize) throws StorageException;
 
+	public Collection<T> listNext(boolean load, String domainKey, String entityType, String entityId, String fileId, int page, int pageSize) throws StorageException;
 
+	public Collection<T> search(boolean load, String domainKey, String query, int pageSize) throws StorageException;
+
+	public Collection<T> search(boolean load, String domainKey, String entityType, String query, int pageSize) throws StorageException;
+
+	public Collection<T> search(boolean load, String domainKey, String entityType, String entityId, String query, int pageSize) throws StorageException;
 }

@@ -16,8 +16,6 @@
  ******************************************************************************/
 package io.boodskap.iot.model;
 
-import java.util.Date;
-
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import io.boodskap.iot.dao.UserDomainDAO;
@@ -36,13 +34,5 @@ public interface IUserDomain extends IDomainObject {
 	public String getUserId();
 	
 	public void setUserId(String userId);
-
-	public Date getCreatedStamp();
-
-	public void setCreatedStamp(Date createdStamp);
-
-	public Date getUpdatedStamp();
-
-	public void setUpdatedStamp(Date updatedStamp);
 
 }

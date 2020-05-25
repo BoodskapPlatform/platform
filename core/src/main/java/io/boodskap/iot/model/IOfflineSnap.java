@@ -34,10 +34,6 @@ public interface IOfflineSnap extends IDomainObject{
 
 	public void setDeviceId(String deviceId);
 
-	public Date getStamp();
-
-	public void setStamp(Date stamp);
-
 	public String getMime();
 
 	public void setMime(String mime);

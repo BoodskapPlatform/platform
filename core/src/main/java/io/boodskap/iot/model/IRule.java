@@ -17,7 +17,6 @@
 package io.boodskap.iot.model;
 
 import java.util.Collection;
-import java.util.Date;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -45,18 +44,6 @@ public interface IRule extends IDomainObject {
 	public boolean isCompilable();
 	
 	public void setCompilable(boolean compilable);
-	
-	public Date getCreatedStamp();
-	
-	public void setCreatedStamp(Date createdStamp);
-	
-	public Date getUpdatedStamp();
-	
-	public void setUpdatedStamp(Date updatedStamp);
-	
-	public String getDescription();
-	
-	public void setDescription(String description);
 	
 	public String getLoader();
 	

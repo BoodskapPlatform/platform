@@ -10,11 +10,10 @@ import io.boodskap.iot.model.IProgress;
 import io.boodskap.iot.model.IResponse;
 import io.boodskap.iot.model.ISentNotification;
 
-public abstract class AbstractSentNotification implements ISentNotification {
+public abstract class AbstractSentNotification extends AbstractDomainObject implements ISentNotification {
 
 	private static final long serialVersionUID = 315874349873688242L;
 
-	private String domainKey;
 	private String notificationId;
 	private String content;
 	private String subject;
@@ -29,12 +28,6 @@ public abstract class AbstractSentNotification implements ISentNotification {
 	public AbstractSentNotification() {
 	}
 
-	public AbstractSentNotification(String domainKey, String notificationId) {
-		super();
-		this.domainKey = domainKey;
-		this.notificationId = notificationId;
-	}
-
 	@Override
 	public IProgress createProgress(String content) {
 		return new Progress(content);
@@ -43,16 +36,6 @@ public abstract class AbstractSentNotification implements ISentNotification {
 	@Override
 	public IResponse createResponse(String content) {
 		return new Response(content);
-	}
-
-	@Override
-	public String getDomainKey() {
-		return domainKey;
-	}
-
-	@Override
-	public void setDomainKey(String domainKey) {
-		this.domainKey = domainKey;
 	}
 
 	@Override
@@ -150,9 +133,8 @@ public abstract class AbstractSentNotification implements ISentNotification {
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		int result = super.hashCode();
 		result = prime * result + ((content == null) ? 0 : content.hashCode());
-		result = prime * result + ((domainKey == null) ? 0 : domainKey.hashCode());
 		result = prime * result + ((notificationId == null) ? 0 : notificationId.hashCode());
 		result = prime * result + ((progress == null) ? 0 : progress.hashCode());
 		result = prime * result + ((queuedAt == null) ? 0 : queuedAt.hashCode());
@@ -168,7 +150,7 @@ public abstract class AbstractSentNotification implements ISentNotification {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
@@ -177,11 +159,6 @@ public abstract class AbstractSentNotification implements ISentNotification {
 			if (other.content != null)
 				return false;
 		} else if (!content.equals(other.content))
-			return false;
-		if (domainKey == null) {
-			if (other.domainKey != null)
-				return false;
-		} else if (!domainKey.equals(other.domainKey))
 			return false;
 		if (notificationId == null) {
 			if (other.notificationId != null)

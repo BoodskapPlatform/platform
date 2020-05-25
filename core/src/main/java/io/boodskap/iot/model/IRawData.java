@@ -16,8 +16,6 @@
  ******************************************************************************/
 package io.boodskap.iot.model;
 
-import java.util.Date;
-
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import io.boodskap.iot.BoodskapSystem;
@@ -27,7 +25,7 @@ import io.boodskap.iot.StorageException;
 import io.boodskap.iot.dao.RawDataDAO;
 
 @JsonSerialize(as=IRawData.class)
-public interface IRawData extends IModel {
+public interface IRawData extends IDomainData {
 	
 	public static enum State{
 		QUEUED,
@@ -83,10 +81,6 @@ public interface IRawData extends IModel {
 
 	public void setId(String id);
 
-	public Date getReceivedStamp();
-
-	public void setReceivedStamp(Date receivedStamp);
-
 	public String getNodeId();
 
 	public void setNodeId(String nodeId);
@@ -123,10 +117,6 @@ public interface IRawData extends IModel {
 
 	public void setMqttTopic(String mqttTopic);
 
-	public String getDomainKey();
-
-	public void setDomainKey(String domainKey);
-
 	public String getDeviceId();
 
 	public void setDeviceId(String deviceId);
@@ -154,10 +144,6 @@ public interface IRawData extends IModel {
 	public State getState();
 	
 	public void setState(State state);
-	
-	public Date getUpdatedStamp();
-	
-	public void setUpdatedStamp(Date updatedStamp);
 	
 	public String getType();
 	

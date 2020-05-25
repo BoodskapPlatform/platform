@@ -16,8 +16,6 @@
  ******************************************************************************/
 package io.boodskap.iot.model;
 
-import java.util.Date;
-
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import io.boodskap.iot.BoodskapSystem;
@@ -41,14 +39,6 @@ public interface IFCMGateway extends IDomainObject {
 	public boolean isDebug();
 
 	public void setDebug(boolean debug);
-
-	public Date getCreatedStamp();
-	
-	public void setCreatedStamp(Date createdStamp);
-	
-	public Date getUpdatedStamp();
-	
-	public void setUpdatedStamp(Date updatedStamp);
 
 	public default void save() {
 		FCMGatewayDAO.get().createOrUpdate(this);

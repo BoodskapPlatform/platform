@@ -58,10 +58,6 @@ public interface IBillingInvoice extends IDomainObject {
 
 	public void setEnddate(Date enddate);
 
-	public Date getCreatedtime();
-
-	public void setCreatedtime(Date createdtime);
-
 	public String getObj();
 
 	public void setObj(String obj);

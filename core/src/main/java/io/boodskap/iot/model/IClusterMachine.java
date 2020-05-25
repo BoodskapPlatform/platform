@@ -1,7 +1,6 @@
 package io.boodskap.iot.model;
 
 import java.util.Collection;
-import java.util.Date;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -66,14 +65,6 @@ public interface IClusterMachine extends IDomainObject {
 	public int getCpuCores();
 	
 	public void setCpuCores(int cpuCores);
-
-	public Date getRegisteredStamp();
-
-	public void setRegisteredStamp(Date registeredStamp);
-
-	public Date getUpdatedStamp();
-
-	public void setUpdatedStamp(Date updatedStamp);
 
 	public <T extends INameValuePair> Collection<T> getProperties();
 

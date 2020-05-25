@@ -13,11 +13,6 @@ public class OTAModelBatchMember extends OTADeviceBatchMember implements IOTAMod
 		super();
 	}
 
-	public OTAModelBatchMember(String domainKey, String batchId, String fromModel, String deviceId) {
-		super(domainKey, batchId, deviceId);
-		this.fromModel = fromModel;
-	}
-
 	public String getFromModel() {
 		return fromModel;
 	}

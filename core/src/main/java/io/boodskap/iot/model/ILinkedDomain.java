@@ -16,8 +16,6 @@
  ******************************************************************************/
 package io.boodskap.iot.model;
 
-import java.util.Date;
-
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import io.boodskap.iot.BoodskapSystem;
@@ -41,14 +39,6 @@ public interface ILinkedDomain extends IDomainObject {
 	public boolean isDisabled();
 	
 	public void setDisabled(boolean disabled);
-
-	public Date getCreatedStamp();
-	
-	public void setCreatedStamp(Date createdStamp);
-	
-	public Date getUpdatedStamp();
-	
-	public void setUpdatedStamp(Date updatedStamp);
 
 	public default void save() {
 		LinkedDomainDAO.get().createOrUpdate(this);

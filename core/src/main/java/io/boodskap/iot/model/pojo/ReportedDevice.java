@@ -1,40 +1,21 @@
 package io.boodskap.iot.model.pojo;
 
-import java.util.Date;
-
-
 import io.boodskap.iot.DataChannel;
 import io.boodskap.iot.model.IReportedDevice;
 
-public class ReportedDevice implements IReportedDevice {
+public class ReportedDevice extends AbstractDomainObject implements IReportedDevice {
 
 	private static final long serialVersionUID = 5079998294707936313L;
 
-	private String domainKey;
 	private String deviceId;
 	private String address;
 	private String mqttServerId;
 	private String nodeId;
 	private String nodeUid;
-	private Date lastReported = new Date();
 	private Integer port;
 	private DataChannel channel;
 
 	public ReportedDevice() {
-	}
-
-	public ReportedDevice(String domainKey, String deviceId) {
-		super();
-		this.domainKey = domainKey;
-		this.deviceId = deviceId;
-	}
-
-	public String getDomainKey() {
-		return domainKey;
-	}
-
-	public void setDomainKey(String domainKey) {
-		this.domainKey = domainKey;
 	}
 
 	public String getDeviceId() {
@@ -51,14 +32,6 @@ public class ReportedDevice implements IReportedDevice {
 
 	public void setMqttServerId(String mqttServerId) {
 		this.mqttServerId = mqttServerId;
-	}
-
-	public Date getLastReported() {
-		return lastReported;
-	}
-
-	public void setLastReported(Date lastReported) {
-		this.lastReported = lastReported;
 	}
 
 	public Integer getPort() {
@@ -104,12 +77,11 @@ public class ReportedDevice implements IReportedDevice {
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		int result = super.hashCode();
 		result = prime * result + ((address == null) ? 0 : address.hashCode());
 		result = prime * result + ((channel == null) ? 0 : channel.hashCode());
 		result = prime * result + ((deviceId == null) ? 0 : deviceId.hashCode());
-		result = prime * result + ((domainKey == null) ? 0 : domainKey.hashCode());
-		result = prime * result + ((lastReported == null) ? 0 : lastReported.hashCode());
+		result = prime * result + ((mqttServerId == null) ? 0 : mqttServerId.hashCode());
 		result = prime * result + ((nodeId == null) ? 0 : nodeId.hashCode());
 		result = prime * result + ((nodeUid == null) ? 0 : nodeUid.hashCode());
 		result = prime * result + ((port == null) ? 0 : port.hashCode());
@@ -120,7 +92,7 @@ public class ReportedDevice implements IReportedDevice {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
@@ -137,15 +109,10 @@ public class ReportedDevice implements IReportedDevice {
 				return false;
 		} else if (!deviceId.equals(other.deviceId))
 			return false;
-		if (domainKey == null) {
-			if (other.domainKey != null)
+		if (mqttServerId == null) {
+			if (other.mqttServerId != null)
 				return false;
-		} else if (!domainKey.equals(other.domainKey))
-			return false;
-		if (lastReported == null) {
-			if (other.lastReported != null)
-				return false;
-		} else if (!lastReported.equals(other.lastReported))
+		} else if (!mqttServerId.equals(other.mqttServerId))
 			return false;
 		if (nodeId == null) {
 			if (other.nodeId != null)

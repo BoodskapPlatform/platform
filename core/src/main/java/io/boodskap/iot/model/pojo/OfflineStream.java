@@ -1,40 +1,21 @@
 package io.boodskap.iot.model.pojo;
 
 import java.util.Arrays;
-import java.util.Date;
 
 import io.boodskap.iot.model.IOfflineStream;
 
-public class OfflineStream implements IOfflineStream{
+public class OfflineStream extends AbstractDomainObject implements IOfflineStream{
 	
 	private static final long serialVersionUID = 5693040931326424173L;
 
-	private String domainKey;
 	private String deviceId;
 	private String camera;
 	private String session;
 	private int frame;
-	private Date stamp;
 	private String mime;
 	private byte[] data;
 	
 	public OfflineStream() {
-	}
-
-	public OfflineStream(String domainKey, String deviceId, String camera, String session, int frame) {
-		this.domainKey = domainKey;
-		this.deviceId = deviceId;
-		this.camera = camera;
-		this.session = session;
-		this.frame = frame;
-	}
-
-	public String getDomainKey() {
-		return domainKey;
-	}
-
-	public void setDomainKey(String domainKey) {
-		this.domainKey = domainKey;
 	}
 
 	public String getDeviceId() {
@@ -69,14 +50,6 @@ public class OfflineStream implements IOfflineStream{
 		this.frame = frame;
 	}
 
-	public Date getStamp() {
-		return stamp;
-	}
-
-	public void setStamp(Date stamp) {
-		this.stamp = stamp;
-	}
-
 	public String getMime() {
 		return mime;
 	}
@@ -96,15 +69,13 @@ public class OfflineStream implements IOfflineStream{
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		int result = super.hashCode();
 		result = prime * result + ((camera == null) ? 0 : camera.hashCode());
 		result = prime * result + Arrays.hashCode(data);
 		result = prime * result + ((deviceId == null) ? 0 : deviceId.hashCode());
-		result = prime * result + ((domainKey == null) ? 0 : domainKey.hashCode());
 		result = prime * result + frame;
 		result = prime * result + ((mime == null) ? 0 : mime.hashCode());
 		result = prime * result + ((session == null) ? 0 : session.hashCode());
-		result = prime * result + ((stamp == null) ? 0 : stamp.hashCode());
 		return result;
 	}
 
@@ -112,7 +83,7 @@ public class OfflineStream implements IOfflineStream{
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
@@ -129,11 +100,6 @@ public class OfflineStream implements IOfflineStream{
 				return false;
 		} else if (!deviceId.equals(other.deviceId))
 			return false;
-		if (domainKey == null) {
-			if (other.domainKey != null)
-				return false;
-		} else if (!domainKey.equals(other.domainKey))
-			return false;
 		if (frame != other.frame)
 			return false;
 		if (mime == null) {
@@ -145,11 +111,6 @@ public class OfflineStream implements IOfflineStream{
 			if (other.session != null)
 				return false;
 		} else if (!session.equals(other.session))
-			return false;
-		if (stamp == null) {
-			if (other.stamp != null)
-				return false;
-		} else if (!stamp.equals(other.stamp))
 			return false;
 		return true;
 	}

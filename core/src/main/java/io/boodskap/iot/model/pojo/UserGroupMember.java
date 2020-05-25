@@ -11,11 +11,6 @@ public class UserGroupMember extends AbstractGroupMember implements IUserGroupMe
 	public UserGroupMember(){
 	}
 
-	public UserGroupMember(String domainKey, String ownerUserId, String groupId, String memberId) {
-		super(domainKey, groupId, memberId);
-		this.ownerUserId = ownerUserId;
-	}
-
 	public String getOwnerUserId() {
 		return ownerUserId;
 	}

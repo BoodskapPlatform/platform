@@ -12,11 +12,6 @@ public class UserDeviceGroup extends AbstractGroup implements IUserDeviceGroup {
 	public UserDeviceGroup() {
 	}
 
-	public UserDeviceGroup(String domainKey, String ownerUserId, String groupId) {
-		super(domainKey, groupId);
-		this.ownerUserId = ownerUserId;
-	}
-
 	public String getOwnerUserId() {
 		return ownerUserId;
 	}

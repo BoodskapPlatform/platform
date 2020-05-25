@@ -1,7 +1,5 @@
 package io.boodskap.iot.model;
 
-import java.util.Date;
-
 import io.boodskap.iot.dao.BillingTemplateDAO;
 
 public interface IBillingTemplate extends IModel {
@@ -49,13 +47,5 @@ public interface IBillingTemplate extends IModel {
 	public String getTemplatecode();
 
 	public void setTemplatecode(String templatecode);
-
-	public Date getUpdatedtime();
-
-	public void setUpdatedtime(Date updatedtime);
-
-	public Date getCreatedtime();
-
-	public void setCreatedtime(Date createdtime);
 
 }

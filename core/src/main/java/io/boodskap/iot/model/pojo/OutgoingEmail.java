@@ -14,10 +14,6 @@ public class OutgoingEmail extends AbstractNotification implements IOutgoingEmai
 	public OutgoingEmail() {
 	}
 
-	public OutgoingEmail(String domainKey, String notificationId) {
-		super(domainKey, notificationId);
-	}
-
 	public String getSubject() {
 		return subject;
 	}

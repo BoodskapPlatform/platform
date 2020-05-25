@@ -22,10 +22,6 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 @JsonSerialize(as=IMessageField.class)
 public interface IMessageField extends IField {
 
-	public String getDescription();
-
-	public void setDescription(String description);
-
 	public boolean isIndexed();
 
 	public void setIndexed(boolean indexed);

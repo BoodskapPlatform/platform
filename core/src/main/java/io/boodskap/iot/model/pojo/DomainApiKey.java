@@ -3,11 +3,10 @@ package io.boodskap.iot.model.pojo;
 import io.boodskap.iot.KeyGenerator;
 import io.boodskap.iot.model.IDomainApiKey;
 
-public class DomainApiKey implements IDomainApiKey{
+public class DomainApiKey extends AbstractDomainObject implements IDomainApiKey{
 
 	private static final long serialVersionUID = -7862597406283328282L;
 	
-	private String domainKey;
 	private String apiKey;
 	
 	public DomainApiKey(){
@@ -15,16 +14,8 @@ public class DomainApiKey implements IDomainApiKey{
 	}
 
 	public DomainApiKey(String domainKey, String apiKey) {
-		this.domainKey = domainKey;
+		setDomainKey(domainKey);
 		this.apiKey = apiKey;
-	}
-
-	public String getDomainKey() {
-		return domainKey;
-	}
-
-	public void setDomainKey(String domainKey) {
-		this.domainKey = domainKey;
 	}
 
 	public String getApiKey() {
@@ -38,9 +29,8 @@ public class DomainApiKey implements IDomainApiKey{
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		int result = super.hashCode();
 		result = prime * result + ((apiKey == null) ? 0 : apiKey.hashCode());
-		result = prime * result + ((domainKey == null) ? 0 : domainKey.hashCode());
 		return result;
 	}
 
@@ -48,7 +38,7 @@ public class DomainApiKey implements IDomainApiKey{
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
@@ -57,11 +47,6 @@ public class DomainApiKey implements IDomainApiKey{
 			if (other.apiKey != null)
 				return false;
 		} else if (!apiKey.equals(other.apiKey))
-			return false;
-		if (domainKey == null) {
-			if (other.domainKey != null)
-				return false;
-		} else if (!domainKey.equals(other.domainKey))
 			return false;
 		return true;
 	}

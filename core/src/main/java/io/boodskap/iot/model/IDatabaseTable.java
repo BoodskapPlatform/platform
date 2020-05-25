@@ -23,7 +23,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.boodskap.iot.dao.DatabaseTableDAO;
 
 @JsonSerialize(as=IDatabaseTable.class)
-public interface IDatabaseTable extends IModel{
+public interface IDatabaseTable extends IDomainObject{
 	
 	public static DatabaseTableDAO<IDatabaseTable> dao(){
 		return DatabaseTableDAO.get();
@@ -46,10 +46,6 @@ public interface IDatabaseTable extends IModel{
 	}
 	
 	public IDatabaseTableField createField(String field);
-
-	public String getDomainKey();
-
-	public void setDomainKey(String domainKey);
 
 	public String getMetaDataId();
 	

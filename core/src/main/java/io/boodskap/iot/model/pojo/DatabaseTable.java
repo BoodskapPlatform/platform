@@ -7,11 +7,10 @@ import java.util.List;
 import io.boodskap.iot.model.IDatabaseTable;
 import io.boodskap.iot.model.IDatabaseTableField;
 
-public class DatabaseTable implements IDatabaseTable {
+public class DatabaseTable extends AbstractDomainObject implements IDatabaseTable {
 	
 	private static final long serialVersionUID = -4292175867114525776L;
 	
-	private String domainKey;
 	private String metaDataId;
 	private String table;
 	private String catalog;
@@ -19,14 +18,6 @@ public class DatabaseTable implements IDatabaseTable {
 	private List<IDatabaseTableField> fields = new ArrayList<>();
 
 	public DatabaseTable() {
-	}
-
-	public String getDomainKey() {
-		return domainKey;
-	}
-
-	public void setDomainKey(String domainKey) {
-		this.domainKey = domainKey;
 	}
 
 	public String getMetaDataId() {
@@ -72,15 +63,19 @@ public class DatabaseTable implements IDatabaseTable {
 
 	@Override
 	public IDatabaseTableField createField(String field) {
-		return new DatabaseTableField(domainKey, metaDataId, table, field);
+		DatabaseTableField f = new DatabaseTableField();
+		f.setDomainKey(getDomainKey());
+		f.setMetaDataId(metaDataId);
+		f.setTable(field);
+		f.setField(field);
+		return f;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		int result = super.hashCode();
 		result = prime * result + ((catalog == null) ? 0 : catalog.hashCode());
-		result = prime * result + ((domainKey == null) ? 0 : domainKey.hashCode());
 		result = prime * result + ((fields == null) ? 0 : fields.hashCode());
 		result = prime * result + ((metaDataId == null) ? 0 : metaDataId.hashCode());
 		result = prime * result + ((schema == null) ? 0 : schema.hashCode());
@@ -92,7 +87,7 @@ public class DatabaseTable implements IDatabaseTable {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
@@ -101,11 +96,6 @@ public class DatabaseTable implements IDatabaseTable {
 			if (other.catalog != null)
 				return false;
 		} else if (!catalog.equals(other.catalog))
-			return false;
-		if (domainKey == null) {
-			if (other.domainKey != null)
-				return false;
-		} else if (!domainKey.equals(other.domainKey))
 			return false;
 		if (fields == null) {
 			if (other.fields != null)

@@ -192,6 +192,8 @@ public interface IStorage extends IBaseStorage {
 
 	public <T extends IDomainEntity> DomainEntityDAO<T> getDomainEntityDAO();
 
+	public <T extends IDomainJsonEntity> DomainJsonEntityDAO<T> getDomainJsonEntityDAO();
+
 	public <T extends IOrganizationFile> OrganizationFileDAO<T> getOrganizationFileDAO();
 
 	public <T extends IOTAModelVersionBatch> OTAModelVersionBatchDAO<T> getOTAModelVersionBatchDAO();

@@ -17,7 +17,6 @@
 package io.boodskap.iot.model;
 
 import java.util.Collection;
-import java.util.Date;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -29,14 +28,6 @@ public interface IBaseCommand extends IDomainObject{
 	public long getUid();
 
 	public void setUid(long uid);
-
-	public Date getCreatedStamp();
-
-	public void setCreatedStamp(Date createdStamp);
-
-	public Date getUpdatedStamp();
-
-	public void setUpdatedStamp(Date updatedStamp);
 
 	public CommandType getCommandType();
 

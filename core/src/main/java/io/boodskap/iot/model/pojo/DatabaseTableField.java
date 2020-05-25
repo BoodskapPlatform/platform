@@ -2,11 +2,10 @@ package io.boodskap.iot.model.pojo;
 
 import io.boodskap.iot.model.IDatabaseTableField;
 
-public class DatabaseTableField implements IDatabaseTableField {
+public class DatabaseTableField extends AbstractDomainObject implements IDatabaseTableField {
 
 	private static final long serialVersionUID = -8634256722528158807L;
 	
-	private String domainKey;
 	private String metaDataId;
 	private String table;
 	private String field;
@@ -14,22 +13,6 @@ public class DatabaseTableField implements IDatabaseTableField {
 	private String size;
 
 	public DatabaseTableField() {
-	}
-
-	public DatabaseTableField(String domainKey, String metaDataId, String table, String field) {
-		super();
-		this.domainKey = domainKey;
-		this.metaDataId = metaDataId;
-		this.table = table;
-		this.field = field;
-	}
-
-	public String getDomainKey() {
-		return domainKey;
-	}
-
-	public void setDomainKey(String domainKey) {
-		this.domainKey = domainKey;
 	}
 
 	public String getMetaDataId() {
@@ -75,8 +58,7 @@ public class DatabaseTableField implements IDatabaseTableField {
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((domainKey == null) ? 0 : domainKey.hashCode());
+		int result = super.hashCode();
 		result = prime * result + ((field == null) ? 0 : field.hashCode());
 		result = prime * result + ((metaDataId == null) ? 0 : metaDataId.hashCode());
 		result = prime * result + ((size == null) ? 0 : size.hashCode());
@@ -89,16 +71,11 @@ public class DatabaseTableField implements IDatabaseTableField {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
 		DatabaseTableField other = (DatabaseTableField) obj;
-		if (domainKey == null) {
-			if (other.domainKey != null)
-				return false;
-		} else if (!domainKey.equals(other.domainKey))
-			return false;
 		if (field == null) {
 			if (other.field != null)
 				return false;

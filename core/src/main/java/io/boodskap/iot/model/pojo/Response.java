@@ -5,7 +5,7 @@ import java.util.Date;
 
 import io.boodskap.iot.model.IResponse;
 
-public class Response implements IResponse {
+public class Response extends AbstractModel implements IResponse {
 	
 	private static final long serialVersionUID = 5905446293522785788L;
 	

@@ -11,11 +11,6 @@ public class UserDeviceGroupMember extends AbstractGroupMember implements IUserD
 	public UserDeviceGroupMember() {
 	}
 
-	public UserDeviceGroupMember(String domainKey, String ownerUserId, String groupId, String memberId) {
-		super(domainKey, groupId, memberId);
-		this.ownerUserId = ownerUserId;
-	}
-
 	public String getOwnerUserId() {
 		return ownerUserId;
 	}

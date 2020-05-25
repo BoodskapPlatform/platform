@@ -1,36 +1,14 @@
 package io.boodskap.iot.model.pojo;
 
-import io.boodskap.iot.model.IFileContent;
 import io.boodskap.iot.model.IOrganizationFile;
 
-public class OrganizationFile extends AbstractFile implements IOrganizationFile {
+public class OrganizationFile extends DomainFile implements IOrganizationFile {
 
 	private static final long serialVersionUID = -4764732675817632874L;
 
-	private String domainKey;
 	private String orgId;
-	private String fileId;
 	
 	public OrganizationFile() {
-	}
-
-	public OrganizationFile(String domainKey, String orgId, String fileId) {
-		this.domainKey = domainKey;
-		this.orgId = orgId;
-		this.fileId = fileId;
-	}
-
-	@Override
-	public IFileContent createContent() {
-		return new FileContent(getData(), getMediaType());
-	}
-
-	public String getDomainKey() {
-		return domainKey;
-	}
-
-	public void setDomainKey(String domainKey) {
-		this.domainKey = domainKey;
 	}
 
 	public String getOrgId() {
@@ -41,20 +19,10 @@ public class OrganizationFile extends AbstractFile implements IOrganizationFile 
 		this.orgId = orgId;
 	}
 
-	public String getFileId() {
-		return fileId;
-	}
-
-	public void setFileId(String fileId) {
-		this.fileId = fileId;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((domainKey == null) ? 0 : domainKey.hashCode());
-		result = prime * result + ((fileId == null) ? 0 : fileId.hashCode());
 		result = prime * result + ((orgId == null) ? 0 : orgId.hashCode());
 		return result;
 	}
@@ -68,16 +36,6 @@ public class OrganizationFile extends AbstractFile implements IOrganizationFile 
 		if (getClass() != obj.getClass())
 			return false;
 		OrganizationFile other = (OrganizationFile) obj;
-		if (domainKey == null) {
-			if (other.domainKey != null)
-				return false;
-		} else if (!domainKey.equals(other.domainKey))
-			return false;
-		if (fileId == null) {
-			if (other.fileId != null)
-				return false;
-		} else if (!fileId.equals(other.fileId))
-			return false;
 		if (orgId == null) {
 			if (other.orgId != null)
 				return false;

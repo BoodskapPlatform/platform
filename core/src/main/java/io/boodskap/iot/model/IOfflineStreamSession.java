@@ -16,8 +16,6 @@
  ******************************************************************************/
 package io.boodskap.iot.model;
 
-import java.util.Date;
-
 import io.boodskap.iot.dao.OfflineStreamSessionDAO;
 
 public interface IOfflineStreamSession extends IDomainObject {
@@ -37,14 +35,6 @@ public interface IOfflineStreamSession extends IDomainObject {
 	public String getSession();
 
 	public void setSession(String session);
-
-	public Date getCreatedStamp();
-	
-	public void setCreatedStamp(Date createdStamp);
-	
-	public Date getUpdatedStamp();
-	
-	public void setUpdatedStamp(Date updatedStamp);
 
 	public default void save() {
 		OfflineStreamSessionDAO.get().createOrUpdate(this);

@@ -112,14 +112,6 @@ public interface IClusterLicense extends IDomainObject {
 
 	public void setValidTo(Date validTo);
 
-	public Date getRegisteredStamp();
-
-	public void setRegisteredStamp(Date registeredStamp);
-
-	public Date getUpdatedStamp();
-
-	public void setUpdatedStamp(Date updatedStamp);
-	
 	public int getGracePeriod();
 	
 	public void setGracePeriod(int gracePeriod);

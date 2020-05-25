@@ -47,10 +47,6 @@ public interface IPlugin extends IModel {
 	public PluginType getType();
 	
 	public void setType(PluginType type);
-
-	public String getDesc();
-	
-	public void setDesc(String desc);
 	
 	public String getAuthor();
 	

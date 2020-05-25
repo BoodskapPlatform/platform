@@ -46,9 +46,4 @@ public interface IBinaryRule extends IRule {
 	public String getType() ;
 
 	public void setType(String type) ;
-
-	public String getDescription();
-
-	public void setDescription(String description);
-
 }

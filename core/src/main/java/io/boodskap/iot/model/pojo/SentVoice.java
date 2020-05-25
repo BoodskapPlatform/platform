@@ -13,10 +13,6 @@ public class SentVoice extends AbstractSentNotification implements ISentVoice {
 	public SentVoice() {
 	}
 
-	public SentVoice(String domainKey, String notificationId) {
-		super(domainKey, notificationId);
-	}
-
 	@Override
 	public String getSendor() {
 		return sendor;

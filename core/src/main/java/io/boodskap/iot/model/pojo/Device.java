@@ -1,18 +1,13 @@
 package io.boodskap.iot.model.pojo;
 
-import java.util.Date;
-
 import io.boodskap.iot.DataChannel;
 import io.boodskap.iot.model.IDevice;
 
-public class Device implements IDevice {
+public class Device extends AbstractDomainObject implements IDevice {
 
 	private static final long serialVersionUID = -3890309949886257710L;
 
-	private String domainKey;
 	private String deviceId;
-	private String name = null;
-	private String description = null;
 	private String modelId = null;
 	private String version = null;
 	private String password = null;
@@ -22,133 +17,106 @@ public class Device implements IDevice {
 	private String nodeUid = null;
 	private Integer reportedPort = null;
 	private DataChannel channel = null;
-	private Date registeredStamp;
-	private Date reportedStamp = null;
 	
 	public Device() {
 	}
 	
-	public Device(String domainKey, String deviceId) {
-		this.domainKey = domainKey;
-		this.deviceId = deviceId;
-	}
-
-	public String getDomainKey() {
-		return domainKey;
-	}
-
-	public void setDomainKey(String domainKey) {
-		this.domainKey = domainKey;
-	}
-
+	@Override
 	public String getDeviceId() {
 		return deviceId;
 	}
 
+	@Override
 	public void setDeviceId(String deviceId) {
 		this.deviceId = deviceId;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
+	@Override
 	public String getModelId() {
 		return modelId;
 	}
 
+	@Override
 	public void setModelId(String modelId) {
 		this.modelId = modelId;
 	}
 
+	@Override
 	public String getVersion() {
 		return version;
 	}
 
+	@Override
 	public void setVersion(String version) {
 		this.version = version;
 	}
 
+	@Override
 	public String getPassword() {
 		return password;
 	}
 
+	@Override
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
-	public Date getRegisteredStamp() {
-		return registeredStamp;
-	}
-
-	public void setRegisteredStamp(Date registeredStamp) {
-		this.registeredStamp = registeredStamp;
-	}
-
+	@Override
 	public String getAssetId() {
 		return assetId;
 	}
 
+	@Override
 	public void setAssetId(String assetId) {
 		this.assetId = assetId;
 	}
 
-	public Date getReportedStamp() {
-		return reportedStamp;
-	}
-
-	public void setReportedStamp(Date reportedStamp) {
-		this.reportedStamp = reportedStamp;
-	}
-
+	@Override
 	public String getReportedIp() {
 		return reportedIp;
 	}
 
+	@Override
 	public void setReportedIp(String reportedIp) {
 		this.reportedIp = reportedIp;
 	}
 
+	@Override
 	public Integer getReportedPort() {
 		return reportedPort;
 	}
 
+	@Override
 	public void setReportedPort(Integer reportedPort) {
 		this.reportedPort = reportedPort;
 	}
 
+	@Override
 	public String getNodeId() {
 		return nodeId;
 	}
 
+	@Override
 	public void setNodeId(String nodeId) {
 		this.nodeId = nodeId;
 	}
 
+	@Override
 	public String getNodeUid() {
 		return nodeUid;
 	}
 
+	@Override
 	public void setNodeUid(String nodeUid) {
 		this.nodeUid = nodeUid;
 	}
 
+	@Override
 	public DataChannel getChannel() {
 		return channel;
 	}
 
+	@Override
 	public void setChannel(DataChannel channel) {
 		this.channel = channel;
 	}
@@ -156,21 +124,16 @@ public class Device implements IDevice {
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		int result = super.hashCode();
 		result = prime * result + ((assetId == null) ? 0 : assetId.hashCode());
 		result = prime * result + ((channel == null) ? 0 : channel.hashCode());
-		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((deviceId == null) ? 0 : deviceId.hashCode());
-		result = prime * result + ((domainKey == null) ? 0 : domainKey.hashCode());
 		result = prime * result + ((modelId == null) ? 0 : modelId.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((nodeId == null) ? 0 : nodeId.hashCode());
 		result = prime * result + ((nodeUid == null) ? 0 : nodeUid.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		result = prime * result + ((registeredStamp == null) ? 0 : registeredStamp.hashCode());
 		result = prime * result + ((reportedIp == null) ? 0 : reportedIp.hashCode());
 		result = prime * result + ((reportedPort == null) ? 0 : reportedPort.hashCode());
-		result = prime * result + ((reportedStamp == null) ? 0 : reportedStamp.hashCode());
 		result = prime * result + ((version == null) ? 0 : version.hashCode());
 		return result;
 	}
@@ -179,7 +142,7 @@ public class Device implements IDevice {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
@@ -191,30 +154,15 @@ public class Device implements IDevice {
 			return false;
 		if (channel != other.channel)
 			return false;
-		if (description == null) {
-			if (other.description != null)
-				return false;
-		} else if (!description.equals(other.description))
-			return false;
 		if (deviceId == null) {
 			if (other.deviceId != null)
 				return false;
 		} else if (!deviceId.equals(other.deviceId))
 			return false;
-		if (domainKey == null) {
-			if (other.domainKey != null)
-				return false;
-		} else if (!domainKey.equals(other.domainKey))
-			return false;
 		if (modelId == null) {
 			if (other.modelId != null)
 				return false;
 		} else if (!modelId.equals(other.modelId))
-			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
 			return false;
 		if (nodeId == null) {
 			if (other.nodeId != null)
@@ -231,11 +179,6 @@ public class Device implements IDevice {
 				return false;
 		} else if (!password.equals(other.password))
 			return false;
-		if (registeredStamp == null) {
-			if (other.registeredStamp != null)
-				return false;
-		} else if (!registeredStamp.equals(other.registeredStamp))
-			return false;
 		if (reportedIp == null) {
 			if (other.reportedIp != null)
 				return false;
@@ -245,11 +188,6 @@ public class Device implements IDevice {
 			if (other.reportedPort != null)
 				return false;
 		} else if (!reportedPort.equals(other.reportedPort))
-			return false;
-		if (reportedStamp == null) {
-			if (other.reportedStamp != null)
-				return false;
-		} else if (!reportedStamp.equals(other.reportedStamp))
 			return false;
 		if (version == null) {
 			if (other.version != null)

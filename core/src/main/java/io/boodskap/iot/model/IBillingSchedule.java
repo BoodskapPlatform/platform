@@ -54,14 +54,6 @@ public interface IBillingSchedule extends IDomainObject {
 
 	public void setPayername(String payername);
 
-	public Date getUpdatedtime();
-
-	public void setUpdatedtime(Date updatedtime);
-
-	public Date getCreatedtime();
-
-	public void setCreatedtime(Date createdtime);
-
 	public boolean isDiscounteditems();
 
 	public void setDiscounteditems(boolean discounteditems);

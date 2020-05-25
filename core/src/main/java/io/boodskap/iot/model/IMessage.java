@@ -18,7 +18,6 @@ package io.boodskap.iot.model;
 
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -61,14 +60,6 @@ public interface IMessage extends IDomainObject {
 	public String getSpecId();
 
 	public void setSpecId(String specId);
-
-	public Date getReceivedStamp();
-
-	public void setReceivedStamp(Date receivedStamp);
-
-	public Date getCreatedStamp();
-
-	public void setCreatedStamp(Date createdStamp);
 
 	public String getDeviceId();
 

@@ -4,7 +4,7 @@ package io.boodskap.iot.model.pojo;
 import io.boodskap.iot.model.IPlugin;
 import io.boodskap.iot.plugin.PluginType;
 
-public class Plugin implements IPlugin {
+public class Plugin extends AbstractModel  implements IPlugin {
 
 	private static final long serialVersionUID = 5195867514141380004L;
 	

@@ -15,10 +15,6 @@ public class OutgoingFCM extends AbstractNotification implements IOutgoingFCM {
 	public OutgoingFCM() {
 	}
 
-	public OutgoingFCM(String domainKey, String notificationId) {
-		super(domainKey, notificationId);
-	}
-
 	public String getDeviceId() {
 		return deviceId;
 	}

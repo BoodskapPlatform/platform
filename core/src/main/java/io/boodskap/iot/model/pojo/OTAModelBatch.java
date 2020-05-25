@@ -13,11 +13,6 @@ public class OTAModelBatch extends OTABatch implements IOTAModelBatch{
 		super();
 	}
 
-	public OTAModelBatch(String domainKey, String batchId, String fromModel) {
-		super(domainKey, batchId);
-		this.fromModel = fromModel;
-	}
-
 	public String getFromModel() {
 		return fromModel;
 	}
