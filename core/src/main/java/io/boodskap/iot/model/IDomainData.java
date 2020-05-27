@@ -19,7 +19,7 @@ package io.boodskap.iot.model;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @JsonSerialize(as = IDomainData.class)
-public interface IDomainData extends IData {
+public interface IDomainData extends IStorageObject {
 	
 	public String getDomainKey();
 	
