@@ -37,33 +37,33 @@ public abstract class AbstractDynamicField extends AbstractStorable implements I
 	}
 
 	@Override
-	public DataType getDataType() {
+	public final DataType getDataType() {
 		return dataType;
 	}
 
 	@Override
-	public void setDataType(DataType dataType) {
+	public final void setDataType(DataType dataType) {
 		this.dataType = dataType;
 	}
 
-	public String getValue() {
+	public final String getValue() {
 		return value;
 	}
 
-	public void setValue(String value) {
+	public final void setValue(String value) {
 		this.value = value;
 	}
 
-	public Double getNvalue() {
+	public final Double getNvalue() {
 		return nvalue;
 	}
 
-	public void setNvalue(Double nvalue) {
+	public final void setNvalue(Double nvalue) {
 		this.nvalue = nvalue;
 	}
 
 	@Override
-	public void setField(String name, Serializable value) throws StorageException {
+	public final void setField(String name, Serializable value) throws StorageException {
 		
 		try {
 			

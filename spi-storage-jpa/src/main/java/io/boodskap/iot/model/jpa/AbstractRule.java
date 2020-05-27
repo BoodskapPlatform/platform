@@ -45,67 +45,67 @@ public abstract class AbstractRule extends AbstractModel implements IRule {
 	public AbstractRule() {
 	}
 
-	public RuleScriptLanguage getLanguage() {
+	public final RuleScriptLanguage getLanguage() {
 		return language;
 	}
 
-	public void setLanguage(RuleScriptLanguage language) {
+	public final void setLanguage(RuleScriptLanguage language) {
 		this.language = language;
 	}
 
-	public String getCode() {
+	public final String getCode() {
 		return code;
 	}
 
-	public void setCode(String code) {
+	public final void setCode(String code) {
 		this.code = code;
 	}
 
 	@Override
-	public Collection<String> getContexts() {
+	public final Collection<String> getContexts() {
 		return contexts;
 	}
 
 	@Override
-	public void setContexts(Collection<String> contexts) {
+	public final void setContexts(Collection<String> contexts) {
 		this.contexts.clear();
 		this.contexts.addAll(contexts);
 	}
 
 	@Override
-	public Collection<String> getPlugins() {
+	public final Collection<String> getPlugins() {
 		return plugins;
 	}
 
 	@Override
-	public void setPlugins(Collection<String> plugins) {
+	public final void setPlugins(Collection<String> plugins) {
 		this.plugins.clear();
 		this.plugins.addAll(plugins);
 	}
 
 	@Override
-	public boolean isCompilable() {
+	public final boolean isCompilable() {
 		return compilable;
 	}
 
 	@Override
-	public void setCompilable(boolean compilable) {
+	public final void setCompilable(boolean compilable) {
 		this.compilable = compilable;
 	}
 
-	public String getLoader() {
+	public final String getLoader() {
 		return loader;
 	}
 
-	public void setLoader(String loader) {
+	public final void setLoader(String loader) {
 		this.loader = loader;
 	}
 
-	public String getGlobalLoader() {
+	public final String getGlobalLoader() {
 		return globalLoader;
 	}
 
-	public void setGlobalLoader(String globalLoader) {
+	public final void setGlobalLoader(String globalLoader) {
 		this.globalLoader = globalLoader;
 	}
 

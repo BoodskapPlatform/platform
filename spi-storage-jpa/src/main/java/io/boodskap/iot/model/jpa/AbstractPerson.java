@@ -34,43 +34,43 @@ public abstract class AbstractPerson extends AbstractContact implements IPerson 
 	public AbstractPerson(){
 	}
 
-	public String getFirstName() {
+	public final String getFirstName() {
 		return firstName;
 	}
 
-	public void setFirstName(String firstName) {
+	public final void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
 
-	public String getLastName() {
+	public final String getLastName() {
 		return lastName;
 	}
 
-	public void setLastName(String lastName) {
+	public final void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
 
-	public int getWorkHourStart() {
+	public final int getWorkHourStart() {
 		return workHourStart;
 	}
 
-	public void setWorkHourStart(int workHourStart) {
+	public final void setWorkHourStart(int workHourStart) {
 		this.workHourStart = workHourStart;
 	}
 
-	public int getWorkHourEnd() {
+	public final int getWorkHourEnd() {
 		return workHourEnd;
 	}
 
-	public void setWorkHourEnd(int workHourEnd) {
+	public final void setWorkHourEnd(int workHourEnd) {
 		this.workHourEnd = workHourEnd;
 	}
 
-	public Collection<Integer> getWorkDays() {
+	public final Collection<Integer> getWorkDays() {
 		return workDays;
 	}
 
-	public void setWorkDays(Collection<Integer> workDays) {
+	public final void setWorkDays(Collection<Integer> workDays) {
 		this.workDays.clear();
 		this.workDays.addAll(workDays);
 	}

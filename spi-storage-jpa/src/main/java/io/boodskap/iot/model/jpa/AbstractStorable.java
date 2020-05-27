@@ -23,19 +23,19 @@ public abstract class AbstractStorable extends AbstractModel implements IStorabl
 	public AbstractStorable() {
 	}
 
-	public DataFormat getFormat() {
+	public final DataFormat getFormat() {
 		return format;
 	}
 
-	public void setFormat(DataFormat format) {
+	public final void setFormat(DataFormat format) {
 		this.format = format;
 	}
 
-	public String getLabel() {
+	public final String getLabel() {
 		return label;
 	}
 
-	public void setLabel(String label) {
+	public final void setLabel(String label) {
 		this.label = label;
 	}
 

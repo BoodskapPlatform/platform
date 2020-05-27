@@ -25,19 +25,19 @@ public abstract class AbstractGroupId implements Serializable {
 		this.groupId = groupId;
 	}
 
-	public String getDomainKey() {
+	public final String getDomainKey() {
 		return domainKey;
 	}
 
-	public void setDomainKey(String domainKey) {
+	public final void setDomainKey(String domainKey) {
 		this.domainKey = domainKey;
 	}
 
-	public String getGroupId() {
+	public final String getGroupId() {
 		return groupId;
 	}
 
-	public void setGroupId(String groupId) {
+	public final void setGroupId(String groupId) {
 		this.groupId = groupId;
 	}
 

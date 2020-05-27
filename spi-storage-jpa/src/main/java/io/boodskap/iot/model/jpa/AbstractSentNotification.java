@@ -63,105 +63,105 @@ public abstract class AbstractSentNotification extends AbstractStorageObject imp
 	}
 
 	@Override
-	public String getDomainKey() {
+	public final String getDomainKey() {
 		return id.getDomainKey();
 	}
 
 	@Override
-	public void setDomainKey(String domainKey) {
+	public final void setDomainKey(String domainKey) {
 		id.setDomainKey(domainKey);
 	}
 
 	@Override
-	public String getNotificationId() {
+	public final String getNotificationId() {
 		return id.getNotificationId();
 	}
 
 	@Override
-	public void setNotificationId(String notificationId) {
+	public final void setNotificationId(String notificationId) {
 		id.setNotificationId(notificationId);
 	}
 
 	@Override
-	public Date getQueuedAt() {
+	public final Date getQueuedAt() {
 		return queuedAt;
 	}
 
 	@Override
-	public void setQueuedAt(Date queuedAt) {
+	public final void setQueuedAt(Date queuedAt) {
 		this.queuedAt = queuedAt;
 	}
 
 	@Override
-	public String getReceipent() {
+	public final String getReceipent() {
 		return receipent;
 	}
 
 	@Override
-	public void setReceipent(String receipent) {
+	public final void setReceipent(String receipent) {
 		this.receipent = receipent;
 	}
 
 	@Override
-	public String getSubject() {
+	public final String getSubject() {
 		return subject;
 	}
 
 	@Override
-	public void setSubject(String subject) {
+	public final void setSubject(String subject) {
 		this.subject = subject;
 	}
 
 	@Override
-	public String getContent() {
+	public final String getContent() {
 		return content;
 	}
 
 	@Override
-	public void setContent(String content) {
+	public final void setContent(String content) {
 		this.content = content;
 	}
 
 	@Override
-	public NotificationStatus getStatus() {
+	public final NotificationStatus getStatus() {
 		return status;
 	}
 
 	@Override
-	public void setStatus(NotificationStatus status) {
+	public final void setStatus(NotificationStatus status) {
 		this.status = status;
 	}
 
 	@Override
-	public Date getSentAt() {
+	public final Date getSentAt() {
 		return sentAt;
 	}
 
 	@Override
-	public void setSentAt(Date sentAt) {
+	public final void setSentAt(Date sentAt) {
 		this.sentAt = sentAt;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public Collection<Response> getResponse() {
+	public final Collection<Response> getResponse() {
 		return response;
 	}
 
 	@Override
-	public void setResponse(Collection<? extends IResponse> response) {
+	public final void setResponse(Collection<? extends IResponse> response) {
 		this.response.clear();
 		response.forEach(r ->{this.response.add((Response) r);});
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public Collection<Progress> getProgress() {
+	public final Collection<Progress> getProgress() {
 		return progress;
 	}
 
 	@Override
-	public void setProgress(Collection<? extends IProgress> progress) {
+	public final void setProgress(Collection<? extends IProgress> progress) {
 		this.progress.clear();
 		progress.forEach(p ->{this.progress.add((Progress) p);});
 	}

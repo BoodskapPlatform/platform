@@ -34,43 +34,43 @@ public abstract class AbstractOTABatch extends AbstractModel implements IOTABatc
 	public AbstractOTABatch() {
 	}
 
-	public OTABatchState getState() {
+	public final OTABatchState getState() {
 		return state;
 	}
 
-	public void setState(OTABatchState state) {
+	public final void setState(OTABatchState state) {
 		this.state = state;
 	}
 
-	public String getFirmwareModel() {
+	public final String getFirmwareModel() {
 		return firmwareModel;
 	}
 
-	public void setFirmwareModel(String firmwareModel) {
+	public final void setFirmwareModel(String firmwareModel) {
 		this.firmwareModel = firmwareModel;
 	}
 
-	public String getFirmwareVersion() {
+	public final String getFirmwareVersion() {
 		return firmwareVersion;
 	}
 
-	public void setFirmwareVersion(String firmwareVersion) {
+	public final void setFirmwareVersion(String firmwareVersion) {
 		this.firmwareVersion = firmwareVersion;
 	}
 
-	public Date getExpireAt() {
+	public final Date getExpireAt() {
 		return expireAt;
 	}
 
-	public void setExpireAt(Date expireAt) {
+	public final void setExpireAt(Date expireAt) {
 		this.expireAt = expireAt;
 	}
 
-	public Date getFinishedAt() {
+	public final Date getFinishedAt() {
 		return finishedAt;
 	}
 
-	public void setFinishedAt(Date finishedAt) {
+	public final void setFinishedAt(Date finishedAt) {
 		this.finishedAt = finishedAt;
 	}
 

@@ -27,27 +27,27 @@ public abstract class AbstractFile extends AbstractModel implements IFile {
 	public AbstractFile() {
 	}
 	
-	public byte[] getData() {
+	public final byte[] getData() {
 		return data;
 	}
 
-	public void setData(byte[] data) {
+	public final void setData(byte[] data) {
 		this.data = data;
 	}
 
-	public String getMediaType() {
+	public final String getMediaType() {
 		return mediaType;
 	}
 
-	public void setMediaType(String mediaType) {
+	public final void setMediaType(String mediaType) {
 		this.mediaType = mediaType;
 	}
 
-	public String getTags() {
+	public final String getTags() {
 		return tags;
 	}
 
-	public void setTags(String tags) {
+	public final void setTags(String tags) {
 		this.tags = tags;
 	}
 
