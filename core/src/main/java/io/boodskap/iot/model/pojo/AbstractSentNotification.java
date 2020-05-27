@@ -41,93 +41,93 @@ public abstract class AbstractSentNotification extends AbstractDomainObject impl
 	}
 
 	@Override
-	public String getNotificationId() {
+	public final String getNotificationId() {
 		return notificationId;
 	}
 
 	@Override
-	public void setNotificationId(String notificationId) {
+	public final void setNotificationId(String notificationId) {
 		this.notificationId = notificationId;
 	}
 
 	@Override
-	public Date getQueuedAt() {
+	public final Date getQueuedAt() {
 		return queuedAt;
 	}
 
 	@Override
-	public void setQueuedAt(Date queuedAt) {
+	public final void setQueuedAt(Date queuedAt) {
 		this.queuedAt = queuedAt;
 	}
 
 	@Override
-	public String getReceipent() {
+	public final String getReceipent() {
 		return receipent;
 	}
 
 	@Override
-	public void setReceipent(String receipent) {
+	public final void setReceipent(String receipent) {
 		this.receipent = receipent;
 	}
 
 	@Override
-	public String getSubject() {
+	public final String getSubject() {
 		return subject;
 	}
 
 	@Override
-	public void setSubject(String subject) {
+	public final void setSubject(String subject) {
 		this.subject = subject;
 	}
 
 	@Override
-	public String getContent() {
+	public final String getContent() {
 		return content;
 	}
 
 	@Override
-	public void setContent(String content) {
+	public final void setContent(String content) {
 		this.content = content;
 	}
 
 	@Override
-	public NotificationStatus getStatus() {
+	public final NotificationStatus getStatus() {
 		return status;
 	}
 
 	@Override
-	public void setStatus(NotificationStatus status) {
+	public final void setStatus(NotificationStatus status) {
 		this.status = status;
 	}
 
 	@Override
-	public Date getSentAt() {
+	public final Date getSentAt() {
 		return sentAt;
 	}
 
 	@Override
-	public void setSentAt(Date sentAt) {
+	public final void setSentAt(Date sentAt) {
 		this.sentAt = sentAt;
 	}
 
 	@Override
-	public List<IResponse> getResponse() {
+	public final List<IResponse> getResponse() {
 		return response;
 	}
 
 	@Override
-	public void setResponse(Collection<? extends IResponse> response) {
+	public final void setResponse(Collection<? extends IResponse> response) {
 		this.response.clear();
 		this.response.addAll(response);
 	}
 
 	@Override
-	public List<IProgress> getProgress() {
+	public final List<IProgress> getProgress() {
 		return progress;
 	}
 
 	@Override
-	public void setProgress(Collection<? extends IProgress> progress) {
+	public final void setProgress(Collection<? extends IProgress> progress) {
 		this.progress.clear();
 		this.progress.addAll(progress);
 	}

@@ -24,72 +24,72 @@ public abstract class AbstractBaseCommand extends AbstractDomainObject implement
 	private Set<String> versions = new HashSet<>();
 
 	@Override
-	public long getUid() {
+	public final long getUid() {
 		return uid;
 	}
 
 	@Override
-	public void setUid(long uid) {
+	public final void setUid(long uid) {
 		this.uid = uid;
 	}
 
 	@Override
-	public CommandType getCommandType() {
+	public final CommandType getCommandType() {
 		return commandType;
 	}
 
 	@Override
-	public void setCommandType(CommandType commandType) {
+	public final void setCommandType(CommandType commandType) {
 		this.commandType = commandType;
 	}
 
 	@Override
-	public Collection<String> getModels() {
+	public final Collection<String> getModels() {
 		return models;
 	}
 
 	@Override
-	public void setModels(Collection<String> models) {
+	public final void setModels(Collection<String> models) {
 		this.models.retainAll(models);
 	}
 
 	@Override
-	public Collection<String> getVersions() {
+	public final Collection<String> getVersions() {
 		return versions;
 	}
 
 	@Override
-	public void setVersions(Collection<String> versions) {
+	public final void setVersions(Collection<String> versions) {
 		this.versions.retainAll(versions);
 	}
 
 	@Override
-	public int getCommandId() {
+	public final int getCommandId() {
 		return commandId;
 	}
 
 	@Override
-	public void setCommandId(int commandId) {
+	public final void setCommandId(int commandId) {
 		this.commandId = commandId;
 	}
 
 	@Override
-	public byte[] getData() {
+	public final byte[] getData() {
 		return data;
 	}
 
 	@Override
-	public void setData(byte[] data) {
+	public final void setData(byte[] data) {
 		this.data = data;
 	}
 
 	@Override
-	public String getJsonData() {
+	public final String getJsonData() {
 		return jsonData;
 	}
 
 	@Override
-	public void setJsonData(String jsonData) {
+	public final void setJsonData(String jsonData) {
 		this.jsonData = jsonData;
 	}
 

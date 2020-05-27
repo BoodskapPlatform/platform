@@ -2,10 +2,11 @@ package io.boodskap.iot.model.pojo;
 
 import io.boodskap.iot.model.IGroup;
 
-public abstract class AbstractGroup extends AbstractDomainObject implements IGroup {
+public abstract class AbstractGroup extends AbstractModel implements IGroup {
 
 	private static final long serialVersionUID = -6339768473151871280L;
 
+	private String domainKey;
 	private String groupId;
 	private boolean individualBroadcast;
 	private String groupEmail;
@@ -14,41 +15,53 @@ public abstract class AbstractGroup extends AbstractDomainObject implements IGro
 	public AbstractGroup(){
 	}
 
-	public String getGroupId() {
+	@Override
+	public final String getDomainKey() {
+		return domainKey;
+	}
+
+	@Override
+	public final void setDomainKey(String domainKey) {
+		this.domainKey = domainKey;
+	}
+
+	@Override
+	public final String getGroupId() {
 		return groupId;
 	}
 
-	public void setGroupId(String groupId) {
+	@Override
+	public final void setGroupId(String groupId) {
 		this.groupId = groupId;
 	}
 
 	@Override
-	public void setIndividualBroadcast(boolean individualBroadcast) {
+	public final void setIndividualBroadcast(boolean individualBroadcast) {
 		this.individualBroadcast = individualBroadcast;
 	}
 
 	@Override
-	public boolean isIndividualBroadcast() {
+	public final boolean isIndividualBroadcast() {
 		return individualBroadcast;
 	}
 
 	@Override
-	public String getGroupEmail() {
+	public final String getGroupEmail() {
 		return groupEmail;
 	}
 
 	@Override
-	public void setGroupEmail(String groupEmail) {
+	public final void setGroupEmail(String groupEmail) {
 		this.groupEmail = groupEmail;
 	}
 
 	@Override
-	public String getGroupPhone() {
+	public final String getGroupPhone() {
 		return groupPhone;
 	}
 
 	@Override
-	public void setGroupPhone(String groupPhone) {
+	public final void setGroupPhone(String groupPhone) {
 		this.groupPhone = groupPhone;
 	}
 

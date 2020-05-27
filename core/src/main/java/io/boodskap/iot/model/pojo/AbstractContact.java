@@ -23,83 +23,83 @@ public abstract class AbstractContact extends AbstractDomainObject implements IC
 	public AbstractContact() {
 	}
 
-	public String getEmail() {
+	public final String getEmail() {
 		return email;
 	}
 
-	public void setEmail(String email) {
+	public final void setEmail(String email) {
 		this.email = email;
 	}
 
-	public String getCountry() {
+	public final String getCountry() {
 		return country;
 	}
 
-	public void setCountry(String country) {
+	public final void setCountry(String country) {
 		this.country = country;
 	}
 
-	public String getState() {
+	public final String getState() {
 		return state;
 	}
 
-	public void setState(String state) {
+	public final void setState(String state) {
 		this.state = state;
 	}
 
-	public String getCity() {
+	public final String getCity() {
 		return city;
 	}
 
-	public void setCity(String city) {
+	public final void setCity(String city) {
 		this.city = city;
 	}
 
-	public String getAddress() {
+	public final String getAddress() {
 		return address;
 	}
 
-	public void setAddress(String address) {
+	public final void setAddress(String address) {
 		this.address = address;
 	}
 
-	public String getZipcode() {
+	public final String getZipcode() {
 		return zipcode;
 	}
 
-	public void setZipcode(String zipcode) {
+	public final void setZipcode(String zipcode) {
 		this.zipcode = zipcode;
 	}
 
-	public String getPassword() {
+	public final String getPassword() {
 		return password;
 	}
 
-	public void setPassword(String password) {
+	public final void setPassword(String password) {
 		this.password = password;
 	}
 
-	public String getLocale() {
+	public final String getLocale() {
 		return locale;
 	}
 
-	public void setLocale(String locale) {
+	public final void setLocale(String locale) {
 		this.locale = locale;
 	}
 
-	public String getTimeZone() {
+	public final String getTimeZone() {
 		return timeZone;
 	}
 
-	public void setTimeZone(String timeZone) {
+	public final void setTimeZone(String timeZone) {
 		this.timeZone = timeZone;
 	}
 
-	public String getPrimaryPhone() {
+	public final String getPrimaryPhone() {
 		return primaryPhone;
 	}
 
-	public void setPrimaryPhone(String primaryPhone) {
+	public final void setPrimaryPhone(String primaryPhone) {
 		this.primaryPhone = primaryPhone;
 	}
 

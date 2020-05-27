@@ -33,9 +33,18 @@ public class Message extends AbstractDomainObject implements IMessage {
 	public IDynamicMessageField createField(String name) {
 		DynamicMessageField f = new DynamicMessageField();
 		f.setDomainKey(getDomainKey());
-		f.setSpecId(getSpecId());
 		f.setName(name);
 		return f;
+	}
+
+	@Override
+	public final String getSpecId() {
+		return specId;
+	}
+
+	@Override
+	public final void setSpecId(String specId) {
+		this.specId = specId;
 	}
 
 	public String getMessageId() {
@@ -44,14 +53,6 @@ public class Message extends AbstractDomainObject implements IMessage {
 
 	public void setMessageId(String messageId) {
 		this.messageId = messageId;
-	}
-
-	public String getSpecId() {
-		return specId;
-	}
-
-	public void setSpecId(String specId) {
-		this.specId = specId;
 	}
 
 	@Override

@@ -5,10 +5,11 @@ import java.util.Arrays;
 import io.boodskap.iot.model.IFile;
 import io.boodskap.iot.model.IFileContent;
 
-public abstract class AbstractFile extends AbstractDomainObject implements IFile {
+public abstract class AbstractFile extends AbstractModel implements IFile {
 
 	private static final long serialVersionUID = 814139036187247697L;
 
+	private String domainKey;
 	private String fileId;
 	private String mediaType;
 	private String tags;
@@ -17,40 +18,55 @@ public abstract class AbstractFile extends AbstractDomainObject implements IFile
 	public AbstractFile() {
 	}
 	
+	public AbstractFile(String domainKey, String fileId) {
+		this.domainKey = domainKey;
+		this.fileId = fileId;
+	}
+	
 	@Override
 	public IFileContent createContent() {
 		return new FileContent(getData(), getMediaType());
 	}
 
-	public String getFileId() {
+	@Override
+	public final String getDomainKey() {
+		return domainKey;
+	}
+
+	@Override
+	public final void setDomainKey(String domainKey) {
+		this.domainKey = domainKey;
+	}
+
+	public final String getFileId() {
 		return fileId;
 	}
 
-	public void setFileId(String fileId) {
+	public final void setFileId(String fileId) {
 		this.fileId = fileId;
 	}
 
-	public byte[] getData() {
+	public final byte[] getData() {
 		return data;
 	}
 
-	public void setData(byte[] data) {
+	public final void setData(byte[] data) {
 		this.data = data;
 	}
 
-	public String getMediaType() {
+	public final String getMediaType() {
 		return mediaType;
 	}
 
-	public void setMediaType(String mediaType) {
+	public final void setMediaType(String mediaType) {
 		this.mediaType = mediaType;
 	}
 
-	public String getTags() {
+	public final String getTags() {
 		return tags;
 	}
 
-	public void setTags(String tags) {
+	public final void setTags(String tags) {
 		this.tags = tags;
 	}
 
@@ -59,6 +75,7 @@ public abstract class AbstractFile extends AbstractDomainObject implements IFile
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + Arrays.hashCode(data);
+		result = prime * result + ((domainKey == null) ? 0 : domainKey.hashCode());
 		result = prime * result + ((fileId == null) ? 0 : fileId.hashCode());
 		result = prime * result + ((mediaType == null) ? 0 : mediaType.hashCode());
 		result = prime * result + ((tags == null) ? 0 : tags.hashCode());
@@ -75,6 +92,11 @@ public abstract class AbstractFile extends AbstractDomainObject implements IFile
 			return false;
 		AbstractFile other = (AbstractFile) obj;
 		if (!Arrays.equals(data, other.data))
+			return false;
+		if (domainKey == null) {
+			if (other.domainKey != null)
+				return false;
+		} else if (!domainKey.equals(other.domainKey))
 			return false;
 		if (fileId == null) {
 			if (other.fileId != null)

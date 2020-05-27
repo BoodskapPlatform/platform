@@ -8,7 +8,6 @@ public abstract class AbstractField extends AbstractStorageObject implements IFi
 	private static final long serialVersionUID = -7398949474866288452L;
 	
 	private String domainKey;
-	private String specId;
 	private String name;
 	private String description;
 	private DataType dataType;
@@ -16,49 +15,41 @@ public abstract class AbstractField extends AbstractStorageObject implements IFi
 	public AbstractField() {
 	}
 
-	public String getDomainKey() {
+	public final String getDomainKey() {
 		return domainKey;
 	}
 
-	public void setDomainKey(String domainKey) {
+	public final void setDomainKey(String domainKey) {
 		this.domainKey = domainKey;
 	}
 
-	public String getSpecId() {
-		return specId;
-	}
-
-	public void setSpecId(String specId) {
-		this.specId = specId;
-	}
-
 	@Override
-	public String getName() {
+	public final String getName() {
 		return name;
 	}
 
 	@Override
-	public void setName(String name) {
+	public final void setName(String name) {
 		this.name = name;
 	}
 
 	@Override
-	public String getDescription() {
+	public final String getDescription() {
 		return description;
 	}
 
 	@Override
-	public void setDescription(String description) {
+	public final void setDescription(String description) {
 		this.description = description;
 	}
 
 	@Override
-	public DataType getDataType() {
+	public final DataType getDataType() {
 		return dataType;
 	}
 
 	@Override
-	public void setDataType(DataType type) {
+	public final void setDataType(DataType type) {
 		this.dataType = type;
 	}
 
@@ -70,7 +61,6 @@ public abstract class AbstractField extends AbstractStorageObject implements IFi
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((domainKey == null) ? 0 : domainKey.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((specId == null) ? 0 : specId.hashCode());
 		return result;
 	}
 
@@ -99,11 +89,6 @@ public abstract class AbstractField extends AbstractStorageObject implements IFi
 			if (other.name != null)
 				return false;
 		} else if (!name.equals(other.name))
-			return false;
-		if (specId == null) {
-			if (other.specId != null)
-				return false;
-		} else if (!specId.equals(other.specId))
 			return false;
 		return true;
 	}

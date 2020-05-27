@@ -7,10 +7,11 @@ import java.util.List;
 import io.boodskap.iot.RuleScriptLanguage;
 import io.boodskap.iot.model.IRule;
 
-public abstract class AbstractRule extends AbstractDomainObject implements IRule {
+public abstract class AbstractRule extends AbstractModel implements IRule {
 
 	private static final long serialVersionUID = 1059255536340100723L;
 
+	private String domainKey;
 	private RuleScriptLanguage language;
 	private String code;
 	private boolean compilable;
@@ -20,6 +21,18 @@ public abstract class AbstractRule extends AbstractDomainObject implements IRule
 	private String globalLoader;
 	
 	public AbstractRule() {
+	}
+
+	public AbstractRule(String domainKey) {
+		this.domainKey = domainKey;
+	}
+
+	public final String getDomainKey() {
+		return domainKey;
+	}
+
+	public final void setDomainKey(String domainKey) {
+		this.domainKey = domainKey;
 	}
 
 	public RuleScriptLanguage getLanguage() {

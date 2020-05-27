@@ -12,12 +12,12 @@ public abstract class AbstractDomainObject extends AbstractModel implements IDom
 	}
 
 	@Override
-	public String getDomainKey() {
+	public final String getDomainKey() {
 		return domainKey;
 	}
 
 	@Override
-	public void setDomainKey(String domainKey) {
+	public final void setDomainKey(String domainKey) {
 		this.domainKey = domainKey;
 	}
 

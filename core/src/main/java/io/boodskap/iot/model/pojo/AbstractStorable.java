@@ -9,43 +9,34 @@ public abstract class AbstractStorable extends AbstractDomainObject implements I
 	private static final long serialVersionUID = -100247674973438772L;
 
 	private String label = null;
-	private String description = null;
 	private DataType dataType = null;
 	private DataFormat format = null;
 	
 	public AbstractStorable() {
 	}
 
-	public DataType getDataType() {
+	public final DataType getDataType() {
 		return dataType;
 	}
 
-	public void setDataType(DataType dataType) {
+	public final void setDataType(DataType dataType) {
 		this.dataType = dataType;
 	}
 
-	public DataFormat getFormat() {
+	public final DataFormat getFormat() {
 		return format;
 	}
 
-	public void setFormat(DataFormat format) {
+	public final void setFormat(DataFormat format) {
 		this.format = format;
 	}
 
-	public String getLabel() {
+	public final String getLabel() {
 		return label;
 	}
 
-	public void setLabel(String label) {
+	public final void setLabel(String label) {
 		this.label = label;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
 	}
 
 	@Override
@@ -53,7 +44,6 @@ public abstract class AbstractStorable extends AbstractDomainObject implements I
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((dataType == null) ? 0 : dataType.hashCode());
-		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((format == null) ? 0 : format.hashCode());
 		result = prime * result + ((label == null) ? 0 : label.hashCode());
 		return result;
@@ -69,11 +59,6 @@ public abstract class AbstractStorable extends AbstractDomainObject implements I
 			return false;
 		AbstractStorable other = (AbstractStorable) obj;
 		if (dataType != other.dataType)
-			return false;
-		if (description == null) {
-			if (other.description != null)
-				return false;
-		} else if (!description.equals(other.description))
 			return false;
 		if (format != other.format)
 			return false;

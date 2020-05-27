@@ -15,42 +15,42 @@ public abstract class AbstractModel extends AbstractStorageObject implements IMo
 	}
 
 	@Override
-	public String getName() {
+	public final String getName() {
 		return name;
 	}
 
 	@Override
-	public void setName(String name) {
+	public final void setName(String name) {
 		this.name = name;
 	}
 
 	@Override
-	public String getDescription() {
+	public final String getDescription() {
 		return description;
 	}
 
 	@Override
-	public void setDescription(String description) {
+	public final void setDescription(String description) {
 		this.description = description;
 	}
 
 	@Override
-	public String getCreatedBy() {
+	public final String getCreatedBy() {
 		return createdBy;
 	}
 
 	@Override
-	public void setCreatedBy(String createdBy) {
+	public final void setCreatedBy(String createdBy) {
 		this.createdBy = createdBy;
 	}
 
 	@Override
-	public String getUpdatedBy() {
+	public final String getUpdatedBy() {
 		return updatedBy;
 	}
 
 	@Override
-	public void setUpdatedBy(String updatedBy) {
+	public final void setUpdatedBy(String updatedBy) {
 		this.updatedBy = updatedBy;
 	}
 

@@ -12,19 +12,23 @@ public abstract class AbstractGroupMember extends AbstractDomainObject implement
 	public AbstractGroupMember(){
 	}
 
-	public String getGroupId() {
+	@Override
+	public final String getGroupId() {
 		return groupId;
 	}
 
-	public void setGroupId(String groupId) {
+	@Override
+	public final void setGroupId(String groupId) {
 		this.groupId = groupId;
 	}
 
-	public String getMemberId() {
+	@Override
+	public final String getMemberId() {
 		return memberId;
 	}
 
-	public void setMemberId(String memberId) {
+	@Override
+	public final void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
 
