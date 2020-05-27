@@ -16,7 +16,7 @@ import io.boodskap.iot.model.IDatabaseTableField;
 
 @Entity
 @Table(name="databasetable")
-public class DatabaseTable implements IDatabaseTable {
+public class DatabaseTable extends AbstractModel implements IDatabaseTable {
 	
 	private static final long serialVersionUID = -4292175867114525776L;
 	
@@ -99,7 +99,7 @@ public class DatabaseTable implements IDatabaseTable {
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		int result = super.hashCode();
 		result = prime * result + ((catalog == null) ? 0 : catalog.hashCode());
 		result = prime * result + ((fields == null) ? 0 : fields.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
@@ -111,7 +111,7 @@ public class DatabaseTable implements IDatabaseTable {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;

@@ -1,19 +1,37 @@
 package io.boodskap.iot.model.jpa;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.MapKeyColumn;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.BatchSize;
 
 import io.boodskap.iot.model.IDomainEntity;
 
 @Entity
 @Table(name="domainentity")
-public class DomainEntity extends AbstractEntity implements IDomainEntity {
+public class DomainEntity extends AbstractModel implements IDomainEntity {
 	
 	private static final long serialVersionUID = 2882976847537967569L;
 
 	@EmbeddedId
 	private DomainEntityId id = new DomainEntityId();
+
+	@ElementCollection(fetch = FetchType.EAGER)
+	@CollectionTable(name = "domain_entity_attrs", joinColumns = @JoinColumn(name = "id"))
+	@MapKeyColumn(name = "attr_name", length = 40)
+	@Column(name = "att_value", length = 1024)
+	@BatchSize(size = 100)
+	private Map<String, String> attributes = new HashMap<>();
 
 	public DomainEntity() {
 	}
@@ -43,9 +61,28 @@ public class DomainEntity extends AbstractEntity implements IDomainEntity {
 	}
 
 	@Override
+	public String getEntityType() {
+		return id.getEntityType();
+	}
+
+	@Override
+	public void setEntityType(String entityType) {
+		id.setEntityType(entityType);
+	}
+
+	public Map<String, String> getAttributes() {
+		return attributes;
+	}
+
+	public void setAttributes(Map<String, String> attributes) {
+		this.attributes = attributes;
+	}
+
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
+		result = prime * result + ((attributes == null) ? 0 : attributes.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
@@ -59,6 +96,11 @@ public class DomainEntity extends AbstractEntity implements IDomainEntity {
 		if (getClass() != obj.getClass())
 			return false;
 		DomainEntity other = (DomainEntity) obj;
+		if (attributes == null) {
+			if (other.attributes != null)
+				return false;
+		} else if (!attributes.equals(other.attributes))
+			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;

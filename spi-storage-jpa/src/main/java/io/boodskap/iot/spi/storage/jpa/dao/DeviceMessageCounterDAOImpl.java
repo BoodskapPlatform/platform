@@ -27,8 +27,8 @@ public class DeviceMessageCounterDAOImpl implements DeviceMessageCounterDAO<Devi
 	}
 
 	@Override
-	public DeviceMessageCounter create(String domainKey, String deviceId, String messageType, String messageId) throws StorageException {
-		return new DeviceMessageCounter(new DeviceMessageCounterId(domainKey, deviceId, messageType, messageId));
+	public DeviceMessageCounter create(String domainKey, String deviceId, String messageType, Date day) throws StorageException {
+		return new DeviceMessageCounter(new DeviceMessageCounterId(domainKey, deviceId, messageType, day));
 	}
 
 	@Override
@@ -36,11 +36,11 @@ public class DeviceMessageCounterDAOImpl implements DeviceMessageCounterDAO<Devi
 		
 		try {
 			
-			final DeviceMessageCounter oe = new CommonDAO<DeviceMessageCounter>(DeviceMessageCounter.class).find(new DeviceMessageCounterId(e.getDomainKey(), e.getDeviceId(), e.getMessageType(), e.getMessageId()));
+			final DeviceMessageCounter oe = new CommonDAO<DeviceMessageCounter>(DeviceMessageCounter.class).find(new DeviceMessageCounterId(e.getDomainKey(), e.getDeviceId(), e.getMessageType(), e.getDay()));
 			DeviceMessageCounter ne;
 			
 			if(null == oe) {
-				ne = new DeviceMessageCounter(new DeviceMessageCounterId(e.getDomainKey(), e.getDeviceId(), e.getMessageType(), e.getMessageId()));
+				ne = new DeviceMessageCounter(new DeviceMessageCounterId(e.getDomainKey(), e.getDeviceId(), e.getMessageType(), e.getDay()));
 				ne.setDay(new Date());
 			}else {
 				ne = oe;
@@ -139,6 +139,13 @@ public class DeviceMessageCounterDAOImpl implements DeviceMessageCounterDAO<Devi
 
 	@Override
 	public Collection<DeviceMessageCounter> listNext(String domainKey, String deviceId, String messageType, Date day, int page, int pageSize) throws StorageException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public DeviceMessageCounter get(String domainKey, String deviceId, String messageType, Date day)
+			throws StorageException {
 		// TODO Auto-generated method stub
 		return null;
 	}

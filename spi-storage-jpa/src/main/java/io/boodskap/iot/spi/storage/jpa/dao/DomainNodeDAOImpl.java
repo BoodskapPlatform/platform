@@ -1,7 +1,6 @@
 package io.boodskap.iot.spi.storage.jpa.dao;
 
 import java.util.Collection;
-import java.util.Date;
 
 import io.boodskap.iot.StorageException;
 import io.boodskap.iot.dao.DomainNodeDAO;
@@ -44,7 +43,6 @@ public class DomainNodeDAOImpl implements DomainNodeDAO<DomainNode> {
 			
 			if(null == oe) {
 				ne = new DomainNode(new DomainNodeId(e.getDomainKey(), e.getNodeId()));
-				ne.setCreatedStamp(new Date());
 			}else {
 				ne = oe;
 			}

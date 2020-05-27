@@ -19,7 +19,7 @@ import io.boodskap.iot.model.IOutgoingCommand;
 
 @Entity
 @Table(name="outgoingcommand")
-public class OutgoingCommand implements IOutgoingCommand {
+public class OutgoingCommand extends AbstractModel implements IOutgoingCommand {
 
 	private static final long serialVersionUID = -1996151954437775661L;
 
@@ -31,9 +31,6 @@ public class OutgoingCommand implements IOutgoingCommand {
 
 	@Column(name="nodeuid", length=40)
 	private String nodeUid;
-
-	@Column(name="description", length=120)
-	private String description;
 
 	@Column(name="reportedip", length=20)
 	private String reportedIp;
@@ -61,9 +58,6 @@ public class OutgoingCommand implements IOutgoingCommand {
 
 	@Column(name="loramdmid")
 	private long loraModemId;
-
-	@Column(name="createdstamp")
-	private Date createdStamp;
 
 	@Column(name="queuedstamp")
 	private Date queuedStamp;
@@ -130,14 +124,6 @@ public class OutgoingCommand implements IOutgoingCommand {
 
 	public void setCorrId(long corrId) {
 		id.setCorrId(corrId);
-	}
-
-	public Date getCreatedStamp() {
-		return createdStamp;
-	}
-
-	public void setCreatedStamp(Date createdStamp) {
-		this.createdStamp = createdStamp;
 	}
 
 	public Date getQueuedStamp() {
@@ -220,14 +206,6 @@ public class OutgoingCommand implements IOutgoingCommand {
 		this.nodeUid = nodeUid;
 	}
 
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
 	public String getReportedIp() {
 		return reportedIp;
 	}
@@ -303,12 +281,10 @@ public class OutgoingCommand implements IOutgoingCommand {
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		int result = super.hashCode();
 		result = prime * result + ((ackedStamp == null) ? 0 : ackedStamp.hashCode());
 		result = prime * result + ((channel == null) ? 0 : channel.hashCode());
-		result = prime * result + ((createdStamp == null) ? 0 : createdStamp.hashCode());
 		result = prime * result + Arrays.hashCode(data);
-		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + (int) (loraBaseStationId ^ (loraBaseStationId >>> 32));
 		result = prime * result + (int) (loraModemId ^ (loraModemId >>> 32));
@@ -316,6 +292,7 @@ public class OutgoingCommand implements IOutgoingCommand {
 		result = prime * result + ((loraTarget == null) ? 0 : loraTarget.hashCode());
 		result = prime * result + (int) (loraTransceiverId ^ (loraTransceiverId >>> 32));
 		result = prime * result + (int) (loraTransmitterId ^ (loraTransmitterId >>> 32));
+		result = prime * result + mqttQos;
 		result = prime * result + nackCode;
 		result = prime * result + ((nodeId == null) ? 0 : nodeId.hashCode());
 		result = prime * result + ((nodeUid == null) ? 0 : nodeUid.hashCode());
@@ -332,7 +309,7 @@ public class OutgoingCommand implements IOutgoingCommand {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
@@ -344,17 +321,7 @@ public class OutgoingCommand implements IOutgoingCommand {
 			return false;
 		if (channel != other.channel)
 			return false;
-		if (createdStamp == null) {
-			if (other.createdStamp != null)
-				return false;
-		} else if (!createdStamp.equals(other.createdStamp))
-			return false;
 		if (!Arrays.equals(data, other.data))
-			return false;
-		if (description == null) {
-			if (other.description != null)
-				return false;
-		} else if (!description.equals(other.description))
 			return false;
 		if (id == null) {
 			if (other.id != null)
@@ -372,6 +339,8 @@ public class OutgoingCommand implements IOutgoingCommand {
 		if (loraTransceiverId != other.loraTransceiverId)
 			return false;
 		if (loraTransmitterId != other.loraTransmitterId)
+			return false;
+		if (mqttQos != other.mqttQos)
 			return false;
 		if (nackCode != other.nackCode)
 			return false;

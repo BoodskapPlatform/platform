@@ -31,7 +31,11 @@ public class Message extends AbstractDomainObject implements IMessage {
 
 	@Override
 	public IDynamicMessageField createField(String name) {
-		return new DynamicMessageField(getDomainKey(), specId, messageId, name);
+		DynamicMessageField f = new DynamicMessageField();
+		f.setDomainKey(getDomainKey());
+		f.setSpecId(getSpecId());
+		f.setName(name);
+		return f;
 	}
 
 	public String getMessageId() {

@@ -1,7 +1,6 @@
 package io.boodskap.iot.spi.storage.jpa.dao;
 
 import java.util.Collection;
-import java.util.Date;
 
 import io.boodskap.iot.StorageException;
 import io.boodskap.iot.dao.DeviceFriendDAO;
@@ -44,7 +43,6 @@ public class DeviceFriendDAOImpl implements DeviceFriendDAO<DeviceFriend> {
 			
 			if(null == oe) {
 				ne = new DeviceFriend(new DeviceFriendId(e.getDomainKey(), e.getDeviceId(), e.getFriendId()));
-				ne.setCreatedStamp(new Date());
 			}else {
 				ne = oe;
 			}

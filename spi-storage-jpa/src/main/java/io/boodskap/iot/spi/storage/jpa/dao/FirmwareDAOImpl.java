@@ -47,16 +47,15 @@ public class FirmwareDAOImpl implements FirmwareDAO<Firmware> {
 			
 			if(null == oe) {
 				ne = new Firmware(new FirmwareId(e.getDomainKey(), e.getDeviceModel(), e.getVersion()));
-				ne.setCreatedStamp(new Date());
 			}else {
 				ne = oe;
 			}
 			
 			UOW.begin();
 			
-			if(null != e.getContent()) ne.setContent(e.getContent());
+			if(null != e.getData()) ne.setData(e.getData());
 			
-			ne.setContentType(e.getContentType());
+			ne.setMediaType(e.getMediaType());
 			ne.setDescription(e.getDescription());
 			ne.setDeviceModel(e.getDeviceModel());
 			ne.setFileName(e.getFileName());

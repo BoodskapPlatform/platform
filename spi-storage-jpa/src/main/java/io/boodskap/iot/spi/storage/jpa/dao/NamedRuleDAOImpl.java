@@ -46,7 +46,6 @@ public class NamedRuleDAOImpl implements NamedRuleDAO<NamedRule> {
 			
 			if(null == oe) {
 				ne = new NamedRule(new NamedRuleId(e.getDomainKey(), e.getName()));
-				ne.setCreatedStamp(new Date());
 			}else {
 				ne = oe;
 			}

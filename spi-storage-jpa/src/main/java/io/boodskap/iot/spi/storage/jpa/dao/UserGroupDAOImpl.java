@@ -44,7 +44,6 @@ public class UserGroupDAOImpl implements UserGroupDAO<UserGroup> {
 			
 			if(null == oe) {
 				ne = new UserGroup(new UserGroupId(e.getDomainKey(), e.getOwnerUserId(), e.getGroupId()));
-				ne.setCreatedStamp(new Date());
 			}else {
 				ne = oe;
 			}

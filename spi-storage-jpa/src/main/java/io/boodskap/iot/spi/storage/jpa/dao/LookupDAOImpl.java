@@ -46,7 +46,6 @@ public class LookupDAOImpl implements LookupDAO<Lookup> {
 			
 			if(null == oe) {
 				ne = new Lookup(new LookupId(e.getDomainKey(), e.getTarget(), e.getTargetId(), e.getName()));
-				ne.setCreatedStamp(new Date());
 			}else {
 				ne = oe;
 			}

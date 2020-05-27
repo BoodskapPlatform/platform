@@ -48,7 +48,6 @@ public class OrganizationFileDAOImpl implements OrganizationFileDAO<Organization
 			
 			if(null == oe) {
 				ne = new OrganizationFile(new OrganizationFileId(e.getDomainKey(), e.getOrgId(), e.getFileId()));
-				ne.setCreatedStamp(new Date());
 			}else {
 				ne = oe;
 			}

@@ -1,20 +1,15 @@
 package io.boodskap.iot.model.jpa;
 
-import java.util.Date;
-
 import io.boodskap.iot.model.IBillingTemplate;
 
-public class BillingTemplate implements IBillingTemplate{
+public class BillingTemplate extends AbstractModel implements IBillingTemplate{
 
 	private static final long serialVersionUID = 6575454134158351507L;
 	
 	private BillingTemplateId id = new BillingTemplateId();
-	private String description = null;
 	private double unitprice;
 	private float tax;
 	private String templatecode = null;
-	private Date updatedtime = null;
-	private Date createdtime = null;
 	
 
 	public BillingTemplate() {
@@ -38,14 +33,6 @@ public class BillingTemplate implements IBillingTemplate{
 
 	public void setItemname(String itemname) {
 		id.setItemname(itemname);
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
 	}
 
 	public double getUnitprice() {
@@ -72,35 +59,16 @@ public class BillingTemplate implements IBillingTemplate{
 		this.templatecode = templatecode;
 	}
 
-	public Date getUpdatedtime() {
-		return updatedtime;
-	}
-
-	public void setUpdatedtime(Date updatedtime) {
-		this.updatedtime = updatedtime;
-	}
-
-	public Date getCreatedtime() {
-		return createdtime;
-	}
-
-	public void setCreatedtime(Date createdtime) {
-		this.createdtime = createdtime;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((createdtime == null) ? 0 : createdtime.hashCode());
-		result = prime * result + ((description == null) ? 0 : description.hashCode());
+		int result = super.hashCode();
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + Float.floatToIntBits(tax);
 		result = prime * result + ((templatecode == null) ? 0 : templatecode.hashCode());
 		long temp;
 		temp = Double.doubleToLongBits(unitprice);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + ((updatedtime == null) ? 0 : updatedtime.hashCode());
 		return result;
 	}
 
@@ -108,21 +76,11 @@ public class BillingTemplate implements IBillingTemplate{
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
 		BillingTemplate other = (BillingTemplate) obj;
-		if (createdtime == null) {
-			if (other.createdtime != null)
-				return false;
-		} else if (!createdtime.equals(other.createdtime))
-			return false;
-		if (description == null) {
-			if (other.description != null)
-				return false;
-		} else if (!description.equals(other.description))
-			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -136,11 +94,6 @@ public class BillingTemplate implements IBillingTemplate{
 		} else if (!templatecode.equals(other.templatecode))
 			return false;
 		if (Double.doubleToLongBits(unitprice) != Double.doubleToLongBits(other.unitprice))
-			return false;
-		if (updatedtime == null) {
-			if (other.updatedtime != null)
-				return false;
-		} else if (!updatedtime.equals(other.updatedtime))
 			return false;
 		return true;
 	}

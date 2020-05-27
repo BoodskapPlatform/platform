@@ -42,7 +42,6 @@ public class FCMGatewayDAOImpl implements FCMGatewayDAO<FCMGateway> {
 			
 			if(null == oe) {
 				ne = new FCMGateway(e.getDomainKey());
-				ne.setCreatedStamp(new Date());
 			}else {
 				ne = oe;
 			}

@@ -5,24 +5,27 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
+import io.boodskap.iot.SizeConstants;
+
+
 @MappedSuperclass
-public abstract class AbstractGroupMember implements Serializable {
-
-	private static final long serialVersionUID = 7540023549338386842L;
-
-	@Column(name="domainkey", length=16)
-	private String domainKey;
+public abstract class AbstractGroupMemberId implements Serializable {
 	
-	@Column(name="groupid", length=40)
+	private static final long serialVersionUID = 8608642509767493580L;
+
+	@Column(name="domainkey", length=SizeConstants.DOMAIN_SIZE)
+	private String domainKey;
+
+	@Column(name="groupid", length=SizeConstants.GROUP_ID_SIZE)
 	private String groupId;
 
-	@Column(name="memberid", length=40)
+	@Column(name="memberid", length=SizeConstants.DEVICE_ID_SIZE)
 	private String memberId;
-	
-	public AbstractGroupMember(){
+
+	public AbstractGroupMemberId() {
 	}
 
-	public AbstractGroupMember(String domainKey, String groupId, String memberId) {
+	public AbstractGroupMemberId(String domainKey, String groupId, String memberId) {
 		this.domainKey = domainKey;
 		this.groupId = groupId;
 		this.memberId = memberId;
@@ -70,7 +73,7 @@ public abstract class AbstractGroupMember implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		AbstractGroupMember other = (AbstractGroupMember) obj;
+		AbstractGroupMemberId other = (AbstractGroupMemberId) obj;
 		if (domainKey == null) {
 			if (other.domainKey != null)
 				return false;

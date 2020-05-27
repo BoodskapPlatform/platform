@@ -17,9 +17,15 @@
 package io.boodskap.iot;
 
 public enum EntityType{
-	UNKNOWN,
-	ENTITY,
+	DOMAIN,
 	DEVICE,
 	ASSET,
-	USER
+	USER,
+	ENTITY,
+	ORG,
+	ORG_DEVICE,
+	ORG_ASSET,
+	ORG_USER,
+	OR_ENTITY,
+	UNKNOWN,
 }

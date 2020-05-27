@@ -8,7 +8,7 @@ import io.boodskap.iot.model.IJarClass;
 
 @Entity
 @Table(name = "jarclass")
-public class JarClass implements IJarClass {
+public class JarClass extends AbstractModel implements IJarClass {
 
 	private static final long serialVersionUID = -4137682579219019646L;
 	
@@ -63,7 +63,7 @@ public class JarClass implements IJarClass {
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		int result = super.hashCode();
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
@@ -72,7 +72,7 @@ public class JarClass implements IJarClass {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;

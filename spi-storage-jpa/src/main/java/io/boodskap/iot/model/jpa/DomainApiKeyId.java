@@ -5,16 +5,18 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
+import io.boodskap.iot.SizeConstants;
+
 
 @Embeddable
 public class DomainApiKeyId implements Serializable {
 	
 	private static final long serialVersionUID = 3438730471808660999L;
 
-	@Column(name="domainkey", length=16)
+	@Column(name="domainkey", length=SizeConstants.DOMAIN_SIZE)
 	private String domainKey;
 
-	@Column(name="apikey", length=40)
+	@Column(name="apikey", length=SizeConstants.API_KEY_SIZE)
 	private String apiKey;
 
 	public DomainApiKeyId() {

@@ -2,7 +2,6 @@ package io.boodskap.iot.model.jpa;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -19,7 +18,7 @@ import io.boodskap.iot.model.INameValuePair;
 
 @Entity
 @Table(name = "clustermachine")
-public class ClusterMachine implements IClusterMachine {
+public class ClusterMachine extends AbstractModel implements IClusterMachine {
 
 	private static final long serialVersionUID = 7271804394768823312L;
 
@@ -35,12 +34,6 @@ public class ClusterMachine implements IClusterMachine {
 	
 	@Column(name="cpucores")
 	private int cpuCores;
-
-	@Column(name = "rstamp")
-	private Date registeredStamp = new Date();
-
-	@Column(name = "ustamp")
-	private Date updatedStamp = new Date();
 
 	@OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<ClusterMachineNVP> properties = new ArrayList<>();
@@ -119,26 +112,6 @@ public class ClusterMachine implements IClusterMachine {
 		this.cpuCores = cpuCores;
 	}
 
-	@Override
-	public Date getRegisteredStamp() {
-		return registeredStamp;
-	}
-
-	@Override
-	public void setRegisteredStamp(Date registeredStamp) {
-		this.registeredStamp = registeredStamp;
-	}
-
-	@Override
-	public Date getUpdatedStamp() {
-		return updatedStamp;
-	}
-
-	@Override
-	public void setUpdatedStamp(Date updatedStamp) {
-		this.updatedStamp = updatedStamp;
-	}
-
 	@SuppressWarnings("unchecked")
 	public Collection<? extends ClusterMachineNVP> getProperties() {
 		return properties;
@@ -166,14 +139,12 @@ public class ClusterMachine implements IClusterMachine {
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		int result = super.hashCode();
 		result = prime * result + cpuCores;
 		result = prime * result + cpuSlots;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((properties == null) ? 0 : properties.hashCode());
-		result = prime * result + ((registeredStamp == null) ? 0 : registeredStamp.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
-		result = prime * result + ((updatedStamp == null) ? 0 : updatedStamp.hashCode());
 		return result;
 	}
 
@@ -181,7 +152,7 @@ public class ClusterMachine implements IClusterMachine {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
@@ -200,17 +171,7 @@ public class ClusterMachine implements IClusterMachine {
 				return false;
 		} else if (!properties.equals(other.properties))
 			return false;
-		if (registeredStamp == null) {
-			if (other.registeredStamp != null)
-				return false;
-		} else if (!registeredStamp.equals(other.registeredStamp))
-			return false;
 		if (status != other.status)
-			return false;
-		if (updatedStamp == null) {
-			if (other.updatedStamp != null)
-				return false;
-		} else if (!updatedStamp.equals(other.updatedStamp))
 			return false;
 		return true;
 	}

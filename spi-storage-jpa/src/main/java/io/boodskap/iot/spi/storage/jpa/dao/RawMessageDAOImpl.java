@@ -52,7 +52,6 @@ public class RawMessageDAOImpl implements RawMessageDAO<RawMessage> {
 			
 			UOW.begin();
 			
-			ne.setReceivedStamp(e.getReceivedStamp());
 			ne.setChannel(e.getChannel());
 			ne.setData(e.getData());
 			ne.setDeviceId(e.getDeviceId());

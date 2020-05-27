@@ -18,10 +18,14 @@ package io.boodskap.iot;
 
 public class SizeConstants {
 	
+	public static final int DOMAIN_SIZE = 16;
+	public static final int API_KEY_SIZE = 20;
 	public static final int ID_SIZE = 40;
 	public static final int EMAIL_ID_SIZE = 120;
-	public static final int DESCRIPTION_SIZE = 120;
-	public static final int FILE_SIZE = 1024 * 1024 * 10; //10MB
+	public static final int NAME_SIZE = 120;
+	public static final int DESCRIPTION_SIZE = 256;
+	public static final int COUNTRY_SIZE = 40;
+	public static final int FILE_SIZE = 1024 * 1024 * 25; //25MB
 	public static final int JAR_FILE_SIZE = FILE_SIZE * 10; //100MB
 	public static final int RAW_DATA_SIZE = 1024 * 1024 * 10; //10MB
 	public static final int RECORD_FIELD_VALUE_SIZE = 1024 * 4; //4KB
@@ -33,6 +37,17 @@ public class SizeConstants {
 	public static final int GLOABL_DATA_SIZE = 1024 * 12; //12KB
 	public static final int MESSAGE_HEADER_SIZE = 1024 * 1; //1KB
 	public static final int MESSAGE_DATA_SIZE = 1024 * 4; //4KB
+	public static final int STATE_SIZE = 40;
+	public static final int CITY_SIZE = 80;
+	public static final int ADDRESS_SIZE = 256;
+	public static final int ZIPCODE_SIZE = 20;
+	public static final int LOCALE_SIZE = 4;
+	public static final int PASSWORD_SIZE = 20;
+	public static final int TIMEZONE_SIZE = 40;
+	public static final int PHONE_NO_SIZE = 16;
+	public static final int GROUP_ID_SIZE = 40;
+	public static final int DEVICE_ID_SIZE = 40;
+	public static final int ASSET_ID_SIZE = 40;
 
 	public SizeConstants() {
 	}

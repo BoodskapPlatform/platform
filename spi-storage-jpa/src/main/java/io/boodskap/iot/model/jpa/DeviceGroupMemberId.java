@@ -7,7 +7,7 @@ import javax.persistence.Embeddable;
 
 
 @Embeddable
-public class DeviceGroupMemberId extends AbstractGroupMember implements Serializable {
+public class DeviceGroupMemberId extends AbstractGroupMemberId implements Serializable {
 	
 	private static final long serialVersionUID = -1058405677059747383L;
 

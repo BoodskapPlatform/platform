@@ -1,7 +1,5 @@
 package io.boodskap.iot.model.jpa;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -14,18 +12,12 @@ import io.boodskap.iot.model.IDevice;
 
 @Entity
 @Table(name="device")
-public class Device implements IDevice {
+public class Device extends AbstractModel implements IDevice {
 
 	private static final long serialVersionUID = -3890309949886257710L;
 
 	@EmbeddedId
 	private DeviceId id = new DeviceId();
-	
-	@Column(name="name", length=40)
-	private String name = null;
-	
-	@Column(name="description", length=120)
-	private String description = null;
 	
 	@Column(name="modelid", length=40)
 	private String modelId = null;
@@ -55,12 +47,6 @@ public class Device implements IDevice {
 	@Enumerated(EnumType.STRING)
 	private DataChannel channel = null;
 	
-	@Column(name="registeredstamp")
-	private Date registeredStamp;
-	
-	@Column(name="reportedstamp")
-	private Date reportedStamp = null;
-	
 	public Device() {
 	}
 	
@@ -83,22 +69,6 @@ public class Device implements IDevice {
 
 	public void setDeviceId(String deviceId) {
 		id.setDeviceId(deviceId);
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
 	}
 
 	public String getModelId() {
@@ -125,28 +95,12 @@ public class Device implements IDevice {
 		this.password = password;
 	}
 
-	public Date getRegisteredStamp() {
-		return registeredStamp;
-	}
-
-	public void setRegisteredStamp(Date registeredStamp) {
-		this.registeredStamp = registeredStamp;
-	}
-
 	public String getAssetId() {
 		return assetId;
 	}
 
 	public void setAssetId(String assetId) {
 		this.assetId = assetId;
-	}
-
-	public Date getReportedStamp() {
-		return reportedStamp;
-	}
-
-	public void setReportedStamp(Date reportedStamp) {
-		this.reportedStamp = reportedStamp;
 	}
 
 	public String getReportedIp() {
@@ -192,20 +146,16 @@ public class Device implements IDevice {
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		int result = super.hashCode();
 		result = prime * result + ((assetId == null) ? 0 : assetId.hashCode());
 		result = prime * result + ((channel == null) ? 0 : channel.hashCode());
-		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((modelId == null) ? 0 : modelId.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((nodeId == null) ? 0 : nodeId.hashCode());
 		result = prime * result + ((nodeUid == null) ? 0 : nodeUid.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		result = prime * result + ((registeredStamp == null) ? 0 : registeredStamp.hashCode());
 		result = prime * result + ((reportedIp == null) ? 0 : reportedIp.hashCode());
 		result = prime * result + ((reportedPort == null) ? 0 : reportedPort.hashCode());
-		result = prime * result + ((reportedStamp == null) ? 0 : reportedStamp.hashCode());
 		result = prime * result + ((version == null) ? 0 : version.hashCode());
 		return result;
 	}
@@ -214,7 +164,7 @@ public class Device implements IDevice {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
@@ -226,11 +176,6 @@ public class Device implements IDevice {
 			return false;
 		if (channel != other.channel)
 			return false;
-		if (description == null) {
-			if (other.description != null)
-				return false;
-		} else if (!description.equals(other.description))
-			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -240,11 +185,6 @@ public class Device implements IDevice {
 			if (other.modelId != null)
 				return false;
 		} else if (!modelId.equals(other.modelId))
-			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
 			return false;
 		if (nodeId == null) {
 			if (other.nodeId != null)
@@ -261,11 +201,6 @@ public class Device implements IDevice {
 				return false;
 		} else if (!password.equals(other.password))
 			return false;
-		if (registeredStamp == null) {
-			if (other.registeredStamp != null)
-				return false;
-		} else if (!registeredStamp.equals(other.registeredStamp))
-			return false;
 		if (reportedIp == null) {
 			if (other.reportedIp != null)
 				return false;
@@ -275,11 +210,6 @@ public class Device implements IDevice {
 			if (other.reportedPort != null)
 				return false;
 		} else if (!reportedPort.equals(other.reportedPort))
-			return false;
-		if (reportedStamp == null) {
-			if (other.reportedStamp != null)
-				return false;
-		} else if (!reportedStamp.equals(other.reportedStamp))
 			return false;
 		if (version == null) {
 			if (other.version != null)

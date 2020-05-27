@@ -6,9 +6,11 @@ import io.boodskap.iot.StorageException;
 import io.boodskap.iot.dao.EntityIterator;
 import io.boodskap.iot.dao.ReceivedCommandDAO;
 import io.boodskap.iot.model.INameValuePair;
+import io.boodskap.iot.model.IReceivedCommand;
 import io.boodskap.iot.model.jpa.ReceivedCommand;
 import io.boodskap.iot.model.jpa.ReceivedCommandId;
 import io.boodskap.iot.model.jpa.ReceivedCommandNVP;
+import io.boodskap.iot.spi.storage.jpa.UOW;
 import io.boodskap.iot.spi.storage.jpa.dao.util.CommonDAO;
 import io.boodskap.iot.spi.storage.jpa.dao.util.EntityIteratorImpl;
 
@@ -40,6 +42,36 @@ public class ReceivedCommandDAOImpl implements ReceivedCommandDAO<ReceivedComman
 
 	@Override
 	public void createOrUpdate(ReceivedCommand e) throws StorageException {
+		
+		try {
+			
+			final IReceivedCommand oe = get(e.getDomainKey(), e.getRequestId());
+			final IReceivedCommand ne;
+			
+			if(null == oe) {
+				ne = new ReceivedCommand(new ReceivedCommandId(e.getDomainKey(), e.getRequestId()));
+			}else {
+				ne = oe;
+			}
+			
+			UOW.begin();
+			
+			ne.setCommandId(e.getCommandId());
+			ne.setCommandType(e.getCommandType());
+			ne.setCompletedStamp(e.getCompletedStamp());
+			ne.setData(e.getData());
+			ne.setDeviceId(e.getDeviceId());
+			
+			if(null == oe) {
+				UOW.persist(ne);
+			}
+			
+			UOW.commit();
+			
+		}catch(Exception ex) {
+			UOW.rollback();
+			throw new StorageException(ex);
+		}
 	}
 
 	@Override

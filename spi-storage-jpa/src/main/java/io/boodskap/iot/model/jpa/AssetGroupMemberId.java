@@ -5,12 +5,14 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
+import io.boodskap.iot.SizeConstants;
+
 @Embeddable
-public class AssetGroupMemberId extends AbstractGroupMember implements Serializable{
+public class AssetGroupMemberId extends AbstractGroupMemberId implements Serializable{
 
 	private static final long serialVersionUID = -1569282403049973098L;
 	
-	@Column(name="ownerassetid", length=40)
+	@Column(name="ownerassetid", length=SizeConstants.ASSET_ID_SIZE)
 	private String ownerAssetId;
 	
 	public AssetGroupMemberId() {

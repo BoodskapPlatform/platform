@@ -44,7 +44,6 @@ public class DeviceGroupDAOImpl implements DeviceGroupDAO<DeviceGroup> {
 			
 			if(null == oe) {
 				ne = new DeviceGroup(new DeviceGroupId(e.getDomainKey(), e.getOwnerDeviceId(), e.getGroupId()));
-				ne.setCreatedStamp(new Date());
 			}else {
 				ne = oe;
 			}

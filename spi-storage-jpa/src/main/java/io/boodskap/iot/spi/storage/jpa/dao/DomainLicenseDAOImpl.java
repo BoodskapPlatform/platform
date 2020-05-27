@@ -42,7 +42,6 @@ public class DomainLicenseDAOImpl implements DomainLicenseDAO<DomainLicense> {
 			
 			if(null == oe) {
 				ne = new DomainLicense(e.getDomainKey());
-				ne.setCreatedStamp(new Date());
 			}else {
 				ne = oe;
 			}

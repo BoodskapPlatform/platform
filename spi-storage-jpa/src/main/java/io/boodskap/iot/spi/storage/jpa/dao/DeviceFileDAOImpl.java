@@ -49,7 +49,6 @@ public class DeviceFileDAOImpl implements DeviceFileDAO<DeviceFile> {
 			
 			if(null == oe) {
 				ne = new DeviceFile(new DeviceFileId(e.getDomainKey(), e.getDeviceId(), e.getFileId()));
-				ne.setCreatedStamp(new Date());
 			}else {
 				ne = oe;
 			}

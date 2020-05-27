@@ -1,7 +1,6 @@
 package io.boodskap.iot.spi.storage.jpa.dao;
 
 import java.util.Collection;
-import java.util.Date;
 
 import io.boodskap.iot.Access;
 import io.boodskap.iot.StorageException;
@@ -45,7 +44,6 @@ public class DomainAccessDAOImpl implements DomainAccessDAO<DomainAccess> {
 			
 			if(null == oe) {
 				ne = new DomainAccess(new DomainAccessId(e.getDomainKey(), e.getAccess()));
-				ne.setGrantedStamp(new Date());
 			}else {
 				ne = oe;
 			}

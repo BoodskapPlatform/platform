@@ -12,16 +12,13 @@ import io.boodskap.iot.model.IDeviceMessageCounter;
 
 @Entity
 @Table(name = "devicemessagecounter")
-public class DeviceMessageCounter implements IDeviceMessageCounter {
+public class DeviceMessageCounter extends AbstractModel implements IDeviceMessageCounter {
 	
 	private static final long serialVersionUID = 5616127044122652367L;
 	
 	@EmbeddedId
 	private DeviceMessageCounterId id = new DeviceMessageCounterId();
 
-	@Column(name="day")
-	private Date day;
-	
 	@Column(name="occurance")
 	private long count = 1L;
 
@@ -33,8 +30,8 @@ public class DeviceMessageCounter implements IDeviceMessageCounter {
 	}
 
 	@Override
-	public IDeviceMessageCounter create(String domainKey, String deviceId, String messageType, String messageId) throws StorageException {
-		return new DeviceMessageCounter(new DeviceMessageCounterId(domainKey, deviceId, messageType, messageId));
+	public IDeviceMessageCounter create(String domainKey, String deviceId, String messageType, Date day) throws StorageException {
+		return new DeviceMessageCounter(new DeviceMessageCounterId(domainKey, deviceId, messageType, day));
 	}
 
 	public String getDomainKey() {
@@ -61,22 +58,14 @@ public class DeviceMessageCounter implements IDeviceMessageCounter {
 		id.setMessageType(messageType);
 	}
 
-	public String getMessageId() {
-		return id.getMessageId();
-	}
-
-	public void setMessageId(String messageId) {
-		id.setMessageId(messageId);
-	}
-
 	@Override
 	public Date getDay() {
-		return day;
+		return id.getDay();
 	}
 
 	@Override
 	public void setDay(Date day) {
-		this.day = day;
+		id.setDay(day);
 	}
 
 	@Override
@@ -87,6 +76,34 @@ public class DeviceMessageCounter implements IDeviceMessageCounter {
 	@Override
 	public void setCount(long count) {
 		this.count = count;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + (int) (count ^ (count >>> 32));
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		DeviceMessageCounter other = (DeviceMessageCounter) obj;
+		if (count != other.count)
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
 	}
 
 }

@@ -66,7 +66,6 @@ public class MessageSpecDAOImpl implements MessageSpecDAO<MessageSpecification> 
 			
 			if(null == oe) {
 				ne = new MessageSpecification(new MessageSpecificationId(e.getDomainKey(), e.getSpecId()));
-				ne.setCreatedStamp(new Date());
 			}else {
 				ne = oe;
 			}

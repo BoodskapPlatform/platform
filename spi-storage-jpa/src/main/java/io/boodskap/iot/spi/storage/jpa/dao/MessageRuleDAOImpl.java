@@ -45,7 +45,6 @@ public class MessageRuleDAOImpl implements MessageRuleDAO<MessageRule> {
 			
 			if(null == oe) {
 				ne = new MessageRule(new MessageRuleId(e.getDomainKey(), e.getSpecId()));
-				ne.setCreatedStamp(new  Date());
 			}else{
 				ne = oe;
 			}

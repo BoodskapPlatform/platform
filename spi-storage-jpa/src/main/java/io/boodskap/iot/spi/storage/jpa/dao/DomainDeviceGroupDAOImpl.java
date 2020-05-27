@@ -44,7 +44,6 @@ public class DomainDeviceGroupDAOImpl implements DomainDeviceGroupDAO<DomainDevi
 			
 			if(null == oe) {
 				ne = new DomainDeviceGroup(new DomainDeviceGroupId(e.getDomainKey(), e.getGroupId()));
-				ne.setCreatedStamp(new Date());
 			}else {
 				ne = oe;
 			}

@@ -45,7 +45,6 @@ public class OfflineStreamSessionDAOImpl implements OfflineStreamSessionDAO<Offl
 			
 			if(null == oe) {
 				ne = new OfflineStreamSession(new OfflineStreamSessionId(e.getDomainKey(), e.getDeviceId(), e.getCamera(), e.getSession()));
-				ne.setCreatedStamp(new Date());
 			}else {
 				ne = oe;
 			}

@@ -1,7 +1,5 @@
 package io.boodskap.iot.model.jpa;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -23,12 +21,6 @@ public class Property extends AbstractStorable implements IProperty {
 	@Lob
 	@Column(name="value", length=131072)
 	private String value = null;
-	
-	@Column(name="createdstamp")
-	private Date createdStamp;
-	
-	@Column(name="updatedstamp")
-	private Date updatedStamp;
 	
 	public Property() {
 	}
@@ -77,29 +69,11 @@ public class Property extends AbstractStorable implements IProperty {
 		this.value = value;
 	}
 
-	public Date getCreatedStamp() {
-		return createdStamp;
-	}
-
-	public void setCreatedStamp(Date createdStamp) {
-		this.createdStamp = createdStamp;
-	}
-
-	public Date getUpdatedStamp() {
-		return updatedStamp;
-	}
-
-	public void setUpdatedStamp(Date updatedStamp) {
-		this.updatedStamp = updatedStamp;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((createdStamp == null) ? 0 : createdStamp.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((updatedStamp == null) ? 0 : updatedStamp.hashCode());
 		result = prime * result + ((value == null) ? 0 : value.hashCode());
 		return result;
 	}
@@ -113,20 +87,10 @@ public class Property extends AbstractStorable implements IProperty {
 		if (getClass() != obj.getClass())
 			return false;
 		Property other = (Property) obj;
-		if (createdStamp == null) {
-			if (other.createdStamp != null)
-				return false;
-		} else if (!createdStamp.equals(other.createdStamp))
-			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
-			return false;
-		if (updatedStamp == null) {
-			if (other.updatedStamp != null)
-				return false;
-		} else if (!updatedStamp.equals(other.updatedStamp))
 			return false;
 		if (value == null) {
 			if (other.value != null)

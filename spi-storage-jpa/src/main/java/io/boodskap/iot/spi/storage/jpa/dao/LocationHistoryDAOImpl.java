@@ -45,7 +45,6 @@ public class LocationHistoryDAOImpl implements LocationHistoryDAO<LocationHistor
 			
 			if(null == oe) {
 				ne = new LocationHistory(new LocationHistoryId(e.getDomainKey(), e.getEntityType(), e.getEntityId(), e.getHistoryId()));
-				ne.setCreatedStamp(new Date());
 			}else {
 				ne = oe;
 			}

@@ -8,7 +8,7 @@ import io.boodskap.iot.StorageException;
 import io.boodskap.iot.dao.MessageCounterDAO;
 
 @JsonSerialize(as=ICounter.class)
-public interface IMessageCounter extends IModel {
+public interface IMessageCounter extends IStorageObject {
 	
 	public static MessageCounterDAO<IMessageCounter> dao() {
 		return MessageCounterDAO.get();

@@ -13,7 +13,7 @@ import io.boodskap.iot.model.IOfflineStream;
 
 @Entity
 @Table(name="offlinestream")
-public class OfflineStream implements IOfflineStream{
+public class OfflineStream extends AbstractModel implements IOfflineStream{
 	
 	private static final long serialVersionUID = 5693040931326424173L;
 
@@ -104,10 +104,11 @@ public class OfflineStream implements IOfflineStream{
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		int result = super.hashCode();
 		result = prime * result + Arrays.hashCode(data);
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((mime == null) ? 0 : mime.hashCode());
+		result = prime * result + ((stamp == null) ? 0 : stamp.hashCode());
 		return result;
 	}
 
@@ -115,7 +116,7 @@ public class OfflineStream implements IOfflineStream{
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
@@ -131,6 +132,11 @@ public class OfflineStream implements IOfflineStream{
 			if (other.mime != null)
 				return false;
 		} else if (!mime.equals(other.mime))
+			return false;
+		if (stamp == null) {
+			if (other.stamp != null)
+				return false;
+		} else if (!stamp.equals(other.stamp))
 			return false;
 		return true;
 	}

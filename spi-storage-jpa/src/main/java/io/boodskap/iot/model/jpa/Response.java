@@ -1,7 +1,5 @@
 package io.boodskap.iot.model.jpa;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Lob;
@@ -9,12 +7,9 @@ import javax.persistence.Lob;
 import io.boodskap.iot.model.IResponse;
 
 @Embeddable
-public class Response implements IResponse {
+public class Response extends AbstractStorageObject implements IResponse {
 	
 	private static final long serialVersionUID = 5905446293522785788L;
-	
-	@Column(name="stamp")
-	private Date stamp;
 	
 	@Lob
 	@Column(name="content", length=4096)
@@ -25,17 +20,6 @@ public class Response implements IResponse {
 
 	public Response(String content) {
 		this.content = content;
-		this.stamp = new Date();
-	}
-
-	@Override
-	public Date getStamp() {
-		return stamp;
-	}
-
-	@Override
-	public void setStamp(Date stamp) {
-		this.stamp = stamp;
 	}
 
 	@Override
@@ -51,9 +35,8 @@ public class Response implements IResponse {
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		int result = super.hashCode();
 		result = prime * result + ((content == null) ? 0 : content.hashCode());
-		result = prime * result + ((stamp == null) ? 0 : stamp.hashCode());
 		return result;
 	}
 
@@ -61,7 +44,7 @@ public class Response implements IResponse {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
@@ -70,11 +53,6 @@ public class Response implements IResponse {
 			if (other.content != null)
 				return false;
 		} else if (!content.equals(other.content))
-			return false;
-		if (stamp == null) {
-			if (other.stamp != null)
-				return false;
-		} else if (!stamp.equals(other.stamp))
 			return false;
 		return true;
 	}

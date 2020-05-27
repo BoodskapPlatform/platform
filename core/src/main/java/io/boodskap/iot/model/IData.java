@@ -16,46 +16,9 @@
  ******************************************************************************/
 package io.boodskap.iot.model;
 
-import java.io.Serializable;
-import java.util.Date;
-
-import org.json.JSONObject;
-
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import io.boodskap.iot.ThreadContext;
-
 @JsonSerialize(as = IData.class)
-public interface IData extends Serializable {
-
-	public Date getRegisteredStamp();
-
-	public void setRegisteredStamp(Date registeredStamp);
-
-	public Date getUpdatedStamp();
-
-	public void setUpdatedStamp(Date updatedStamp);
-
-	public void save();
-
-	public default String toJSONString() {
-		try {
-			return ThreadContext.toJSON(this);
-		} catch (Exception e) {
-			throw new IllegalArgumentException(e);
-		}
-	}
-
-	public default String toJSONPrettyString() {
-		try {
-			return ThreadContext.toJSONPretty(this);
-		} catch (Exception e) {
-			throw new IllegalArgumentException(e);
-		}
-	}
-
-	public default JSONObject toJSON() {
-		return new JSONObject(this);
-	}
-
+public interface IData extends IStorageObject {
+	
 }

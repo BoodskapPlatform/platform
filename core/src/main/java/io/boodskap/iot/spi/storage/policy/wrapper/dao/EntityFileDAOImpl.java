@@ -120,4 +120,14 @@ public class EntityFileDAOImpl implements EntityFileDAO<IEntityFile> {
 		impl.delete();
 	}
 
+	@Override
+	public void delete(String domainKey, String entityType) throws StorageException {
+		impl.delete(domainKey, entityType);
+	}
+
+	@Override
+	public void delete(String domainKey, String entityType, String entityId) throws StorageException {
+		impl.delete(domainKey, entityType, entityId);
+	}
+
 }

@@ -1,6 +1,5 @@
 package io.boodskap.iot.model.jpa;
 
-import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -15,9 +14,6 @@ public class OTABatch extends AbstractOTABatch implements IOTABatch {
 
 	@EmbeddedId
 	private OTABatchId id = new OTABatchId();
-	
-	@Column(name="dummy")
-	private Integer dummy;
 	
 	public OTABatch() {
 	}
@@ -40,14 +36,6 @@ public class OTABatch extends AbstractOTABatch implements IOTABatch {
 
 	public void setBatchId(String batchId) {
 		id.setBatchId(batchId);
-	}
-
-	public Integer getDummy() {
-		return dummy;
-	}
-
-	public void setDummy(Integer dummy) {
-		this.dummy = dummy;
 	}
 
 	@Override

@@ -104,4 +104,9 @@ public class DatabaseTableField extends AbstractDomainObject implements IDatabas
 		return true;
 	}
 
+	@Override
+	public void save() {
+		throw new UnsupportedOperationException();
+	}
+
 }

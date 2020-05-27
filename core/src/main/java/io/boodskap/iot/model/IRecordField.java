@@ -16,30 +16,9 @@
  ******************************************************************************/
 package io.boodskap.iot.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @JsonSerialize(as=IRecordField.class)
-public interface IRecordField extends IField {
+public interface IRecordField extends IMessageField {
 
-	public String getDescription();
-
-	public void setDescription(String description);
-
-	public boolean isIndexed();
-
-	public void setIndexed(boolean indexed);
-
-	public boolean isFulltextIndexed();
-
-	public void setFulltextIndexed(boolean fulltextIndexed);
-
-	@JsonIgnore
-	public default boolean isNumericField() {
-		return getDataType().isNumbericField();
-	}
-	
-	public default void save() {
-		throw new UnsupportedOperationException();
-	}
 }

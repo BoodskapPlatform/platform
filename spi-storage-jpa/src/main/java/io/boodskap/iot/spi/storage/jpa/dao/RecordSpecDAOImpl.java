@@ -46,7 +46,6 @@ public class RecordSpecDAOImpl implements RecordSpecDAO<RecordSpecification> {
 			
 			if(null == oe) {
 				ne = new RecordSpecification(new RecordSpecificationId(e.getDomainKey(), e.getSpecId()));
-				ne.setCreatedStamp(new Date());
 			}else {
 				ne = oe;
 			}

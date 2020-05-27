@@ -44,7 +44,6 @@ public class UserAssetGroupDAOImpl implements UserAssetGroupDAO<UserAssetGroup> 
 			
 			if(null == oe) {
 				ne = new UserAssetGroup(new UserAssetGroupId(e.getDomainKey(), e.getOwnerUserId(), e.getGroupId()));
-				ne.setCreatedStamp(new Date());
 			}else {
 				ne = oe;
 			}

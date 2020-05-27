@@ -1,8 +1,5 @@
 package io.boodskap.iot.model.jpa;
 
-import java.util.Date;
-
-import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -11,16 +8,13 @@ import io.boodskap.iot.model.IDomainDeviceGroupMember;
 
 @Entity
 @Table(name="domaindevicegroupmember")
-public class DomainDeviceGroupMember implements IDomainDeviceGroupMember {
+public class DomainDeviceGroupMember extends AbstractModel implements IDomainDeviceGroupMember {
 
 	private static final long serialVersionUID = -2319679190852676896L;
 	
 	@EmbeddedId
 	private DomainDeviceGroupMemberId id = new DomainDeviceGroupMemberId();
 
-	@Column(name="regstamp")
-	private Date registeredStamp;
-	
 	public DomainDeviceGroupMember(){
 	}
 
@@ -58,20 +52,11 @@ public class DomainDeviceGroupMember implements IDomainDeviceGroupMember {
 		id.setDomainKey(domainKey);
 	}
 
-	public Date getRegisteredStamp() {
-		return registeredStamp;
-	}
-
-	public void setRegisteredStamp(Date registeredStamp) {
-		this.registeredStamp = registeredStamp;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		int result = super.hashCode();
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((registeredStamp == null) ? 0 : registeredStamp.hashCode());
 		return result;
 	}
 
@@ -79,7 +64,7 @@ public class DomainDeviceGroupMember implements IDomainDeviceGroupMember {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
@@ -88,11 +73,6 @@ public class DomainDeviceGroupMember implements IDomainDeviceGroupMember {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
-			return false;
-		if (registeredStamp == null) {
-			if (other.registeredStamp != null)
-				return false;
-		} else if (!registeredStamp.equals(other.registeredStamp))
 			return false;
 		return true;
 	}

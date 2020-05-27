@@ -40,10 +40,12 @@ public class User extends AbstractPerson implements IUser {
 		id.setDomainKey(domainKey);
 	}
 
+	@Override
 	public String getUserId() {
 		return id.getUserId();
 	}
 
+	@Override
 	public void setUserId(String userId) {
 		id.setUserId(userId);
 	}

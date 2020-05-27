@@ -45,7 +45,6 @@ public class PropertyDAOImpl implements PropertyDAO<Property> {
 			
 			if(null == oe) {
 				ne = new Property(new PropertyId(e.getDomainKey(), e.getTarget(), e.getTargetId(), e.getName()));
-				ne.setCreatedStamp(new Date());
 			}else {
 				ne = oe;
 			}

@@ -2,7 +2,6 @@ package io.boodskap.iot.model.jpa;
 
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,7 +19,7 @@ import io.boodskap.iot.model.IDeviceCommand;
 
 @Entity
 @Table(name="devicecommand")
-public class DeviceCommand implements IDeviceCommand{
+public class DeviceCommand extends AbstractModel implements IDeviceCommand{
 
 	private static final long serialVersionUID = -1976353918687344385L;
 
@@ -38,12 +37,6 @@ public class DeviceCommand implements IDeviceCommand{
 
 	@Column(name="data", length=1024)
 	private byte[] data;
-
-	@Column(name="createdstamp")
-	private Date createdStamp;
-
-	@Column(name="updatedstamp")
-	private Date updatedStamp;
 
 	@Column(name="commandtype", length=12)
 	@Enumerated(EnumType.STRING)
@@ -72,18 +65,22 @@ public class DeviceCommand implements IDeviceCommand{
 		this.id = id;
 	}
 
+	@Override
 	public DeviceCommandTarget getTarget() {
 		return target;
 	}
 
+	@Override
 	public void setTarget(DeviceCommandTarget target) {
 		this.target = target;
 	}
 
+	@Override
 	public boolean isIncludeMe() {
 		return includeMe;
 	}
 
+	@Override
 	public void setIncludeMe(boolean includeMe) {
 		this.includeMe = includeMe;
 	}
@@ -93,42 +90,42 @@ public class DeviceCommand implements IDeviceCommand{
 		return groups;
 	}
 
+	@Override
 	public String getDomainKey() {
 		return id.getDomainKey();
 	}
 
+	@Override
 	public void setDomainKey(String domainKey) {
 		id.setDomainKey(domainKey);
 	}
 
+	@Override
 	public String getDeviceId() {
 		return id.getDeviceId();
 	}
 
+	@Override
 	public void setDeviceId(String deviceId) {
 		id.setDeviceId(deviceId);
 	}
 
+	@Override
 	public long getUid() {
 		return id.getUid();
 	}
 
+	@Override
 	public void setUid(long uid) {
 		id.setUid(uid);
 	}
 
-	public Date getCreatedStamp() {
-		return createdStamp;
-	}
-
-	public void setCreatedStamp(Date createdStamp) {
-		this.createdStamp = createdStamp;
-	}
-
+	@Override
 	public CommandType getCommandType() {
 		return commandType;
 	}
 
+	@Override
 	public void setCommandType(CommandType commandType) {
 		this.commandType = commandType;
 	}
@@ -143,26 +140,32 @@ public class DeviceCommand implements IDeviceCommand{
 		return versions;
 	}
 
+	@Override
 	public int getCommandId() {
 		return commandId;
 	}
 
+	@Override
 	public void setCommandId(int commandId) {
 		this.commandId = commandId;
 	}
 
+	@Override
 	public byte[] getData() {
 		return data;
 	}
 
+	@Override
 	public void setData(byte[] data) {
 		this.data = data;
 	}
 
+	@Override
 	public String getJsonData() {
 		return jsonData;
 	}
 
+	@Override
 	public void setJsonData(String jsonData) {
 		this.jsonData = jsonData;
 	}
@@ -186,22 +189,11 @@ public class DeviceCommand implements IDeviceCommand{
 	}
 
 	@Override
-	public Date getUpdatedStamp() {
-		return updatedStamp;
-	}
-
-	@Override
-	public void setUpdatedStamp(Date updatedStamp) {
-		this.updatedStamp = updatedStamp;
-	}
-
-	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		int result = super.hashCode();
 		result = prime * result + commandId;
 		result = prime * result + ((commandType == null) ? 0 : commandType.hashCode());
-		result = prime * result + ((createdStamp == null) ? 0 : createdStamp.hashCode());
 		result = prime * result + Arrays.hashCode(data);
 		result = prime * result + ((groups == null) ? 0 : groups.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
@@ -209,7 +201,6 @@ public class DeviceCommand implements IDeviceCommand{
 		result = prime * result + ((jsonData == null) ? 0 : jsonData.hashCode());
 		result = prime * result + ((models == null) ? 0 : models.hashCode());
 		result = prime * result + ((target == null) ? 0 : target.hashCode());
-		result = prime * result + ((updatedStamp == null) ? 0 : updatedStamp.hashCode());
 		result = prime * result + ((versions == null) ? 0 : versions.hashCode());
 		return result;
 	}
@@ -218,7 +209,7 @@ public class DeviceCommand implements IDeviceCommand{
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
@@ -226,11 +217,6 @@ public class DeviceCommand implements IDeviceCommand{
 		if (commandId != other.commandId)
 			return false;
 		if (commandType != other.commandType)
-			return false;
-		if (createdStamp == null) {
-			if (other.createdStamp != null)
-				return false;
-		} else if (!createdStamp.equals(other.createdStamp))
 			return false;
 		if (!Arrays.equals(data, other.data))
 			return false;
@@ -257,11 +243,6 @@ public class DeviceCommand implements IDeviceCommand{
 		} else if (!models.equals(other.models))
 			return false;
 		if (target != other.target)
-			return false;
-		if (updatedStamp == null) {
-			if (other.updatedStamp != null)
-				return false;
-		} else if (!updatedStamp.equals(other.updatedStamp))
 			return false;
 		if (versions == null) {
 			if (other.versions != null)

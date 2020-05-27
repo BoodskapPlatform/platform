@@ -47,7 +47,6 @@ public class EventDAOImpl implements EventDAO<Event> {
 			
 			if(null == oe) {
 				ne = new Event(new EventId(e.getDomainKey(), e.getEventId()));
-				ne.setCreatedStamp(new Date());
 			}else {
 				ne = oe;
 			}

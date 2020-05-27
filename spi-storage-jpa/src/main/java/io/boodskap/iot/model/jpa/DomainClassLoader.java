@@ -9,7 +9,7 @@ import io.boodskap.iot.model.IDomainClassLoader;
 
 @Entity
 @Table(name="domainclassloader")
-public class DomainClassLoader implements IDomainClassLoader {
+public class DomainClassLoader extends AbstractModel implements IDomainClassLoader {
 
 	private static final long serialVersionUID = -200466371784433311L;
 	
@@ -53,7 +53,7 @@ public class DomainClassLoader implements IDomainClassLoader {
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		int result = super.hashCode();
 		result = prime * result + ((globalLoader == null) ? 0 : globalLoader.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
@@ -63,7 +63,7 @@ public class DomainClassLoader implements IDomainClassLoader {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;

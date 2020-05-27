@@ -48,7 +48,6 @@ public class LocationDAOImpl implements LocationDAO<Location> {
 			
 			if(null == oe) {
 				ne = new Location(new LocationId(e.getDomainKey(), e.getEntityType(), e.getEntityId()));
-				ne.setCreatedStamp(new Date());
 			}else {
 				ne = oe;
 			}

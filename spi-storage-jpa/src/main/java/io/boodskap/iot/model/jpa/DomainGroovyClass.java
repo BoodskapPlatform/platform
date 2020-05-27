@@ -9,7 +9,7 @@ import io.boodskap.iot.model.IDomainGroovyClass;
 
 @Entity
 @Table(name = "domaingroovyclass")
-public class DomainGroovyClass implements IDomainGroovyClass {
+public class DomainGroovyClass extends AbstractModel implements IDomainGroovyClass {
 
 	private static final long serialVersionUID = 4578909004576300500L;
 	
@@ -99,7 +99,7 @@ public class DomainGroovyClass implements IDomainGroovyClass {
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		int result = super.hashCode();
 		result = prime * result + ((code == null) ? 0 : code.hashCode());
 		result = prime * result + ((fileName == null) ? 0 : fileName.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
@@ -110,7 +110,7 @@ public class DomainGroovyClass implements IDomainGroovyClass {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;

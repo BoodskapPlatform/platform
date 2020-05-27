@@ -61,7 +61,6 @@ public class DeviceDAOImpl implements DeviceDAO<Device> {
 			ne.setPassword(e.getPassword());
 			ne.setReportedIp(e.getReportedIp());
 			ne.setReportedPort(e.getReportedPort());
-			ne.setReportedStamp(e.getReportedStamp());
 			ne.setVersion(e.getVersion());
 			
 			if(null == oe) {

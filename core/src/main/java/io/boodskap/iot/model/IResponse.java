@@ -16,16 +16,10 @@
  ******************************************************************************/
 package io.boodskap.iot.model;
 
-import java.util.Date;
-
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @JsonSerialize(as=IResponse.class)
-public interface IResponse extends IModel {
-	
-	public Date getStamp();
-	
-	public void setStamp(Date stamp);
+public interface IResponse extends IStorageObject {
 	
 	public String getContent();
 	

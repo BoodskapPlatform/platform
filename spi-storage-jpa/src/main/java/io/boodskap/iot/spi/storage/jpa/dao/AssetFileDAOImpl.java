@@ -48,7 +48,6 @@ public class AssetFileDAOImpl implements AssetFileDAO<AssetFile> {
 			
 			if(null == oe) {
 				ne = new AssetFile(new AssetFileId(e.getDomainKey(), e.getAssetId(), e.getFileId()));
-				ne.setCreatedStamp(new Date());
 			}else {
 				ne = oe;
 			}

@@ -50,7 +50,6 @@ public class OTABatchMemberDAOImpl implements OTABatchMemberDAO<OTABatchMember> 
 			
 			if(null == oe) {
 				ne = new OTABatchMember(new OTABatchMemberId(e.getDomainKey(), e.getBatchId(), e.getDeviceId()));
-				ne.setCreatedStamp(new Date());
 			}else {
 				ne = oe;
 			}

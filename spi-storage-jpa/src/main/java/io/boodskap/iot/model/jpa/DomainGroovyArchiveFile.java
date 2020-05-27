@@ -13,7 +13,7 @@ import io.boodskap.iot.model.IDomainGroovyArchiveFile;
 
 @Entity
 @Table(name = "domaingarchfile")
-public class DomainGroovyArchiveFile implements IDomainGroovyArchiveFile {
+public class DomainGroovyArchiveFile extends AbstractModel implements IDomainGroovyArchiveFile {
 
 	private static final long serialVersionUID = -6433581376660773352L;
 
@@ -72,7 +72,7 @@ public class DomainGroovyArchiveFile implements IDomainGroovyArchiveFile {
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		int result = super.hashCode();
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + Arrays.hashCode(objectCode);
 		return result;
@@ -82,7 +82,7 @@ public class DomainGroovyArchiveFile implements IDomainGroovyArchiveFile {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;

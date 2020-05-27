@@ -13,7 +13,7 @@ import io.boodskap.iot.model.IGroovyArchiveFile;
 
 @Entity
 @Table(name = "garchfile")
-public class GroovyArchiveFile implements IGroovyArchiveFile {
+public class GroovyArchiveFile extends AbstractModel implements IGroovyArchiveFile {
 
 	private static final long serialVersionUID = 6171708929613470512L;
 
@@ -64,7 +64,7 @@ public class GroovyArchiveFile implements IGroovyArchiveFile {
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		int result = super.hashCode();
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + Arrays.hashCode(objectCode);
 		return result;
@@ -74,7 +74,7 @@ public class GroovyArchiveFile implements IGroovyArchiveFile {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;

@@ -52,7 +52,6 @@ public class OfflineStreamDAOImpl implements OfflineStreamDAO<OfflineStream> {
 			ne.setFrame(e.getFrame());
 			ne.setMime(e.getMime());
 			ne.setData(e.getData());
-			ne.setStamp(e.getStamp());
 			
 			if(null == oe) {
 				UOW.persist(ne);

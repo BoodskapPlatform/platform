@@ -21,7 +21,7 @@ import java.util.Date;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @JsonSerialize(as=IProgress.class)
-public interface IProgress extends IModel {
+public interface IProgress extends IStorageObject {
 	
 	public Date getStamp();
 	

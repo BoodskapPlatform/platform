@@ -41,7 +41,6 @@ public class SystemFileDAOImpl implements SystemFileDAO<SystemFile> {
 			
 			if(null == oe) {
 				ne = new SystemFile(e.getFileId());
-				ne.setCreatedStamp(new Date());
 			}else {
 				ne = oe;
 			}

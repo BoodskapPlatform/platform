@@ -1,7 +1,5 @@
 package io.boodskap.iot.model.jpa;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -16,15 +14,12 @@ import io.boodskap.iot.model.IRawMessage;
 
 @Entity
 @Table(name="rawmessage")
-public class RawMessage implements IRawMessage{
+public class RawMessage extends AbstractStorable implements IRawMessage{
 	
 	private static final long serialVersionUID = 5717122373902848831L;
 	
 	@EmbeddedId
 	private RawMessageId id = new RawMessageId();
-	
-	@Column(name="receivedstamp")
-	private Date receivedStamp;
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name="channel", length=12)
@@ -82,14 +77,6 @@ public class RawMessage implements IRawMessage{
 
 	public void setRawId(String rawId) {
 		id.setRawId(rawId);
-	}
-
-	public Date getReceivedStamp() {
-		return receivedStamp;
-	}
-
-	public void setReceivedStamp(Date receivedStamp) {
-		this.receivedStamp = receivedStamp;
 	}
 
 	public DataChannel getChannel() {
@@ -183,7 +170,7 @@ public class RawMessage implements IRawMessage{
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		int result = super.hashCode();
 		result = prime * result + ((channel == null) ? 0 : channel.hashCode());
 		result = prime * result + ((data == null) ? 0 : data.hashCode());
 		result = prime * result + ((deviceId == null) ? 0 : deviceId.hashCode());
@@ -195,7 +182,6 @@ public class RawMessage implements IRawMessage{
 		result = prime * result + ((nodeId == null) ? 0 : nodeId.hashCode());
 		result = prime * result + ((nodeUid == null) ? 0 : nodeUid.hashCode());
 		result = prime * result + port;
-		result = prime * result + ((receivedStamp == null) ? 0 : receivedStamp.hashCode());
 		result = prime * result + ((specId == null) ? 0 : specId.hashCode());
 		return result;
 	}
@@ -204,7 +190,7 @@ public class RawMessage implements IRawMessage{
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
@@ -257,11 +243,6 @@ public class RawMessage implements IRawMessage{
 		} else if (!nodeUid.equals(other.nodeUid))
 			return false;
 		if (port != other.port)
-			return false;
-		if (receivedStamp == null) {
-			if (other.receivedStamp != null)
-				return false;
-		} else if (!receivedStamp.equals(other.receivedStamp))
 			return false;
 		if (specId == null) {
 			if (other.specId != null)

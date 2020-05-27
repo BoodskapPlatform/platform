@@ -5,17 +5,18 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import io.boodskap.iot.SizeConstants;
 import io.boodskap.iot.model.IDomain;
 import io.boodskap.iot.model.IDomainRole;
 
 @Entity
 @Table(name="domain")
-public class Domain extends AbstractEntity implements IDomain {
+public class Domain extends AbstractContact implements IDomain {
 
 	private static final long serialVersionUID = 6658928306824558407L;
 
 	@Id
-	@Column(name="domainkey", length=16)
+	@Column(name="domainkey", length=SizeConstants.DOMAIN_SIZE)
 	private String domainKey = null;
 	
 	public Domain() {

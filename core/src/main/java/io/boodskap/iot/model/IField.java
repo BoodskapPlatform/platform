@@ -21,10 +21,18 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.boodskap.iot.DataType;
 
 @JsonSerialize(as=IField.class)
-public interface IField extends IModel {
+public interface IField extends IStorageObject {
 	
 	public DataType getDataType();
 	
 	public void setDataType(DataType type);
+	
+	public String getName();
+	
+	public void setName(String name);
+	
+	public String getDescription();
+	
+	public void setDescription(String description);
 	
 }

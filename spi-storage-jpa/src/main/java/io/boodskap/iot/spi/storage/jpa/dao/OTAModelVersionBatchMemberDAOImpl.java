@@ -50,7 +50,6 @@ public class OTAModelVersionBatchMemberDAOImpl implements OTAModelVersionBatchMe
 			
 			if(null == oe) {
 				ne = new OTAModelVersionBatchMember(new OTAModelVersionBatchMemberId(e.getDomainKey(), e.getBatchId(), e.getFromModel(), e.getFromVersion(), e.getDeviceId()));
-				ne.setCreatedStamp(new Date());
 			}else {
 				ne = oe;
 			}

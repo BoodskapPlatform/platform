@@ -7,26 +7,26 @@ import javax.persistence.Embeddable;
 
 
 @Embeddable
-public class DomainEntityRoleId implements Serializable {
+public class DomainJsonEntityId implements Serializable {
 	
-	private static final long serialVersionUID = -5492339197948756619L;
+	private static final long serialVersionUID = -6496017550119752826L;
 
 	@Column(name="domainkey", length=16)
 	private String domainKey;
 
+	@Column(name="entitytype", length=40)
+	private String entityType;
+
 	@Column(name="entityid", length=40)
 	private String entityId;
 
-	@Column(name="name", length=40)
-	private String name = null;
-	
-	public DomainEntityRoleId() {
+	public DomainJsonEntityId() {
 	}
 
-	public DomainEntityRoleId(String domainKey, String entityId, String name) {
+	public DomainJsonEntityId(String domainKey, String entityType, String entityId) {
 		this.domainKey = domainKey;
+		this.entityType = entityType;
 		this.entityId = entityId;
-		this.name = name;
 	}
 
 	public String getDomainKey() {
@@ -37,6 +37,14 @@ public class DomainEntityRoleId implements Serializable {
 		this.domainKey = domainKey;
 	}
 
+	public String getEntityType() {
+		return entityType;
+	}
+
+	public void setEntityType(String entityType) {
+		this.entityType = entityType;
+	}
+
 	public String getEntityId() {
 		return entityId;
 	}
@@ -45,21 +53,13 @@ public class DomainEntityRoleId implements Serializable {
 		this.entityId = entityId;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((domainKey == null) ? 0 : domainKey.hashCode());
 		result = prime * result + ((entityId == null) ? 0 : entityId.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((entityType == null) ? 0 : entityType.hashCode());
 		return result;
 	}
 
@@ -71,7 +71,7 @@ public class DomainEntityRoleId implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		DomainEntityRoleId other = (DomainEntityRoleId) obj;
+		DomainJsonEntityId other = (DomainJsonEntityId) obj;
 		if (domainKey == null) {
 			if (other.domainKey != null)
 				return false;
@@ -82,10 +82,10 @@ public class DomainEntityRoleId implements Serializable {
 				return false;
 		} else if (!entityId.equals(other.entityId))
 			return false;
-		if (name == null) {
-			if (other.name != null)
+		if (entityType == null) {
+			if (other.entityType != null)
 				return false;
-		} else if (!name.equals(other.name))
+		} else if (!entityType.equals(other.entityType))
 			return false;
 		return true;
 	}

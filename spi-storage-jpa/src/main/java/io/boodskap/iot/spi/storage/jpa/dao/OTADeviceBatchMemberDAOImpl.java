@@ -50,7 +50,6 @@ public class OTADeviceBatchMemberDAOImpl implements OTADeviceBatchMemberDAO<OTAD
 			
 			if(null == oe) {
 				ne = new OTADeviceBatchMember(new OTADeviceBatchMemberId(e.getDomainKey(), e.getBatchId(), e.getDeviceId()));
-				ne.setCreatedStamp(new Date());
 			}else {
 				ne = oe;
 			}

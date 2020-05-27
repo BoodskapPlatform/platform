@@ -9,7 +9,7 @@ import io.boodskap.iot.DataType;
 import io.boodskap.iot.model.IMessageField;
 
 @Embeddable
-public class MessageField implements IMessageField {
+public class MessageField extends AbstractStorageObject implements IMessageField {
 
 	private static final long serialVersionUID = -6373844951592507837L;
 
@@ -81,7 +81,7 @@ public class MessageField implements IMessageField {
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		int result = super.hashCode();
 		result = prime * result + ((dataType == null) ? 0 : dataType.hashCode());
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + (fulltextIndexed ? 1231 : 1237);
@@ -94,7 +94,7 @@ public class MessageField implements IMessageField {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;

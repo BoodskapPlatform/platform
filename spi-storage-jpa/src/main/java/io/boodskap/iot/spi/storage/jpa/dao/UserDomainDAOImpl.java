@@ -47,7 +47,6 @@ public class UserDomainDAOImpl implements UserDomainDAO<UserDomain> {
 			
 			if(null == oe) {
 				ne = new UserDomain(new UserDomainId(e.getUserId(), e.getDomainKey()));
-				ne.setCreatedStamp(new Date());
 			}else {
 				ne = oe;
 			}

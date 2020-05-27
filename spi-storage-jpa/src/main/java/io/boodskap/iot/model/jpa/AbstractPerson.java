@@ -11,7 +11,7 @@ import javax.persistence.MappedSuperclass;
 import io.boodskap.iot.model.IPerson;
 
 @MappedSuperclass
-public abstract class AbstractPerson extends AbstractEntity implements IPerson {
+public abstract class AbstractPerson extends AbstractContact implements IPerson {
 
 	private static final long serialVersionUID = -8823527511832428112L;
 

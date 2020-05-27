@@ -14,7 +14,7 @@ import io.boodskap.iot.model.IReportedDevice;
 
 @Entity()
 @Table(name="reporteddevice")
-public class ReportedDevice implements IReportedDevice {
+public class ReportedDevice extends AbstractModel implements IReportedDevice {
 
 	private static final long serialVersionUID = 5079998294707936313L;
 	
@@ -120,6 +120,70 @@ public class ReportedDevice implements IReportedDevice {
 
 	public void setNodeUid(String nodeUid) {
 		this.nodeUid = nodeUid;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((address == null) ? 0 : address.hashCode());
+		result = prime * result + ((channel == null) ? 0 : channel.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((lastReported == null) ? 0 : lastReported.hashCode());
+		result = prime * result + ((mqttServerId == null) ? 0 : mqttServerId.hashCode());
+		result = prime * result + ((nodeId == null) ? 0 : nodeId.hashCode());
+		result = prime * result + ((nodeUid == null) ? 0 : nodeUid.hashCode());
+		result = prime * result + ((port == null) ? 0 : port.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ReportedDevice other = (ReportedDevice) obj;
+		if (address == null) {
+			if (other.address != null)
+				return false;
+		} else if (!address.equals(other.address))
+			return false;
+		if (channel != other.channel)
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (lastReported == null) {
+			if (other.lastReported != null)
+				return false;
+		} else if (!lastReported.equals(other.lastReported))
+			return false;
+		if (mqttServerId == null) {
+			if (other.mqttServerId != null)
+				return false;
+		} else if (!mqttServerId.equals(other.mqttServerId))
+			return false;
+		if (nodeId == null) {
+			if (other.nodeId != null)
+				return false;
+		} else if (!nodeId.equals(other.nodeId))
+			return false;
+		if (nodeUid == null) {
+			if (other.nodeUid != null)
+				return false;
+		} else if (!nodeUid.equals(other.nodeUid))
+			return false;
+		if (port == null) {
+			if (other.port != null)
+				return false;
+		} else if (!port.equals(other.port))
+			return false;
+		return true;
 	}
 
 }

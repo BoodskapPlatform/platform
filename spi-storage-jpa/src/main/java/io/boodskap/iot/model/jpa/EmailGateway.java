@@ -1,7 +1,5 @@
 package io.boodskap.iot.model.jpa;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -11,7 +9,7 @@ import io.boodskap.iot.model.IEmailGateway;
 
 @Entity
 @Table(name="emailgateway")
-public class EmailGateway implements IEmailGateway {
+public class EmailGateway extends AbstractModel implements IEmailGateway {
 
 	private static final long serialVersionUID = 8909342397880526010L;
 
@@ -49,12 +47,6 @@ public class EmailGateway implements IEmailGateway {
 	@Column(name="debug")
 	private boolean debug = false;
 
-	@Column(name="createdstamp")
-	private Date createdStamp;
-	
-	@Column(name="updatedstamp")
-	private Date updatedStamp;
-	
 	public EmailGateway() {
 	}
 
@@ -150,28 +142,11 @@ public class EmailGateway implements IEmailGateway {
 		this.name = name;
 	}
 
-	public Date getCreatedStamp() {
-		return createdStamp;
-	}
-
-	public void setCreatedStamp(Date createdStamp) {
-		this.createdStamp = createdStamp;
-	}
-
-	public Date getUpdatedStamp() {
-		return updatedStamp;
-	}
-
-	public void setUpdatedStamp(Date updatedStamp) {
-		this.updatedStamp = updatedStamp;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		int result = super.hashCode();
 		result = prime * result + ((bounceEmail == null) ? 0 : bounceEmail.hashCode());
-		result = prime * result + ((createdStamp == null) ? 0 : createdStamp.hashCode());
 		result = prime * result + (debug ? 1231 : 1237);
 		result = prime * result + ((domainKey == null) ? 0 : domainKey.hashCode());
 		result = prime * result + ((host == null) ? 0 : host.hashCode());
@@ -181,7 +156,6 @@ public class EmailGateway implements IEmailGateway {
 		result = prime * result + ((primaryEmail == null) ? 0 : primaryEmail.hashCode());
 		result = prime * result + (ssl ? 1231 : 1237);
 		result = prime * result + (tls ? 1231 : 1237);
-		result = prime * result + ((updatedStamp == null) ? 0 : updatedStamp.hashCode());
 		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
 	}
@@ -190,7 +164,7 @@ public class EmailGateway implements IEmailGateway {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
@@ -199,11 +173,6 @@ public class EmailGateway implements IEmailGateway {
 			if (other.bounceEmail != null)
 				return false;
 		} else if (!bounceEmail.equals(other.bounceEmail))
-			return false;
-		if (createdStamp == null) {
-			if (other.createdStamp != null)
-				return false;
-		} else if (!createdStamp.equals(other.createdStamp))
 			return false;
 		if (debug != other.debug)
 			return false;
@@ -237,11 +206,6 @@ public class EmailGateway implements IEmailGateway {
 		if (ssl != other.ssl)
 			return false;
 		if (tls != other.tls)
-			return false;
-		if (updatedStamp == null) {
-			if (other.updatedStamp != null)
-				return false;
-		} else if (!updatedStamp.equals(other.updatedStamp))
 			return false;
 		if (user == null) {
 			if (other.user != null)

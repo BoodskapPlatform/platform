@@ -12,7 +12,7 @@ import io.boodskap.iot.model.IBillingSchedule;
 
 @Entity
 @Table(name = "billingschedule")
-public class BillingSchedule implements IBillingSchedule {
+public class BillingSchedule extends AbstractModel implements IBillingSchedule {
 
 	private static final long serialVersionUID = 5134362610388399477L;
 
@@ -36,12 +36,6 @@ public class BillingSchedule implements IBillingSchedule {
 
 	@Column(name = "payername", length = 180)
 	private String payername = null;
-
-	@Column(name = "updatedtime")
-	private Date updatedtime = null;
-
-	@Column(name = "createdtime")
-	private Date createdtime = null;
 
 	@Column(name = "discounteditems")
 	private boolean discounteditems = true;
@@ -151,22 +145,6 @@ public class BillingSchedule implements IBillingSchedule {
 		this.payername = payername;
 	}
 
-	public Date getUpdatedtime() {
-		return updatedtime;
-	}
-
-	public void setUpdatedtime(Date updatedtime) {
-		this.updatedtime = updatedtime;
-	}
-
-	public Date getCreatedtime() {
-		return createdtime;
-	}
-
-	public void setCreatedtime(Date createdtime) {
-		this.createdtime = createdtime;
-	}
-
 	public boolean isDiscounteditems() {
 		return discounteditems;
 	}
@@ -242,10 +220,9 @@ public class BillingSchedule implements IBillingSchedule {
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		int result = super.hashCode();
 		result = prime * result + ((billingtype == null) ? 0 : billingtype.hashCode());
 		result = prime * result + ((companyname == null) ? 0 : companyname.hashCode());
-		result = prime * result + ((createdtime == null) ? 0 : createdtime.hashCode());
 		result = prime * result + ((currency == null) ? 0 : currency.hashCode());
 		result = prime * result + (discounteditems ? 1231 : 1237);
 		result = prime * result + (enabled ? 1231 : 1237);
@@ -259,7 +236,6 @@ public class BillingSchedule implements IBillingSchedule {
 		result = prime * result + ((payername == null) ? 0 : payername.hashCode());
 		result = prime * result + ((startdate == null) ? 0 : startdate.hashCode());
 		result = prime * result + ((startevery == null) ? 0 : startevery.hashCode());
-		result = prime * result + ((updatedtime == null) ? 0 : updatedtime.hashCode());
 		result = prime * result + weekday;
 		return result;
 	}
@@ -268,7 +244,7 @@ public class BillingSchedule implements IBillingSchedule {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
@@ -282,11 +258,6 @@ public class BillingSchedule implements IBillingSchedule {
 			if (other.companyname != null)
 				return false;
 		} else if (!companyname.equals(other.companyname))
-			return false;
-		if (createdtime == null) {
-			if (other.createdtime != null)
-				return false;
-		} else if (!createdtime.equals(other.createdtime))
 			return false;
 		if (currency == null) {
 			if (other.currency != null)
@@ -343,11 +314,6 @@ public class BillingSchedule implements IBillingSchedule {
 			if (other.startevery != null)
 				return false;
 		} else if (!startevery.equals(other.startevery))
-			return false;
-		if (updatedtime == null) {
-			if (other.updatedtime != null)
-				return false;
-		} else if (!updatedtime.equals(other.updatedtime))
 			return false;
 		if (weekday != other.weekday)
 			return false;

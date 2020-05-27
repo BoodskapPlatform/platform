@@ -9,7 +9,7 @@ import javax.persistence.Lob;
 import io.boodskap.iot.model.IProgress;
 
 @Embeddable
-public class Progress implements IProgress {
+public class Progress extends AbstractStorageObject implements IProgress {
 	
 	private static final long serialVersionUID = 2747446673053336905L;
 
@@ -51,7 +51,7 @@ public class Progress implements IProgress {
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		int result = super.hashCode();
 		result = prime * result + ((content == null) ? 0 : content.hashCode());
 		result = prime * result + ((stamp == null) ? 0 : stamp.hashCode());
 		return result;
@@ -61,7 +61,7 @@ public class Progress implements IProgress {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;

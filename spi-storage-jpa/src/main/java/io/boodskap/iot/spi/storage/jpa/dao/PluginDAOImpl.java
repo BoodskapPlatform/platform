@@ -51,7 +51,7 @@ public class PluginDAOImpl implements PluginDAO<Plugin> {
 			ne.setClazz(e.getClazz());
 			ne.setContextId(e.getContextId());
 			ne.setCrc(e.getCrc());
-			ne.setDesc(e.getDesc());
+			ne.setDescription(e.getDescription());
 			ne.setJsonContent(e.getJsonContent());
 			ne.setReadme(e.getReadme());
 			ne.setSystemId(e.getSystemId());

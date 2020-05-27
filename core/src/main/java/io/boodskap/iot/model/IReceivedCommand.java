@@ -8,9 +8,9 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.boodskap.iot.dao.ReceivedCommandDAO;
 
 @JsonSerialize(as=IReceivedCommand.class)
-public interface IReceivedCommand extends IDomainObject {
+public interface IReceivedCommand extends IStorageObject {
 
-	public static enum Format {
+	public static enum EncodingFormat {
 		BASE64, HEX, TEXT
 	}
 
@@ -64,9 +64,9 @@ public interface IReceivedCommand extends IDomainObject {
 
 	public void setRawData(String rawData);
 
-	public Format getFormat();
+	public EncodingFormat getEncodingFormat();
 
-	public void setFormat(Format format);
+	public void setEncodingFormat(EncodingFormat encodingFormat);
 
 	public Integer getCommandId();
 

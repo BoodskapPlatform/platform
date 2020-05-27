@@ -9,7 +9,7 @@ import io.boodskap.iot.model.IClassLoader;
 
 @Entity
 @Table(name="classloader")
-public class ClassLoader implements IClassLoader {
+public class ClassLoader extends AbstractModel implements IClassLoader {
 	
 	private static final long serialVersionUID = 2991776579399759266L;
 	
@@ -49,7 +49,7 @@ public class ClassLoader implements IClassLoader {
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		int result = super.hashCode();
 		result = prime * result + ((globalLoader == null) ? 0 : globalLoader.hashCode());
 		result = prime * result + ((loader == null) ? 0 : loader.hashCode());
 		return result;
@@ -59,7 +59,7 @@ public class ClassLoader implements IClassLoader {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;

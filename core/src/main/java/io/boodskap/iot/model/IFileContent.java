@@ -16,10 +16,12 @@
  ******************************************************************************/
 package io.boodskap.iot.model;
 
+import java.io.Serializable;
+
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @JsonSerialize(as=IFileContent.class)
-public interface IFileContent extends IModel {
+public interface IFileContent extends Serializable {
 	
 	public byte[] getData();
 	
@@ -29,7 +31,4 @@ public interface IFileContent extends IModel {
 	
 	public void setMediaType(String mediaType);
 
-	public default void save() {
-		throw new UnsupportedOperationException();
-	}
 }

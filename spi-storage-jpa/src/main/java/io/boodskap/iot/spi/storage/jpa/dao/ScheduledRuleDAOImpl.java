@@ -45,7 +45,6 @@ public class ScheduledRuleDAOImpl implements ScheduledRuleDAO<ScheduledRule> {
 			
 			if(null == oe) {
 				ne = new ScheduledRule(new ScheduledRuleId(e.getDomainKey(), e.getRuleId()));
-				ne.setCreatedStamp(new Date());
 			}else {
 				ne = oe;
 			}

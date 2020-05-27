@@ -14,14 +14,18 @@ public class DomainEntityId implements Serializable {
 	@Column(name="domainkey", length=16)
 	private String domainKey;
 
+	@Column(name="entitytype", length=40)
+	private String entityType;
+
 	@Column(name="entityid", length=40)
 	private String entityId;
 
 	public DomainEntityId() {
 	}
 
-	public DomainEntityId(String domainKey, String entityId) {
+	public DomainEntityId(String domainKey, String entityType, String entityId) {
 		this.domainKey = domainKey;
+		this.entityType = entityType;
 		this.entityId = entityId;
 	}
 
@@ -31,6 +35,14 @@ public class DomainEntityId implements Serializable {
 
 	public void setDomainKey(String domainKey) {
 		this.domainKey = domainKey;
+	}
+
+	public String getEntityType() {
+		return entityType;
+	}
+
+	public void setEntityType(String entityType) {
+		this.entityType = entityType;
 	}
 
 	public String getEntityId() {
@@ -47,6 +59,7 @@ public class DomainEntityId implements Serializable {
 		int result = 1;
 		result = prime * result + ((domainKey == null) ? 0 : domainKey.hashCode());
 		result = prime * result + ((entityId == null) ? 0 : entityId.hashCode());
+		result = prime * result + ((entityType == null) ? 0 : entityType.hashCode());
 		return result;
 	}
 
@@ -68,6 +81,11 @@ public class DomainEntityId implements Serializable {
 			if (other.entityId != null)
 				return false;
 		} else if (!entityId.equals(other.entityId))
+			return false;
+		if (entityType == null) {
+			if (other.entityType != null)
+				return false;
+		} else if (!entityType.equals(other.entityType))
 			return false;
 		return true;
 	}

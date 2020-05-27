@@ -1,33 +1,14 @@
 package io.boodskap.iot.model.pojo;
 
-import java.util.Date;
-
-
 import io.boodskap.iot.model.IResponse;
 
-public class Response extends AbstractModel implements IResponse {
+public class Response extends AbstractStorageObject implements IResponse {
 	
 	private static final long serialVersionUID = 5905446293522785788L;
 	
-	private Date stamp;
 	private String content;
 
 	public Response() {
-	}
-
-	public Response(String content) {
-		this.content = content;
-		this.stamp = new Date();
-	}
-
-	@Override
-	public Date getStamp() {
-		return stamp;
-	}
-
-	@Override
-	public void setStamp(Date stamp) {
-		this.stamp = stamp;
 	}
 
 	@Override
@@ -43,9 +24,8 @@ public class Response extends AbstractModel implements IResponse {
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		int result = super.hashCode();
 		result = prime * result + ((content == null) ? 0 : content.hashCode());
-		result = prime * result + ((stamp == null) ? 0 : stamp.hashCode());
 		return result;
 	}
 
@@ -53,7 +33,7 @@ public class Response extends AbstractModel implements IResponse {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
@@ -62,11 +42,6 @@ public class Response extends AbstractModel implements IResponse {
 			if (other.content != null)
 				return false;
 		} else if (!content.equals(other.content))
-			return false;
-		if (stamp == null) {
-			if (other.stamp != null)
-				return false;
-		} else if (!stamp.equals(other.stamp))
 			return false;
 		return true;
 	}

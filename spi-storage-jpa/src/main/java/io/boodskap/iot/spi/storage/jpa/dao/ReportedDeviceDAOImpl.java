@@ -1,7 +1,6 @@
 package io.boodskap.iot.spi.storage.jpa.dao;
 
 import java.util.Collection;
-import java.util.Date;
 
 import io.boodskap.iot.StorageException;
 import io.boodskap.iot.dao.EntityIterator;
@@ -52,7 +51,6 @@ public class ReportedDeviceDAOImpl implements ReportedDeviceDAO<ReportedDevice> 
 			
 			ne.setAddress(e.getAddress());
 			ne.setChannel(e.getChannel());
-			ne.setLastReported(new Date());
 			ne.setNodeId(e.getNodeId());
 			ne.setNodeUid(e.getNodeUid());
 			ne.setPort(e.getPort());

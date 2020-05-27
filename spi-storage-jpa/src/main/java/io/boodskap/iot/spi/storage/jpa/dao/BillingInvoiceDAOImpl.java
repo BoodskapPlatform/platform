@@ -1,7 +1,6 @@
 package io.boodskap.iot.spi.storage.jpa.dao;
 
 import java.util.Collection;
-import java.util.Date;
 
 import io.boodskap.iot.StorageException;
 import io.boodskap.iot.dao.BillingInvoiceDAO;
@@ -44,7 +43,6 @@ public class BillingInvoiceDAOImpl implements BillingInvoiceDAO<BillingInvoice> 
 			
 			if(null == oe) {
 				ne = new BillingInvoice(new BillingInvoiceId(e.getDomainKey(), e.getTargetDomain(), e.getInvoiceId()));
-				ne.setCreatedtime(new Date());
 			}else {
 				ne = oe;
 			}

@@ -44,7 +44,6 @@ public class OrganizationUserDAOImpl implements OrganizationUserDAO<Organization
 			
 			if(null == oe) {
 				ne = new OrganizationUser(new OrganizationUserId(e.getDomainKey(), e.getOrgId(), e.getUserId()));
-				ne.setCreatedStamp(new Date());
 			}else {
 				ne = oe;
 			}

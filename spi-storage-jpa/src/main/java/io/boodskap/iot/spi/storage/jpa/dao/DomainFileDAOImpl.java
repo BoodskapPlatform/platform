@@ -48,7 +48,6 @@ public class DomainFileDAOImpl implements DomainFileDAO<DomainFile> {
 			
 			if(null == oe) {
 				ne = new DomainFile(new DomainFileId(e.getDomainKey(), e.getFileId()));
-				ne.setCreatedStamp(new Date());
 			}else {
 				ne = oe;
 			}

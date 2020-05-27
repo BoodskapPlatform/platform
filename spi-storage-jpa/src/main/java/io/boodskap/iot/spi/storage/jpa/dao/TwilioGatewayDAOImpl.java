@@ -42,7 +42,6 @@ public class TwilioGatewayDAOImpl implements TwilioGatewayDAO<TwilioGateway> {
 			
 			if(null == oe) {
 				ne = new TwilioGateway(e.getDomainKey());
-				ne.setCreatedStamp(new Date());
 			}else {
 				ne = oe;
 			}

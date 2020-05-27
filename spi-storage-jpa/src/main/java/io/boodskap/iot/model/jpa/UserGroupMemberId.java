@@ -4,7 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Embeddable
-public class UserGroupMemberId extends AbstractGroupMember {
+public class UserGroupMemberId extends AbstractGroupMemberId {
 
 	private static final long serialVersionUID = -3847899451541535739L;
 	

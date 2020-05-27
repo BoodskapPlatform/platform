@@ -45,7 +45,6 @@ public class CameraDeviceDAOImpl implements CameraDeviceDAO<CameraDevice> {
 			
 			if(null == oe) {
 				ne = new CameraDevice(new CameraDeviceId(e.getDomainKey(), e.getDeviceId(), e.getCamera()));
-				ne.setCreatedStamp(new Date());
 			}else {
 				ne = oe;
 			}

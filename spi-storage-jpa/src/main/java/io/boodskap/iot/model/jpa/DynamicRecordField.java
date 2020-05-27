@@ -8,7 +8,7 @@ import io.boodskap.iot.model.IDynamicRecordField;
 
 @Entity()
 @Table(name="dynamicrecordfield")
-public class DynamicRecordField extends DynamicField implements IDynamicRecordField {
+public class DynamicRecordField extends AbstractDynamicField implements IDynamicRecordField {
 	
 	private static final long serialVersionUID = 8101500765559308203L;
 

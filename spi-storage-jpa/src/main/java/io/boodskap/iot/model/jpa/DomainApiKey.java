@@ -9,7 +9,7 @@ import io.boodskap.iot.model.IDomainApiKey;
 
 @Entity
 @Table(name="domainapikey")
-public class DomainApiKey implements IDomainApiKey{
+public class DomainApiKey extends AbstractModel implements IDomainApiKey{
 
 	private static final long serialVersionUID = -7862597406283328282L;
 	
@@ -43,7 +43,7 @@ public class DomainApiKey implements IDomainApiKey{
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		int result = super.hashCode();
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
@@ -52,7 +52,7 @@ public class DomainApiKey implements IDomainApiKey{
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;

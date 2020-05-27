@@ -2,11 +2,9 @@ package io.boodskap.iot.model.jpa;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -17,15 +15,12 @@ import io.boodskap.iot.model.IRecord;
 
 @Entity()
 @Table(name="record")
-public class Record implements IRecord {
+public class Record extends AbstractModel implements IRecord {
 	
 	private static final long serialVersionUID = -8983111494193420302L;
 
 	@EmbeddedId
 	private RecordId id = new RecordId();
-	
-	@Column(name="createdstamp")
-	private Date createdStamp = new Date();
 	
 	@OneToMany(
 			targetEntity=DynamicRecordField.class,
@@ -76,16 +71,6 @@ public class Record implements IRecord {
 		id.setSpecId(specId);
 	}
 
-	@Override
-	public Date getCreatedStamp() {
-		return createdStamp;
-	}
-
-	@Override
-	public void setCreatedStamp(Date createdStamp) {
-		this.createdStamp = createdStamp;
-	}
-
 	@SuppressWarnings("unchecked")
 	@Override
 	public Collection<DynamicRecordField> getFields() {
@@ -104,8 +89,7 @@ public class Record implements IRecord {
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((createdStamp == null) ? 0 : createdStamp.hashCode());
+		int result = super.hashCode();
 		result = prime * result + ((fields == null) ? 0 : fields.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
@@ -115,16 +99,11 @@ public class Record implements IRecord {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
 		Record other = (Record) obj;
-		if (createdStamp == null) {
-			if (other.createdStamp != null)
-				return false;
-		} else if (!createdStamp.equals(other.createdStamp))
-			return false;
 		if (fields == null) {
 			if (other.fields != null)
 				return false;

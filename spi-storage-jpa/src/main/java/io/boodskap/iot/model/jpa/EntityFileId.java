@@ -5,26 +5,32 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
+import io.boodskap.iot.SizeConstants;
+
 
 @Embeddable
 public class EntityFileId implements Serializable {
 	
 	private static final long serialVersionUID = -5360716309551563563L;
 
-	@Column(name="domainkey", length=16)
+	@Column(name="domainkey", length=SizeConstants.DOMAIN_SIZE)
 	private String domainKey;
+	
+	@Column(name="entitytype", length=SizeConstants.ID_SIZE)
+	private String entityType;
 
-	@Column(name="entityid", length=40)
+	@Column(name="entityid", length=SizeConstants.ID_SIZE)
 	private String entityId;
 
-	@Column(name="fileid", length=40)
+	@Column(name="fileid", length=SizeConstants.ID_SIZE)
 	private String fileId;
 
 	public EntityFileId() {
 	}
 
-	public EntityFileId(String domainKey, String entityId, String fileId) {
+	public EntityFileId(String domainKey, String entityType, String entityId, String fileId) {
 		this.domainKey = domainKey;
+		this.entityType = entityType;
 		this.entityId = entityId;
 		this.fileId = fileId;
 	}
@@ -53,12 +59,21 @@ public class EntityFileId implements Serializable {
 		this.fileId = fileId;
 	}
 
+	public String getEntityType() {
+		return entityType;
+	}
+
+	public void setEntityType(String entityType) {
+		this.entityType = entityType;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((domainKey == null) ? 0 : domainKey.hashCode());
 		result = prime * result + ((entityId == null) ? 0 : entityId.hashCode());
+		result = prime * result + ((entityType == null) ? 0 : entityType.hashCode());
 		result = prime * result + ((fileId == null) ? 0 : fileId.hashCode());
 		return result;
 	}
@@ -81,6 +96,11 @@ public class EntityFileId implements Serializable {
 			if (other.entityId != null)
 				return false;
 		} else if (!entityId.equals(other.entityId))
+			return false;
+		if (entityType == null) {
+			if (other.entityType != null)
+				return false;
+		} else if (!entityType.equals(other.entityType))
 			return false;
 		if (fileId == null) {
 			if (other.fileId != null)

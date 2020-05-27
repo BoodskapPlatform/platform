@@ -2,7 +2,6 @@ package io.boodskap.iot.spi.storage.jpa.dao;
 
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Date;
 
 import javax.persistence.Query;
 
@@ -49,7 +48,6 @@ public class OTABatchDAOImpl implements OTABatchDAO<OTABatch> {
 			
 			if(null == oe) {
 				ne = new OTABatch(new OTABatchId(e.getDomainKey(), e.getBatchId()));
-				ne.setCreatedAt(new Date());
 			}else {
 				ne = oe;
 			}
@@ -63,7 +61,6 @@ public class OTABatchDAOImpl implements OTABatchDAO<OTABatch> {
 			ne.setFirmwareVersion(e.getFirmwareVersion());
 			ne.setName(e.getName());
 			ne.setState(e.getState());
-			ne.setUpdatedAt(new Date());
 			
 			if(null == oe) {
 				UOW.persist(ne);

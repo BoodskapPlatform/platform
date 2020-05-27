@@ -46,7 +46,6 @@ public class GlobalDataDAOImpl implements GlobalDataDAO<GlobalData> {
 			
 			if(null == oe) {
 				ne = new GlobalData(new GlobalDataId(e.getDataId(), e.getDomainKey()));
-				ne.setCreatedStamp(new Date());
 			}else {
 				ne = oe;
 			}

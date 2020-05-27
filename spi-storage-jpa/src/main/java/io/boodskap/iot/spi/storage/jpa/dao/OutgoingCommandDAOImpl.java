@@ -1,7 +1,6 @@
 package io.boodskap.iot.spi.storage.jpa.dao;
 
 import java.util.Collection;
-import java.util.Date;
 
 import io.boodskap.iot.StorageException;
 import io.boodskap.iot.dao.EntityIterator;
@@ -44,7 +43,6 @@ public class OutgoingCommandDAOImpl implements OutgoingCommandDAO<OutgoingComman
 			
 			if(null == oe) {
 				ne = new OutgoingCommand(new OutgoingCommandId(e.getDomainKey(), e.getRequestId(), e.getDeviceId(), e.getCorrId()));
-				ne.setCreatedStamp(new Date());
 			}else {
 				ne = oe;
 			}

@@ -48,7 +48,6 @@ public class PublicFileDAOImpl implements PublicFileDAO<PublicFile> {
 			
 			if(null == oe) {
 				ne = new PublicFile(new PublicFileId(e.getDomainKey(), e.getFileId()));
-				ne.setCreatedStamp(new Date());
 			}else {
 				ne = oe;
 			}

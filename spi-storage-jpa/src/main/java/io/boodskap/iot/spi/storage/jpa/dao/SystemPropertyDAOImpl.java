@@ -43,7 +43,6 @@ public class SystemPropertyDAOImpl implements SystemPropertyDAO<SystemProperty> 
 			
 			if(null == oe) {
 				ne = new SystemProperty(e.getName());
-				ne.setCreatedStamp(new Date());
 			}else {
 				ne = oe;
 			}

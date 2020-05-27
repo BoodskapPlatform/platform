@@ -37,6 +37,10 @@ public interface EntityFileDAO<T extends IEntityFile> extends DAO<T> {
 
 	public boolean has(String domainKey, String entityType, String entityId, String fileId) throws StorageException;
 
+	public void delete(String domainKey, String entityType) throws StorageException;
+
+	public void delete(String domainKey, String entityType, String entityId) throws StorageException;
+
 	public void delete(String domainKey, String entityType, String entityId, String fileId) throws StorageException;
 
 	public void update(String domainKey, String entityType, String entityId, String fileId, String tags, String description) throws StorageException;

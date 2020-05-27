@@ -1,7 +1,5 @@
 package io.boodskap.iot.model.jpa;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -16,7 +14,7 @@ import io.boodskap.iot.model.ILookup;
 
 @Entity
 @Table(name="lookup")
-public class Lookup implements ILookup{
+public class Lookup extends AbstractModel implements ILookup{
 
 	private static final long serialVersionUID = -5281376095868689212L;
 
@@ -30,12 +28,6 @@ public class Lookup implements ILookup{
 	@Column(name="type", length=12)
 	@Enumerated(EnumType.STRING)
 	private DataType type;
-	
-	@Column(name="createdstamp")
-	private Date createdStamp;
-	
-	@Column(name="updatedstamp")
-	private Date updatedStamp;
 	
 	public Lookup(){
 	}
@@ -92,30 +84,12 @@ public class Lookup implements ILookup{
 		this.type = type;
 	}
 
-	public Date getCreatedStamp() {
-		return createdStamp;
-	}
-
-	public void setCreatedStamp(Date createdStamp) {
-		this.createdStamp = createdStamp;
-	}
-
-	public Date getUpdatedStamp() {
-		return updatedStamp;
-	}
-
-	public void setUpdatedStamp(Date updatedStamp) {
-		this.updatedStamp = updatedStamp;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((createdStamp == null) ? 0 : createdStamp.hashCode());
+		int result = super.hashCode();
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
-		result = prime * result + ((updatedStamp == null) ? 0 : updatedStamp.hashCode());
 		result = prime * result + ((value == null) ? 0 : value.hashCode());
 		return result;
 	}
@@ -124,27 +98,17 @@ public class Lookup implements ILookup{
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
 		Lookup other = (Lookup) obj;
-		if (createdStamp == null) {
-			if (other.createdStamp != null)
-				return false;
-		} else if (!createdStamp.equals(other.createdStamp))
-			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
 		if (type != other.type)
-			return false;
-		if (updatedStamp == null) {
-			if (other.updatedStamp != null)
-				return false;
-		} else if (!updatedStamp.equals(other.updatedStamp))
 			return false;
 		if (value == null) {
 			if (other.value != null)

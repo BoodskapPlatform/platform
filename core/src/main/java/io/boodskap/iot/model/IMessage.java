@@ -144,6 +144,7 @@ public interface IMessage extends IDomainObject {
 	
 	public default void setData(JsonNode data) {
 		
+		
 		Map<String, Object> fields = ThreadContext.toMap(data);
 		
 		for(Map.Entry<String, Object> me : fields.entrySet()) {

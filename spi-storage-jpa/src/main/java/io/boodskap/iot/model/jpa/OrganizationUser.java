@@ -1,8 +1,5 @@
 package io.boodskap.iot.model.jpa;
 
-import java.util.Date;
-
-import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -12,19 +9,13 @@ import io.boodskap.iot.model.IOrganizationUserRole;
 
 @Entity
 @Table(name="organizationuser")
-public class OrganizationUser implements IOrganizationUser {
+public class OrganizationUser extends AbstractPerson implements IOrganizationUser {
 	
 	private static final long serialVersionUID = -2018718809063224007L;
 	
 	@EmbeddedId
 	private OrganizationUserId id = new OrganizationUserId();
 
-	@Column(name="createdstamp")
-	private Date createdStamp;
-	
-	@Column(name="updatedstamp")
-	private Date updatedStamp;
-	
 	public OrganizationUser() {
 	}
 
@@ -63,29 +54,11 @@ public class OrganizationUser implements IOrganizationUser {
 		id.setUserId(userId);
 	}
 
-	public Date getCreatedStamp() {
-		return createdStamp;
-	}
-
-	public void setCreatedStamp(Date createdStamp) {
-		this.createdStamp = createdStamp;
-	}
-
-	public Date getUpdatedStamp() {
-		return updatedStamp;
-	}
-
-	public void setUpdatedStamp(Date updatedStamp) {
-		this.updatedStamp = updatedStamp;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((createdStamp == null) ? 0 : createdStamp.hashCode());
+		int result = super.hashCode();
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((updatedStamp == null) ? 0 : updatedStamp.hashCode());
 		return result;
 	}
 
@@ -93,25 +66,15 @@ public class OrganizationUser implements IOrganizationUser {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
 		OrganizationUser other = (OrganizationUser) obj;
-		if (createdStamp == null) {
-			if (other.createdStamp != null)
-				return false;
-		} else if (!createdStamp.equals(other.createdStamp))
-			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
-			return false;
-		if (updatedStamp == null) {
-			if (other.updatedStamp != null)
-				return false;
-		} else if (!updatedStamp.equals(other.updatedStamp))
 			return false;
 		return true;
 	}

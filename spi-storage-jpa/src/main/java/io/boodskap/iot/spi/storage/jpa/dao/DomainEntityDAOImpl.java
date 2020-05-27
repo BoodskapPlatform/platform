@@ -25,8 +25,8 @@ public class DomainEntityDAOImpl implements DomainEntityDAO<DomainEntity> {
 	}
 
 	@Override
-	public DomainEntity create(String domainKey, String entityId) {
-		return new DomainEntity(new DomainEntityId(domainKey, entityId));
+	public DomainEntity create(String domainKey, String entityType, String entityId) {
+		return new DomainEntity(new DomainEntityId(domainKey, entityType, entityId));
 	}
 
 	@Override
@@ -39,11 +39,11 @@ public class DomainEntityDAOImpl implements DomainEntityDAO<DomainEntity> {
 		
 		try {
 			
-			final IDomainEntity oe = get(e.getDomainKey(), e.getEntityId());
+			final IDomainEntity oe = get(e.getDomainKey(), e.getEntityType(), e.getEntityId());
 			IDomainEntity ne;
 			
 			if(null == oe) {
-				ne = new DomainEntity(new DomainEntityId(e.getDomainKey(), e.getEntityId()));
+				ne = new DomainEntity(new DomainEntityId(e.getDomainKey(), e.getEntityType(), e.getEntityId()));
 				ne.setRegisteredStamp(new Date());
 			}else {
 				ne = oe;
@@ -51,19 +51,14 @@ public class DomainEntityDAOImpl implements DomainEntityDAO<DomainEntity> {
 			
 			UOW.begin();
 			
-			ne.setAddress(e.getAddress());
-			ne.setCity(e.getCity());
-			ne.setCountry(e.getCountry());
 			ne.setDescription(e.getDescription());
-			ne.setEmail(e.getEmail());
 			ne.setEntityId(e.getEntityId());
-			ne.setLocale(e.getLocale());
 			ne.setName(e.getName());
-			ne.setPrimaryPhone(e.getPrimaryPhone());
-			ne.setState(e.getState());
-			ne.setTimeZone(e.getTimeZone());
-			ne.setZipcode(e.getZipcode());
 			ne.setUpdatedStamp(e.getUpdatedStamp());
+			ne.setAttributes(e.getAttributes());
+			ne.setEntityType(e.getEntityType());
+			ne.setCreatedBy(e.getCreatedBy());
+			ne.setUpdatedBy(e.getUpdatedBy());
 			
 			if(null == oe) {
 				UOW.persist(ne);
@@ -103,13 +98,13 @@ public class DomainEntityDAOImpl implements DomainEntityDAO<DomainEntity> {
 	}
 
 	@Override
-	public void delete(String domainKey, String entityId) throws StorageException {
-		new CommonDAO<>(DomainEntity.class).delete(domainKey, "entityId", entityId);
+	public void delete(String domainKey, String entityType, String entityId) throws StorageException {
+		new CommonDAO<>(DomainEntity.class).delete(domainKey, "entityType", entityType, "entityId", entityId);
 	}
 
 	@Override
-	public DomainEntity get(String domainKey, String entityId) throws StorageException {
-		return new CommonDAO<>(DomainEntity.class).find(new DomainEntityId(domainKey, entityId));
+	public DomainEntity get(String domainKey, String entityType, String entityId) throws StorageException {
+		return new CommonDAO<>(DomainEntity.class).find(new DomainEntityId(domainKey, entityType, entityId));
 	}
 
 	@Override
@@ -118,13 +113,23 @@ public class DomainEntityDAOImpl implements DomainEntityDAO<DomainEntity> {
 	}
 
 	@Override
-	public Collection<DomainEntity> listNext(String domainKey, String entityId, int page, int pageSize) throws StorageException {
+	public Collection<DomainEntity> list(String domainKey, String entityType, int page, int pageSize) throws StorageException {
+		return new CommonDAO<>(DomainEntity.class).list(domainKey, page, pageSize, "id.entityType");
+	}
+
+	@Override
+	public Collection<DomainEntity> listNext(String domainKey, String entityType, String entityId, int page, int pageSize) throws StorageException {
 		return list(domainKey, page, pageSize);
 	}
 
 	@Override
 	public Collection<DomainEntity> search(String domainKey, String query, int pageSize) throws StorageException {
 		return new CommonDAO<>(DomainEntity.class).search(query, domainKey, pageSize);
+	}
+
+	@Override
+	public Collection<DomainEntity> search(String domainKey, String entityType, String query, int pageSize) throws StorageException {
+		return new CommonDAO<>(DomainEntity.class).search(query, domainKey, "id.entityType", entityType, pageSize);
 	}
 
 	@Override

@@ -1,7 +1,5 @@
 package io.boodskap.iot.model.jpa;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -13,7 +11,7 @@ import io.boodskap.iot.model.ICluster;
 
 @Entity
 @Table(name="cluster")
-public class Cluster implements ICluster {
+public class Cluster extends AbstractModel implements ICluster {
 	
 	private static final long serialVersionUID = 3614768552679942510L;
 
@@ -24,12 +22,6 @@ public class Cluster implements ICluster {
 	@Enumerated(EnumType.STRING)
 	private ClusterStatus status;
 
-	@Column(name="rstamp")
-	private Date registeredStamp = new Date();
-	
-	@Column(name="ustamp")
-	private Date updatedStamp = new Date();
-	
 	@Column(name="machines")
 	private int machines;
 	
@@ -81,26 +73,6 @@ public class Cluster implements ICluster {
 	@Override
 	public void setTargetDomainKey(String targetDomainKey) {
 		id.setTargetDomainKey(targetDomainKey);
-	}
-
-	@Override
-	public Date getRegisteredStamp() {
-		return registeredStamp;
-	}
-
-	@Override
-	public void setRegisteredStamp(Date registeredStamp) {
-		this.registeredStamp = registeredStamp;
-	}
-
-	@Override
-	public Date getUpdatedStamp() {
-		return updatedStamp;
-	}
-
-	@Override
-	public void setUpdatedStamp(Date updatedStamp) {
-		this.updatedStamp = updatedStamp;
 	}
 
 	@Override
@@ -166,15 +138,13 @@ public class Cluster implements ICluster {
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		int result = super.hashCode();
 		result = prime * result + cores;
 		result = prime * result + devices;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + machines;
 		result = prime * result + organizations;
-		result = prime * result + ((registeredStamp == null) ? 0 : registeredStamp.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
-		result = prime * result + ((updatedStamp == null) ? 0 : updatedStamp.hashCode());
 		result = prime * result + users;
 		return result;
 	}
@@ -183,7 +153,7 @@ public class Cluster implements ICluster {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
@@ -201,17 +171,7 @@ public class Cluster implements ICluster {
 			return false;
 		if (organizations != other.organizations)
 			return false;
-		if (registeredStamp == null) {
-			if (other.registeredStamp != null)
-				return false;
-		} else if (!registeredStamp.equals(other.registeredStamp))
-			return false;
 		if (status != other.status)
-			return false;
-		if (updatedStamp == null) {
-			if (other.updatedStamp != null)
-				return false;
-		} else if (!updatedStamp.equals(other.updatedStamp))
 			return false;
 		if (users != other.users)
 			return false;

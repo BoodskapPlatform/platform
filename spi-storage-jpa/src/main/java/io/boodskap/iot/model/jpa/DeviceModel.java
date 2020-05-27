@@ -1,8 +1,5 @@
 package io.boodskap.iot.model.jpa;
 
-import java.util.Date;
-
-import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -11,18 +8,12 @@ import io.boodskap.iot.model.IDeviceModel;
 
 @Entity
 @Table(name="devicemodel")
-public class DeviceModel implements IDeviceModel {
+public class DeviceModel extends AbstractModel implements IDeviceModel {
 
 	private static final long serialVersionUID = -1271201656801970354L;
 	
 	@EmbeddedId
 	private DeviceModelId id = new DeviceModelId();
-	
-	@Column(name="description", length=120)
-	private String description = null;
-	
-	@Column(name="registeredstamp")
-	private Date registeredStamp = null;
 	
 	public DeviceModel() {
 	}
@@ -55,29 +46,11 @@ public class DeviceModel implements IDeviceModel {
 		id.setVersion(version);
 	}
 
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public Date getRegisteredStamp() {
-		return registeredStamp;
-	}
-
-	public void setRegisteredStamp(Date registeredStamp) {
-		this.registeredStamp = registeredStamp;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((description == null) ? 0 : description.hashCode());
+		int result = super.hashCode();
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((registeredStamp == null) ? 0 : registeredStamp.hashCode());
 		return result;
 	}
 
@@ -85,25 +58,15 @@ public class DeviceModel implements IDeviceModel {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
 		DeviceModel other = (DeviceModel) obj;
-		if (description == null) {
-			if (other.description != null)
-				return false;
-		} else if (!description.equals(other.description))
-			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
-			return false;
-		if (registeredStamp == null) {
-			if (other.registeredStamp != null)
-				return false;
-		} else if (!registeredStamp.equals(other.registeredStamp))
 			return false;
 		return true;
 	}

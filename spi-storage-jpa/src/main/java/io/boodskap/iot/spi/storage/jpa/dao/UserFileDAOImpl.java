@@ -48,7 +48,6 @@ public class UserFileDAOImpl implements UserFileDAO<UserFile> {
 			
 			if(null == oe) {
 				ne = new UserFile(new UserFileId(e.getDomainKey(), e.getUserId(), e.getFileId()));
-				ne.setCreatedStamp(new Date());
 			}else {
 				ne = oe;
 			}

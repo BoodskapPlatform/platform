@@ -5,13 +5,12 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import io.boodskap.iot.SizeConstants;
 import io.boodskap.iot.model.IPlugin;
 import io.boodskap.iot.plugin.PluginType;
 
 @Entity
 @Table(name="plugin")
-public class Plugin implements IPlugin {
+public class Plugin extends AbstractModel implements IPlugin {
 
 	private static final long serialVersionUID = 5195867514141380004L;
 	
@@ -26,9 +25,6 @@ public class Plugin implements IPlugin {
 	
 	@Column(name="type", length=12)
 	private PluginType type;
-	
-	@Column(name="desc", length=SizeConstants.DESCRIPTION_SIZE)
-	private String desc;
 	
 	@Column(name="author", length=80)
 	private String author;
@@ -92,14 +88,6 @@ public class Plugin implements IPlugin {
 		this.type = type;
 	}
 
-	public String getDesc() {
-		return desc;
-	}
-
-	public void setDesc(String desc) {
-		this.desc = desc;
-	}
-
 	public String getAuthor() {
 		return author;
 	}
@@ -143,12 +131,11 @@ public class Plugin implements IPlugin {
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		int result = super.hashCode();
 		result = prime * result + ((author == null) ? 0 : author.hashCode());
 		result = prime * result + ((clazz == null) ? 0 : clazz.hashCode());
 		result = prime * result + ((contextId == null) ? 0 : contextId.hashCode());
 		result = prime * result + ((crc == null) ? 0 : crc.hashCode());
-		result = prime * result + ((desc == null) ? 0 : desc.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((jsonContent == null) ? 0 : jsonContent.hashCode());
 		result = prime * result + ((readme == null) ? 0 : readme.hashCode());
@@ -161,7 +148,7 @@ public class Plugin implements IPlugin {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
@@ -185,11 +172,6 @@ public class Plugin implements IPlugin {
 			if (other.crc != null)
 				return false;
 		} else if (!crc.equals(other.crc))
-			return false;
-		if (desc == null) {
-			if (other.desc != null)
-				return false;
-		} else if (!desc.equals(other.desc))
 			return false;
 		if (id == null) {
 			if (other.id != null)

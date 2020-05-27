@@ -17,7 +17,7 @@ import io.boodskap.iot.model.IDatabaseTable;
 
 @Entity
 @Table(name="databasemetadata")
-public class DatabaseMetaData implements IDatabaseMetaData {
+public class DatabaseMetaData extends AbstractModel implements IDatabaseMetaData {
 	
 	private static final long serialVersionUID = 547209306501041052L;
 	
@@ -525,7 +525,7 @@ public class DatabaseMetaData implements IDatabaseMetaData {
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		int result = super.hashCode();
 		result = prime * result + ((aliases == null) ? 0 : aliases.hashCode());
 		result = prime * result + ((catalogs == null) ? 0 : catalogs.hashCode());
 		result = prime * result + ((databaseMajorVersion == null) ? 0 : databaseMajorVersion.hashCode());
@@ -579,7 +579,7 @@ public class DatabaseMetaData implements IDatabaseMetaData {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;

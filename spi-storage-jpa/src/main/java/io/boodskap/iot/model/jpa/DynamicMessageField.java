@@ -8,7 +8,7 @@ import io.boodskap.iot.model.IDynamicMessageField;
 
 @Entity()
 @Table(name="dyamicmessagefield")
-public class DynamicMessageField extends DynamicField implements IDynamicMessageField {
+public class DynamicMessageField extends AbstractDynamicField implements IDynamicMessageField {
 	
 	private static final long serialVersionUID = -5123999890746243650L;
 

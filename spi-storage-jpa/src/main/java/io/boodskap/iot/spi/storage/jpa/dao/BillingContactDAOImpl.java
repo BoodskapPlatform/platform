@@ -1,7 +1,6 @@
 package io.boodskap.iot.spi.storage.jpa.dao;
 
 import java.util.Collection;
-import java.util.Date;
 
 import io.boodskap.iot.StorageException;
 import io.boodskap.iot.dao.BillingContactDAO;
@@ -44,7 +43,6 @@ public class BillingContactDAOImpl implements BillingContactDAO<BillingContact> 
 			
 			if(null == oe) {
 				ne = new BillingContact(new BillingContactId(e.getDomainKey(), e.getTargetDomain(), e.getContactId()));
-				ne.setCreatedtime(new Date());
 			}else {
 				ne = oe;
 			}
@@ -53,7 +51,6 @@ public class BillingContactDAOImpl implements BillingContactDAO<BillingContact> 
 			
 			ne.setAddress(e.getAddress());
 			ne.setCity(e.getCity());
-			ne.setContact(e.getContact());
 			ne.setCountry(e.getCountry());
 			ne.setEmail(e.getEmail());
 			ne.setLogo(e.getLogo());
@@ -62,7 +59,6 @@ public class BillingContactDAOImpl implements BillingContactDAO<BillingContact> 
 			ne.setState(e.getState());
 			ne.setType(e.getType());
 			ne.setZipcode(e.getZipcode());
-			ne.setUpdatedtime(new Date());
 			
 			
 			if(null == oe) {

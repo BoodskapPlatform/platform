@@ -16,21 +16,19 @@
  ******************************************************************************/
 package io.boodskap.iot.model;
 
+import java.io.Serializable;
+
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import io.boodskap.iot.BoodskapSystem;
 
 @JsonSerialize(as=IDatabaseTableField.class)
-public interface IDatabaseTableField extends IDomainObject {
+public interface IDatabaseTableField extends Serializable {
 
 	public static Class<? extends IDatabaseTableField> clazz() {
 		return BoodskapSystem.storage().getDatabaseTableDAO().fieldClazz();
 	}
 
-	public default void save() {
-		throw new UnsupportedOperationException();
-	}
-	
 	public String getMetaDataId();
 	
 	public void setMetaDataId(String metaDataId);

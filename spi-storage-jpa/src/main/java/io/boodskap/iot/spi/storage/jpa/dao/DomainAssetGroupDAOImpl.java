@@ -44,7 +44,6 @@ public class DomainAssetGroupDAOImpl implements DomainAssetGroupDAO<DomainAssetG
 			
 			if(null == oe) {
 				ne = new DomainAssetGroup(new DomainAssetGroupId(e.getDomainKey(), e.getGroupId()));
-				ne.setCreatedStamp(new Date());
 			}else {
 				ne = oe;
 			}

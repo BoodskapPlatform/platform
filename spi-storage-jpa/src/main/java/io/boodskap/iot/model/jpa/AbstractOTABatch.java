@@ -11,7 +11,7 @@ import io.boodskap.iot.OTABatchState;
 import io.boodskap.iot.model.IOTABatch;
 
 @MappedSuperclass
-public abstract class AbstractOTABatch implements IOTABatch {
+public abstract class AbstractOTABatch extends AbstractModel implements IOTABatch {
 
 	private static final long serialVersionUID = 4612047731177937664L;
 
@@ -24,18 +24,6 @@ public abstract class AbstractOTABatch implements IOTABatch {
 	
 	@Column(name="fwversion")
 	private String firmwareVersion;
-	
-	@Column(name="name")
-	private String name;
-	
-	@Column(name="description")
-	private String description;
-	
-	@Column(name="createdat")
-	private Date createdAt;
-	
-	@Column(name="updatedat")
-	private Date updatedAt;
 	
 	@Column(name="expireat")
 	private Date expireAt;
@@ -70,30 +58,6 @@ public abstract class AbstractOTABatch implements IOTABatch {
 		this.firmwareVersion = firmwareVersion;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public Date getCreatedAt() {
-		return createdAt;
-	}
-
-	public void setCreatedAt(Date createdAt) {
-		this.createdAt = createdAt;
-	}
-
 	public Date getExpireAt() {
 		return expireAt;
 	}
@@ -110,27 +74,15 @@ public abstract class AbstractOTABatch implements IOTABatch {
 		this.finishedAt = finishedAt;
 	}
 
-	public Date getUpdatedAt() {
-		return updatedAt;
-	}
-
-	public void setUpdatedAt(Date updatedAt) {
-		this.updatedAt = updatedAt;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((createdAt == null) ? 0 : createdAt.hashCode());
-		result = prime * result + ((description == null) ? 0 : description.hashCode());
+		int result = super.hashCode();
 		result = prime * result + ((expireAt == null) ? 0 : expireAt.hashCode());
 		result = prime * result + ((finishedAt == null) ? 0 : finishedAt.hashCode());
 		result = prime * result + ((firmwareModel == null) ? 0 : firmwareModel.hashCode());
 		result = prime * result + ((firmwareVersion == null) ? 0 : firmwareVersion.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((state == null) ? 0 : state.hashCode());
-		result = prime * result + ((updatedAt == null) ? 0 : updatedAt.hashCode());
 		return result;
 	}
 
@@ -138,21 +90,11 @@ public abstract class AbstractOTABatch implements IOTABatch {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
 		AbstractOTABatch other = (AbstractOTABatch) obj;
-		if (createdAt == null) {
-			if (other.createdAt != null)
-				return false;
-		} else if (!createdAt.equals(other.createdAt))
-			return false;
-		if (description == null) {
-			if (other.description != null)
-				return false;
-		} else if (!description.equals(other.description))
-			return false;
 		if (expireAt == null) {
 			if (other.expireAt != null)
 				return false;
@@ -173,17 +115,7 @@ public abstract class AbstractOTABatch implements IOTABatch {
 				return false;
 		} else if (!firmwareVersion.equals(other.firmwareVersion))
 			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
 		if (state != other.state)
-			return false;
-		if (updatedAt == null) {
-			if (other.updatedAt != null)
-				return false;
-		} else if (!updatedAt.equals(other.updatedAt))
 			return false;
 		return true;
 	}

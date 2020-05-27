@@ -47,7 +47,6 @@ public class TemplateDAOImpl implements TemplateDAO<Template> {
 			
 			if(null == oe) {
 				ne = new Template(new TemplateId(e.getDomainKey(), e.getName()));
-				ne.setCreatedStamp(new Date());
 			}else {
 				ne = oe;
 			}

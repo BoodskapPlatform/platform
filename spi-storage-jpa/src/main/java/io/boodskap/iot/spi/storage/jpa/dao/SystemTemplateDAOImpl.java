@@ -39,7 +39,6 @@ public class SystemTemplateDAOImpl implements SystemTemplateDAO<SystemTemplate> 
 			
 			if(null == oe) {
 				ne = new SystemTemplate(e.getName());
-				ne.setCreatedStamp(new Date());
 			}else {
 				ne = oe;
 			}

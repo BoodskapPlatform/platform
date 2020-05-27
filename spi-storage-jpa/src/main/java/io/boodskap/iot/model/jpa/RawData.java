@@ -1,7 +1,6 @@
 package io.boodskap.iot.model.jpa;
 
 import java.util.Arrays;
-import java.util.Date;
 import java.util.UUID;
 
 import javax.persistence.Column;
@@ -20,7 +19,7 @@ import io.boodskap.iot.model.IRawData;
 
 @Entity
 @Table(name="rawdata", indexes= {@Index(columnList = "domainKey"), @Index(columnList = "receivedStamp")})
-public class RawData implements IRawData {
+public class RawData extends AbstractStorageObject implements IRawData {
 
 	private static final long serialVersionUID = 8770058772346142631L;
 	
@@ -76,12 +75,6 @@ public class RawData implements IRawData {
 	@Column(name="size")
 	private int size;
 	
-	@Column(name="receivedstamp")
-    private Date receivedStamp;
-	
-	@Column(name="updatedstamp")
-    private Date updatedStamp;
-	
 	@Enumerated(EnumType.STRING)
 	@Column(name="channel", length=8)
     private DataChannel channel;
@@ -111,14 +104,6 @@ public class RawData implements IRawData {
 
 	public void setId(String id) {
 		this.id = id;
-	}
-
-	public Date getReceivedStamp() {
-		return receivedStamp;
-	}
-
-	public void setReceivedStamp(Date receivedStamp) {
-		this.receivedStamp = receivedStamp;
 	}
 
 	public String getMqttServerId() {
@@ -265,14 +250,6 @@ public class RawData implements IRawData {
 		this.state = state;
 	}
 
-	public Date getUpdatedStamp() {
-		return updatedStamp;
-	}
-
-	public void setUpdatedStamp(Date updatedStamp) {
-		this.updatedStamp = updatedStamp;
-	}
-
 	public String getBinaryType() {
 		return binaryType;
 	}
@@ -292,7 +269,7 @@ public class RawData implements IRawData {
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		int result = super.hashCode();
 		result = prime * result + ((binaryType == null) ? 0 : binaryType.hashCode());
 		result = prime * result + ((channel == null) ? 0 : channel.hashCode());
 		result = prime * result + ((contentType == null) ? 0 : contentType.hashCode());
@@ -304,17 +281,16 @@ public class RawData implements IRawData {
 		result = prime * result + ((firmwareVersion == null) ? 0 : firmwareVersion.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((ipAddress == null) ? 0 : ipAddress.hashCode());
+		result = prime * result + ((mqttServerId == null) ? 0 : mqttServerId.hashCode());
 		result = prime * result + ((mqttTopic == null) ? 0 : mqttTopic.hashCode());
 		result = prime * result + ((nodeId == null) ? 0 : nodeId.hashCode());
 		result = prime * result + ((nodeUid == null) ? 0 : nodeUid.hashCode());
 		result = prime * result + ((port == null) ? 0 : port.hashCode());
 		result = prime * result + ((properties == null) ? 0 : properties.hashCode());
 		result = prime * result + ((rawDataType == null) ? 0 : rawDataType.hashCode());
-		result = prime * result + ((receivedStamp == null) ? 0 : receivedStamp.hashCode());
 		result = prime * result + size;
 		result = prime * result + ((state == null) ? 0 : state.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
-		result = prime * result + ((updatedStamp == null) ? 0 : updatedStamp.hashCode());
 		return result;
 	}
 
@@ -322,7 +298,7 @@ public class RawData implements IRawData {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
@@ -376,6 +352,11 @@ public class RawData implements IRawData {
 				return false;
 		} else if (!ipAddress.equals(other.ipAddress))
 			return false;
+		if (mqttServerId == null) {
+			if (other.mqttServerId != null)
+				return false;
+		} else if (!mqttServerId.equals(other.mqttServerId))
+			return false;
 		if (mqttTopic == null) {
 			if (other.mqttTopic != null)
 				return false;
@@ -403,11 +384,6 @@ public class RawData implements IRawData {
 			return false;
 		if (rawDataType != other.rawDataType)
 			return false;
-		if (receivedStamp == null) {
-			if (other.receivedStamp != null)
-				return false;
-		} else if (!receivedStamp.equals(other.receivedStamp))
-			return false;
 		if (size != other.size)
 			return false;
 		if (state != other.state)
@@ -416,11 +392,6 @@ public class RawData implements IRawData {
 			if (other.type != null)
 				return false;
 		} else if (!type.equals(other.type))
-			return false;
-		if (updatedStamp == null) {
-			if (other.updatedStamp != null)
-				return false;
-		} else if (!updatedStamp.equals(other.updatedStamp))
 			return false;
 		return true;
 	}

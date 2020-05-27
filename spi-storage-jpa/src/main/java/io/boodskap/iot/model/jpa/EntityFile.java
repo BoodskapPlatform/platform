@@ -36,6 +36,16 @@ public class EntityFile extends AbstractFile implements IEntityFile {
 		id.setDomainKey(domainKey);
 	}
 
+	@Override
+	public String getEntityType() {
+		return id.getEntityType();
+	}
+
+	@Override
+	public void setEntityType(String entityType) {
+		id.setEntityType(entityType);
+	}
+
 	public String getEntityId() {
 		return id.getEntityId();
 	}

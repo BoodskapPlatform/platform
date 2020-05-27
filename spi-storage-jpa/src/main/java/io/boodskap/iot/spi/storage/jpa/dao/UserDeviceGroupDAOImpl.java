@@ -44,7 +44,6 @@ public class UserDeviceGroupDAOImpl implements UserDeviceGroupDAO<UserDeviceGrou
 			
 			if(null == oe) {
 				ne = new UserDeviceGroup(new UserDeviceGroupId(e.getDomainKey(), e.getOwnerUserId(), e.getGroupId()));
-				ne.setCreatedStamp(new Date());
 			}else {
 				ne = oe;
 			}

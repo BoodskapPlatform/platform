@@ -1,36 +1,39 @@
 package io.boodskap.iot.model.jpa;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+
+import io.boodskap.iot.SizeConstants;
 
 @Embeddable
 public class DeviceMessageCounterId implements Serializable{
 
 	private static final long serialVersionUID = 4652182033348790106L;
 
-	@Column(name="domainkey", length=16)
+	@Column(name="domainkey", length=SizeConstants.DOMAIN_SIZE)
 	private String domainKey;
 
-	@Column(name="deviceid", length=40)
+	@Column(name="deviceid", length=SizeConstants.DEVICE_ID_SIZE)
 	private String deviceId;
 
 	@Column(name="messagetype", length=40)
 	String messageType;
 
-	@Column(name="messageid", length=40)
-	String messageId;
-
+	@Column(name="day")
+	private Date day;
+	
 	public DeviceMessageCounterId() {
 	}
 
-	public DeviceMessageCounterId(String domainKey, String deviceId, String messageType, String messageId) {
+	public DeviceMessageCounterId(String domainKey, String deviceId, String messageType, Date day) {
 		super();
 		this.domainKey = domainKey;
 		this.deviceId = deviceId;
 		this.messageType = messageType;
-		this.messageId = messageId;
+		this.day = day;
 	}
 
 	public String getDomainKey() {
@@ -57,21 +60,21 @@ public class DeviceMessageCounterId implements Serializable{
 		this.messageType = messageType;
 	}
 
-	public String getMessageId() {
-		return messageId;
+	public Date getDay() {
+		return day;
 	}
 
-	public void setMessageId(String messageId) {
-		this.messageId = messageId;
+	public void setDay(Date day) {
+		this.day = day;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((day == null) ? 0 : day.hashCode());
 		result = prime * result + ((deviceId == null) ? 0 : deviceId.hashCode());
 		result = prime * result + ((domainKey == null) ? 0 : domainKey.hashCode());
-		result = prime * result + ((messageId == null) ? 0 : messageId.hashCode());
 		result = prime * result + ((messageType == null) ? 0 : messageType.hashCode());
 		return result;
 	}
@@ -85,6 +88,11 @@ public class DeviceMessageCounterId implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		DeviceMessageCounterId other = (DeviceMessageCounterId) obj;
+		if (day == null) {
+			if (other.day != null)
+				return false;
+		} else if (!day.equals(other.day))
+			return false;
 		if (deviceId == null) {
 			if (other.deviceId != null)
 				return false;
@@ -94,11 +102,6 @@ public class DeviceMessageCounterId implements Serializable{
 			if (other.domainKey != null)
 				return false;
 		} else if (!domainKey.equals(other.domainKey))
-			return false;
-		if (messageId == null) {
-			if (other.messageId != null)
-				return false;
-		} else if (!messageId.equals(other.messageId))
 			return false;
 		if (messageType == null) {
 			if (other.messageType != null)

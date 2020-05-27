@@ -42,7 +42,6 @@ public class DomainRuleDAOImpl implements DomainRuleDAO<DomainRule> {
 			
 			if(null == oe) {
 				ne = new DomainRule(e.getDomainKey());
-				ne.setCreatedStamp(new Date());
 			}else {
 				ne = oe;
 			}
@@ -51,7 +50,6 @@ public class DomainRuleDAOImpl implements DomainRuleDAO<DomainRule> {
 			
 			ne.setCode(e.getCode());
 			ne.setCompilable(e.isCompilable());
-			ne.setCreatedStamp(e.getCreatedStamp());
 			ne.setDescription(e.getDescription());
 			ne.setLanguage(e.getLanguage());
 			ne.setPlugins(e.getPlugins());

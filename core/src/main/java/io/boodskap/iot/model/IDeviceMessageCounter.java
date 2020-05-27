@@ -14,8 +14,12 @@ public interface IDeviceMessageCounter extends IDomainObject {
 		return DeviceMessageCounterDAO.get();
 	}
 	
-	public static void increment(String domainKey, String deviceId, String messageType, String messageId) throws StorageException{
-		IDeviceMessageCounter e = dao().create(domainKey, deviceId, messageType, messageId);
+	public static void increment(String domainKey, String deviceId, String messageType, Date day) throws StorageException{
+		IDeviceMessageCounter e = dao().get(domainKey, deviceId, messageType, day);
+		if(null == e) {
+			dao().create(domainKey, deviceId, messageType, day);
+		}
+		e.setCount( e.getCount() + 1);
 		e.save();
 	}
 	
@@ -39,7 +43,7 @@ public interface IDeviceMessageCounter extends IDomainObject {
 		dao().createOrUpdate(this);
 	}
 
-	public IDeviceMessageCounter create(String domainKey, String deviceId, String messageType, String messageId) throws StorageException;
+	public IDeviceMessageCounter create(String domainKey, String deviceId, String messageType, Date day) throws StorageException;
 	
 	public String getDeviceId();
 	
@@ -49,10 +53,6 @@ public interface IDeviceMessageCounter extends IDomainObject {
 	
 	public void setMessageType(String messageType);
 	
-	public String getMessageId();
-	
-	public void setMessageId(String messageId);
-
 	public Date getDay();
 	
 	public void setDay(Date day);

@@ -42,4 +42,35 @@ public class BillingTemplateId implements Serializable {
 		this.itemname = itemname;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((itemname == null) ? 0 : itemname.hashCode());
+		result = prime * result + ((templatename == null) ? 0 : templatename.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		BillingTemplateId other = (BillingTemplateId) obj;
+		if (itemname == null) {
+			if (other.itemname != null)
+				return false;
+		} else if (!itemname.equals(other.itemname))
+			return false;
+		if (templatename == null) {
+			if (other.templatename != null)
+				return false;
+		} else if (!templatename.equals(other.templatename))
+			return false;
+		return true;
+	}
+
 }

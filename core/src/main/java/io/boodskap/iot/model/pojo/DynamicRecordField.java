@@ -2,7 +2,7 @@ package io.boodskap.iot.model.pojo;
 
 import io.boodskap.iot.model.IDynamicRecordField;
 
-public class DynamicRecordField extends DynamicField implements IDynamicRecordField {
+public class DynamicRecordField extends AbstractDynamicField implements IDynamicRecordField {
 	
 	private static final long serialVersionUID = 8101500765559308203L;
 

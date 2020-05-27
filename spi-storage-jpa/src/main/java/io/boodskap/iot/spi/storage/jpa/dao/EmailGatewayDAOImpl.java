@@ -42,7 +42,6 @@ public class EmailGatewayDAOImpl implements EmailGatewayDAO<EmailGateway> {
 			
 			if(null == oe) {
 				ne = new EmailGateway(e.getDomainKey());
-				ne.setCreatedStamp(new Date());
 			}else {
 				ne = oe;
 			}

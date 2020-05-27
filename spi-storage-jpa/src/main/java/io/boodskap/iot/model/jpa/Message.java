@@ -20,7 +20,7 @@ import io.boodskap.iot.model.IMessage;
 
 @Entity()
 @Table(name="message")
-public class Message implements IMessage {
+public class Message extends AbstractModel implements IMessage {
 	
 	private static final long serialVersionUID = -1928207596119374413L;
 
@@ -54,9 +54,6 @@ public class Message implements IMessage {
 	@Column(name="fwver", length=40)
 	private String firmwareVersion;
 	
-	@Column(name="receivedstamp")
-	private Date receivedStamp;
-
 	@Enumerated(EnumType.STRING)
 	@Column(name="state", length=15)
 	private State state = State.PROCESSING;
@@ -114,16 +111,6 @@ public class Message implements IMessage {
 		id.setSpecId(specId);
 	}
 
-	@Override
-	public Date getCreatedStamp() {
-		return createdStamp;
-	}
-
-	@Override
-	public void setCreatedStamp(Date createdStamp) {
-		this.createdStamp = createdStamp;
-	}
-
 	@SuppressWarnings("unchecked")
 	@Override
 	public Collection<DynamicMessageField> getFields() {
@@ -137,16 +124,6 @@ public class Message implements IMessage {
 			DynamicMessageField f = (DynamicMessageField)d;
 			this.fields.add(f);
 		});
-	}
-
-	@Override
-	public Date getReceivedStamp() {
-		return receivedStamp;
-	}
-
-	@Override
-	public void setReceivedStamp(Date receivedStamp) {
-		this.receivedStamp = receivedStamp;
 	}
 
 	@Override
@@ -252,7 +229,7 @@ public class Message implements IMessage {
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		int result = super.hashCode();
 		result = prime * result + ((createdStamp == null) ? 0 : createdStamp.hashCode());
 		result = prime * result + ((dataChannel == null) ? 0 : dataChannel.hashCode());
 		result = prime * result + ((deviceId == null) ? 0 : deviceId.hashCode());
@@ -264,7 +241,6 @@ public class Message implements IMessage {
 		result = prime * result + ((nodeId == null) ? 0 : nodeId.hashCode());
 		result = prime * result + ((nodeUid == null) ? 0 : nodeUid.hashCode());
 		result = prime * result + ((port == null) ? 0 : port.hashCode());
-		result = prime * result + ((receivedStamp == null) ? 0 : receivedStamp.hashCode());
 		result = prime * result + ((state == null) ? 0 : state.hashCode());
 		result = prime * result + ((trace == null) ? 0 : trace.hashCode());
 		return result;
@@ -274,7 +250,7 @@ public class Message implements IMessage {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
@@ -330,11 +306,6 @@ public class Message implements IMessage {
 			if (other.port != null)
 				return false;
 		} else if (!port.equals(other.port))
-			return false;
-		if (receivedStamp == null) {
-			if (other.receivedStamp != null)
-				return false;
-		} else if (!receivedStamp.equals(other.receivedStamp))
 			return false;
 		if (state != other.state)
 			return false;

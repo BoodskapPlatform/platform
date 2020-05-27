@@ -21,7 +21,7 @@ import io.boodskap.iot.model.IReceivedCommand;
 
 @Entity
 @Table(name = "receivedcommand")
-public class ReceivedCommand implements IReceivedCommand {
+public class ReceivedCommand extends AbstractStorable implements IReceivedCommand {
 
 	private static final long serialVersionUID = -1687434685919726866L;
 
@@ -68,9 +68,9 @@ public class ReceivedCommand implements IReceivedCommand {
 	@Column(name="completedstamp")
 	private Date completedStamp;
 
-	@Column(name="format", length = 8)
+	@Column(name="encodingformat", length = 8)
 	@Enumerated(EnumType.STRING)
-	private Format format;
+	private EncodingFormat encodingFormat;
 
 	@Column(name="status", length = 12)
 	@Enumerated(EnumType.STRING)
@@ -222,12 +222,12 @@ public class ReceivedCommand implements IReceivedCommand {
 		this.completedStamp = completedStamp;
 	}
 
-	public Format getFormat() {
-		return format;
+	public EncodingFormat getEncodingFormat() {
+		return encodingFormat;
 	}
 
-	public void setFormat(Format format) {
-		this.format = format;
+	public void setEncodingFormat(EncodingFormat encodingFormat) {
+		this.encodingFormat = encodingFormat;
 	}
 
 	public Status getStatus() {
@@ -280,7 +280,7 @@ public class ReceivedCommand implements IReceivedCommand {
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		int result = super.hashCode();
 		result = prime * result + ((commandId == null) ? 0 : commandId.hashCode());
 		result = prime * result + ((commandType == null) ? 0 : commandType.hashCode());
 		result = prime * result + ((completedStamp == null) ? 0 : completedStamp.hashCode());
@@ -289,8 +289,8 @@ public class ReceivedCommand implements IReceivedCommand {
 		result = prime * result + ((deviceIds == null) ? 0 : deviceIds.hashCode());
 		result = prime * result + ((deviceModel == null) ? 0 : deviceModel.hashCode());
 		result = prime * result + ((deviceVersion == null) ? 0 : deviceVersion.hashCode());
+		result = prime * result + ((encodingFormat == null) ? 0 : encodingFormat.hashCode());
 		result = prime * result + ((failedCount == null) ? 0 : failedCount.hashCode());
-		result = prime * result + ((format == null) ? 0 : format.hashCode());
 		result = prime * result + ((groupId == null) ? 0 : groupId.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((mergeContent == null) ? 0 : mergeContent.hashCode());
@@ -308,7 +308,7 @@ public class ReceivedCommand implements IReceivedCommand {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
@@ -350,12 +350,12 @@ public class ReceivedCommand implements IReceivedCommand {
 				return false;
 		} else if (!deviceVersion.equals(other.deviceVersion))
 			return false;
+		if (encodingFormat != other.encodingFormat)
+			return false;
 		if (failedCount == null) {
 			if (other.failedCount != null)
 				return false;
 		} else if (!failedCount.equals(other.failedCount))
-			return false;
-		if (format != other.format)
 			return false;
 		if (groupId == null) {
 			if (other.groupId != null)

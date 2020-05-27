@@ -1,7 +1,6 @@
 package io.boodskap.iot.spi.storage.jpa.dao;
 
 import java.util.Collection;
-import java.util.Date;
 
 import io.boodskap.iot.StorageException;
 import io.boodskap.iot.dao.BillingTemplateDAO;
@@ -44,7 +43,6 @@ public class BillingTemplateDAOImpl implements BillingTemplateDAO<BillingTemplat
 			
 			if(null == oe) {
 				ne = new BillingTemplate(new BillingTemplateId(e.getTemplatename(), e.getItemname()));
-				ne.setCreatedtime(new Date());
 			}else {
 				ne = oe;
 			}
@@ -55,7 +53,6 @@ public class BillingTemplateDAOImpl implements BillingTemplateDAO<BillingTemplat
 			ne.setTax(e.getTax());
 			ne.setTemplatecode(e.getTemplatecode());
 			ne.setUnitprice(e.getUnitprice());
-			ne.setUpdatedtime(new Date());
 			
 			if(null == oe) {
 				UOW.persist(ne);

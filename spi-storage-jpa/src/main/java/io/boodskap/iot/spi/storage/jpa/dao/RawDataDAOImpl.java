@@ -42,7 +42,6 @@ public class RawDataDAOImpl implements RawDataDAO<RawData> {
 			
 			if(null == oe) {
 				ne = new RawData(e.getId());
-				ne.setReceivedStamp(new Date());
 			}else {
 				ne = oe;
 			}

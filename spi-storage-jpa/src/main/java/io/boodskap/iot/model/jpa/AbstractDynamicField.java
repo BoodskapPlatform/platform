@@ -1,26 +1,39 @@
-package io.boodskap.iot.model.pojo;
+package io.boodskap.iot.model.jpa;
 
 import java.io.Serializable;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.persistence.Column;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.MappedSuperclass;
+
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.ArrayUtils;
 
 import io.boodskap.iot.DataType;
+import io.boodskap.iot.SizeConstants;
 import io.boodskap.iot.StorageException;
 import io.boodskap.iot.ThreadContext;
 import io.boodskap.iot.model.IDynamicField;
 
-public abstract class DynamicField extends AbstractDomainObject implements IDynamicField {
+@MappedSuperclass
+public abstract class AbstractDynamicField extends AbstractStorable implements IDynamicField {
 	
 	private static final long serialVersionUID = 8521375450218976930L;
 
+	@Column(name="tvalue", length=SizeConstants.MESSAGE_FIELD_VALUE_SIZE)
 	private String value;
+	
+	@Column(name="dvalue")
 	private Double nvalue;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name="fdatatype")
 	private DataType dataType;
 	
-	public DynamicField() {
+	public AbstractDynamicField() {
 	}
 
 	@Override
@@ -60,6 +73,7 @@ public abstract class DynamicField extends AbstractDomainObject implements IDyna
 				setDataType(DataType.STRING);
 				return;
 			}
+			
 			
 			String converted = value.toString();
 			dataType = DataType.STRING;
@@ -112,40 +126,6 @@ public abstract class DynamicField extends AbstractDomainObject implements IDyna
 			throw new StorageException(ex);
 		}
 		
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((dataType == null) ? 0 : dataType.hashCode());
-		result = prime * result + ((nvalue == null) ? 0 : nvalue.hashCode());
-		result = prime * result + ((value == null) ? 0 : value.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		DynamicField other = (DynamicField) obj;
-		if (dataType != other.dataType)
-			return false;
-		if (nvalue == null) {
-			if (other.nvalue != null)
-				return false;
-		} else if (!nvalue.equals(other.nvalue))
-			return false;
-		if (value == null) {
-			if (other.value != null)
-				return false;
-		} else if (!value.equals(other.value))
-			return false;
-		return true;
 	}
 
 }

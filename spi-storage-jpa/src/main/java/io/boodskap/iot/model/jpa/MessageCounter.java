@@ -2,13 +2,24 @@ package io.boodskap.iot.model.jpa;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import io.boodskap.iot.model.IMessageCounter;
 
-public class MessageCounter implements IMessageCounter {
+@Entity()
+@Table(name="messagecounter")
+public class MessageCounter extends AbstractStorageObject implements IMessageCounter {
 	
 	private static final long serialVersionUID = -5795353107563657636L;
 	
+	@Id
+	@Column(name="id")
 	private Date id;
+	
+	@Column(name="total")
 	private long count;
 
 	@Override

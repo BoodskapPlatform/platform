@@ -12,7 +12,7 @@ import io.boodskap.iot.model.IBillingInvoice;
 
 @Entity
 @Table(name="billinginvoice")
-public class BillingInvoice implements IBillingInvoice {
+public class BillingInvoice extends AbstractModel implements IBillingInvoice {
 
 	private static final long serialVersionUID = 4021060188189620220L;
 	
@@ -42,9 +42,6 @@ public class BillingInvoice implements IBillingInvoice {
 	
 	@Column(name="enddate")
 	private Date enddate = null;
-	
-	@Column(name="createdtime")
-	private Date createdtime = null;
 	
 	@Lob
 	@Column(name="obj", length=4096)
@@ -138,14 +135,6 @@ public class BillingInvoice implements IBillingInvoice {
 		this.enddate = enddate;
 	}
 
-	public Date getCreatedtime() {
-		return createdtime;
-	}
-
-	public void setCreatedtime(Date createdtime) {
-		this.createdtime = createdtime;
-	}
-
 	public String getObj() {
 		return obj;
 	}
@@ -165,8 +154,7 @@ public class BillingInvoice implements IBillingInvoice {
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((createdtime == null) ? 0 : createdtime.hashCode());
+		int result = super.hashCode();
 		result = prime * result + ((enddate == null) ? 0 : enddate.hashCode());
 		result = prime * result + ((file == null) ? 0 : file.hashCode());
 		result = prime * result + ((frequency == null) ? 0 : frequency.hashCode());
@@ -186,16 +174,11 @@ public class BillingInvoice implements IBillingInvoice {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
 		BillingInvoice other = (BillingInvoice) obj;
-		if (createdtime == null) {
-			if (other.createdtime != null)
-				return false;
-		} else if (!createdtime.equals(other.createdtime))
-			return false;
 		if (enddate == null) {
 			if (other.enddate != null)
 				return false;

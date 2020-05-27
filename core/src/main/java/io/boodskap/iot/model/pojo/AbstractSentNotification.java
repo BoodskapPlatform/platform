@@ -35,7 +35,9 @@ public abstract class AbstractSentNotification extends AbstractDomainObject impl
 
 	@Override
 	public IResponse createResponse(String content) {
-		return new Response(content);
+		Response r = new Response();
+		r.setContent(content);
+		return r;
 	}
 
 	@Override

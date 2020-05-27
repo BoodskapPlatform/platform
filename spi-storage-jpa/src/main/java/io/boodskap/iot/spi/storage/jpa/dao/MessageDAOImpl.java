@@ -2,7 +2,6 @@ package io.boodskap.iot.spi.storage.jpa.dao;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -48,7 +47,6 @@ public class MessageDAOImpl implements MessageDAO<Message> {
 			
 			if(null == ne) {
 				ne = new Message(new MessageId(e.getDomainKey(), e.getSpecId(), e.getMessageId()));
-				ne.setCreatedStamp(new Date());
 			}else {
 				ne = oe;
 			}
@@ -61,7 +59,6 @@ public class MessageDAOImpl implements MessageDAO<Message> {
 			ne.setNodeId(e.getNodeId());
 			ne.setNodeUid(e.getNodeUid());
 			ne.setPort(e.getPort());
-			ne.setReceivedStamp(e.getReceivedStamp());
 			
 			if(null == oe) {
 				UOW.persist(ne);

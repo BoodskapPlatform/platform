@@ -1,49 +1,25 @@
-package io.boodskap.iot.model.jpa;
+package io.boodskap.iot.model.pojo;
 
 import java.io.Serializable;
 import java.util.Map;
 import java.util.UUID;
 
-import javax.persistence.Column;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.MappedSuperclass;
-
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.ArrayUtils;
 
 import io.boodskap.iot.DataType;
-import io.boodskap.iot.SizeConstants;
 import io.boodskap.iot.StorageException;
 import io.boodskap.iot.ThreadContext;
 import io.boodskap.iot.model.IDynamicField;
 
-@MappedSuperclass
-public abstract class DynamicField implements IDynamicField {
+public abstract class AbstractDynamicField extends AbstractField implements IDynamicField {
 	
 	private static final long serialVersionUID = 8521375450218976930L;
 
-	@Column(name="tvalue", length=SizeConstants.MESSAGE_FIELD_VALUE_SIZE)
 	private String value;
-	
-	@Column(name="dvalue")
 	private Double nvalue;
 	
-	@Enumerated(EnumType.STRING)
-	@Column(name="fdatatype")
-	private DataType dataType;
-	
-	public DynamicField() {
-	}
-
-	@Override
-	public DataType getDataType() {
-		return dataType;
-	}
-
-	@Override
-	public void setDataType(DataType dataType) {
-		this.dataType = dataType;
+	public AbstractDynamicField() {
 	}
 
 	public String getValue() {
@@ -67,16 +43,16 @@ public abstract class DynamicField implements IDynamicField {
 		
 		try {
 			
+			DataType dataType = DataType.STRING;
+
 			setName(name);
 			
 			if(null == value) {
-				setDataType(DataType.STRING);
+				setDataType(dataType);
 				return;
 			}
 			
-			
 			String converted = value.toString();
-			dataType = DataType.STRING;
 			boolean primitive = value.getClass().isPrimitive();
 			
 			if(value instanceof Byte) {
@@ -120,6 +96,8 @@ public abstract class DynamicField implements IDynamicField {
 				converted = ThreadContext.mapToJson(json);
 			}
 			
+			setDataType(dataType);
+			
 			this.value = converted;
 			
 		}catch(Exception ex) {
@@ -131,8 +109,7 @@ public abstract class DynamicField implements IDynamicField {
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((dataType == null) ? 0 : dataType.hashCode());
+		int result = super.hashCode();
 		result = prime * result + ((nvalue == null) ? 0 : nvalue.hashCode());
 		result = prime * result + ((value == null) ? 0 : value.hashCode());
 		return result;
@@ -142,13 +119,11 @@ public abstract class DynamicField implements IDynamicField {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		DynamicField other = (DynamicField) obj;
-		if (dataType != other.dataType)
-			return false;
+		AbstractDynamicField other = (AbstractDynamicField) obj;
 		if (nvalue == null) {
 			if (other.nvalue != null)
 				return false;

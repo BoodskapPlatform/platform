@@ -2,7 +2,6 @@ package io.boodskap.iot.spi.storage.jpa.dao;
 
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -49,7 +48,6 @@ public class EventRegistrationDAOImpl implements EventRegistrationDAO<EventRegis
 			
 			if(null == oe) {
 				ne = new EventRegistration(new EventRegistrationId(e.getDomainKey(), e.getEventId(), e.getChannel(), e.getToAddress()));
-				ne.setCreatedStamp(new Date());
 			}else {
 				ne = oe;
 			}

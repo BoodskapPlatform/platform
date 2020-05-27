@@ -13,7 +13,7 @@ import io.boodskap.iot.model.IClusterLicense;
 
 @Entity
 @Table(name="clusterlicense")
-public class ClusterLicense implements IClusterLicense {
+public class ClusterLicense extends AbstractModel implements IClusterLicense {
 	
 	private static final long serialVersionUID = 9070428612984197936L;
 
@@ -58,12 +58,6 @@ public class ClusterLicense implements IClusterLicense {
 	@Column(name = "graceperiod")
 	private int gracePeriod;
 
-	@Column(name="rstamp")
-	private Date registeredStamp = new Date();
-	
-	@Column(name="ustamp")
-	private Date updatedStamp = new Date();
-	
 	@Column(name="validfrom")
 	private Date validFrom;
 	
@@ -115,26 +109,6 @@ public class ClusterLicense implements IClusterLicense {
 	@Override
 	public void setLicenseKey(String licenseKey) {
 		id.setLicenseKey(licenseKey);
-	}
-
-	@Override
-	public Date getRegisteredStamp() {
-		return registeredStamp;
-	}
-
-	@Override
-	public void setRegisteredStamp(Date registeredStamp) {
-		this.registeredStamp = registeredStamp;
-	}
-
-	@Override
-	public Date getUpdatedStamp() {
-		return updatedStamp;
-	}
-
-	@Override
-	public void setUpdatedStamp(Date updatedStamp) {
-		this.updatedStamp = updatedStamp;
 	}
 
 	@Override
@@ -280,7 +254,7 @@ public class ClusterLicense implements IClusterLicense {
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		int result = super.hashCode();
 		result = prime * result + gracePeriod;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((licenseType == null) ? 0 : licenseType.hashCode());
@@ -291,10 +265,9 @@ public class ClusterLicense implements IClusterLicense {
 		result = prime * result + maxMachineCores;
 		result = prime * result + maxMachines;
 		result = prime * result + maxMessagesPerMinute;
+		result = prime * result + maxOrganizations;
 		result = prime * result + maxUsers;
-		result = prime * result + ((registeredStamp == null) ? 0 : registeredStamp.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
-		result = prime * result + ((updatedStamp == null) ? 0 : updatedStamp.hashCode());
 		result = prime * result + ((validFrom == null) ? 0 : validFrom.hashCode());
 		result = prime * result + ((validTo == null) ? 0 : validTo.hashCode());
 		return result;
@@ -304,7 +277,7 @@ public class ClusterLicense implements IClusterLicense {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
@@ -332,19 +305,11 @@ public class ClusterLicense implements IClusterLicense {
 			return false;
 		if (maxMessagesPerMinute != other.maxMessagesPerMinute)
 			return false;
+		if (maxOrganizations != other.maxOrganizations)
+			return false;
 		if (maxUsers != other.maxUsers)
 			return false;
-		if (registeredStamp == null) {
-			if (other.registeredStamp != null)
-				return false;
-		} else if (!registeredStamp.equals(other.registeredStamp))
-			return false;
 		if (status != other.status)
-			return false;
-		if (updatedStamp == null) {
-			if (other.updatedStamp != null)
-				return false;
-		} else if (!updatedStamp.equals(other.updatedStamp))
 			return false;
 		if (validFrom == null) {
 			if (other.validFrom != null)

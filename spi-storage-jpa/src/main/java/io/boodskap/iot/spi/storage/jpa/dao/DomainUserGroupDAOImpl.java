@@ -44,7 +44,6 @@ public class DomainUserGroupDAOImpl implements DomainUserGroupDAO<DomainUserGrou
 			
 			if(null == oe) {
 				ne = new DomainUserGroup(new DomainUserGroupId(e.getDomainKey(), e.getGroupId()));
-				ne.setCreatedStamp(new Date());
 			}else {
 				ne = oe;
 			}

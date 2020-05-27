@@ -31,7 +31,9 @@ public interface DeviceMessageCounterDAO<T extends IDeviceMessageCounter> {
 	
 	public Class<? extends T> clazz();
 	
-	public T create(String domainKey, String deviceId, String messageType, String messageId) throws StorageException;
+	public T create(String domainKey, String deviceId, String messageType, Date day) throws StorageException;
+	
+	public T get(String domainKey, String deviceId, String messageType, Date day) throws StorageException;
 	
 	public void createOrUpdate(T counter) throws StorageException;
 

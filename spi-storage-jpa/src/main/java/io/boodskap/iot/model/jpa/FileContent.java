@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.Lob;
 
 import io.boodskap.iot.SizeConstants;
 import io.boodskap.iot.model.IFileContent;
@@ -13,6 +14,7 @@ public class FileContent implements IFileContent {
 	
 	private static final long serialVersionUID = 2834539513803785961L;
 
+	@Lob
 	@Column(name="data", length=SizeConstants.FILE_SIZE)
 	private byte[] data;
 	

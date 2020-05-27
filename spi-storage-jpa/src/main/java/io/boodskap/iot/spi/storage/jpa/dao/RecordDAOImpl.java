@@ -2,7 +2,6 @@ package io.boodskap.iot.spi.storage.jpa.dao;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -49,7 +48,6 @@ public class RecordDAOImpl implements RecordDAO<Record> {
 			
 			if(null == oe) {
 				ne = new Record(new RecordId(e.getDomainKey(), e.getSpecId(), e.getRecordId()));
-				ne.setCreatedStamp(new Date());
 			}else {
 				ne = oe;
 			}

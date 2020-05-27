@@ -16,7 +16,7 @@ import io.boodskap.iot.model.INotification;
 import io.boodskap.iot.model.IResponse;
 
 @MappedSuperclass
-public abstract class AbstractNotification implements INotification{
+public abstract class AbstractNotification extends AbstractModel implements INotification{
 
 	private static final long serialVersionUID = -78399951798565586L;
 
@@ -122,7 +122,7 @@ public abstract class AbstractNotification implements INotification{
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		int result = super.hashCode();
 		result = prime * result + ((content == null) ? 0 : content.hashCode());
 		result = prime * result + ((queuedAt == null) ? 0 : queuedAt.hashCode());
 		result = prime * result + ((receipents == null) ? 0 : receipents.hashCode());
@@ -137,7 +137,7 @@ public abstract class AbstractNotification implements INotification{
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;

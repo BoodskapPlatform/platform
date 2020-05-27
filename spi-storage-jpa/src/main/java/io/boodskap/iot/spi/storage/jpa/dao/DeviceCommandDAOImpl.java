@@ -43,7 +43,6 @@ public class DeviceCommandDAOImpl implements DeviceCommandDAO<DeviceCommand> {
 			
 			if(null == oe) {
 				ne = new DeviceCommand(new DeviceCommandId(e.getDomainKey(), e.getDeviceId(), e.getUid()));
-				ne.setCreatedStamp(new Date());
 			}else {
 				ne = oe;
 			}

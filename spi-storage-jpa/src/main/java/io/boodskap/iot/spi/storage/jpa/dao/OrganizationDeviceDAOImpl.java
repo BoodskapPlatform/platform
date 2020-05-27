@@ -62,7 +62,6 @@ public class OrganizationDeviceDAOImpl implements OrganizationDeviceDAO<Organiza
 			ne.setReportedIp(e.getReportedIp());
 			ne.setReportedPort(e.getReportedPort());
 			ne.setVersion(e.getVersion());
-			ne.setReportedStamp(new Date());
 			
 			if(null == oe) {
 				UOW.persist(ne);

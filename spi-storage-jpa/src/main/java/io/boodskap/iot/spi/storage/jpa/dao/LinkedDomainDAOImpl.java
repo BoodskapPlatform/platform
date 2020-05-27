@@ -46,7 +46,6 @@ public class LinkedDomainDAOImpl implements LinkedDomainDAO<LinkedDomain> {
 			
 			if(null == oe) {
 				ne = new LinkedDomain(new LinkedDomainId(e.getDomainKey(), e.getLinkedDomainKey(), e.getLinkedApiKey()));
-				ne.setCreatedStamp(new Date());
 			}else {
 				ne = oe;
 			}

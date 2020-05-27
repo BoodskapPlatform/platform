@@ -538,6 +538,12 @@ public class JPAStorage implements IStorage {
 
 	@SuppressWarnings("unchecked")
 	@Override
+	public DomainJsonEntityDAO<DomainJsonEntity> getDomainJsonEntityDAO() {
+		return DomainJsonEntityDAOImpl.get();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
 	public OrganizationFileDAO<OrganizationFile> getOrganizationFileDAO() {
 		return OrganizationFileDAOImpl.get();
 	}

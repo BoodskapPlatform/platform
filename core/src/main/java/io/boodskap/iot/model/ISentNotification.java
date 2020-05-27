@@ -24,11 +24,15 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.boodskap.iot.NotificationStatus;
 
 @JsonSerialize(as=ISentNotification.class)
-public interface ISentNotification extends IDomainObject {
+public interface ISentNotification extends IStorageObject {
 	
 	public IProgress createProgress(String content);
 	
 	public IResponse createResponse(String content);
+	
+	public String getDomainKey();
+	
+	public void setDomainKey(String domainKey);
 
 	public String getNotificationId();
 

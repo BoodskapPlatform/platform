@@ -1,7 +1,6 @@
 package io.boodskap.iot.spi.storage.jpa.dao;
 
 import java.util.Collection;
-import java.util.Date;
 
 import io.boodskap.iot.StorageException;
 import io.boodskap.iot.dao.BillingScheduleDAO;
@@ -44,7 +43,6 @@ public class BillingScheduleDAOImpl implements BillingScheduleDAO<BillingSchedul
 			
 			if(null == oe) {
 				ne = new BillingSchedule(new BillingScheduleId(e.getDomainKey(), e.getTargetDomain(), e.getScheduleId()));
-				ne.setCreatedtime(new Date());
 			}else {
 				ne = oe;
 			}

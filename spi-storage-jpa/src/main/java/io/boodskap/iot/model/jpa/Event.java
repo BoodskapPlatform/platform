@@ -1,7 +1,5 @@
 package io.boodskap.iot.model.jpa;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -11,15 +9,12 @@ import io.boodskap.iot.model.IEvent;
 
 @Entity
 @Table(name="event")
-public class Event implements IEvent {
+public class Event extends AbstractModel implements IEvent {
 
 	private static final long serialVersionUID = -9017353632495955259L;
 
 	@EmbeddedId
 	private EventId id = new EventId();
-	
-	@Column(name="name", length=80)
-	private String name;
 	
 	@Column(name="content", length=1024)
 	private String content;
@@ -32,12 +27,6 @@ public class Event implements IEvent {
 	
 	@Column(name="stemplate", length=40)
 	private String subjectTemplate;
-	
-	@Column(name="createdstamp")
-	private Date createdStamp;
-	
-	@Column(name="updatedstamp")
-	private Date updatedStamp;
 	
 	public Event() {
 	}
@@ -60,14 +49,6 @@ public class Event implements IEvent {
 
 	public void setEventId(String eventId) {
 		id.setEventId(eventId);
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public String getContent() {
@@ -102,34 +83,15 @@ public class Event implements IEvent {
 		this.subjectTemplate = subjectTemplate;
 	}
 
-	public Date getCreatedStamp() {
-		return createdStamp;
-	}
-
-	public void setCreatedStamp(Date createdStamp) {
-		this.createdStamp = createdStamp;
-	}
-
-	public Date getUpdatedStamp() {
-		return updatedStamp;
-	}
-
-	public void setUpdatedStamp(Date updatedStamp) {
-		this.updatedStamp = updatedStamp;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		int result = super.hashCode();
 		result = prime * result + ((content == null) ? 0 : content.hashCode());
 		result = prime * result + ((contentTemplate == null) ? 0 : contentTemplate.hashCode());
-		result = prime * result + ((createdStamp == null) ? 0 : createdStamp.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((subject == null) ? 0 : subject.hashCode());
 		result = prime * result + ((subjectTemplate == null) ? 0 : subjectTemplate.hashCode());
-		result = prime * result + ((updatedStamp == null) ? 0 : updatedStamp.hashCode());
 		return result;
 	}
 
@@ -137,7 +99,7 @@ public class Event implements IEvent {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
@@ -152,20 +114,10 @@ public class Event implements IEvent {
 				return false;
 		} else if (!contentTemplate.equals(other.contentTemplate))
 			return false;
-		if (createdStamp == null) {
-			if (other.createdStamp != null)
-				return false;
-		} else if (!createdStamp.equals(other.createdStamp))
-			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
-			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
 			return false;
 		if (subject == null) {
 			if (other.subject != null)
@@ -176,11 +128,6 @@ public class Event implements IEvent {
 			if (other.subjectTemplate != null)
 				return false;
 		} else if (!subjectTemplate.equals(other.subjectTemplate))
-			return false;
-		if (updatedStamp == null) {
-			if (other.updatedStamp != null)
-				return false;
-		} else if (!updatedStamp.equals(other.updatedStamp))
 			return false;
 		return true;
 	}

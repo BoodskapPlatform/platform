@@ -1,7 +1,5 @@
 package io.boodskap.iot.model.jpa;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -11,7 +9,7 @@ import io.boodskap.iot.model.IAlexa;
 
 @Entity
 @Table(name="alexa")
-public class Alexa implements IAlexa {
+public class Alexa extends AbstractModel implements IAlexa {
 
 	private static final long serialVersionUID = -7983470981398356497L;
 
@@ -29,15 +27,6 @@ public class Alexa implements IAlexa {
 	
 	@Column(name="eresponse", length=256)
 	private String errorResponse;
-	
-	@Column(name="createdby", length=80)
-	private String createdBy;
-
-	@Column(name="rstamp")
-	private Date registeredStamp = new Date();
-	
-	@Column(name="ustamp")
-	private Date updatedStamp = new Date();
 	
 	public Alexa() {
 	}
@@ -107,47 +96,14 @@ public class Alexa implements IAlexa {
 	}
 
 	@Override
-	public String getCreatedBy() {
-		return createdBy;
-	}
-
-	@Override
-	public void setCreatedBy(String createdBy) {
-		this.createdBy = createdBy;
-	}
-
-	@Override
-	public Date getRegisteredStamp() {
-		return registeredStamp;
-	}
-
-	@Override
-	public void setRegisteredStamp(Date registeredStamp) {
-		this.registeredStamp = registeredStamp;
-	}
-
-	@Override
-	public Date getUpdatedStamp() {
-		return updatedStamp;
-	}
-
-	@Override
-	public void setUpdatedStamp(Date updatedStamp) {
-		this.updatedStamp = updatedStamp;
-	}
-
-	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((createdBy == null) ? 0 : createdBy.hashCode());
+		int result = super.hashCode();
 		result = prime * result + ((errorResponse == null) ? 0 : errorResponse.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((intentName == null) ? 0 : intentName.hashCode());
-		result = prime * result + ((registeredStamp == null) ? 0 : registeredStamp.hashCode());
 		result = prime * result + ((ruleName == null) ? 0 : ruleName.hashCode());
 		result = prime * result + ((ruleType == null) ? 0 : ruleType.hashCode());
-		result = prime * result + ((updatedStamp == null) ? 0 : updatedStamp.hashCode());
 		return result;
 	}
 
@@ -155,16 +111,11 @@ public class Alexa implements IAlexa {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
 		Alexa other = (Alexa) obj;
-		if (createdBy == null) {
-			if (other.createdBy != null)
-				return false;
-		} else if (!createdBy.equals(other.createdBy))
-			return false;
 		if (errorResponse == null) {
 			if (other.errorResponse != null)
 				return false;
@@ -180,11 +131,6 @@ public class Alexa implements IAlexa {
 				return false;
 		} else if (!intentName.equals(other.intentName))
 			return false;
-		if (registeredStamp == null) {
-			if (other.registeredStamp != null)
-				return false;
-		} else if (!registeredStamp.equals(other.registeredStamp))
-			return false;
 		if (ruleName == null) {
 			if (other.ruleName != null)
 				return false;
@@ -194,11 +140,6 @@ public class Alexa implements IAlexa {
 			if (other.ruleType != null)
 				return false;
 		} else if (!ruleType.equals(other.ruleType))
-			return false;
-		if (updatedStamp == null) {
-			if (other.updatedStamp != null)
-				return false;
-		} else if (!updatedStamp.equals(other.updatedStamp))
 			return false;
 		return true;
 	}

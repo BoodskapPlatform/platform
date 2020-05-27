@@ -43,7 +43,6 @@ public class FCMDeviceDAOImpl implements FCMDeviceDAO<FCMDevice> {
 			
 			if(null == oe) {
 				ne = new FCMDevice(new FCMDeviceId(e.getDomainKey(), e.getDeviceId()));
-				ne.setCreatedStamp(new Date());
 			}else {
 				ne = oe;
 			}
