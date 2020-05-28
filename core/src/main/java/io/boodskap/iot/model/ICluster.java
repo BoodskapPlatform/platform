@@ -34,6 +34,23 @@ public interface ICluster extends IDomainObject {
 		ICluster.dao().createOrUpdate(this);
 	}
 	
+	@Override
+	public default void copy(Object other) {
+		
+		ICluster o = (ICluster) other;
+		
+		setTargetDomainKey(o.getTargetDomainKey());
+		setClusterId(o.getClusterId());
+		setStatus(o.getStatus());
+		setMachines(o.getMachines());
+		setUsers(o.getUsers());
+		setCores(o.getCores());
+		setDevices(o.getDevices());
+		setOrganizations(o.getOrganizations());
+		
+		IDomainObject.super.copy(other);
+	}
+	
 	public String getTargetDomainKey();
 
 	public void setTargetDomainKey(String targetDomainKey);

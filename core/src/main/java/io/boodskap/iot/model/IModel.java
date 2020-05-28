@@ -21,6 +21,19 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 @JsonSerialize(as = IModel.class)
 public interface IModel extends IStorageObject {
 
+	@Override
+	public default void copy(Object other) {
+		
+		IModel o = (IModel) other;
+		
+		setName(o.getName());
+		setDescription(o.getDescription());
+		setCreatedBy(o.getCreatedBy());
+		setUpdatedBy(o.getUpdatedBy());
+
+		IStorageObject.super.copy(other);
+	}
+	
 	public String getName();
 
 	public void setName(String name);

@@ -29,15 +29,15 @@ import io.boodskap.iot.ThreadContext;
 @JsonSerialize(as=IStorageObject.class)
 public interface IStorageObject extends Serializable{
 
-	public Date getRegisteredStamp();
-
-	public void setRegisteredStamp(Date registeredStamp);
-
-	public Date getUpdatedStamp();
-
-	public void setUpdatedStamp(Date updatedStamp);
-
-	public void save() throws StorageException;
+	public default void copy(Object other) {
+		
+		IStorageObject o = (IStorageObject) other;
+		
+		setRegisteredStamp(o.getRegisteredStamp());
+		setUpdatedStamp(o.getUpdatedStamp());
+		
+		
+	}
 
 	public default String toJSONString() {
 		try {
@@ -59,4 +59,14 @@ public interface IStorageObject extends Serializable{
 		return new JSONObject(this);
 	}
 
+	public void save() throws StorageException;
+
+	public Date getRegisteredStamp();
+
+	public void setRegisteredStamp(Date registeredStamp);
+
+	public Date getUpdatedStamp();
+
+	public void setUpdatedStamp(Date updatedStamp);
+	
 }

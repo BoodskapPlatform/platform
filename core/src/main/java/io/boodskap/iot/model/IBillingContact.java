@@ -24,6 +24,21 @@ public interface IBillingContact extends IContact {
 		IBillingContact.dao().createOrUpdate(this);
 	}
 	
+	@Override
+	public default void copy(Object other) {
+		
+		IBillingContact o = (IBillingContact) other;
+		
+		setTargetDomain(o.getTargetDomain());
+		setContactId(o.getContactId());
+		setType(o.getType());
+		setLogo(o.getLogo());
+		setObj(o.getObj());
+		setDepartment(o.getDepartment());
+		
+		IContact.super.copy(other);
+	}
+	
 	public String getTargetDomain();
 
 	public void setTargetDomain(String targetDomain);

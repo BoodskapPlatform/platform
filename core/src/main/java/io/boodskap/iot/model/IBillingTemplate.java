@@ -24,6 +24,21 @@ public interface IBillingTemplate extends IModel {
 		IBillingTemplate.dao().createOrUpdate(this);
 	}
 
+	@Override
+	public default void copy(Object other) {
+		
+		IBillingTemplate o = (IBillingTemplate) other;
+		
+		setTemplatecode(o.getTemplatename());
+		setItemname(o.getItemname());
+		setDescription(o.getDescription());
+		setUnitprice(o.getUnitprice());
+		setTax(o.getTax());
+		setTemplatecode(o.getTemplatecode());
+		
+		IModel.super.copy(other);
+	}
+
 	public String getTemplatename();
 
 	public void setTemplatename(String templatename);

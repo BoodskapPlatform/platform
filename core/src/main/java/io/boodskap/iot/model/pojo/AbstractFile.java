@@ -28,13 +28,11 @@ public abstract class AbstractFile extends AbstractModel implements IFile {
 		return new FileContent(getData(), getMediaType());
 	}
 
-	@Override
-	public final String getDomainKey() {
+	public String getDomainKey() {
 		return domainKey;
 	}
 
-	@Override
-	public final void setDomainKey(String domainKey) {
+	public void setDomainKey(String domainKey) {
 		this.domainKey = domainKey;
 	}
 

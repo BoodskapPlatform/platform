@@ -43,6 +43,19 @@ public interface IDeviceMessageCounter extends IDomainObject {
 		dao().createOrUpdate(this);
 	}
 
+	@Override
+	public default void copy(Object other) {
+		
+		IDeviceMessageCounter o = (IDeviceMessageCounter) other;
+		
+		setDeviceId(o.getDeviceId());
+		setMessageType(o.getMessageType());
+		setDay(o.getDay());
+		setCount(o.getCount());
+		
+		IDomainObject.super.copy(other);
+	}
+
 	public IDeviceMessageCounter create(String domainKey, String deviceId, String messageType, Date day) throws StorageException;
 	
 	public String getDeviceId();

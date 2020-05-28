@@ -43,6 +43,17 @@ public interface IDeviceFriend extends IDomainObject {
 		IDeviceFriend.dao().createOrUpdate(this);
 	}
 
+	@Override
+	public default void copy(Object other) {
+		
+		IDeviceFriend o = (IDeviceFriend) other;
+		
+		setDeviceId(o.getDeviceId());
+		setFriendId(o.getFriendId());
+		
+		IDomainObject.super.copy(other);
+	}
+
 	public String getDeviceId();
 
 	public void setDeviceId(String deviceId);

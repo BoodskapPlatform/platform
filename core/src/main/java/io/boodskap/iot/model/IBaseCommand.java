@@ -25,6 +25,22 @@ import io.boodskap.iot.CommandType;
 @JsonSerialize(as=IBaseCommand.class)
 public interface IBaseCommand extends IDomainObject{
 
+	@Override
+	public default void copy(Object other) {
+		
+		IBaseCommand o = (IBaseCommand) other;
+
+		setUid(o.getUid());
+		setCommandType(o.getCommandType());
+		setModels(o.getModels());
+		setVersions(o.getVersions());
+		setCommandId(o.getCommandId());
+		setData(o.getData());
+		setJsonData(o.getJsonData());
+		
+		IDomainObject.super.copy(other);
+	}
+
 	public long getUid();
 
 	public void setUid(long uid);

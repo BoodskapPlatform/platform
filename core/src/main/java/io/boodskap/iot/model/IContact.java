@@ -21,6 +21,24 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 @JsonSerialize(as=IContact.class)
 public interface IContact extends IDomainObject {
 
+	@Override
+	public default void copy(Object other) {
+		
+		IContact o = (IContact) other;
+
+		setEmail(o.getEmail());
+		setCountry(o.getCountry());
+		setState(o.getState());
+		setCity(o.getCity());
+		setAddress(o.getAddress());
+		setZipcode(o.getZipcode());
+		setLocale(o.getLocale());
+		setTimeZone(o.getTimeZone());
+		setPrimaryPhone(o.getPrimaryPhone());
+		
+		IDomainObject.super.copy(other);
+	}
+	
 	public String getEmail();
 
 	public void setEmail(String email);

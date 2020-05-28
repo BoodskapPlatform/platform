@@ -45,6 +45,60 @@ public interface IDatabaseMetaData extends IDomainObject{
 		IDatabaseMetaData.dao().createOrUpdate(this);
 	}
 	
+	@Override
+	public default void copy(Object other) {
+		
+		IDatabaseMetaData o = (IDatabaseMetaData) other;
+		
+		setMetaDataId(o.getMetaDataId());
+		setDatabaseProductName(o.getDatabaseProductName());
+		setDatabaseProductVersion(o.getDatabaseProductVersion());
+		setDatabaseMajorVersion(o.getDatabaseMajorVersion());
+		setDatabaseMinorVersion(o.getDatabaseMinorVersion());
+		setDriverVersion(o.getDriverVersion());
+		setDriverName(o.getDriverName());
+		setDriverMajorVersion(o.getDriverMajorVersion());
+		setDriverMinorVersion(o.getDriverMinorVersion());
+		setJdbcMajorVersion(o.getJdbcMajorVersion());
+		setJdbcMinorVersion(o.getJdbcMinorVersion());
+		setMaxBinaryLiteralLength(o.getMaxBinaryLiteralLength());
+		setMaxCatalogNameLength(o.getMaxCatalogNameLength());
+		setMaxCharLiteralLength(o.getMaxCharLiteralLength());
+		setMaxColumnNameLength(o.getMaxColumnNameLength());
+		setMaxColumnsInGroupBy(o.getMaxColumnsInGroupBy());
+		setMaxColumnsInIndex(o.getMaxColumnsInIndex());
+		setMaxColumnsInOrderBy(o.getMaxColumnsInOrderBy());
+		setMaxColumnsInSelect(o.getMaxColumnsInSelect());
+		setMaxColumnsInTable(o.getMaxColumnsInTable());
+		setMaxConnections(o.getMaxConnections());
+		setMaxCursorNameLength(o.getMaxCursorNameLength());
+		setMaxIndexLength(o.getMaxIndexLength());
+		setMaxLogicalLobSize(o.getMaxLogicalLobSize());
+		setMaxProcedureNameLength(o.getMaxProcedureNameLength());
+		setMaxRowSize(o.getMaxRowSize());
+		setMaxSchemaNameLength(o.getMaxSchemaNameLength());
+		setMaxStatementLength(o.getMaxStatementLength());
+		setMaxStatements(o.getMaxStatements());
+		setMaxTableNameLength(o.getMaxTableNameLength());
+		setMaxUserNameLength(o.getMaxUserNameLength());
+		setSqlKeywords(o.getSqlKeywords());
+		setNumericFunctions(o.getNumericFunctions());
+		setStringFunctions(o.getStringFunctions());
+		setSystemFunctions(o.getSystemFunctions());
+		setTimeDateFunctions(o.getTimeDateFunctions());
+		setSchemas(o.getSchemas());
+		setCatalogs(o.getCatalogs());
+		setTables(o.getTables());
+		setViews(o.getViews());
+		setSystables(o.getSystables());
+		setGbltempTables(o.getGbltempTables());
+		setLcltempTables(o.getLcltempTables());
+		setAliases(o.getAliases());
+		setSynonyms(o.getSynonyms());
+		
+		IDomainObject.super.copy(other);
+	}
+
 	public String getMetaDataId();
 
 	public void setMetaDataId(String metaDataId);

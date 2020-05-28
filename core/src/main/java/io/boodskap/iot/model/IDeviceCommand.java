@@ -46,6 +46,19 @@ public interface IDeviceCommand extends IBaseCommand{
 		IDeviceCommand.dao().createOrUpdate(this);
 	}
 
+	@Override
+	public default void copy(Object other) {
+		
+		IDeviceCommand o = (IDeviceCommand) other;
+		
+		setTarget(o.getTarget());
+		setIncludeMe(o.isIncludeMe());
+		setDeviceId(o.getDeviceId());
+		setGroups(o.getGroups());
+		
+		IBaseCommand.super.copy(other);
+	}
+
 	public DeviceCommandTarget getTarget();
 
 	public void setTarget(DeviceCommandTarget target);

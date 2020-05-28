@@ -40,6 +40,22 @@ public interface IClusterMachine extends IDomainObject {
 		return MachineStatus.ACTIVE == getStatus();
 	}
 	
+	@Override
+	public default void copy(Object other) {
+		
+		IClusterMachine o = (IClusterMachine) other;
+		
+		setClusterId(o.getClusterId());
+		setTargetDomainKey(o.getTargetDomainKey());
+		setMachineId(o.getMachineId());
+		setStatus(o.getStatus());
+		setCpuSlots(o.getCpuSlots());
+		setCpuCores(o.getCpuCores());
+		setProperties(o.getProperties());
+		
+		IDomainObject.super.copy(other);
+	}
+
 	public INameValuePair createNameValuePair(String name, String value);
 	
 	public String getClusterId();

@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.boodskap.iot.dao.DomainClassLoaderDAO;
 
 @JsonSerialize(as=IDomainClassLoader.class)
-public interface IDomainClassLoader extends IClassLoader, IDomainObject {
+public interface IDomainClassLoader extends IClassLoader{
 
 	public static DomainClassLoaderDAO<IDomainClassLoader> dao(){
 		return DomainClassLoaderDAO.get();
@@ -26,4 +26,8 @@ public interface IDomainClassLoader extends IClassLoader, IDomainObject {
 	public default void save() {
 		dao().createOrUpdate(this);
 	}
+	
+	public String getDomainKey();
+	
+	public void setDomainKey(String domainKey);
 }

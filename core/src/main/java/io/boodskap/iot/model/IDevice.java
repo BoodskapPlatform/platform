@@ -44,6 +44,25 @@ public interface IDevice extends IDomainObject {
 		IDevice.dao().createOrUpdate(this);
 	}
 	
+	@Override
+	public default void copy(Object other) {
+		
+		IDevice o = (IDevice) other;
+		
+		setDeviceId(o.getDeviceId());
+		setModelId(o.getModelId());
+		setVersion(o.getVersion());
+		setPassword(o.getPassword());
+		setAssetId(o.getAssetId());
+		setReportedIp(o.getReportedIp());
+		setReportedPort(o.getReportedPort());
+		setNodeId(o.getNodeId());
+		setNodeUid(o.getNodeUid());
+		setChannel(o.getChannel());
+		
+		IDomainObject.super.copy(other);
+	}
+
 	public String getDeviceId() ;
 
 	public void setDeviceId(String deviceId);

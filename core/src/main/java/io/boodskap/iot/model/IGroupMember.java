@@ -21,6 +21,17 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 @JsonSerialize(as=IGroupMember.class)
 public interface IGroupMember extends IDomainObject {
 
+	@Override
+	public default void copy(Object other) {
+		
+		IGroupMember o = (IGroupMember) other;
+		
+		setGroupId(o.getGroupId());
+		setMemberId(o.getMemberId());
+		
+		IDomainObject.super.copy(other);
+	}
+
 	public String getGroupId();
 
 	public void setGroupId(String groupId);

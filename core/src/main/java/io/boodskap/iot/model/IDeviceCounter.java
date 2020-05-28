@@ -107,6 +107,24 @@ public interface IDeviceCounter extends IDomainObject {
 		return dao().countCommands(getDomainKey(), getDeviceId());
 	}
 	
+	@Override
+	public default void copy(Object other) {
+		
+		IDeviceCounter o = (IDeviceCounter) other;
+		
+		setDeviceId(o.getDeviceId());
+		setUdpMessages(o.getUdpMessages());
+		setMqttMessages(o.getMqttMessages());
+		setHttpMessages(o.getHttpMessages());
+		setFcmMessages(o.getFcmMessages());
+		setCommands(o.getCommands());
+		setCoapMessages(o.getCoapMessages());
+		setTcpMessages(o.getTcpMessages());
+		setLoraMessages(o.getLoraMessages());
+		
+		IDomainObject.super.copy(other);
+	}
+
 	public String getDeviceId() ;
 
 	public void setDeviceId(String deviceId);

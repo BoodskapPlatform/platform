@@ -43,6 +43,16 @@ public interface IBinaryRule extends IRule {
 		IBinaryRule.dao().createOrUpdate(this);
 	}
 
+	@Override
+	public default void copy(Object other) {
+		
+		IBinaryRule o = (IBinaryRule) other;
+		
+		setType(o.getType());
+		
+		IRule.super.copy(other);
+	}
+
 	public String getType() ;
 
 	public void setType(String type) ;

@@ -19,7 +19,7 @@ package io.boodskap.iot.model;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @JsonSerialize(as=IFile.class)
-public interface IFile extends ISystemFile, IDomainObject {
+public interface IFile extends ISystemFile, IDomainObject{
 
 	public String getMediaType();
 
@@ -28,5 +28,17 @@ public interface IFile extends ISystemFile, IDomainObject {
 	public String getTags();
 
 	public void setTags(String tags);
+
+	@Override
+	public default void copy(Object other) {
+		
+		IFile o = (IFile) other;
+		
+		setMediaType(o.getMediaType());
+		setTags(o.getTags());
+		
+		ISystemFile.super.copy(other);
+		IDomainObject.super.copy(other);
+	}
 
 }

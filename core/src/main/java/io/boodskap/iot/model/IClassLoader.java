@@ -27,6 +27,16 @@ public interface IClassLoader extends IModel {
 		dao().createOrUpdate(this);
 	}
 
+	@Override
+	public default void copy(Object other) {
+		
+		IClassLoader o = (IClassLoader) other;
+		
+		setLoader(o.getLoader());
+		
+		IModel.super.copy(other);
+	}
+	
 	public String getLoader();
 	
 	public void setLoader(String loader);

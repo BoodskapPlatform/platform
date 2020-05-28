@@ -43,6 +43,16 @@ public interface IDeviceGroup extends IGroup {
 		DeviceGroupDAO.get().createOrUpdate(this);
 	}
 
+	@Override
+	public default void copy(Object other) {
+		
+		IDeviceGroup o = (IDeviceGroup) other;
+		
+		setOwnerDeviceId(o.getOwnerDeviceId());
+		
+		IGroup.super.copy(other);
+	}
+
 	public String getOwnerDeviceId();
 
 	public void setOwnerDeviceId(String ownerDeviceId);

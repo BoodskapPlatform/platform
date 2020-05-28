@@ -43,6 +43,16 @@ public interface ICameraDevice extends IDomainObject{
 		ICameraDevice.dao().createOrUpdate(this);
 	}
 
+	@Override
+	public default void copy(Object other) {
+		
+		ICameraDevice o = (ICameraDevice) other;
+		
+		setDeviceId(o.getDeviceId());
+		setCamera(o.getCamera());
+		
+		IDomainObject.super.copy(other);
+	}
 	public String getDeviceId();
 
 	public void setDeviceId(String deviceId);

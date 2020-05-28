@@ -87,6 +87,28 @@ public interface ICounter extends IModel {
 		dao().incrementRecords();
 	}
 
+	@Override
+	public default void copy(Object other) {
+		
+		ICounter o = (ICounter) other;
+		
+		setId(o.getId());
+		setUsers(o.getUsers());
+		setDevices(o.getDevices());
+		setUdpMessages(o.getUdpMessages());
+		setMqttMessages(o.getMqttMessages());
+		setHttpMessages(o.getHttpMessages());
+		setFcmMessages(o.getFcmMessages());
+		setCommands(o.getCommands());
+		setCoapMessages(o.getCoapMessages());
+		setTcpMessages(o.getTcpMessages());
+		setDomains(o.getDomains());
+		setLoraMessages(o.getLoraMessages());
+		setRecords(o.getRecords());
+		
+		IModel.super.copy(other);
+	}
+
 	public int getId();
 
 	public void setId(int id);

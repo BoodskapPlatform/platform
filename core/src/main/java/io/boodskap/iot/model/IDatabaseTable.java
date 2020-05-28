@@ -45,6 +45,20 @@ public interface IDatabaseTable extends IDomainObject{
 		IDatabaseTable.dao().createOrUpdate(this);
 	}
 	
+	@Override
+	public default void copy(Object other) {
+		
+		IDatabaseTable o = (IDatabaseTable) other;
+		
+		setMetaDataId(o.getMetaDataId());
+		setTable(o.getTable());
+		setCatalog(o.getCatalog());
+		setSchema(o.getSchema());
+		setFields(o.getFields());
+		
+		IDomainObject.super.copy(other);
+	}
+
 	public IDatabaseTableField createField(String field);
 
 	public String getMetaDataId();

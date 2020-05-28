@@ -25,6 +25,22 @@ import io.boodskap.iot.RuleScriptLanguage;
 @JsonSerialize(as=IRule.class)
 public interface IRule extends IDomainObject {
 
+	@Override
+	public default void copy(Object other) {
+		
+		IRule o = (IRule) other;
+		
+		setLanguage(o.getLanguage());
+		setCode(o.getCode());
+		setContexts(o.getContexts());
+		setPlugins(o.getPlugins());
+		setCompilable(o.isCompilable());
+		setLoader(o.getLoader());
+		setGlobalLoader(o.getGlobalLoader());
+		
+		IDomainObject.super.copy(other);
+	}
+
 	public RuleScriptLanguage getLanguage();
 
 	public void setLanguage(RuleScriptLanguage language);

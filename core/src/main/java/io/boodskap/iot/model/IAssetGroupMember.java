@@ -43,6 +43,16 @@ public interface IAssetGroupMember extends IGroupMember {
 		IAssetGroupMember.dao().createOrUpdate(this);
 	}
 
+	@Override
+	public default void copy(Object other) {
+		
+		IAssetGroupMember o = (IAssetGroupMember) other;
+		
+		setOwnerAssetId(o.getOwnerAssetId());
+		
+		IGroupMember.super.copy(other);
+	}
+
 	public String getOwnerAssetId();
 
 	public void setOwnerAssetId(String ownerAssetId);

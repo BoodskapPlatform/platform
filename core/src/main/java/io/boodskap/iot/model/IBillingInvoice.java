@@ -26,6 +26,25 @@ public interface IBillingInvoice extends IDomainObject {
 		IBillingInvoice.dao().createOrUpdate(this);
 	}
 
+	@Override
+	public default void copy(Object other) {
+		
+		IBillingInvoice o = (IBillingInvoice) other;
+		
+		setTargetDomain(o.getTargetDomain());
+		setInvoicename(o.getInvoicename());
+		setInvoiceno(o.getInvoiceno());
+		setFrequency(o.getFrequency());
+		setFile(o.getFile());
+		setGrandtotal(o.getGrandtotal());
+		setStartdate(o.getStartdate());
+		setEnddate(o.getEnddate());
+		setObj(o.getObj());
+		setInvoicetype(o.getInvoicetype());
+		
+		IDomainObject.super.copy(other);
+	}
+	
 	public String getTargetDomain();
 
 	public void setTargetDomain(String targetDomain);

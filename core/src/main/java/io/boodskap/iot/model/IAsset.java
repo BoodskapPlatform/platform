@@ -43,6 +43,16 @@ public interface IAsset extends IDomainObject {
 		IAsset.dao().createOrUpdate(this);
 	}
 
+	@Override
+	public default void copy(Object other) {
+		
+		IAsset o = (IAsset) other;
+		
+		setAssetId(o.getAssetId());
+		
+		IDomainObject.super.copy(other);
+	}
+
 	public String getAssetId();
 
 	public void setAssetId(String assetId);

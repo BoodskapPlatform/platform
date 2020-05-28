@@ -48,6 +48,31 @@ public interface IClusterLicense extends IDomainObject {
 		IClusterLicense.dao().createOrUpdate(this);
 	}
 	
+	@Override
+	public default void copy(Object other) {
+		
+		IClusterLicense o = (IClusterLicense) other;
+		
+		setLicenseKey(o.getLicenseKey());
+		setClusterId(o.getClusterId());
+		setTargetDomainKey(o.getTargetDomainKey());
+		setLicenseType(o.getLicenseType());
+		setStatus(o.getStatus());
+		setMaxDomains(o.getMaxDomains());
+		setMaxMachineCores(o.getMaxMachines());
+		setMaxUsers(o.getMaxUsers());
+		setMaxCores(o.getMaxCores());
+		setMaxMachineCores(o.getMaxMachineCores());
+		setMaxDevices(o.getMaxDevices());
+		setMaxMessagesPerMinute(o.getMaxMessagesPerMinute());
+		setMaxOrganizations(o.getMaxOrganizations());
+		setValidFrom(o.getValidFrom());
+		setValidTo(o.getValidTo());
+		setGracePeriod(o.getGracePeriod());
+		
+		IDomainObject.super.copy(other);
+	}
+
 	public String getLicenseKey();
 	
 	public void setLicenseKey(String licenseKey);

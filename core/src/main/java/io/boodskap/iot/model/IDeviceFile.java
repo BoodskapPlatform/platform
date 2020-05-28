@@ -43,6 +43,16 @@ public interface IDeviceFile extends IDomainFile {
 		IDeviceFile.dao().createOrUpdate(this);
 	}
 
+	@Override
+	public default void copy(Object other) {
+		
+		IDeviceFile o = (IDeviceFile) other;
+		
+		setDeviceId(o.getDeviceId());
+		
+		IDomainFile.super.copy(other);
+	}
+
 	public String getDeviceId();
 	
 	public void setDeviceId(String deviceId);

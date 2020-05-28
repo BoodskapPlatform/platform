@@ -26,6 +26,29 @@ public interface IBillingSchedule extends IDomainObject {
 		IBillingSchedule.dao().createOrUpdate(this);
 	}
 
+	@Override
+	public default void copy(Object other) {
+		
+		IBillingSchedule o = (IBillingSchedule) other;
+		
+		setTargetDomain(o.getTargetDomain());
+		setInvoicename(o.getInvoicename());
+		setInvoicecode(o.getInvoicecode());
+		setFrequency(o.getFrequency());
+		setCurrency(o.getCurrency());
+		setPayername(o.getPayername());
+		setDiscounteditems(o.isDiscounteditems());
+		setEnabled(o.isEnabled());
+		setObj(o.getObj());
+		setStartdate(o.getStartdate());
+		setStartevery(o.getStartevery());
+		setWeekday(o.getWeekday());
+		setBillingtype(o.getBillingtype());
+		setExecuted(o.isExecuted());
+		
+		IDomainObject.super.copy(other);
+	}
+
 	public String getTargetDomain();
 
 	public void setTargetDomain(String targetDomain);

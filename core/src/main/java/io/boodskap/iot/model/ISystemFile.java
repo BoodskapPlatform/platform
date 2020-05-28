@@ -20,6 +20,17 @@ public interface ISystemFile extends IModel{
 		SystemFileDAO.get().createOrUpdate(this);
 	}
 	
+	@Override
+	public default void copy(Object other) {
+		
+		ISystemFile o = (ISystemFile) other;
+		
+		setFileId(o.getFileId());
+		setData(o.getData());
+		
+		IModel.super.copy(other);
+	}
+
 	public IFileContent createContent();
 	
 	public String getFileId();

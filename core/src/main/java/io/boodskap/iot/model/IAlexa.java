@@ -39,8 +39,23 @@ public interface IAlexa extends IDomainObject {
 		return dao().get(domainKey, alexaId);
 	}
 
+	@Override
 	public default void save() {
 		IAlexa.dao().createOrUpdate(this);
+	}
+	
+	@Override
+	public default void copy(Object other) {
+		
+		IAlexa o = (IAlexa) other;
+		
+		setAlexaId(o.getAlexaId());
+		setRuleType(o.getRuleType());
+		setRuleName(o.getRuleName());
+		setIntentName(o.getIntentName());
+		setErrorResponse(o.getErrorResponse());
+		
+		IDomainObject.super.copy(other);
 	}
 	
 	public String getAlexaId();
