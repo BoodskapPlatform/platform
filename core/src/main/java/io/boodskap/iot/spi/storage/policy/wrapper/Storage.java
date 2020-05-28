@@ -81,6 +81,11 @@ public class Storage implements IStorage {
 	}
 
 	@Override
+	public DomainCounterDAO<IDomainCounter> getDomainCounterDAO() {
+		return new DomainCounterDAOImpl(impl.getDomainCounterDAO());
+	}
+
+	@Override
 	public DeviceCommandDAO<IDeviceCommand> getDeviceCommandDAO() {
 		return new DeviceCommandDAOImpl(impl.getDeviceCommandDAO());
 	}

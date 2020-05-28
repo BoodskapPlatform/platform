@@ -76,6 +76,12 @@ public class JPAStorage implements IStorage {
 
 	@SuppressWarnings("unchecked")
 	@Override
+	public DomainCounterDAO<DomainCounter> getDomainCounterDAO() {
+		return DomainCounterDAOImpl.get();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
 	public DeviceCommandDAO<DeviceCommand> getDeviceCommandDAO() {
 		return DeviceCommandDAO.get();
 	}
