@@ -27,7 +27,32 @@ public interface IRawMessage extends IDomainData{
 	public static IRawMessage create(String domainKey, String rawId) {
 		return RawMessageDAO.get().create(domainKey, rawId);
 	}
+
+	public default void save() {
+		RawMessageDAO.get().createOrUpdate(this);
+	}
 	
+	@Override
+	public default void copy(Object other) {
+		
+		IRawMessage o = (IRawMessage) other;
+		
+		setRawId(o.getRawId());
+		setChannel(o.getChannel());
+		setSpecId(o.getSpecId());
+		setDeviceId(o.getDeviceId());
+		setDeviceModel(o.getDeviceModel());
+		setFirmwareVersion(o.getFirmwareVersion());
+		setNodeId(o.getNodeId());
+		setNodeUid(o.getNodeUid());
+		setPort(o.getPort());
+		setIpAddress(o.getIpAddress());
+		setHeader(o.getHeader());
+		setData(o.getData());
+		
+		IDomainData.super.copy(other);
+	}
+
 	public String getRawId();
 
 	public void setRawId(String rawId);
@@ -75,9 +100,5 @@ public interface IRawMessage extends IDomainData{
 	public String getData();
 
 	public void setData(String data);
-
-	public default void save() {
-		RawMessageDAO.get().createOrUpdate(this);
-	}
 
 }

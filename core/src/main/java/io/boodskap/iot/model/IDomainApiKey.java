@@ -47,6 +47,16 @@ public interface IDomainApiKey extends IDomainObject{
 		IDomainApiKey.dao().createOrUpdate(this);
 	}
 
+	@Override
+	public default void copy(Object other) {
+		
+		IDomainApiKey o = (IDomainApiKey) other;
+		
+		setApiKey(o.getApiKey());
+		
+		IDomainObject.super.copy(other);
+	}
+
 	public String getApiKey();
 
 	public void setApiKey(String apiKey);

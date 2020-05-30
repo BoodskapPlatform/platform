@@ -51,6 +51,87 @@ public interface IMessage extends IDomainObject {
 		return dao().create(domainKey, specId, messageId);
 	}
 	
+	public default void setProcessing() throws StorageException {
+		setState(State.PROCESSING);
+		updateState();
+	}
+
+	public default void setProcessed() throws StorageException {
+		setState(State.PROCESSED);
+		updateState();
+	}
+
+	public default void setSkipped() throws StorageException {
+		setState(State.SKIPPED);
+		updateState();
+	}
+
+	public default void setFailed(Throwable trace) throws StorageException {
+		setState(State.FAILED);
+		setTrace(ExceptionUtils.getStackTrace(trace));
+		updateState();
+	}
+
+	public default void updateState() throws StorageException {
+		dao().updateState(this);
+	}
+
+	public default Map<String, Object> getData(){
+		Map<String, Object> fields = new HashMap<String, Object>();
+		Collection<IDynamicMessageField> data = getFields();
+		if(null != data) {
+			data.forEach(f -> {
+				fields.put(f.getName(), f.getFieldValue());
+			});
+		}
+		return fields;
+	}
+	
+	public default void setData(JsonNode data) {
+		
+		
+		Map<String, Object> fields = ThreadContext.toMap(data);
+		
+		for(Map.Entry<String, Object> me : fields.entrySet()) {
+			
+			IDynamicMessageField mf = createField(me.getKey());
+			mf.setField(me.getKey(), (Serializable) me.getValue());
+			getFields().add(mf);
+		}
+		
+	}
+	
+	@Override
+	public default void save() {
+		MessageDAO.get().createOrUpdate(this);
+	}
+
+	@Override
+	public default void copy(Object other) {
+		
+		IMessage o = (IMessage) other;
+		
+		setMessageId(o.getMessageId());
+		setSpecId(o.getSpecId());
+		setDeviceId(o.getDeviceId());
+		setDeviceModel(o.getDeviceModel());
+		setFirmwareVersion(o.getFirmwareVersion());
+		setNodeId(o.getNodeId());
+		setNodeUid(o.getNodeId());
+		setIpAddress(o.getIpAddress());
+		setPort(o.getPort());
+		setDataChannel(o.getDataChannel());
+		setState(o.getState());
+		setTrace(o.getTrace());
+		
+		IDomainObject.super.copy(other);
+	}
+	
+	@JsonIgnore
+	public <T extends IDynamicMessageField> Collection<T> getFields();
+
+	public void setFields(Collection<? extends IDynamicMessageField> data);
+	
 	public IDynamicMessageField createField(String name);
 
 	public String getMessageId();
@@ -101,63 +182,4 @@ public interface IMessage extends IDomainObject {
 	
 	public void setTrace(String trace);
 	
-	public default void setProcessing() throws StorageException {
-		setState(State.PROCESSING);
-		updateState();
-	}
-
-	public default void setProcessed() throws StorageException {
-		setState(State.PROCESSED);
-		updateState();
-	}
-
-	public default void setSkipped() throws StorageException {
-		setState(State.SKIPPED);
-		updateState();
-	}
-
-	public default void setFailed(Throwable trace) throws StorageException {
-		setState(State.FAILED);
-		setTrace(ExceptionUtils.getStackTrace(trace));
-		updateState();
-	}
-
-	public default void updateState() throws StorageException {
-		dao().updateState(this);
-	}
-
-	@JsonIgnore
-	public <T extends IDynamicMessageField> Collection<T> getFields();
-
-	public void setFields(Collection<? extends IDynamicMessageField> data);
-	
-	public default Map<String, Object> getData(){
-		Map<String, Object> fields = new HashMap<String, Object>();
-		Collection<IDynamicMessageField> data = getFields();
-		if(null != data) {
-			data.forEach(f -> {
-				fields.put(f.getName(), f.getFieldValue());
-			});
-		}
-		return fields;
-	}
-	
-	public default void setData(JsonNode data) {
-		
-		
-		Map<String, Object> fields = ThreadContext.toMap(data);
-		
-		for(Map.Entry<String, Object> me : fields.entrySet()) {
-			
-			IDynamicMessageField mf = createField(me.getKey());
-			mf.setField(me.getKey(), (Serializable) me.getValue());
-			getFields().add(mf);
-		}
-		
-	}
-
-	public default void save() {
-		MessageDAO.get().createOrUpdate(this);
-	}
-
 }

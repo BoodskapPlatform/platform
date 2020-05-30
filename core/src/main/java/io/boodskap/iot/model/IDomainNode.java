@@ -43,6 +43,16 @@ public interface IDomainNode extends IDomainObject{
 		IDomainNode.dao().createOrUpdate(this);
 	}
 
+	@Override
+	public default void copy(Object other) {
+		
+		IDomainNode o = (IDomainNode) other;
+		
+		setNodeId(o.getNodeId());
+		
+		IDomainObject.super.copy(other);
+	}
+
 	public String getNodeId();
 
 	public void setNodeId(String nodeId);

@@ -22,14 +22,6 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 @JsonSerialize(as=IMessageField.class)
 public interface IMessageField extends IField {
 
-	public boolean isIndexed();
-
-	public void setIndexed(boolean indexed);
-
-	public boolean isFulltextIndexed();
-
-	public void setFulltextIndexed(boolean fulltextIndexed);
-
 	@JsonIgnore
 	public default boolean isNumericField() {
 		return getDataType().isNumbericField();
@@ -38,4 +30,24 @@ public interface IMessageField extends IField {
 	public default void save() {
 		throw new UnsupportedOperationException();
 	}
+
+	@Override
+	public default void copy(Object other) {
+		
+		IMessageField o = (IMessageField) other;
+		
+		setIndexed(o.isIndexed());
+		setFulltextIndexed(o.isFulltextIndexed());
+		
+		IField.super.copy(other);
+	}
+	
+	public boolean isIndexed();
+
+	public void setIndexed(boolean indexed);
+
+	public boolean isFulltextIndexed();
+
+	public void setFulltextIndexed(boolean fulltextIndexed);
+
 }

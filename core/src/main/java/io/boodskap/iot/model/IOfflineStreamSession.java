@@ -24,6 +24,23 @@ public interface IOfflineStreamSession extends IDomainObject {
 		return OfflineStreamSessionDAO.get().create(domainKey, deviceId, camera, session);
 	}
 
+	@Override
+	public default void save() {
+		OfflineStreamSessionDAO.get().createOrUpdate(this);
+	}
+	
+	@Override
+	public default void copy(Object other) {
+		
+		IOfflineStreamSession o = (IOfflineStreamSession) other;
+
+		setDeviceId(o.getDeviceId());
+		setCamera(o.getCamera());
+		setSession(o.getSession());
+		
+		IDomainObject.super.copy(other);
+	}
+	
 	public String getDeviceId();
 
 	public void setDeviceId(String deviceId);
@@ -36,8 +53,4 @@ public interface IOfflineStreamSession extends IDomainObject {
 
 	public void setSession(String session);
 
-	public default void save() {
-		OfflineStreamSessionDAO.get().createOrUpdate(this);
-	}
-	
 }

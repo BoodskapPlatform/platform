@@ -39,6 +39,7 @@ public interface IAsset extends IDomainObject {
 		return dao().get(domainKey, assetId);
 	}
 
+	@Override
 	public default void save() {
 		IAsset.dao().createOrUpdate(this);
 	}

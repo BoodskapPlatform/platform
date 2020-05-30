@@ -19,12 +19,40 @@ package io.boodskap.iot.model;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import io.boodskap.iot.BoodskapSystem;
+import io.boodskap.iot.dao.OrganizationAssetDAO;
 
 @JsonSerialize(as=IOrganizationAsset.class)
 public interface IOrganizationAsset extends IAsset{
 
+	public static OrganizationAssetDAO<IOrganizationAsset> dao(){
+		return OrganizationAssetDAO.get();
+	}
+
+	public static Class<? extends IOrganizationAsset> clazz() {
+		return dao().clazz();
+	}
+
+	public static IOrganizationAsset find(String domainKey, String orgId, String assetId) {
+		return dao().get(domainKey, orgId, assetId);
+	}
+
 	public static IOrganizationAsset create(String domainKey, String orgId, String assetId) {
 		return BoodskapSystem.storage().getOrganizationAssetDAO().create(domainKey, orgId, assetId);
+	}
+	
+	@Override
+	public default void save() {
+		dao().createOrUpdate(this);
+	}
+
+	@Override
+	public default void copy(Object other) {
+		
+		IOrganizationAsset o = (IOrganizationAsset) other;
+		
+		setOrgId(o.getOrgId());
+		
+		IAsset.super.copy(other);
 	}
 	
 	public String getOrgId();

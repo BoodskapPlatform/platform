@@ -43,6 +43,17 @@ public interface IDeviceModel extends IDomainObject {
 		IDeviceModel.dao().createOrUpdate(this);
 	}
 
+	@Override
+	public default void copy(Object other) {
+		
+		IDeviceModel o = (IDeviceModel) other;
+		
+		setModelId(o.getModelId());
+		setVersion(o.getVersion());
+		
+		IDomainObject.super.copy(other);
+	}
+
 	public String getModelId();
 
 	public void setModelId(String modelId);

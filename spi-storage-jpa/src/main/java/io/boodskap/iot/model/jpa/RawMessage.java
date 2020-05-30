@@ -14,7 +14,7 @@ import io.boodskap.iot.model.IRawMessage;
 
 @Entity
 @Table(name="rawmessage")
-public class RawMessage extends AbstractStorable implements IRawMessage{
+public class RawMessage extends AbstractStorageObject implements IRawMessage{
 	
 	private static final long serialVersionUID = 5717122373902848831L;
 	

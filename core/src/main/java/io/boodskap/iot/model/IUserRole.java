@@ -18,9 +18,31 @@ package io.boodskap.iot.model;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import io.boodskap.iot.dao.UserRoleDAO;
+
 @JsonSerialize(as=IUserRole.class)
 public interface IUserRole extends IDomainRole {
 	
+	public static UserRoleDAO<IUserRole> dao(){
+		return UserRoleDAO.get();
+	}
+	
+	public static Class<? extends IUserRole> clazz() {
+		return dao().clazz();
+	}
+	
+	public static IUserRole create(String domainKey, String userId, String name) {
+		return dao().create(domainKey, userId, name);
+	}
+	
+	public static IUserRole find(String domainKey, String userId, String name) {
+		return dao().get(domainKey, userId, name);
+	}
+	
+	public default void save() {
+		IUserRole.dao().createOrUpdate(this);
+	}
+
 	public String getUserId();
 	
 	public void setUserId(String userId);

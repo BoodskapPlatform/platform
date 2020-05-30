@@ -28,6 +28,22 @@ public interface ILinkedDomain extends IDomainObject {
 		return BoodskapSystem.storage().getLinkedDomainDAO().create(domainKey, linkedDomainKey, linkedApiKey);
 	}	
 
+	public default void save() {
+		LinkedDomainDAO.get().createOrUpdate(this);
+	}
+
+	@Override
+	public default void copy(Object other) {
+		
+		ILinkedDomain o = (ILinkedDomain) other;
+		
+		setLinkedDomainKey(o.getLinkedDomainKey());
+		setLinkedApiKey(o.getLinkedApiKey());
+		setDisabled(o.isDisabled());
+		
+		IDomainObject.super.copy(other);
+	}
+	
 	public String getLinkedDomainKey();
 
 	public void setLinkedDomainKey(String linkedDomainKey);
@@ -39,8 +55,4 @@ public interface ILinkedDomain extends IDomainObject {
 	public boolean isDisabled();
 	
 	public void setDisabled(boolean disabled);
-
-	public default void save() {
-		LinkedDomainDAO.get().createOrUpdate(this);
-	}
 }

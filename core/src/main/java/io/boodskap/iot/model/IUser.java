@@ -49,8 +49,9 @@ public interface IUser extends IPerson {
 	}
 
 	public default void addRole(String name, String description) {		
-		IUserRole e = createRole(name, description);
-		UserRoleDAO.get().createOrUpdate(e);
+		IUserRole role = IUserRole.create(getDomainKey(), getUserId(), name);
+		role.setDescription(description);
+		UserRoleDAO.get().createOrUpdate(role);
 	}
 	
 	public default void removeRole(String name) {
@@ -85,6 +86,4 @@ public interface IUser extends IPerson {
 		return UserRoleDAO.get().get(getDomainKey(), getUserId(), name) != null;
 	}
 	
-	public IUserRole createRole(String name, String description);
-
 }

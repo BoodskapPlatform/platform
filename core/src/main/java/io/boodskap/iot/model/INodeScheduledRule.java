@@ -28,6 +28,21 @@ public interface INodeScheduledRule extends IDomainObject{
 		return BoodskapSystem.storage().getNodeScheduledRuleDAO().create(domainKey, ruleId, nodeId);
 	}
 
+	public default void save() {
+		NodeScheduledRuleDAO.get().createOrUpdate(this);
+	}
+
+	@Override
+	public default void copy(Object other) {
+		
+		INodeScheduledRule o = (INodeScheduledRule) other;
+
+		setRuleId(o.getRuleId());
+		setNodeId(o.getNodeId());
+		
+		IDomainObject.super.copy(other);
+	}
+	
 	public String getRuleId();
 
 	public void setRuleId(String ruleId);
@@ -35,9 +50,5 @@ public interface INodeScheduledRule extends IDomainObject{
 	public String getNodeId();
 
 	public void setNodeId(String nodeId);
-
-	public default void save() {
-		NodeScheduledRuleDAO.get().createOrUpdate(this);
-	}
 
 }

@@ -27,12 +27,23 @@ public interface IOrganization extends IContact {
 		return OrganizationDAO.get().create(domainKey, orgId);
 	}
 	
-	public String getOrgId();
-
-	public void setOrgId(String orgId);
-
+	@Override
 	public default void save() {
 		OrganizationDAO.get().createOrUpdate(this);
 	}
+
+	@Override
+	public default void copy(Object other) {
+		
+		IOrganization o = (IOrganization) other;
+
+		setOrgId(o.getOrgId());
+		
+		IContact.super.copy(other);
+	}
+	
+	public String getOrgId();
+
+	public void setOrgId(String orgId);
 
 }

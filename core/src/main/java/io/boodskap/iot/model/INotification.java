@@ -26,6 +26,23 @@ import io.boodskap.iot.NotificationStatus;
 @JsonSerialize(as=INotification.class)
 public interface INotification extends IDomainObject{
 
+	@Override
+	public default void copy(Object other) {
+		
+		INotification o = (INotification) other;
+
+		setNotificationId(o.getNotificationId());
+		setQueuedAt(o.getQueuedAt());
+		setSendor(o.getSendor());
+		setContent(o.getContent());
+		setStatus(o.getStatus());
+		setSentAt(o.getSentAt());
+		setReceipents(o.getReceipents());
+		setResponse(o.getResponse());
+		
+		IDomainObject.super.copy(other);
+	}
+	
 	public String getNotificationId();
 
 	public void setNotificationId(String notificationId);

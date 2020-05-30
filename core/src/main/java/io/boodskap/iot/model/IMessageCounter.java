@@ -13,7 +13,22 @@ public interface IMessageCounter extends IStorageObject {
 	public static MessageCounterDAO<IMessageCounter> dao() {
 		return MessageCounterDAO.get();
 	}
+	
+	public default void save() throws StorageException {
+		dao().increment();
+	}
 
+	@Override
+	public default void copy(Object other) {
+		
+		IMessageCounter o = (IMessageCounter) other;
+
+		setId(o.getId());
+		setCount(o.getCount());
+		
+		IStorageObject.super.copy(other);
+	}
+	
 	public Date getId();
 	
 	public void setId(Date id);
@@ -21,8 +36,4 @@ public interface IMessageCounter extends IStorageObject {
 	public long getCount();
 	
 	public void setCount(long count);
-	
-	public default void save() throws StorageException {
-		dao().increment();
-	}
 }

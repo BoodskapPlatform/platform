@@ -2,7 +2,6 @@ package io.boodskap.iot.model.pojo;
 
 
 import io.boodskap.iot.model.IUser;
-import io.boodskap.iot.model.IUserRole;
 
 public class User extends AbstractPerson implements IUser {
 
@@ -11,11 +10,6 @@ public class User extends AbstractPerson implements IUser {
 	private String userId;
 
 	public User(){
-	}
-
-	@Override
-	public IUserRole createRole(String name, String description) {
-		return new UserRole(getDomainKey(), getUserId(), name, description);
 	}
 
 	public String getUserId() {

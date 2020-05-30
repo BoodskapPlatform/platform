@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import io.boodskap.iot.model.IUser;
-import io.boodskap.iot.model.IUserRole;
 
 @Entity()
 @Table(name="user")
@@ -21,13 +20,6 @@ public class User extends AbstractPerson implements IUser {
 
 	public User(UserId id){
 		this.id = id;
-	}
-
-	@Override
-	public IUserRole createRole(String name, String description) {
-		UserRole role = new UserRole(new UserRoleId(getDomainKey(), getUserId(), name));
-		role.setDescription(description);
-		return role;
 	}
 
 	@Override

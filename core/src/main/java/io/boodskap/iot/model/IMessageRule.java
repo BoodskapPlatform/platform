@@ -43,6 +43,16 @@ public interface IMessageRule extends IRule {
 		IMessageRule.dao().createOrUpdate(this);
 	}
 
+	@Override
+	public default void copy(Object other) {
+		
+		IMessageRule o = (IMessageRule) other;
+		
+		setSpecId(o.getSpecId());
+		
+		IRule.super.copy(other);
+	}
+	
 	public String getSpecId();
 
 	public void setSpecId(String specId);

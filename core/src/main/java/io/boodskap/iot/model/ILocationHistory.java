@@ -28,6 +28,16 @@ public interface ILocationHistory extends ILocation {
 		return BoodskapSystem.storage().getLocationHistoryDAO().create(domainKey, entityType, entityId, historyId);
 	}	
 
+	@Override
+	public default void copy(Object other) {
+		
+		ILocationHistory o = (ILocationHistory) other;
+		
+		setHistoryId(o.getHistoryId());
+		
+		ILocation.super.copy(other);
+	}
+	
 	public String getHistoryId();
 
 	public void setHistoryId(String historyId);

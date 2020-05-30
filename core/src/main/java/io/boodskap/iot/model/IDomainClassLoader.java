@@ -27,6 +27,16 @@ public interface IDomainClassLoader extends IClassLoader{
 		dao().createOrUpdate(this);
 	}
 	
+	@Override
+	public default void copy(Object other) {
+		
+		IDomainClassLoader o = (IDomainClassLoader) other;
+		
+		setDomainKey(o.getDomainKey());
+		
+		IClassLoader.super.copy(other);
+	}
+
 	public String getDomainKey();
 	
 	public void setDomainKey(String domainKey);

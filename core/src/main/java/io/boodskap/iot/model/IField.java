@@ -23,9 +23,21 @@ import io.boodskap.iot.DataType;
 @JsonSerialize(as=IField.class)
 public interface IField extends IStorageObject {
 	
+	@Override
+	public default void copy(Object other) {
+		
+		IField o = (IField) other;
+
+		setDataType(o.getDataType());
+		setName(o.getName());
+		setDescription(o.getDescription());
+		
+		IStorageObject.super.copy(other);
+	}
+	
 	public DataType getDataType();
 	
-	public void setDataType(DataType type);
+	public void setDataType(DataType dataType);
 	
 	public String getName();
 	

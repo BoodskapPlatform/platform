@@ -45,6 +45,18 @@ public interface IDomainEntity extends IDomainObject {
 		IDomainEntity.dao().createOrUpdate(this);
 	}
 
+	@Override
+	public default void copy(Object other) {
+		
+		IDomainEntity o = (IDomainEntity) other;
+		
+		setEntityId(o.getEntityType());
+		setEntityId(o.getEntityId());
+		setAttributes(o.getAttributes());
+		
+		IDomainObject.super.copy(other);
+	}
+
 	public String getEntityType();
 	
 	public void setEntityType(String entityType);

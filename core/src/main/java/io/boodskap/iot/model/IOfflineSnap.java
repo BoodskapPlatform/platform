@@ -30,6 +30,24 @@ public interface IOfflineSnap extends IDomainObject{
 		return BoodskapSystem.storage().getOfflineSnapDAO().create(domainKey, deviceId, camera, stamp);
 	}
 	
+	@Override
+	public default void save() {
+		OfflineSnapDAO.get().createOrUpdate(this);
+	}
+
+	@Override
+	public default void copy(Object other) {
+		
+		IOfflineSnap o = (IOfflineSnap) other;
+		
+		setDeviceId(o.getDeviceId());
+		setMime(o.getMime());
+		setData(o.getData());
+		setCamera(o.getCamera());
+		
+		IDomainObject.super.copy(other);
+	}
+	
 	public String getDeviceId();
 
 	public void setDeviceId(String deviceId);
@@ -45,9 +63,5 @@ public interface IOfflineSnap extends IDomainObject{
 	public String getCamera();
 
 	public void setCamera(String camera);
-
-	public default void save() {
-		OfflineSnapDAO.get().createOrUpdate(this);
-	}
 
 }

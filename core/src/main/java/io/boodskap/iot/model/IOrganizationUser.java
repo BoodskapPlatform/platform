@@ -50,6 +50,16 @@ public interface IOrganizationUser extends IUser {
 		return OrganizationUserRoleDAO.get().get(getDomainKey(), getOrgId(), getUserId(), name) != null;
 	}
 
+	@Override
+	public default void copy(Object other) {
+		
+		IOrganizationUser o = (IOrganizationUser) other;
+		
+		setOrgId(o.getOrgId());
+		
+		IUser.super.copy(other);
+	}
+	
 	public String getOrgId();
 	
 	public void setOrgId(String orgId);

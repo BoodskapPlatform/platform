@@ -53,4 +53,9 @@ public class OrganizationUserRole extends UserRole implements IOrganizationUserR
 		return true;
 	}
 
+	@Override
+	public void save() {
+		IOrganizationUserRole.super.save();
+	}
+
 }

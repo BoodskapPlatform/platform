@@ -23,10 +23,38 @@ import io.boodskap.iot.dao.OrganizationRoleDAO;
 @JsonSerialize(as=IOrganizationRole.class)
 public interface IOrganizationRole extends IDomainRole {
 	
+	public static OrganizationRoleDAO<IOrganizationRole> dao(){
+		return OrganizationRoleDAO.get();
+	}
+	
+	public static Class<? extends IOrganizationRole> clazz() {
+		return dao().clazz();
+	}
+	
 	public static IOrganizationRole create(String domainKey, String orgId, String name) {
-		return OrganizationRoleDAO.get().create(domainKey, orgId, name);
+		return dao().create(domainKey, orgId, name);
 	}
 
+	
+	public static IOrganizationRole find(String domainKey, String orgId, String name) {
+		return dao().get(domainKey, orgId, name);
+	}
+	
+	@Override
+	public default void save() {
+		dao().createOrUpdate(this);
+	}
+
+	@Override
+	public default void copy(Object other) {
+		
+		IOrganizationRole o = (IOrganizationRole) other;
+
+		setOrgId(o.getOrgId());
+		
+		IDomainRole.super.copy(other);
+	}
+	
 	public String getOrgId();
 	
 	public void setOrgId(String orgId);

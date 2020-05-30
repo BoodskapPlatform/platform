@@ -6,7 +6,7 @@ import io.boodskap.iot.BoodskapSystem;
 import io.boodskap.iot.dao.DomainGroovyClassDAO;
 
 @JsonSerialize(as=IDomainGroovyClass.class)
-public interface IDomainGroovyClass extends IGroovyClass, IDomainObject {
+public interface IDomainGroovyClass extends IGroovyClass {
 	
 	public static DomainGroovyClassDAO<IDomainGroovyClass> dao(){
 		return BoodskapSystem.storage().getDomainGroovyClassDAO();
@@ -25,4 +25,17 @@ public interface IDomainGroovyClass extends IGroovyClass, IDomainObject {
 		dao().createOrUpdate(this);
 	}
 
+	@Override
+	public default void copy(Object other) {
+		
+		IDomainGroovyClass o = (IDomainGroovyClass) other;
+		
+		setDomainKey(o.getDomainKey());
+		
+		IGroovyClass.super.copy(other);
+	}
+	
+	public String getDomainKey();
+	
+	public void setDomainKey(String domainKey);
 }

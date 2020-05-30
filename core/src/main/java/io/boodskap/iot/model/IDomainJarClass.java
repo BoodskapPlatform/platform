@@ -6,7 +6,7 @@ import io.boodskap.iot.BoodskapSystem;
 import io.boodskap.iot.dao.DomainJarClassDAO;
 
 @JsonSerialize(as=IDomainJarClass.class)
-public interface IDomainJarClass extends IJarClass, IDomainObject {
+public interface IDomainJarClass extends IJarClass {
 
 	public static DomainJarClassDAO<IDomainJarClass> dao(){
 		return BoodskapSystem.storage().getDomainJarClassDAO();
@@ -21,4 +21,17 @@ public interface IDomainJarClass extends IJarClass, IDomainObject {
 		dao().createOrUpdate(this);
 	}
 
+	@Override
+	public default void copy(Object other) {
+		
+		IDomainJarClass o = (IDomainJarClass) other;
+		
+		setDomainKey(o.getDomainKey());
+		
+		IJarClass.super.copy(other);
+	}
+	
+	public String getDomainKey();
+	
+	public void setDomainKey(String domainKey);
 }

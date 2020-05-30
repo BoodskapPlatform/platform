@@ -6,7 +6,7 @@ import io.boodskap.iot.BoodskapSystem;
 import io.boodskap.iot.dao.DomainGroovyArchiveFileDAO;
 
 @JsonSerialize(as=IDomainGroovyArchiveFile.class)
-public interface IDomainGroovyArchiveFile extends IJarFile, IDomainObject {
+public interface IDomainGroovyArchiveFile extends IJarFile {
 
 	public static DomainGroovyArchiveFileDAO<IDomainGroovyArchiveFile> dao(){
 		return BoodskapSystem.storage().getDomainGroovyArchiveFileDAO();
@@ -24,5 +24,19 @@ public interface IDomainGroovyArchiveFile extends IJarFile, IDomainObject {
 	public default void save() {
 		dao().createOrUpdate(this);
 	}
+	
+	@Override
+	public default void copy(Object other) {
+		
+		IDomainGroovyArchiveFile o = (IDomainGroovyArchiveFile) other;
+		
+		setDomainKey(o.getDomainKey());
+		
+		IJarFile.super.copy(other);
+	}
+
+	public String getDomainKey();
+	
+	public void setDomainKey(String domainKey);
 
 }

@@ -49,6 +49,16 @@ public interface IDomainJsonEntity extends IDomainEntity {
 		return new JSONObject(getJson());
 	}
 
+	@Override
+	public default void copy(Object other) {
+		
+		IDomainJsonEntity o = (IDomainJsonEntity) other;
+		
+		setJson(o.getJson());
+		
+		IDomainEntity.super.copy(other);
+	}
+
 	public String getJson();
 	
 	public void setJson(String json);

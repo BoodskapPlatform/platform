@@ -29,6 +29,23 @@ public interface ILocation extends IDomainObject {
 		return BoodskapSystem.storage().getLocationDAO().create(domainKey, entityType, entityId);
 	}	
 
+	public default void save() {
+		LocationDAO.get().createOrUpdate(this);
+	}
+
+	@Override
+	public default void copy(Object other) {
+		
+		ILocation o = (ILocation) other;
+		
+		setEntityId(o.getEntityId());
+		setEntityType(o.getEntityType());
+		setLatitude(o.getLatitude());
+		setLongitude(o.getLongitude());
+		
+		IDomainObject.super.copy(other);
+	}
+	
 	public String getEntityId();
 
 	public void setEntityId(String entityId);
@@ -44,8 +61,4 @@ public interface ILocation extends IDomainObject {
 	public double getLongitude();
 	
 	public void setLongitude(double longitude);
-
-	public default void save() {
-		LocationDAO.get().createOrUpdate(this);
-	}
 }

@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import io.boodskap.iot.model.IOrganizationUser;
-import io.boodskap.iot.model.IOrganizationUserRole;
 
 @Entity
 @Table(name="organizationuser")
@@ -21,13 +20,6 @@ public class OrganizationUser extends AbstractPerson implements IOrganizationUse
 
 	public OrganizationUser(OrganizationUserId id) {
 		this.id = id;
-	}
-
-	@Override
-	public IOrganizationUserRole createRole(String name, String description) {
-		OrganizationUserRole role = new OrganizationUserRole(new OrganizationUserRoleId(getDomainKey(), getOrgId(), getUserId(), name));
-		role.setDescription(description);
-		return null;
 	}
 
 	public String getDomainKey() {

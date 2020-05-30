@@ -44,6 +44,16 @@ public interface IDomainAccess extends IDomainObject{
 		IDomainAccess.dao().createOrUpdate(this);
 	}
 	
+	@Override
+	public default void copy(Object other) {
+		
+		IDomainAccess o = (IDomainAccess) other;
+		
+		setAccess(o.getAccess());
+		
+		IDomainObject.super.copy(other);
+	}
+
 	public Access getAccess();
 
 	public void setAccess(Access access);

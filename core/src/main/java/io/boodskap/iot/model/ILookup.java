@@ -37,26 +37,7 @@ public interface ILookup extends IDomainObject{
 		return BoodskapSystem.storage().getLookupDAO().create(domainKey, target, targetId, name);
 	}	
 
-	public PropertyTarget getTarget();
-
-	public void setTarget(PropertyTarget target);
-
-	public String getTargetId();
-
-	public void setTargetId(String targetId);
-
-	public String getName();
-
-	public void setName(String name);
-
-	public String getValue();
-
-	public void setValue(String value);
-
-	public DataType getType();
-
-	public void setType(DataType type);
-	
+	@Override
 	public default void save() {
 		LookupDAO.get().createOrUpdate(this);
 	}
@@ -116,4 +97,33 @@ public interface ILookup extends IDomainObject{
 		
 	}
 
+	@Override
+	public default void copy(Object other) {
+		
+		ILookup o = (ILookup) other;
+		
+		setTarget(o.getTarget());
+		setTargetId(o.getTargetId());
+		setValue(o.getValue());
+		setType(o.getType());
+		
+		IDomainObject.super.copy(other);
+	}
+	
+	public PropertyTarget getTarget();
+
+	public void setTarget(PropertyTarget target);
+
+	public String getTargetId();
+
+	public void setTargetId(String targetId);
+
+	public String getValue();
+
+	public void setValue(String value);
+
+	public DataType getType();
+
+	public void setType(DataType type);
+	
 }

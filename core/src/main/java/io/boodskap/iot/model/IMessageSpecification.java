@@ -52,6 +52,17 @@ public interface IMessageSpecification extends IDomainObject {
 		IMessageSpecification.dao().createOrUpdate(this);
 	}
 
+	@Override
+	public default void copy(Object other) {
+		
+		IMessageSpecification o = (IMessageSpecification) other;
+		
+		setSpecId(o.getSpecId());
+		setFields(o.getFields());
+		
+		IDomainObject.super.copy(other);
+	}
+	
 	public IMessageField createField(String name, DataType dataType) throws StorageException;
 	
 	public void addField(IMessageField field) throws StorageException;

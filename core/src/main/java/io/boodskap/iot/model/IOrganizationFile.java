@@ -18,13 +18,41 @@ package io.boodskap.iot.model;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import io.boodskap.iot.BoodskapSystem;
+import io.boodskap.iot.dao.OrganizationFileDAO;
 
 @JsonSerialize(as=IOrganizationFile.class)
 public interface IOrganizationFile extends IDomainFile {
 	
+	public static OrganizationFileDAO<IOrganizationFile> dao(){
+		return OrganizationFileDAO.get();
+	}
+	
+	public static Class<? extends IOrganizationFile> clazz() {
+		return dao().clazz();
+	}
+	
 	public static IOrganizationFile create(String domainKey, String orgId, String fileId) {
-		return BoodskapSystem.storage().getOrganizationFileDAO().create(domainKey, orgId, fileId);
+		return dao().create(domainKey, orgId, fileId);
+	}
+	
+
+	public static IOrganizationFile  find(String domainKey, String orgId, String fileId) {
+		return dao().get(domainKey, orgId, fileId);
+	}
+
+	@Override
+	public default void save() {
+		IDomainFile.dao().createOrUpdate(this);
+	}
+
+	@Override
+	public default void copy(Object other) {
+		
+		IOrganizationFile o = (IOrganizationFile) other;
+
+		setOrgId(o.getOrgId());
+		
+		IDomainFile.super.copy(other);
 	}
 	
 	public String getOrgId();

@@ -21,20 +21,28 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.boodskap.iot.dao.OfflineStreamDAO;
 
 @JsonSerialize(as=IOfflineStream.class)
-public interface IOfflineStream extends IDomainObject{
+public interface IOfflineStream extends IOfflineSnap{
 	
 	public static IOfflineStream create(String domainKey, String deviceId, String camera, String session, int frame) {
 		return OfflineStreamDAO.get().create(domainKey, deviceId, camera, session, frame);
 	}
 	
-	public String getDeviceId();
+	@Override
+	public default void save() {
+		OfflineStreamDAO.get().createOrUpdate(this);
+	}
 
-	public void setDeviceId(String deviceId);
+	@Override
+	public default void copy(Object other) {
+		
+		IOfflineStream o = (IOfflineStream) other;
 
-	public String getCamera();
-
-	public void setCamera(String camera);
-
+		setSession(o.getSession());
+		setFrame(o.getFrame());
+		
+		IOfflineSnap.super.copy(other);
+	}
+	
 	public String getSession();
 
 	public void setSession(String session);
@@ -43,16 +51,4 @@ public interface IOfflineStream extends IDomainObject{
 
 	public void setFrame(int frame);
 	
-	public String getMime();
-
-	public void setMime(String mime);
-
-	public byte[] getData();
-
-	public void setData(byte[] data);
-
-	public default void save() {
-		OfflineStreamDAO.get().createOrUpdate(this);
-	}
-
 }

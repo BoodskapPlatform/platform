@@ -39,6 +39,16 @@ public interface IDomainLicense extends IDomainObject {
 		IDomainLicense.dao().createOrUpdate(this);
 	}
 
+	@Override
+	public default void copy(Object other) {
+		
+		IDomainLicense o = (IDomainLicense) other;
+		
+		setLicense(o.getLicense());
+		
+		IDomainObject.super.copy(other);
+	}
+
 	public byte[] getLicense();
 
 	public void setLicense(byte[] license);

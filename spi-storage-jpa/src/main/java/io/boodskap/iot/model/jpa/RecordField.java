@@ -2,20 +2,13 @@ package io.boodskap.iot.model.jpa;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 
-import io.boodskap.iot.DataType;
 import io.boodskap.iot.model.IRecordField;
 
 @Embeddable
-public class RecordField extends AbstractModel implements IRecordField {
+public class RecordField extends AbstractField implements IRecordField {
 
 	private static final long serialVersionUID = 2617723620254661858L;
-
-	@Column(name="datatype", length=12)
-	@Enumerated(EnumType.STRING)
-	private DataType dataType;
 
 	@Column(name="indexed")
 	private boolean indexed;
@@ -24,14 +17,6 @@ public class RecordField extends AbstractModel implements IRecordField {
 	private boolean fulltextIndexed;
 	
 	public RecordField(){
-	}
-
-	public DataType getDataType() {
-		return dataType;
-	}
-
-	public void setDataType(DataType dataType) {
-		this.dataType = dataType;
 	}
 
 	public boolean isIndexed() {
@@ -54,7 +39,6 @@ public class RecordField extends AbstractModel implements IRecordField {
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((dataType == null) ? 0 : dataType.hashCode());
 		result = prime * result + (fulltextIndexed ? 1231 : 1237);
 		result = prime * result + (indexed ? 1231 : 1237);
 		return result;
@@ -69,8 +53,6 @@ public class RecordField extends AbstractModel implements IRecordField {
 		if (getClass() != obj.getClass())
 			return false;
 		RecordField other = (RecordField) obj;
-		if (dataType != other.dataType)
-			return false;
 		if (fulltextIndexed != other.fulltextIndexed)
 			return false;
 		if (indexed != other.indexed)

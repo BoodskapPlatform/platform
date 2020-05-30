@@ -25,6 +25,18 @@ public interface IJarFile extends IModel{
 		dao().createOrUpdate(this);
 	}
 
+	@Override
+	public default void copy(Object other) {
+		
+		IJarFile o = (IJarFile) other;
+		
+		setLoader(o.getLoader());
+		setFileName(o.getFileName());
+		setObjectCode(o.getObjectCode());
+		
+		IModel.super.copy(other);
+	}
+
 	public String getLoader();
 	
 	public void setLoader(String loader);
