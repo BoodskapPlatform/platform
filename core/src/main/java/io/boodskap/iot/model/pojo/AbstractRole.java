@@ -1,23 +1,23 @@
 package io.boodskap.iot.model.pojo;
 
-import io.boodskap.iot.model.IModel;
+import io.boodskap.iot.model.IRole;
 
-public abstract class AbstractModel extends AbstractEntity implements IModel {
+public class AbstractRole  extends AbstractEntity implements IRole {
 
-	private static final long serialVersionUID = 2846999319144262673L;
+	private static final long serialVersionUID = -1901008600649363360L;
 	
 	private String name;
 	
-	public AbstractModel() {
+	public AbstractRole() {
 	}
 
 	@Override
-	public final String getName() {
+	public String getName() {
 		return name;
 	}
 
 	@Override
-	public final void setName(String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 
@@ -37,7 +37,7 @@ public abstract class AbstractModel extends AbstractEntity implements IModel {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		AbstractModel other = (AbstractModel) obj;
+		AbstractRole other = (AbstractRole) obj;
 		if (name == null) {
 			if (other.name != null)
 				return false;

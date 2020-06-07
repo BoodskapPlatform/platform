@@ -21,7 +21,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.boodskap.iot.dao.DomainRoleDAO;
 
 @JsonSerialize(as=IDomainRole.class)
-public interface IDomainRole extends IRole, IDomainObject {
+public interface IDomainRole extends IRole {
 	
 	public static DomainRoleDAO<IDomainRole> dao(){
 		return DomainRoleDAO.get();
@@ -42,5 +42,9 @@ public interface IDomainRole extends IRole, IDomainObject {
 	public default void save() {
 		IDomainRole.dao().createOrUpdate(this);
 	}
+	
+	public String getDomainKey();
+	
+	public void setDomainKey(String domainKey);
 
 }

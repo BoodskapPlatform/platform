@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import io.boodskap.iot.model.IEntityFile;
-import io.boodskap.iot.model.IFileContent;
 
 @Entity
 @Table(name="entityfile")
@@ -17,11 +16,6 @@ public class EntityFile extends AbstractFile implements IEntityFile {
 	private EntityFileId id = new EntityFileId();
 	
 	public EntityFile() {
-	}
-
-	@Override
-	public IFileContent createContent() {
-		return new FileContent(getData(), getMediaType());
 	}
 
 	public EntityFile(EntityFileId id) {

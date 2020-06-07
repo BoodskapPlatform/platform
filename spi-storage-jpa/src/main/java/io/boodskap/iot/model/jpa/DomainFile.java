@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import io.boodskap.iot.model.IDomainFile;
-import io.boodskap.iot.model.IFileContent;
 
 @Entity
 @Table(name="domainfile")
@@ -21,11 +20,6 @@ public class DomainFile extends AbstractFile implements IDomainFile {
 
 	public DomainFile(DomainFileId id) {
 		this.id = id;
-	}
-
-	@Override
-	public IFileContent createContent() {
-		return new FileContent(getData(), getMediaType());
 	}
 
 	public String getDomainKey() {

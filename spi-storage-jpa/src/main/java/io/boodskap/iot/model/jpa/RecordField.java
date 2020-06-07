@@ -16,6 +16,9 @@ public class RecordField extends AbstractField implements IRecordField {
 	@Column(name="fullindexed")
 	private boolean fulltextIndexed;
 	
+	@Column(name="name", length=80)
+	private String name;
+
 	public RecordField(){
 	}
 

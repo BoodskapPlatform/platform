@@ -9,7 +9,7 @@ import io.boodskap.iot.model.IGroovyClass;
 
 @Entity
 @Table(name = "groovyclass")
-public class GroovyClass extends AbstractModel implements IGroovyClass {
+public class GroovyClass extends AbstractEntity implements IGroovyClass {
 
 	private static final long serialVersionUID = 4578909004576300500L;
 	
@@ -36,26 +36,32 @@ public class GroovyClass extends AbstractModel implements IGroovyClass {
 		this.id = id;
 	}
 
+	@Override
 	public String getLoader() {
 		return id.getLoader();
 	}
 
+	@Override
 	public void setLoader(String loader) {
 		id.setLoader(loader);
 	}
 
+	@Override
 	public String getPkg() {
 		return id.getPkg();
 	}
 
+	@Override
 	public void setPkg(String pkg) {
 		id.setPkg(pkg);
 	}
 
+	@Override
 	public String getName() {
 		return id.getName();
 	}
 
+	@Override
 	public void setName(String name) {
 		id.setName(name);
 	}

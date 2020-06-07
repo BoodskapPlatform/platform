@@ -18,7 +18,7 @@ import io.boodskap.iot.SizeConstants;
 import io.boodskap.iot.model.IRawData;
 
 @Entity
-@Table(name="rawdata", indexes= {@Index(columnList = "domainKey"), @Index(columnList = "receivedStamp")})
+@Table(name="rawdata", indexes= {@Index(columnList = "domainKey"), @Index(columnList = "registeredStamp")})
 public class RawData extends AbstractStorageObject implements IRawData {
 
 	private static final long serialVersionUID = 8770058772346142631L;

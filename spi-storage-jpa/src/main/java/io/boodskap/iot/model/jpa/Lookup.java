@@ -14,7 +14,7 @@ import io.boodskap.iot.model.ILookup;
 
 @Entity
 @Table(name="lookup")
-public class Lookup extends AbstractModel implements ILookup{
+public class Lookup extends AbstractEntity implements ILookup{
 
 	private static final long serialVersionUID = -5281376095868689212L;
 

@@ -14,34 +14,19 @@ public abstract class AbstractField extends AbstractStorageObject implements IFi
 
 	private static final long serialVersionUID = -6421083893579742193L;
 	
-	@Column(name="name", length=SizeConstants.NAME_SIZE)
+	@Enumerated(EnumType.STRING)
+	@Column(name="fdatatype")
+	private DataType dataType;
+	
+	@Column(name="name", length=80)
 	private String name;
 
 	@Column(name="description", length=SizeConstants.DESCRIPTION_SIZE)
 	private String description;
 	
-	@Enumerated(EnumType.STRING)
-	@Column(name="fdatatype")
-	private DataType dataType;
-	
 	public AbstractField() {
 	}
 	
-	public AbstractField(String name, DataType dataType) {
-		this.name = name;
-		this.dataType = dataType;
-	}
-	
-	@Override
-	public String getName() {
-		return name;
-	}
-
-	@Override
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	@Override
 	public final String getDescription() {
 		return description;
@@ -53,13 +38,23 @@ public abstract class AbstractField extends AbstractStorageObject implements IFi
 	}
 
 	@Override
-	public DataType getDataType() {
+	public final DataType getDataType() {
 		return dataType;
 	}
 
 	@Override
-	public void setDataType(DataType dataType) {
+	public final void setDataType(DataType dataType) {
 		this.dataType = dataType;
+	}
+
+	@Override
+	public final String getName() {
+		return name;
+	}
+
+	@Override
+	public final void setName(String name) {
+		this.name = name;
 	}
 
 	@Override

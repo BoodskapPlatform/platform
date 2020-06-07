@@ -29,8 +29,4 @@ public interface IStorable extends Serializable {
 
 	public void setFormat(DataFormat format);
 
-	public String getDescription();
-
-	public void setDescription(String description);
-
 }

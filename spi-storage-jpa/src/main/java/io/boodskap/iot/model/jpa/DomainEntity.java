@@ -9,7 +9,6 @@ import javax.persistence.ElementCollection;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
 import javax.persistence.MapKeyColumn;
 import javax.persistence.Table;
 
@@ -27,9 +26,9 @@ public class DomainEntity extends AbstractModel implements IDomainEntity {
 	private DomainEntityId id = new DomainEntityId();
 
 	@ElementCollection(fetch = FetchType.EAGER)
-	@CollectionTable(name = "domain_entity_attrs", joinColumns = @JoinColumn(name = "id"))
 	@MapKeyColumn(name = "attr_name", length = 40)
 	@Column(name = "att_value", length = 1024)
+	@CollectionTable(name = "domain_entity_attrs")
 	@BatchSize(size = 100)
 	private Map<String, String> attributes = new HashMap<>();
 

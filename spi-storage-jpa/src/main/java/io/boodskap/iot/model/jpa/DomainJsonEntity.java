@@ -9,7 +9,6 @@ import javax.persistence.ElementCollection;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.MapKeyColumn;
 import javax.persistence.Table;
@@ -32,9 +31,9 @@ public class DomainJsonEntity extends AbstractModel implements IDomainJsonEntity
 	private String json = null;
 
 	@ElementCollection(fetch = FetchType.EAGER)
-	@CollectionTable(name = "domain_jsonentity_attrs", joinColumns = @JoinColumn(name = "id"))
 	@MapKeyColumn(name = "attr_name", length = 40)
 	@Column(name = "att_value", length = 1024)
+	@CollectionTable(name = "domain_json_entity_attrs")
 	@BatchSize(size = 100)
 	private Map<String, String> attributes = new HashMap<>();
 

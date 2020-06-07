@@ -25,10 +25,6 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 @JsonSerialize(as=IPerson.class)
 public interface IPerson extends IContact {
 
-	public String getUserId();
-
-	public void setUserId(String userId);
-
 	public String getFirstName();
 
 	public void setFirstName(String firstName);
@@ -66,8 +62,6 @@ public interface IPerson extends IContact {
 			sb.append(getLastName());
 		}
 		
-		if(sb.length() > 0) return sb.toString();
-		
-		return getUserId();
+		return sb.toString();
 	}
 }

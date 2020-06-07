@@ -14,7 +14,7 @@ import io.boodskap.iot.RuleScriptLanguage;
 import io.boodskap.iot.model.IRule;
 
 @MappedSuperclass
-public abstract class AbstractRule extends AbstractModel implements IRule {
+public abstract class AbstractRule extends AbstractEntity implements IRule {
 
 	private static final long serialVersionUID = 1059255536340100723L;
 

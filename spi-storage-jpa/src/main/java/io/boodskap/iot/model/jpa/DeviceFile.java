@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import io.boodskap.iot.model.IDeviceFile;
-import io.boodskap.iot.model.IFileContent;
 
 @Entity
 @Table(name="devicefile")
@@ -21,11 +20,6 @@ public class DeviceFile extends AbstractFile implements IDeviceFile {
 
 	public DeviceFile(DeviceFileId id) {
 		this.id = id;
-	}
-
-	@Override
-	public IFileContent createContent() {
-		return new FileContent(getData(), getMediaType());
 	}
 
 	public String getDomainKey() {

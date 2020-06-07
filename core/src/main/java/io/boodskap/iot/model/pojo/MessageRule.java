@@ -12,11 +12,6 @@ public class MessageRule extends AbstractRule implements IMessageRule {
 	public MessageRule() {
 	}
 
-	public MessageRule(String domainKey, String specId) {
-		super(domainKey);
-		this.specId = specId;
-	}
-
 	public String getSpecId() {
 		return specId;
 	}

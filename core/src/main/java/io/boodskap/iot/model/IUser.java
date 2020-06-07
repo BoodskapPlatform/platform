@@ -85,5 +85,8 @@ public interface IUser extends IPerson {
 	public default boolean hasRole(String name) {
 		return UserRoleDAO.get().get(getDomainKey(), getUserId(), name) != null;
 	}
+
+	public String getUserId();
 	
+	public void setUserId(String userId);
 }

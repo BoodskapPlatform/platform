@@ -1,10 +1,11 @@
 package io.boodskap.iot.model.jpa;
 
-import javax.persistence.EmbeddedId;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
-import io.boodskap.iot.model.IFileContent;
+import io.boodskap.iot.SizeConstants;
 import io.boodskap.iot.model.IPublicFile;
 
 @Entity
@@ -13,42 +14,43 @@ public class PublicFile extends AbstractFile implements IPublicFile {
 
 	private static final long serialVersionUID = -8400532640153605579L;
 	
-	@EmbeddedId
-	private PublicFileId id = new PublicFileId();
+	@Id
+	@Column(name="fileid", length=40)
+	private String fileId;
+
+	@Column(name="dkey", length=SizeConstants.DOMAIN_SIZE)
+	private String domainKey;
+
 	
 	public PublicFile() {
 	}
 
-	public PublicFile(PublicFileId id) {
-		this.id = id;
-	}
-
-	@Override
-	public IFileContent createContent() {
-		return new FileContent(getData(), getMediaType());
+	public PublicFile(String fileId) {
+		this.fileId = fileId;
 	}
 
 	public String getDomainKey() {
-		return id.getDomainKey();
+		return domainKey;
 	}
 
 	public void setDomainKey(String domainKey) {
-		id.setDomainKey(domainKey);
+		this.domainKey = domainKey;
 	}
 
 	public String getFileId() {
-		return id.getFileId();
+		return fileId;
 	}
 
 	public void setFileId(String fileId) {
-		id.setFileId(fileId);
+		this.fileId = fileId;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((domainKey == null) ? 0 : domainKey.hashCode());
+		result = prime * result + ((fileId == null) ? 0 : fileId.hashCode());
 		return result;
 	}
 
@@ -61,12 +63,17 @@ public class PublicFile extends AbstractFile implements IPublicFile {
 		if (getClass() != obj.getClass())
 			return false;
 		PublicFile other = (PublicFile) obj;
-		if (id == null) {
-			if (other.id != null)
+		if (domainKey == null) {
+			if (other.domainKey != null)
 				return false;
-		} else if (!id.equals(other.id))
+		} else if (!domainKey.equals(other.domainKey))
+			return false;
+		if (fileId == null) {
+			if (other.fileId != null)
+				return false;
+		} else if (!fileId.equals(other.fileId))
 			return false;
 		return true;
 	}
-	
+
 }

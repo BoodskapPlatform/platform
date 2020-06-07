@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import io.boodskap.iot.model.IAssetFile;
-import io.boodskap.iot.model.IFileContent;
 
 @Entity
 @Table(name="assetfile")
@@ -24,31 +23,32 @@ public class AssetFile extends AbstractFile implements IAssetFile {
 	}
 
 	@Override
-	public IFileContent createContent() {
-		return new FileContent(getData(), getMediaType());
-	}
-
-	public String getDomainKey() {
+	public final String getDomainKey() {
 		return id.getDomainKey();
 	}
 
-	public void setDomainKey(String domainKey) {
+	@Override
+	public final void setDomainKey(String domainKey) {
 		id.setDomainKey(domainKey);
 	}
 
-	public String getAssetId() {
+	@Override
+	public final String getAssetId() {
 		return id.getAssetId();
 	}
 
-	public void setAssetId(String assetId) {
+	@Override
+	public final void setAssetId(String assetId) {
 		id.setAssetId(assetId);
 	}
 
-	public String getFileId() {
+	@Override
+	public final String getFileId() {
 		return id.getFileId();
 	}
 
-	public void setFileId(String fileId) {
+	@Override
+	public final void setFileId(String fileId) {
 		id.setFileId(fileId);
 	}
 

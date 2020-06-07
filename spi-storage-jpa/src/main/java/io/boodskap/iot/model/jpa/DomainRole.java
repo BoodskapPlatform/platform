@@ -8,7 +8,7 @@ import io.boodskap.iot.model.IDomainRole;
 
 @Entity
 @Table(name="domainrole")
-public class DomainRole extends AbstractModel implements IDomainRole {
+public class DomainRole extends AbstractEntity implements IDomainRole {
 	
 	private static final long serialVersionUID = 2283422339170322884L;
 

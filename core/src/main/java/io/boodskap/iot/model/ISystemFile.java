@@ -26,7 +26,9 @@ public interface ISystemFile extends IModel{
 		ISystemFile o = (ISystemFile) other;
 		
 		setFileId(o.getFileId());
+		setMediaType(o.getMediaType());
 		setData(o.getData());
+		setTags(o.getTags());
 		
 		IModel.super.copy(other);
 	}
@@ -37,8 +39,17 @@ public interface ISystemFile extends IModel{
 	
 	public void setFileId(String fileId);
 
+	public String getMediaType();
+
+	public void setMediaType(String mediaType);
+
 	@JsonIgnore
 	public byte[] getData();
 
 	public void setData(byte[] data);
+
+	public String getTags();
+
+	public void setTags(String tags);
+
 }

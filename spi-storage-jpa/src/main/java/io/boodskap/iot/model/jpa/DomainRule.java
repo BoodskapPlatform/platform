@@ -18,6 +18,9 @@ public class DomainRule extends AbstractRule implements IDomainRule{
 	@Column(name="domainkey", length=SizeConstants.DOMAIN_SIZE)
 	private String domainKey; 
 
+	@Column(name="name", length=SizeConstants.NAME_SIZE)
+	private String name;
+
 	public DomainRule() {
 	}
 	
@@ -25,12 +28,24 @@ public class DomainRule extends AbstractRule implements IDomainRule{
 		this.domainKey = domainKey;
 	}
 
+	@Override
 	public String getDomainKey() {
 		return domainKey;
 	}
 
+	@Override
 	public void setDomainKey(String domainKey) {
 		this.domainKey = domainKey;
+	}
+
+	@Override
+	public String getName() {
+		return name;
+	}
+
+	@Override
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	@Override
@@ -38,6 +53,7 @@ public class DomainRule extends AbstractRule implements IDomainRule{
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + ((domainKey == null) ? 0 : domainKey.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
 	}
 
@@ -54,6 +70,11 @@ public class DomainRule extends AbstractRule implements IDomainRule{
 			if (other.domainKey != null)
 				return false;
 		} else if (!domainKey.equals(other.domainKey))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
 			return false;
 		return true;
 	}

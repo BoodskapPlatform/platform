@@ -25,6 +25,10 @@ public class BoodskapConfiguration implements IConfig{
 	
 	private static final long serialVersionUID = 7078124126063442833L;
 	
+	public static final String HTTP_X_DOMAIN_KEY = "X-BSKP-DKEY";
+	public static final String HTTP_X_API_KEY = "X-BSKP-AKEY";
+	public static final String HTTP_X_TOKEN = "X-BSKP-TOKEN";
+
 	private static final BoodskapConfiguration instance = new BoodskapConfiguration();
 	
 	private String domainKey;

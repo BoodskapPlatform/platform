@@ -8,7 +8,7 @@ import io.boodskap.iot.model.IJarClass;
 
 @Entity
 @Table(name = "jarclass")
-public class JarClass extends AbstractModel implements IJarClass {
+public class JarClass extends AbstractEntity implements IJarClass {
 
 	private static final long serialVersionUID = -4137682579219019646L;
 	

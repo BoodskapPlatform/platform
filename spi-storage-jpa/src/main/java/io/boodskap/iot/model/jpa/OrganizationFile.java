@@ -4,7 +4,6 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import io.boodskap.iot.model.IFileContent;
 import io.boodskap.iot.model.IOrganizationFile;
 
 @Entity
@@ -21,11 +20,6 @@ public class OrganizationFile extends AbstractFile implements IOrganizationFile 
 
 	public OrganizationFile(OrganizationFileId id) {
 		this.id = id;
-	}
-
-	@Override
-	public IFileContent createContent() {
-		return new FileContent(getData(), getMediaType());
 	}
 
 	public String getDomainKey() {

@@ -8,7 +8,7 @@ import io.boodskap.iot.model.IUserRole;
 
 @Entity
 @Table(name="userrole")
-public class UserRole extends AbstractModel implements IUserRole {
+public class UserRole extends AbstractEntity implements IUserRole {
 	
 	private static final long serialVersionUID = -1713165327685347649L;
 	

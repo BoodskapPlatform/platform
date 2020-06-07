@@ -31,6 +31,10 @@ public interface IAuthToken extends Serializable {
 		return ThreadContext.AUTH.get();
 	}
 	
+	public static void set(IAuthToken token) {
+		ThreadContext.AUTH.set(token);
+	}
+	
 	public static void clear() {
 		ThreadContext.AUTH.remove();
 		MDC.clear();

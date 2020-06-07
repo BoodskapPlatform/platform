@@ -3,7 +3,7 @@ package io.boodskap.iot.model;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @JsonSerialize(as=IJavaClass.class)
-public interface IJavaClass extends IModel{
+public interface IJavaClass extends IEntity{
 
 	@Override
 	public default void copy(Object other) {
@@ -12,8 +12,9 @@ public interface IJavaClass extends IModel{
 
 		setLoader(o.getLoader());
 		setPkg(o.getPkg());
+		setName(o.getName());
 		
-		IModel.super.copy(other);
+		IEntity.super.copy(other);
 	}
 	
 	public String getLoader();
@@ -24,4 +25,7 @@ public interface IJavaClass extends IModel{
 	
 	public void setPkg(String pkg);
 
+	public String getName();
+	
+	public void setName(String name);
 }

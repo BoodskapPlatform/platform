@@ -2,15 +2,18 @@ package io.boodskap.iot.model.jpa;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
 
+import io.boodskap.iot.DataFormat;
 import io.boodskap.iot.model.ISystemProperty;
 
 @Entity
 @Table(name="systemproperty")
-public class SystemProperty extends AbstractStorable implements ISystemProperty {
+public class SystemProperty extends AbstractEntity implements ISystemProperty {
 
 	private static final long serialVersionUID = -3731879336825133100L;
 
@@ -22,6 +25,10 @@ public class SystemProperty extends AbstractStorable implements ISystemProperty 
 	@Column(name="value", length=131072)
 	private String value = null;
 	
+	@Column(name="format", length=8)
+	@Enumerated(EnumType.STRING)
+	private DataFormat format;
+
 	public SystemProperty() {
 	}
 	
@@ -29,51 +36,34 @@ public class SystemProperty extends AbstractStorable implements ISystemProperty 
 		this.name = name;
 	}
 
+	@Override
 	public String getName() {
 		return name;
 	}
 
+	@Override
 	public void setName(String name) {
 		this.name = name;
 	}
 
+	@Override
 	public String getValue() {
 		return value;
 	}
 
+	@Override
 	public void setValue(String value) {
 		this.value = value;
 	}
 
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((value == null) ? 0 : value.hashCode());
-		return result;
+	public DataFormat getFormat() {
+		return format;
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		SystemProperty other = (SystemProperty) obj;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
-		if (value == null) {
-			if (other.value != null)
-				return false;
-		} else if (!value.equals(other.value))
-			return false;
-		return true;
+	public void setFormat(DataFormat format) {
+		this.format = format;
 	}
 
 }

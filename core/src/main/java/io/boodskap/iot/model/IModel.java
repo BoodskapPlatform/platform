@@ -19,7 +19,7 @@ package io.boodskap.iot.model;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @JsonSerialize(as = IModel.class)
-public interface IModel extends IStorageObject {
+public interface IModel extends IEntity {
 
 	@Override
 	public default void copy(Object other) {
@@ -27,27 +27,12 @@ public interface IModel extends IStorageObject {
 		IModel o = (IModel) other;
 		
 		setName(o.getName());
-		setDescription(o.getDescription());
-		setCreatedBy(o.getCreatedBy());
-		setUpdatedBy(o.getUpdatedBy());
 
-		IStorageObject.super.copy(other);
+		IEntity.super.copy(other);
 	}
 	
 	public String getName();
 
 	public void setName(String name);
 
-	public String getDescription();
-
-	public void setDescription(String description);
-
-	public String getCreatedBy();
-	
-	public void setCreatedBy(String createdBy);
-	
-	public String getUpdatedBy();
-	
-	public void setUpdatedBy(String updatedBy);
-	
 }

@@ -23,8 +23,8 @@ import io.boodskap.iot.dao.PublicFileDAO;
 @JsonSerialize(as=IPublicFile.class)
 public interface IPublicFile extends IFile {
 
-	public static IPublicFile create(String domainKey, String fileId) {
-		return PublicFileDAO.get().create(domainKey, fileId);
+	public static IPublicFile create(String fileId) {
+		return PublicFileDAO.get().create(fileId);
 	}
 
 	public default void save() {

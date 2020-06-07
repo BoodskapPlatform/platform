@@ -8,6 +8,7 @@ import javax.persistence.MappedSuperclass;
 
 import io.boodskap.iot.SizeConstants;
 import io.boodskap.iot.model.IFile;
+import io.boodskap.iot.model.IFileContent;
 
 @MappedSuperclass
 public abstract class AbstractFile extends AbstractModel implements IFile {
@@ -27,6 +28,11 @@ public abstract class AbstractFile extends AbstractModel implements IFile {
 	public AbstractFile() {
 	}
 	
+	@Override
+	public final IFileContent createContent() {
+		return new FileContent(getData(), getMediaType());
+	}
+
 	public final byte[] getData() {
 		return data;
 	}

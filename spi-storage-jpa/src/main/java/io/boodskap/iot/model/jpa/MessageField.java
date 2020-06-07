@@ -21,22 +21,27 @@ public class MessageField extends AbstractField implements IMessageField {
 	}
 
 	public MessageField(String name, DataType dataType) {
-		super(name, dataType);
+		setName(name);
+		setDataType(dataType);
 	}
 
-	public boolean isIndexed() {
+	@Override
+	public final boolean isIndexed() {
 		return indexed;
 	}
 
-	public void setIndexed(boolean indexed) {
+	@Override
+	public final void setIndexed(boolean indexed) {
 		this.indexed = indexed;
 	}
 
-	public boolean isFulltextIndexed() {
+	@Override
+	public final boolean isFulltextIndexed() {
 		return fulltextIndexed;
 	}
 
-	public void setFulltextIndexed(boolean fulltextIndexed) {
+	@Override
+	public final void setFulltextIndexed(boolean fulltextIndexed) {
 		this.fulltextIndexed = fulltextIndexed;
 	}
 

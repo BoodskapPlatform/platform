@@ -14,7 +14,7 @@ import io.boodskap.iot.model.ISystemTemplate;
 
 @Entity
 @Table(name="systemtemplate")
-public class SystemTemplate extends AbstractModel implements ISystemTemplate {
+public class SystemTemplate extends AbstractEntity implements ISystemTemplate {
 
 	private static final long serialVersionUID = -7130221747939431559L;
 

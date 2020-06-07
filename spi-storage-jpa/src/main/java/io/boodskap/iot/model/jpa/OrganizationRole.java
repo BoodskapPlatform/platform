@@ -8,7 +8,7 @@ import io.boodskap.iot.model.IOrganizationRole;
 
 @Entity
 @Table(name="organizationrole")
-public class OrganizationRole extends AbstractModel implements IOrganizationRole {
+public class OrganizationRole extends AbstractEntity implements IOrganizationRole {
 	
 	private static final long serialVersionUID = -1713165327685347649L;
 	

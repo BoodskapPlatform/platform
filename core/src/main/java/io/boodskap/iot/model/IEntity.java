@@ -18,24 +18,31 @@ package io.boodskap.iot.model;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-@JsonSerialize(as=IRole.class)
-public interface IRole extends IEntity {
-	
-	public default void save() {
-		throw new UnsupportedOperationException();
-	}
+@JsonSerialize(as = IEntity.class)
+public interface IEntity extends IStorageObject {
 
 	@Override
-	default void copy(Object other) {
+	public default void copy(Object other) {
+		
+		IEntity o = (IEntity) other;
+		
+		setDescription(o.getDescription());
+		setCreatedBy(o.getCreatedBy());
+		setUpdatedBy(o.getUpdatedBy());
 
-		IRole e = (IRole) other;
-		
-		setName(e.getName());
-		
-		IEntity.super.copy(other);
+		IStorageObject.super.copy(other);
 	}
-
-	public String getName();
 	
-	public void setName(String name);
+	public String getDescription();
+
+	public void setDescription(String description);
+
+	public String getCreatedBy();
+	
+	public void setCreatedBy(String createdBy);
+	
+	public String getUpdatedBy();
+	
+	public void setUpdatedBy(String updatedBy);
+	
 }

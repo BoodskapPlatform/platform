@@ -9,7 +9,7 @@ import io.boodskap.iot.model.IDomainGroovyClass;
 
 @Entity
 @Table(name = "domaingroovyclass")
-public class DomainGroovyClass extends AbstractModel implements IDomainGroovyClass {
+public class DomainGroovyClass extends AbstractEntity implements IDomainGroovyClass {
 
 	private static final long serialVersionUID = 4578909004576300500L;
 	

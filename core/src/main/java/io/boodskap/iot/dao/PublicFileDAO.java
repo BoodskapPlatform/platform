@@ -29,25 +29,19 @@ public interface PublicFileDAO<T extends IPublicFile> extends DAO<T> {
 		return BoodskapSystem.storage().getPublicFileDAO();
 	}
 
-	public T create(String domainKey, String fileId) throws StorageException;
+	public T create(String fileId) throws StorageException;
 
 	public T get(String fileId) throws StorageException;
 
-	public T get(String domainKey, String fileId) throws StorageException;
-
 	public IFileContent getContent(String fileId) throws StorageException;
-
-	public IFileContent getContent(String domainKey, String fileId) throws StorageException;
 
 	public boolean has(String fileId) throws StorageException;
 
-	public boolean has(String domainKey, String fileId) throws StorageException;
+	public void delete(String fileId) throws StorageException;
 
-	public void delete(String domainKey, String fileId) throws StorageException;
-
-	public void update(String domainKey, String fileId, String tags, String description) throws StorageException;
+	public void update(String fileId, String tags, String description) throws StorageException;
 	
-	public void update(String domainKey, String fileId, byte[] data, String mediaType)throws StorageException;
+	public void update(String fileId, byte[] data, String mediaType)throws StorageException;
 
 	public Collection<T> list(boolean load, int page, int pageSize) throws StorageException;
 	

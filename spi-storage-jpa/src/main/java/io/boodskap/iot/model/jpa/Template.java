@@ -14,7 +14,7 @@ import io.boodskap.iot.model.ITemplate;
 
 @Entity
 @Table(name="template")
-public class Template extends AbstractModel implements ITemplate {
+public class Template extends AbstractEntity implements ITemplate {
 
 	private static final long serialVersionUID = 4692755922250173262L;
 

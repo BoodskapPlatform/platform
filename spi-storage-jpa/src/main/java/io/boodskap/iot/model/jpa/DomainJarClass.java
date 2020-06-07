@@ -8,7 +8,7 @@ import io.boodskap.iot.model.IDomainJarClass;
 
 @Entity
 @Table(name = "domainjarclass")
-public class DomainJarClass extends AbstractModel implements IDomainJarClass {
+public class DomainJarClass extends AbstractEntity implements IDomainJarClass {
 
 	private static final long serialVersionUID = 3039514434471294683L;
 	

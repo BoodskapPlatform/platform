@@ -32,8 +32,8 @@ public class PublicFileDAOImpl implements PublicFileDAO<IPublicFile> {
 		this.impl = impl;
 	}
 
-	public IPublicFile create(String domainKey, String fileId) throws StorageException {
-		return impl.create(domainKey, fileId);
+	public IPublicFile create(String fileId) throws StorageException {
+		return impl.create(fileId);
 	}
 
 	public Class<? extends IPublicFile> clazz() {
@@ -60,44 +60,24 @@ public class PublicFileDAOImpl implements PublicFileDAO<IPublicFile> {
 		return impl.count(domainKey);
 	}
 
-	public void delete(String domainKey) throws StorageException {
-		impl.delete(domainKey);
-	}
-
 	public IPublicFile get(String fileId) throws StorageException {
 		return impl.get(fileId);
-	}
-
-	public IPublicFile get(String domainKey, String fileId) throws StorageException {
-		return impl.get(domainKey, fileId);
 	}
 
 	public IFileContent getContent(String fileId) throws StorageException {
 		return impl.getContent(fileId);
 	}
 
-	public IFileContent getContent(String domainKey, String fileId) throws StorageException {
-		return impl.getContent(domainKey, fileId);
-	}
-
 	public boolean has(String fileId) throws StorageException {
 		return impl.has(fileId);
 	}
 
-	public boolean has(String domainKey, String fileId) throws StorageException {
-		return impl.has(domainKey, fileId);
+	public void delete(String fileId) throws StorageException {
+		impl.delete(fileId);
 	}
 
-	public void delete(String domainKey, String fileId) throws StorageException {
-		impl.delete(domainKey, fileId);
-	}
-
-	public void update(String domainKey, String fileId, String tags, String description) throws StorageException {
-		impl.update(domainKey, fileId, tags, description);
-	}
-
-	public void update(String domainKey, String fileId, byte[] data, String mediaType) throws StorageException {
-		impl.update(domainKey, fileId, data, mediaType);
+	public void update(String fileId, byte[] data, String mediaType) throws StorageException {
+		impl.update(fileId, data, mediaType);
 	}
 
 	public Collection<IPublicFile> list(boolean load, int page, int pageSize) throws StorageException {
@@ -114,6 +94,11 @@ public class PublicFileDAOImpl implements PublicFileDAO<IPublicFile> {
 
 	public void delete() throws StorageException {
 		impl.delete();
+	}
+
+	@Override
+	public void update(String fileId, String tags, String description) throws StorageException {
+		impl.update(fileId, tags, description);
 	}
 
 }
