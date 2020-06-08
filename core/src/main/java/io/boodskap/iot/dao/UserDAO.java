@@ -34,6 +34,8 @@ public interface UserDAO<T extends IUser> extends DAO<T> {
 
 	public T get(String domainKey, String userId) throws StorageException;
 
+	public long countUsers(String userId) throws StorageException;
+
 	public void delete(String domainKey, String userId) throws StorageException;
 	
 	public Collection<T> list(String domainKey, int page, int pageSize) throws StorageException;

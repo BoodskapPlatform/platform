@@ -29,12 +29,16 @@ import io.boodskap.iot.ThreadContext;
 @JsonSerialize(as=IStorageObject.class)
 public interface IStorageObject extends Serializable{
 
+	//======================================
+	// Default Methods
+	//======================================
+	
 	public default void copy(Object other) {
 		
 		IStorageObject o = (IStorageObject) other;
 		
-		setRegisteredStamp(o.getRegisteredStamp());
-		setUpdatedStamp(o.getUpdatedStamp());
+		setRegisteredStamp(o.getRegisteredStamp() == null ? new Date() : o.getRegisteredStamp());
+		setUpdatedStamp(new Date()); //We always update the recent updated stamp
 		
 		
 	}
@@ -59,8 +63,16 @@ public interface IStorageObject extends Serializable{
 		return new JSONObject(this);
 	}
 
+	//======================================
+	// Methods
+	//======================================
+	
 	public void save() throws StorageException;
 
+	//======================================
+	// Attributes
+	//======================================
+	
 	public Date getRegisteredStamp();
 
 	public void setRegisteredStamp(Date registeredStamp);

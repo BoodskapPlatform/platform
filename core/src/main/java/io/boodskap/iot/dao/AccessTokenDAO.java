@@ -16,26 +16,22 @@
  ******************************************************************************/
 package io.boodskap.iot.dao;
 
-import java.util.Collection;
-
 import io.boodskap.iot.BoodskapSystem;
 import io.boodskap.iot.StorageException;
-import io.boodskap.iot.model.IDomain;
+import io.boodskap.iot.model.IAccessToken;
 
-public interface DomainDAO<T extends IDomain> extends DAO<T> {
+public interface AccessTokenDAO<T extends IAccessToken>{
 	
-	public static DomainDAO<IDomain> get() {
-		return BoodskapSystem.storage().getDomainDAO();
+	public static AccessTokenDAO<IAccessToken> get() {
+		return BoodskapSystem.storage().getAccessTokenDAO();
 	}
+	
+	public T create(String token);
+	
+	public void createOrUpdate(T e) throws StorageException;
 
-	public T create(String domainKey) throws StorageException;
+	public T get(String token) throws StorageException;
 	
-	public T get(String domainKey) throws StorageException;
+	public void delete(String token) throws StorageException;
 	
-	public Collection<T> list(int page, int pageSize) throws StorageException;
-	
-	public Collection<T> listNext(String domainKey, int page, int pageSize) throws StorageException;
-	
-	public Collection<T> search(String query, int pageSize) throws StorageException;
-
 }

@@ -17,12 +17,19 @@
 package io.boodskap.iot;
 
 import java.io.Serializable;
-import java.util.List;
-import java.util.Map;
 
+import org.json.JSONObject;
 import org.slf4j.MDC;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import io.boodskap.iot.model.IDevice;
+import io.boodskap.iot.model.IDomain;
+import io.boodskap.iot.model.ILinkedDomain;
+import io.boodskap.iot.model.IOrganization;
+import io.boodskap.iot.model.IOrganizationDevice;
+import io.boodskap.iot.model.IOrganizationUser;
+import io.boodskap.iot.model.IUser;
 
 @JsonSerialize(as=IAuthToken.class)
 public interface IAuthToken extends Serializable {
@@ -40,56 +47,89 @@ public interface IAuthToken extends Serializable {
 		MDC.clear();
 	}
 	
-	public void touch();
+	public static boolean isEngine() {
+		IAuthToken token = get();
+		return (null != token && token.isSystem());
+	}
+	
+	public default String getDomainKey() {
+		return (null != getUser() ? getUser().getDomainKey() : getDevice().getDomainKey());
+	}
+
+	public default boolean hasDomainKey(String domainKey) {
+		
+		if(getDomainKey().equals(domainKey)) return true;
+		
+		return (ILinkedDomain.count(getDomainKey(), domainKey) > 0);
+		
+	}
+
+	public default boolean hasOrganizationId(String organizationId) {
+		return IOrganization.has(getDomainKey(), organizationId);
+	}
+
+	public default boolean isDevice() {
+		return null != getDevice();
+	}
+
+	public default boolean isUser() {
+		return null != getUser() && getUser().isUser();
+	}
+
+	public default boolean isOrganizationUser() {
+		return null != getUser() && getUser().isOrganizationUser();
+	}
+
+	public default boolean isAdmin() {
+		return null != getUser() && getUser().isAdmin();
+	}
+
+	public default boolean isDomainAdmin() {
+		return null != getUser() && getUser().isDomainAdmin();
+	}
+
+	public default boolean isOrganizationAdmin() {
+		return null != getUser() && getUser().isOrganizationAdmin();
+	}
+
+	public default boolean isDeveloper() {
+		return null != getUser() && getUser().isDeveloper();
+	}
+
+	public default boolean isValid() {
+		return !isExpired();
+	}
+	
+	public boolean isExternal();
+	
+	public boolean isSystem();
+
+	public AuthType getAuthType();
+	
+	public IDomain getDomain();
+	
+	public IOrganization getOrganization();
+	
+	public IUser getUser();
+	
+	public IDevice getDevice();
+	
+	public IOrganizationDevice getOrganizationDevice();
+	
+	public IOrganizationUser getOrganizationUser();
+	
+	public long getCreatedAt();
 	
 	public boolean isExpired();
 	
 	public long getAccessedAt();
 
-	public String getDomainKey();
-
-	public String getUser();
-
-	public String getApiKey();
-	
-	public String getOrganizationId();
-
-	public boolean isValid();
-
-	public boolean isUser();
-
-	public boolean isOrganizationUser();
-
-	public boolean isDeveloper();
-
-	public boolean isOrganizationAdmin();
-
-	public boolean isDomainAdmin();
-
-	public boolean isAdmin();
-	
-	public String getToken();
-
 	public long getExpireIn();
 
 	public String getIpAddress();
+	
+	public JSONObject getExtraConfig();
+	
+	public String getToken();
 
-	public boolean hasRole(String role);
-	
-	public boolean hasDomainKey(String domainkey);
-	
-	public boolean hasAccess(Access access);
-	
-	public AuthType getAuthType();
-	
-	public List<String> getRoles();
-	
-	public Map<String,String> getLinkedTokens();
-	
-	public String getThisOrMyDomainKey(String dkey);
-	
-	public String getThisOrMyOrDefaultDomainKey(String dkey);
-	
-	public boolean hasOrganizationId(String orgId);
-	
 }

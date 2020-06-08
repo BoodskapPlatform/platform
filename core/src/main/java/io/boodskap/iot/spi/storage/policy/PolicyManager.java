@@ -1,5 +1,6 @@
 package io.boodskap.iot.spi.storage.policy;
 
+import io.boodskap.iot.AuthType;
 import io.boodskap.iot.CacheStore;
 import io.boodskap.iot.DomainSettings;
 import io.boodskap.iot.IAuthToken;
@@ -22,7 +23,6 @@ public class PolicyManager {
 		
 		if(null == t) throw new StorageException("Not authenticated");
 		if(t.isExpired()) throw new StorageException("Session expired");
-		if(!t.isValid()) throw new StorageException("Invalid session");
 		
 		return t;
 	}
@@ -38,21 +38,24 @@ public class PolicyManager {
 	
 
 	public static void checkReadAccess() {
-		if(!enabled) return;
+		if(!enabled || IAuthToken.isEngine()) return;
 		checkReadAccess(getAdminAuthToken().getDomainKey(), null);
 	}
 
 	public static void checkReadAccess(String domainKey) {
+		if(!enabled || IAuthToken.isEngine()) return;
 		checkReadAccess(domainKey, null);
 	}
 
 	public static void checkReadAccess(String domainKey, String organizationId) {
 		
-		if(!enabled) return;
+		if(!enabled || IAuthToken.isEngine()) return;
 		
 		final IAuthToken t = getAuthToken();
 		
-		if(t.getApiKey() != null && t.hasDomainKey(domainKey)) return; //API Access Grants all premissions
+		if(t.getAuthType() == AuthType.PLATFORM) return; //Grants all permissions
+		if(t.getAuthType() == AuthType.DOMAIN && t.hasDomainKey(domainKey)) return; //Grants all domain permissions
+		if(null != organizationId && t.getAuthType() == AuthType.ORG && t.hasDomainKey(domainKey) && t.hasOrganizationId(organizationId)) return; //Grants all organization permissions
 		
 		DomainSettings s = (null == organizationId) ? CacheStore.get().getSettings(domainKey) : CacheStore.get().getOrgSettings(domainKey, organizationId);
 		
@@ -60,7 +63,7 @@ public class PolicyManager {
 		
 		if(!t.hasDomainKey(domainKey)) throw new StorageException(String.format("Domain:%s not authorized", domainKey));
 		
-		if(null != organizationId && !t.hasOrganizationId(organizationId)) throw new StorageException(String.format("Domain:%s Organization:%s not authorized", domainKey, organizationId));
+		if(null != organizationId && !t.hasOrganizationId(organizationId)) throw new StorageException(String.format("Organization:%s.%s not authorized", domainKey, organizationId));
 		
 		if(t.isUser() && (s.isCanUserDelete() || s.isCanUserWrite() || s.isCanUserRead())) return;
 		
@@ -81,21 +84,24 @@ public class PolicyManager {
 	}
 
 	public static void checkWriteAccess() throws StorageException {
-		if(!enabled) return;
+		if(!enabled || IAuthToken.isEngine()) return;
 		checkWriteAccess(getAdminAuthToken().getDomainKey(), null);
 	}
 	
 	public static void checkWriteAccess(String domainKey) throws StorageException {
+		if(!enabled || IAuthToken.isEngine()) return;
 		checkWriteAccess(domainKey, null);
 	}
 	
 	public static void checkWriteAccess(String domainKey, String organizationId) throws StorageException {
 		
-		if(!enabled) return;
+		if(!enabled || IAuthToken.isEngine()) return;
 		
 		final IAuthToken t = getAuthToken();
 		
-		if(t.getApiKey() != null && t.hasDomainKey(domainKey)) return; //API Access Grants all premissions
+		if(t.getAuthType() == AuthType.PLATFORM) return; //Grants all permissions
+		if(t.getAuthType() == AuthType.DOMAIN && t.hasDomainKey(domainKey)) return; //Grants all domain permissions
+		if(null != organizationId && t.getAuthType() == AuthType.ORG && t.hasDomainKey(domainKey) && t.hasOrganizationId(organizationId)) return; //Grants all organization permissions
 		
 		DomainSettings s = (null == organizationId) ? CacheStore.get().getSettings(domainKey) : CacheStore.get().getOrgSettings(domainKey, organizationId);
 		
@@ -103,7 +109,7 @@ public class PolicyManager {
 		
 		if(!t.hasDomainKey(domainKey)) throw new StorageException(String.format("Domain:%s not authorized", domainKey));
 		
-		if(null != organizationId && !t.hasOrganizationId(organizationId)) throw new StorageException(String.format("Domain:%s Organization:%s not authorized", domainKey, organizationId));
+		if(null != organizationId && !t.hasOrganizationId(organizationId)) throw new StorageException(String.format("Organization:%s.%s not authorized", domainKey, organizationId));
 		
 		if(t.isUser() && (s.isCanUserDelete() || s.isCanUserWrite())) return;
 		
@@ -120,24 +126,28 @@ public class PolicyManager {
 		}else {
 			throw new StorageException(String.format("Domain:%s Organization:%s not authorized", domainKey, organizationId));
 		}
+
 	}
 
 	public static void checkDeleteAccess() {
-		if(!enabled) return;
+		if(!enabled || IAuthToken.isEngine()) return;
 		checkDeleteAccess(getAdminAuthToken().getDomainKey(), null);
 	}
 
 	public static void checkDeleteAccess(String domainKey) {
+		if(!enabled || IAuthToken.isEngine()) return;
 		checkDeleteAccess(domainKey, null);
 	}
 
 	public static void checkDeleteAccess(String domainKey, String organizationId) {
 		
-		if(!enabled) return;
+		if(!enabled || IAuthToken.isEngine()) return;
 		
 		final IAuthToken t = getAuthToken();
 		
-		if(t.getApiKey() != null && t.hasDomainKey(domainKey)) return; //API Access Grants all premissions
+		if(t.getAuthType() == AuthType.PLATFORM) return; //Grants all permissions
+		if(t.getAuthType() == AuthType.DOMAIN && t.hasDomainKey(domainKey)) return; //Grants all domain permissions
+		if(null != organizationId && t.getAuthType() == AuthType.ORG && t.hasDomainKey(domainKey) && t.hasOrganizationId(organizationId)) return; //Grants all organization permissions
 		
 		DomainSettings s = (null == organizationId) ? CacheStore.get().getSettings(domainKey) : CacheStore.get().getOrgSettings(domainKey, organizationId);
 		
@@ -145,7 +155,7 @@ public class PolicyManager {
 		
 		if(!t.hasDomainKey(domainKey)) throw new StorageException(String.format("Domain:%s not authorized", domainKey));
 		
-		if(null != organizationId && !t.hasOrganizationId(organizationId)) throw new StorageException(String.format("Domain:%s Organization:%s not authorized", domainKey, organizationId));
+		if(null != organizationId && !t.hasOrganizationId(organizationId)) throw new StorageException(String.format("Organization:%s.%s not authorized", domainKey, organizationId));
 		
 		if(t.isUser() && (s.isCanUserDelete())) return;
 		
@@ -162,6 +172,7 @@ public class PolicyManager {
 		}else {
 			throw new StorageException(String.format("Domain:%s Organization:%s not authorized", domainKey, organizationId));
 		}
+
 	}
 
 	

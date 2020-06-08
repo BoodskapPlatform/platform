@@ -85,6 +85,11 @@ public class OrganizationUserDAOImpl implements OrganizationUserDAO<Organization
 	}
 
 	@Override
+	public long count(String domainKey, String orgId) throws StorageException {
+		return new CommonDAO<>(OrganizationUser.class).count("id.domainKey", domainKey, "id.orgId", orgId);
+	}
+
+	@Override
 	public void delete(String domainKey) throws StorageException {
 		new CommonDAO<>(OrganizationUser.class).delete(domainKey);
 	}

@@ -16,32 +16,92 @@
  ******************************************************************************/
 package io.boodskap.iot.model;
 
+import java.util.Collection;
+
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import io.boodskap.iot.DataChannel;
+import io.boodskap.iot.StorageException;
 import io.boodskap.iot.dao.DeviceDAO;
+import io.boodskap.iot.dao.EntityIterator;
 
 @JsonSerialize(as=IDevice.class)
 public interface IDevice extends IDomainObject {
 
+	//======================================
+	// DAO Methods
+	//======================================
+	
 	public static DeviceDAO<IDevice> dao(){
 		return DeviceDAO.get();
-	}
-	
-	public static Class<? extends IDevice> clazz() {
-		return dao().clazz();
 	}
 	
 	public static IDevice create(String domainKey, String deviceId) {
 		return dao().create(domainKey, deviceId);
 	}
 
-	public static IDevice find(String domainKey, String deviceId) {
+	public static IDevice get(String domainKey, String deviceId) {
 		return dao().get(domainKey, deviceId);
 	}
 
+	public static void delete(String domainKey, String deviceId) throws StorageException{
+		dao().delete(domainKey, deviceId);
+	}
+
+	public static String getLinkedAssetId(String domainKey, String deviceId) throws StorageException{
+		return dao().getLinkedAssetId(domainKey, deviceId);
+	}
+
+	public static Collection<IDevice> list(String domainKey, int page, int pageSize) throws StorageException{
+		return dao().list(domainKey, page, pageSize);
+	}
+
+	public static Collection<IDevice> listNext(String domainKey, String deviceId, int page, int pageSize) throws StorageException{
+		return dao().listNext(domainKey, deviceId, page, pageSize);
+	}
+
+	public static Collection<IDevice> search(String domainKey, String query, int pageSize) throws StorageException{
+		return dao().search(domainKey, query, pageSize);
+	}
+
+	public static Class<? extends IDevice> clazz() {
+		return dao().clazz();
+	}
+		
+	public static void createOrUpdate(IDevice e) throws StorageException{
+		dao().createOrUpdate(e);
+	}
+
+	public static EntityIterator<IDevice> load() throws StorageException{
+		return dao().load();
+	}
+	
+	public static EntityIterator<IDevice> load(String domainKey) throws StorageException{
+		return dao().load(domainKey);
+	}
+	
+	public static long count() throws StorageException{
+		return dao().count();
+	}
+	
+	public static long count(String  domainKey) throws StorageException{
+		return dao().count(domainKey);
+	}
+	
+	public static void delete() throws StorageException{
+		dao().delete();
+	}
+	
+	public static void delete(String domainKey) throws StorageException{
+		dao().delete(domainKey);
+	}
+
+	//======================================
+	// Default Methods
+	//======================================
+	
 	public default void save() {
-		IDevice.dao().createOrUpdate(this);
+		dao().createOrUpdate(this);
 	}
 	
 	@Override
@@ -63,6 +123,10 @@ public interface IDevice extends IDomainObject {
 		IDomainObject.super.copy(other);
 	}
 
+	//======================================
+	// Attriutes
+	//======================================
+	
 	public String getDeviceId() ;
 
 	public void setDeviceId(String deviceId);

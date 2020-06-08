@@ -32,6 +32,8 @@ public interface OrganizationUserDAO<T extends IOrganizationUser> extends DAO<T>
 
 	public T get(String domainKey, String orgId, String userId) throws StorageException;
 
+	public long count(String domainKey, String orgId) throws StorageException;
+	
 	public void delete(String domainKey, String orgId) throws StorageException;
 
 	public void delete(String domainKey, String orgId, String userId) throws StorageException;

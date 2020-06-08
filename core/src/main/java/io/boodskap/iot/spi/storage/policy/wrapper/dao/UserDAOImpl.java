@@ -91,4 +91,9 @@ public class UserDAOImpl implements UserDAO<IUser> {
 		impl.delete();
 	}
 
+	@Override
+	public long countUsers(String userId) throws StorageException {
+		return impl.countUsers(userId);
+	}
+
 }

@@ -645,4 +645,9 @@ public class Storage implements IStorage {
 		return new DomainGroovyArchiveFileDAOImpl(impl.getDomainGroovyArchiveFileDAO());
 	}
 
+	@Override
+	public AccessTokenDAO<IAccessToken> getAccessTokenDAO() throws StorageException {
+		return new AccessTokenDAOImpl(impl.getAccessTokenDAO());
+	}
+
 }

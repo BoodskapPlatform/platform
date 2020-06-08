@@ -16,12 +16,20 @@
  ******************************************************************************/
 package io.boodskap.iot.model;
 
+import java.util.Collection;
+
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import io.boodskap.iot.StorageException;
 import io.boodskap.iot.dao.DomainApiKeyDAO;
+import io.boodskap.iot.dao.EntityIterator;
 
 @JsonSerialize(as=IDomainApiKey.class)
 public interface IDomainApiKey extends IDomainObject{
+	
+	//======================================
+	// DAO Methods
+	//======================================
 	
 	public static DomainApiKeyDAO<IDomainApiKey> dao(){
 		return DomainApiKeyDAO.get();
@@ -35,16 +43,57 @@ public interface IDomainApiKey extends IDomainObject{
 		return dao().create(domainKey, apiKey);
 	}
 
-	public static IDomainApiKey find(String domainKey) {
+	public static IDomainApiKey get(String domainKey) {
 		return dao().get(domainKey);
 	}
 
-	public static IDomainApiKey find(String domainKey, String apiKey) {
+	public static IDomainApiKey get(String domainKey, String apiKey) {
 		return dao().get(domainKey, apiKey);
 	}
 
+	public static Collection<IDomainApiKey> list(String domainKey, int page, int pageSize) throws StorageException{
+		return dao().list(domainKey, page, pageSize);
+	}
+
+	public static Collection<IDomainApiKey> listNext(String domainKey, String apiKey, int page, int pageSize) throws StorageException{
+		return dao().listNext(domainKey, apiKey, page, pageSize);
+	}
+	
+	public static void createOrUpdate(IDomainApiKey e) throws StorageException{
+		dao().createOrUpdate(e);
+	}
+
+	public static EntityIterator<IDomainApiKey> load() throws StorageException{
+		return dao().load();
+	}
+	
+	public static EntityIterator<IDomainApiKey> load(String domainKey) throws StorageException{
+		return dao().load(domainKey);
+	}
+	
+	public static long count() throws StorageException{
+		return dao().count();
+	}
+	
+	public static long count(String domainKey) throws StorageException{
+		return dao().count(domainKey);
+	}
+	
+	public static void delete() throws StorageException{
+		dao().delete();
+	}
+	
+	public static void delete(String domainKey) throws StorageException{
+		dao().delete(domainKey);
+	}
+
+
+	//======================================
+	// Default Methods
+	//======================================
+	
 	public default void save() {
-		IDomainApiKey.dao().createOrUpdate(this);
+		dao().createOrUpdate(this);
 	}
 
 	@Override
@@ -57,6 +106,10 @@ public interface IDomainApiKey extends IDomainObject{
 		IDomainObject.super.copy(other);
 	}
 
+	//======================================
+	// Attributes
+	//======================================
+	
 	public String getApiKey();
 
 	public void setApiKey(String apiKey);

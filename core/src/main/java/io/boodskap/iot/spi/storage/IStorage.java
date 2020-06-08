@@ -24,6 +24,8 @@ public interface IStorage extends IBaseStorage {
 	
 	public <T extends IDeviceCounter> DeviceCounterDAO<T> getDeviceCounterDAO();
 	
+	public <T extends IAccessToken> AccessTokenDAO<T> getAccessTokenDAO() throws StorageException;
+	
 	public <T extends IAlexa> AlexaDAO<T> getAlexaDAO() throws StorageException;
 	
 	public <T extends IAsset> AssetDAO<T> getAssetDAO() throws StorageException;

@@ -25,6 +25,30 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 @JsonSerialize(as=IPerson.class)
 public interface IPerson extends IContact {
 
+	//======================================
+	// Default Methods
+	//======================================
+	
+	public default String getName() {
+		
+		StringBuffer sb = new StringBuffer();
+		
+		if(StringUtils.isNotBlank(getFirstName())) {
+			sb.append(getFirstName());
+		}
+		
+		if(StringUtils.isNotBlank(getLastName())) {
+			if(sb.length() > 0) sb.append(" ");
+			sb.append(getLastName());
+		}
+		
+		return sb.toString();
+	}
+	
+	//======================================
+	// Attributes
+	//======================================
+	
 	public String getFirstName();
 
 	public void setFirstName(String firstName);
@@ -49,19 +73,4 @@ public interface IPerson extends IContact {
 	
 	public void setWorkDays(Collection<Integer> workDays);
 
-	public default String getName() {
-		
-		StringBuffer sb = new StringBuffer();
-		
-		if(StringUtils.isNotBlank(getFirstName())) {
-			sb.append(getFirstName());
-		}
-		
-		if(StringUtils.isNotBlank(getLastName())) {
-			if(sb.length() > 0) sb.append(" ");
-			sb.append(getLastName());
-		}
-		
-		return sb.toString();
-	}
 }

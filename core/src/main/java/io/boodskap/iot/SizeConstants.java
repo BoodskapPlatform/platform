@@ -48,6 +48,8 @@ public class SizeConstants {
 	public static final int GROUP_ID_SIZE = 40;
 	public static final int DEVICE_ID_SIZE = 40;
 	public static final int ASSET_ID_SIZE = 40;
+	public static final int EXTRA_CONFIG_SIZE = 1024 * 4; //4KB
+	public static final int TOKEN_SIZE = 256;
 
 	public SizeConstants() {
 	}

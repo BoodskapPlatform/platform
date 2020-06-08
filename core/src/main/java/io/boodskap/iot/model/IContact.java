@@ -21,6 +21,10 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 @JsonSerialize(as=IContact.class)
 public interface IContact extends IDomainObject {
 
+	//======================================
+	// Default Methods
+	//======================================
+	
 	@Override
 	public default void copy(Object other) {
 		
@@ -38,6 +42,10 @@ public interface IContact extends IDomainObject {
 		
 		IDomainObject.super.copy(other);
 	}
+	
+	//======================================
+	// Attribute
+	//======================================
 	
 	public String getEmail();
 

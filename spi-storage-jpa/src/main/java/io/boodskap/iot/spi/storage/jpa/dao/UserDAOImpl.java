@@ -151,4 +151,9 @@ public class UserDAOImpl implements UserDAO<User> {
 		new CommonDAO<>(User.class).delete();
 	}
 
+	@Override
+	public long countUsers(String userId) throws StorageException {
+		return new CommonDAO<>(User.class).count("id.userid", userId);
+	}
+
 }

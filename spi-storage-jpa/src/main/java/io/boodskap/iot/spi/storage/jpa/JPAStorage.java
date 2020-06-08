@@ -34,6 +34,12 @@ public class JPAStorage implements IStorage {
 
 	@SuppressWarnings("unchecked")
 	@Override
+	public AccessTokenDAO<AccessToken> getAccessTokenDAO() throws StorageException {
+		return AccessTokenDAOImpl.get();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
 	public AlexaDAO<Alexa> getAlexaDAO() throws StorageException {
 		return AlexaDAOImpl.get();
 	}

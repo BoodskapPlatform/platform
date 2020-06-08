@@ -21,6 +21,10 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 @JsonSerialize(as=IDomainObject.class)
 public interface IDomainObject extends IModel {
 	
+	//======================================
+	// Default Methods
+	//======================================
+	
 	@Override
 	public default void copy(Object other) {
 		
@@ -30,6 +34,10 @@ public interface IDomainObject extends IModel {
 		
 		IModel.super.copy(other);
 	}
+	
+	//======================================
+	// Attributes
+	//======================================
 	
 	public String getDomainKey();
 	

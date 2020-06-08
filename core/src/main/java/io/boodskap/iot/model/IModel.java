@@ -21,6 +21,10 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 @JsonSerialize(as = IModel.class)
 public interface IModel extends IEntity {
 
+	//======================================
+	// Default Methods
+	//======================================
+	
 	@Override
 	public default void copy(Object other) {
 		
@@ -30,6 +34,10 @@ public interface IModel extends IEntity {
 
 		IEntity.super.copy(other);
 	}
+	
+	//======================================
+	// Attributes
+	//======================================
 	
 	public String getName();
 

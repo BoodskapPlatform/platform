@@ -16,14 +16,22 @@
  ******************************************************************************/
 package io.boodskap.iot.model;
 
+import java.util.Collection;
+
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import io.boodskap.iot.StorageException;
 import io.boodskap.iot.dao.DomainDAO;
 import io.boodskap.iot.dao.DomainRoleDAO;
+import io.boodskap.iot.dao.EntityIterator;
 
 @JsonSerialize(as=IDomain.class)
 public interface IDomain extends IContact {
 
+	//======================================
+	// DAO Methods
+	//======================================
+	
 	public static DomainDAO<IDomain> dao(){
 		return DomainDAO.get();
 	}
@@ -36,10 +44,54 @@ public interface IDomain extends IContact {
 		return dao().create(domainKey);
 	}
 
-	public static IDomain find(String domainKey) {
+	public static IDomain get(String domainKey) {
 		return dao().get(domainKey);
 	}
 
+	public static void delete() throws StorageException{
+		dao().delete();
+	}
+
+	public static Collection<IDomain> list(int page, int pageSize) throws StorageException{
+		return dao().list(page, pageSize);
+	}
+	
+	public static Collection<IDomain> listNext(String domainKey, int page, int pageSize) throws StorageException{
+		return dao().listNext(domainKey, page, pageSize);
+	}
+	
+	public static Collection<IDomain> search(String query, int pageSize) throws StorageException{
+		return dao().search(query, pageSize);
+	}
+
+	public static void createOrUpdate(IDomain e) throws StorageException{
+		dao().createOrUpdate(e);
+	}
+
+	public static EntityIterator<IDomain> load() throws StorageException{
+		return dao().load();
+	}
+	
+	public static EntityIterator<IDomain> load(String domainKey) throws StorageException{
+		return dao().load(domainKey);
+	}
+	
+	public static long count() throws StorageException{
+		return dao().count();
+	}
+	
+	public static long count(String domainKey) throws StorageException{
+		return dao().count(domainKey);
+	}
+	
+	public static void delete(String domainKey) throws StorageException{
+		dao().delete(domainKey);
+	}
+
+	//======================================
+	// Default Methods
+	//======================================
+	
 	public default void save() {
 		IDomain.dao().createOrUpdate(this);
 	}
@@ -56,6 +108,10 @@ public interface IDomain extends IContact {
 	public default boolean hasRole(String name) {
 		return DomainRoleDAO.get().get(getDomainKey(), name) != null;
 	}
+	
+	//======================================
+	// Methods
+	//======================================
 	
 	public IDomainRole createRole(String name, String description);
 

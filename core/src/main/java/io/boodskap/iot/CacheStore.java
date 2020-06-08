@@ -32,6 +32,7 @@ import io.boodskap.iot.model.IMessage;
 import io.boodskap.iot.model.IMessageSpecification;
 import io.boodskap.iot.model.IOfflineSnap;
 import io.boodskap.iot.model.IOfflineStream;
+import io.boodskap.iot.model.IOrganization;
 import io.boodskap.iot.model.IOutgoingCommand;
 import io.boodskap.iot.model.IRawData;
 import io.boodskap.iot.spi.cache.ICache;
@@ -48,7 +49,6 @@ public class CacheStore implements Serializable {
 	private Map<String, DomainSettings> settingsCache;
 	private Map<String, OrganizationSettings> orgSettingsCache;
 	private Map<String, IMessageSpecification> msgSpecCache; // domainKey.msgid
-	private Map<String, IAuthToken> authCache; //UUID
 	private Map<String, Long> deviceUpdateCache; //domainKey.deviceId
 	private BlockingQueue<String> incomingMessages;
 	private BlockingQueue<CommandKey> routedCommands;
@@ -83,11 +83,6 @@ public class CacheStore implements Serializable {
 		{
 			LOG.info("Initing organization settings cache");
 			orgSettingsCache = cache.getCache(String.class, OrganizationSettings.class, "ORG_SETTINGS_CACHE");
-		}
-
-		{
-			LOG.info("Initing auth cache");
-			authCache = cache.getCache(String.class, IAuthToken.class, "AUTH_CACHE");
 		}
 
 		{
@@ -263,10 +258,6 @@ public class CacheStore implements Serializable {
 		return msgSpecCache;
 	}
 
-	public Map<String, IAuthToken> getAuthCache() {
-		return authCache;
-	}
-
 	public Map<String, Long> getDeviceUpdateCache() {
 		return deviceUpdateCache;
 	}
@@ -320,6 +311,9 @@ public class CacheStore implements Serializable {
 	}
 
 	public DomainSettings getSettings(String domainKey) {
+		
+		if(null == IDomain.get(domainKey)) throw new StorageException(String.format("Domain %s not found", domainKey));
+		
 		DomainSettings s =  settingsCache.get(domainKey);
 		if(null == s) {
 			s = new DomainSettings();
@@ -333,6 +327,10 @@ public class CacheStore implements Serializable {
 	
 	
 	public OrganizationSettings getOrgSettings(String domainKey, String organizationId) {
+		
+		if(null == IDomain.get(domainKey)) throw new StorageException(String.format("Domain %s not found", domainKey));
+		if(null == IOrganization.get(domainKey, organizationId)) throw new StorageException(String.format("Organization %s.%s not found", domainKey, organizationId));		
+		
 		OrganizationSettings s =  orgSettingsCache.get(String.format("%s.%s", domainKey, organizationId));
 		if(null == s) {
 			s = new OrganizationSettings();

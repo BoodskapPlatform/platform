@@ -16,29 +16,118 @@
  ******************************************************************************/
 package io.boodskap.iot.model;
 
+import java.util.Collection;
+
+import org.apache.commons.codec.DecoderException;
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.codec.binary.Hex;
+import org.json.JSONObject;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import io.boodskap.iot.StorageException;
+import io.boodskap.iot.dao.EntityIterator;
 import io.boodskap.iot.dao.SystemPropertyDAO;
 
 @JsonSerialize(as=ISystemProperty.class)
 public interface ISystemProperty extends IStorable, IModel {
 	
+	//======================================
+	// DAO Methods
+	//======================================
+	
+	@JsonIgnore
+	public static SystemPropertyDAO<ISystemProperty> dao() {
+		return SystemPropertyDAO.get();
+	}
+	
+	@JsonIgnore
 	public static Class<? extends ISystemProperty> clazz(){
-		return SystemPropertyDAO.get().clazz();
+		return dao().clazz();
 	}
 	
-	public static ISystemProperty create(String name) {
-		return SystemPropertyDAO.get().create(name);
+	@JsonIgnore
+	public static ISystemProperty create(String name)  throws StorageException{
+		return dao().create(name);
 	}
 	
-	public static ISystemProperty find(String name) {
-		return SystemPropertyDAO.get().get(name);
-	}
-	
-	public default void save() {
-		SystemPropertyDAO.get().createOrUpdate(this);
+	@JsonIgnore
+	public static void createOrUpdate(ISystemProperty e)  throws StorageException{
+		dao().createOrUpdate(e);
 	}
 
+	@JsonIgnore
+	public static EntityIterator<ISystemProperty> load() throws StorageException{
+		return dao().load();
+	}
+	
+	@JsonIgnore
+	public static long count() throws StorageException{
+		return dao().count();
+	}
+	
+	@JsonIgnore
+	public static void delete() throws StorageException{
+		dao().delete();
+	}
+
+	@JsonIgnore
+	public static void delete(String name) throws StorageException{
+		dao().delete(name);
+	}
+
+	@JsonIgnore
+	public static ISystemProperty get(String name) throws StorageException{
+		return dao().get(name);
+	}
+
+	@JsonIgnore
+	public static Collection<ISystemProperty> list(int page, int pageSize) throws StorageException{
+		return dao().list(page, pageSize);
+	}
+
+	@JsonIgnore
+	public static Collection<ISystemProperty> listNext(String name, int page, int pageSize) throws StorageException{
+		return dao().listNext(name, page, pageSize);
+	}
+
+	@JsonIgnore
+	public static Collection<ISystemProperty> search(String query, int pageSize) throws StorageException{
+		return dao().search(query, pageSize);
+	}
+	
+	//======================================
+	// Default Methods
+	//======================================
+	
+	@JsonIgnore
+	public default void save() {
+		dao().createOrUpdate(this);
+	}
+	
+	@JsonIgnore
+	public default Object value() throws DecoderException {
+		
+		String value = getValue();
+		
+		switch(getFormat()) {
+		case BASE64:
+			return Base64.decodeBase64(value);
+		case HEX:
+			return Hex.decodeHex(value);
+		case JSON:
+			return new JSONObject(value);
+		default:
+		case AS_IS:
+			return value;
+		}
+	}
+
+	//======================================
+	// Attributes
+	//======================================
+	
 	public String getValue();
 
 	public void setValue(String value);

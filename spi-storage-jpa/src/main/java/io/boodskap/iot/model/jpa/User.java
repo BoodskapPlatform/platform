@@ -2,12 +2,13 @@ package io.boodskap.iot.model.jpa;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.Index;
 import javax.persistence.Table;
 
 import io.boodskap.iot.model.IUser;
 
 @Entity()
-@Table(name="user")
+@Table(name="user", indexes = { @Index(columnList = "userid")})
 public class User extends AbstractPerson implements IUser {
 
 	private static final long serialVersionUID = 7791702980774707258L;
