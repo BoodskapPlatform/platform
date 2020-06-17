@@ -31,27 +31,27 @@ public abstract class AbstractGroupMemberId implements Serializable {
 		this.memberId = memberId;
 	}
 
-	public final String getDomainKey() {
+	public String getDomainKey() {
 		return domainKey;
 	}
 
-	public final void setDomainKey(String domainKey) {
+	public void setDomainKey(String domainKey) {
 		this.domainKey = domainKey;
 	}
 
-	public final String getGroupId() {
+	public String getGroupId() {
 		return groupId;
 	}
 
-	public final void setGroupId(String groupId) {
+	public void setGroupId(String groupId) {
 		this.groupId = groupId;
 	}
 
-	public final String getMemberId() {
+	public String getMemberId() {
 		return memberId;
 	}
 
-	public final void setMemberId(String memberId) {
+	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
 

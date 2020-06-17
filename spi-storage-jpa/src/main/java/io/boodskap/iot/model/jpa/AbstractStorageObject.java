@@ -22,22 +22,22 @@ public abstract class AbstractStorageObject implements IStorageObject {
 	}
 
 	@Override
-	public final Date getRegisteredStamp() {
+	public Date getRegisteredStamp() {
 		return registeredStamp;
 	}
 
 	@Override
-	public final void setRegisteredStamp(Date registeredStamp) {
+	public void setRegisteredStamp(Date registeredStamp) {
 		this.registeredStamp = registeredStamp;
 	}
 
 	@Override
-	public final Date getUpdatedStamp() {
+	public Date getUpdatedStamp() {
 		return updatedStamp;
 	}
 
 	@Override
-	public final void setUpdatedStamp(Date updatedStamp) {
+	public void setUpdatedStamp(Date updatedStamp) {
 		this.updatedStamp = updatedStamp;
 	}
 

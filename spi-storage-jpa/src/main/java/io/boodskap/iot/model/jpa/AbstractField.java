@@ -28,32 +28,32 @@ public abstract class AbstractField extends AbstractStorageObject implements IFi
 	}
 	
 	@Override
-	public final String getDescription() {
+	public String getDescription() {
 		return description;
 	}
 
 	@Override
-	public final void setDescription(String description) {
+	public void setDescription(String description) {
 		this.description = description;
 	}
 
 	@Override
-	public final DataType getDataType() {
+	public DataType getDataType() {
 		return dataType;
 	}
 
 	@Override
-	public final void setDataType(DataType dataType) {
+	public void setDataType(DataType dataType) {
 		this.dataType = dataType;
 	}
 
 	@Override
-	public final String getName() {
+	public String getName() {
 		return name;
 	}
 
 	@Override
-	public final void setName(String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 

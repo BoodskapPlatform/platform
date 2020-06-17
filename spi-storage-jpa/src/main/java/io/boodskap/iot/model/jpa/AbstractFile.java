@@ -29,31 +29,31 @@ public abstract class AbstractFile extends AbstractModel implements IFile {
 	}
 	
 	@Override
-	public final IFileContent createContent() {
+	public IFileContent createContent() {
 		return new FileContent(getData(), getMediaType());
 	}
 
-	public final byte[] getData() {
+	public byte[] getData() {
 		return data;
 	}
 
-	public final void setData(byte[] data) {
+	public void setData(byte[] data) {
 		this.data = data;
 	}
 
-	public final String getMediaType() {
+	public String getMediaType() {
 		return mediaType;
 	}
 
-	public final void setMediaType(String mediaType) {
+	public void setMediaType(String mediaType) {
 		this.mediaType = mediaType;
 	}
 
-	public final String getTags() {
+	public String getTags() {
 		return tags;
 	}
 
-	public final void setTags(String tags) {
+	public void setTags(String tags) {
 		this.tags = tags;
 	}
 

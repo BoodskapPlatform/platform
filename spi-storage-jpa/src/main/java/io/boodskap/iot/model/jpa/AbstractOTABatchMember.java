@@ -31,35 +31,35 @@ public abstract class AbstractOTABatchMember extends AbstractModel implements IO
 	public AbstractOTABatchMember() {
 	}
 
-	public final OTAState getState() {
+	public OTAState getState() {
 		return state;
 	}
 
-	public final void setState(OTAState state) {
+	public void setState(OTAState state) {
 		this.state = state;
 	}
 
-	public final Date getBeginStamp() {
+	public Date getBeginStamp() {
 		return beginStamp;
 	}
 
-	public final void setBeginStamp(Date beginStamp) {
+	public void setBeginStamp(Date beginStamp) {
 		this.beginStamp = beginStamp;
 	}
 
-	public final Date getEndStamp() {
+	public Date getEndStamp() {
 		return endStamp;
 	}
 
-	public final void setEndStamp(Date endStamp) {
+	public void setEndStamp(Date endStamp) {
 		this.endStamp = endStamp;
 	}
 
-	public final int getFailureCount() {
+	public int getFailureCount() {
 		return failureCount;
 	}
 
-	public final void setFailureCount(int failureCount) {
+	public void setFailureCount(int failureCount) {
 		this.failureCount = failureCount;
 	}
 

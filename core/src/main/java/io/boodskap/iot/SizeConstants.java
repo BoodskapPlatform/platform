@@ -42,7 +42,7 @@ public class SizeConstants {
 	public static final int ADDRESS_SIZE = 256;
 	public static final int ZIPCODE_SIZE = 20;
 	public static final int LOCALE_SIZE = 4;
-	public static final int PASSWORD_SIZE = 20;
+	public static final int PASSWORD_SIZE = 256;
 	public static final int TIMEZONE_SIZE = 40;
 	public static final int PHONE_NO_SIZE = 16;
 	public static final int GROUP_ID_SIZE = 40;

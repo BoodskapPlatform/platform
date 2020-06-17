@@ -47,74 +47,74 @@ public abstract class AbstractNotification extends AbstractModel implements INot
 	}
 
 	@Override
-	public final Date getQueuedAt() {
+	public Date getQueuedAt() {
 		return queuedAt;
 	}
 
 	@Override
-	public final void setQueuedAt(Date queuedAt) {
+	public void setQueuedAt(Date queuedAt) {
 		this.queuedAt = queuedAt;
 	}
 
 	@Override
-	public final String getSendor() {
+	public String getSendor() {
 		return sendor;
 	}
 
 	@Override
-	public final void setSendor(String sendor) {
+	public void setSendor(String sendor) {
 		this.sendor = sendor;
 	}
 
 	@Override
-	public final String getContent() {
+	public String getContent() {
 		return content;
 	}
 
 	@Override
-	public final void setContent(String content) {
+	public void setContent(String content) {
 		this.content = content;
 	}
 
 	@Override
-	public final NotificationStatus getStatus() {
+	public NotificationStatus getStatus() {
 		return status;
 	}
 
 	@Override
-	public final void setStatus(NotificationStatus status) {
+	public void setStatus(NotificationStatus status) {
 		this.status = status;
 	}
 
 	@Override
-	public final Date getSentAt() {
+	public Date getSentAt() {
 		return sentAt;
 	}
 
 	@Override
-	public final void setSentAt(Date sentAt) {
+	public void setSentAt(Date sentAt) {
 		this.sentAt = sentAt;
 	}
 
 	@Override
-	public final List<String> getReceipents() {
+	public List<String> getReceipents() {
 		return receipents;
 	}
 
 	@Override
-	public final void setReceipents(Collection<String> receipents) {
+	public void setReceipents(Collection<String> receipents) {
 		this.receipents.clear();
 		this.receipents.addAll(receipents);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public final Collection<Response> getResponse() {
+	public Collection<Response> getResponse() {
 		return response;
 	}
 
 	@Override
-	public final void setResponse(Collection<? extends IResponse> response) {
+	public void setResponse(Collection<? extends IResponse> response) {
 		this.response.clear();
 		response.forEach(r -> {this.response.add((Response) r);});
 	}

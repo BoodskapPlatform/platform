@@ -32,32 +32,32 @@ public abstract class AbstractEntity extends AbstractStorageObject implements IE
 	}
 
 	@Override
-	public final String getDescription() {
+	public String getDescription() {
 		return description;
 	}
 
 	@Override
-	public final void setDescription(String description) {
+	public void setDescription(String description) {
 		this.description = description;
 	}
 
 	@Override
-	public final String getCreatedBy() {
+	public String getCreatedBy() {
 		return createdBy;
 	}
 
 	@Override
-	public final void setCreatedBy(String createdBy) {
+	public void setCreatedBy(String createdBy) {
 		this.createdBy = createdBy;
 	}
 
 	@Override
-	public final String getUpdatedBy() {
+	public String getUpdatedBy() {
 		return updatedBy;
 	}
 
 	@Override
-	public final void setUpdatedBy(String updatedBy) {
+	public void setUpdatedBy(String updatedBy) {
 		this.updatedBy = updatedBy;
 	}
 

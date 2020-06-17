@@ -18,7 +18,6 @@ package io.boodskap.iot.model;
 
 import java.util.Collection;
 
-import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.binary.Hex;
 import org.json.JSONObject;
@@ -107,21 +106,28 @@ public interface ISystemProperty extends IStorable, IModel {
 	}
 	
 	@JsonIgnore
-	public default Object value() throws DecoderException {
+	public default Object value(){
 		
-		String value = getValue();
-		
-		switch(getFormat()) {
-		case BASE64:
-			return Base64.decodeBase64(value);
-		case HEX:
-			return Hex.decodeHex(value);
-		case JSON:
-			return new JSONObject(value);
-		default:
-		case AS_IS:
-			return value;
+		try {
+
+			String value = getValue();
+			
+			switch(getFormat()) {
+			case BASE64:
+				return Base64.decodeBase64(value);
+			case HEX:
+				return Hex.decodeHex(value);
+			case JSON:
+				return new JSONObject(value);
+			default:
+			case AS_IS:
+				return value;
+			}
+			
+		}catch(Exception ex) {
+			throw new StorageException(ex);
 		}
+		
 	}
 
 	//======================================

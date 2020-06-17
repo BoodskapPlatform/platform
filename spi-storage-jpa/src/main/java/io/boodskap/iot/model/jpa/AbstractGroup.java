@@ -23,32 +23,32 @@ public abstract class AbstractGroup extends AbstractModel implements IGroup {
 	}
 
 	@Override
-	public final void setIndividualBroadcast(boolean individualBroadcast) {
+	public void setIndividualBroadcast(boolean individualBroadcast) {
 		this.individualBroadcast = individualBroadcast;
 	}
 
 	@Override
-	public final boolean isIndividualBroadcast() {
+	public boolean isIndividualBroadcast() {
 		return individualBroadcast;
 	}
 
 	@Override
-	public final String getGroupEmail() {
+	public String getGroupEmail() {
 		return groupEmail;
 	}
 
 	@Override
-	public final void setGroupEmail(String groupEmail) {
+	public void setGroupEmail(String groupEmail) {
 		this.groupEmail = groupEmail;
 	}
 
 	@Override
-	public final String getGroupPhone() {
+	public String getGroupPhone() {
 		return groupPhone;
 	}
 
 	@Override
-	public final void setGroupPhone(String groupPhone) {
+	public void setGroupPhone(String groupPhone) {
 		this.groupPhone = groupPhone;
 	}
 

@@ -30,22 +30,22 @@ public class SystemFile extends AbstractFile implements ISystemFile {
 	}
 
 	@Override
-	public final String getFileId() {
+	public String getFileId() {
 		return fileId;
 	}
 
 	@Override
-	public final void setFileId(String fileId) {
+	public void setFileId(String fileId) {
 		this.fileId = fileId;
 	}
 
 	@Override
-	public final String getDomainKey() {
+	public String getDomainKey() {
 		return domainKey;
 	}
 
 	@Override
-	public final void setDomainKey(String domainKey) {
+	public void setDomainKey(String domainKey) {
 		this.domainKey = domainKey;
 	}
 

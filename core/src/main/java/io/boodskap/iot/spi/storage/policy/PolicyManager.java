@@ -36,6 +36,48 @@ public class PolicyManager {
 		return t;
 	}
 	
+	public static void checkEngineAccess() {
+		
+		if(enabled && !IAuthToken.isEngine()) throw new StorageException("Need platform engine access");
+	}
+	
+	public static void checkAdminAccess() {
+		if(enabled) {
+			if(!IAuthToken.isEngine()) {
+				getAdminAuthToken();
+			}
+		}
+	}
+	
+	public static void checkDomainAdminAccess() {
+		
+		if(!enabled) return;
+		
+		final IAuthToken t = getAuthToken();
+		
+		if(!IAuthToken.isEngine() && !t.isDomainAdmin()) throw new StorageException("Need domain admin access");
+	}
+	
+
+	public static void checkOrgAdminAccess() {
+		
+		if(!enabled) return;
+		
+		final IAuthToken t = getAuthToken();
+		
+		if(!IAuthToken.isEngine() && !t.isOrganizationAdmin()) throw new StorageException("Need organization admin access");
+	}
+	
+
+	public static void checkDeveloperAccess() {
+		
+		if(!enabled) return;
+		
+		final IAuthToken t = getAuthToken();
+		
+		if(!IAuthToken.isEngine() && !t.isDeveloper()) throw new StorageException("Need developer access");
+	}
+	
 
 	public static void checkReadAccess() {
 		if(!enabled || IAuthToken.isEngine()) return;

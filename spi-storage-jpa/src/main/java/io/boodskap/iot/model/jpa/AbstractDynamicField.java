@@ -20,19 +20,19 @@ public abstract class AbstractDynamicField extends AbstractField implements IDyn
 	public AbstractDynamicField() {
 	}
 
-	public final String getValue() {
+	public String getValue() {
 		return value;
 	}
 
-	public final void setValue(String value) {
+	public void setValue(String value) {
 		this.value = value;
 	}
 
-	public final Double getNvalue() {
+	public Double getNvalue() {
 		return nvalue;
 	}
 
-	public final void setNvalue(Double nvalue) {
+	public void setNvalue(Double nvalue) {
 		this.nvalue = nvalue;
 	}
 
